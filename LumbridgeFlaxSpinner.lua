@@ -153,7 +153,7 @@ local function setupGUI()
     IG_Back.string_value = ""
 end
 
-function drawGUI()
+local function drawGUI()
     API.DrawSquareFilled(IG_Back)
     API.DrawTextAt(IG)
     API.DrawTextAt(IG2)
