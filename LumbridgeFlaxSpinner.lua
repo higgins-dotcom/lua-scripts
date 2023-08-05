@@ -153,7 +153,7 @@ local function setupGUI()
     IG_Back.string_value = ""
 end
 
-local function drawGUI()
+function drawGUI()
     API.DrawSquareFilled(IG_Back)
     API.DrawTextAt(IG)
     API.DrawTextAt(IG2)
@@ -172,13 +172,13 @@ while API.Read_LoopyLoop() do
         goto continue
     end
 
-    if API.InvItemcount_1(ID.BOWSTRING) > 0 then
+    if API.InvItemcount_1(ID.BOWSTRING) > 0 or API.InvItemcount_1(ID.FLAX) < 1 then
         if API.GetFloorLv_2() == 2 then
             bank()
-            if API.InvItemcount_1(ID.FLAX) < 0 then
+            if API.InvItemcount_1(ID.FLAX) < 1 then
                 fail = fail + 1
             end
-            if fail > 3 then
+            if fail > 2 then
                 API.Write_LoopyLoop(0)
                 printProgressReport(true)
                 break
@@ -187,6 +187,7 @@ while API.Read_LoopyLoop() do
             stairsUp()
         end
     elseif API.InvItemcount_1(ID.FLAX) > 0 then
+        fail = 0
         if API.GetFloorLv_2() == 2 then
             stairsDown()
         else
