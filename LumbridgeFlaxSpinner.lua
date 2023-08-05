@@ -4,7 +4,7 @@
 @description Spins flax into bowstrings
 @author Higgins <discord@higginshax>
 @date 22/07/2023
-@version 1.0
+@version 1.1
 
 Flax Bank Preset 1
 Start at top of Lumbridge Castle bank
@@ -137,7 +137,7 @@ local function setupGUI()
     IG3.box_start = FFPOINT.new(40, 5, 0)
     IG3.box_name = "TITLE"
     IG3.colour = ImColor.new(0, 255, 0);
-    IG3.string_value = "- Flax Spinner v1.0 -"
+    IG3.string_value = "- Flax Spinner v1.1 -"
 
     IG4 = API.CreateIG_answer()
     IG4.box_start = FFPOINT.new(70, 21, 0)
