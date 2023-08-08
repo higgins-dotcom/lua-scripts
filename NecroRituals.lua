@@ -69,8 +69,21 @@ local function clickPlatform(soulDismissed)
     end
 end
 
+local function scanForInterface(interfaceComps)
+    return #(ScanForInterfaceTest2Get(true, interfaceComps)) > 0
+end
+
 local function isRitualOpen()
-    return (API.VB_FindPSett(2874, 0).state == 589923) or (API.VB_FindPSett(2874, 0).state == 3244050)
+    return scanForInterface{
+        InterfaceComp5.new(1224,0,-1,-1,0 ),
+        InterfaceComp5.new(1224,2,-1,0,0 ),
+        InterfaceComp5.new(1224,3,-1,2,0 ),
+        InterfaceComp5.new(1224,6,-1,3,0 ),
+        InterfaceComp5.new(1224,11,-1,6,0 ),
+        InterfaceComp5.new(1224,43,-1,11,0 ),
+        -- InterfaceComp5.new(1224,43,3,43,0 )
+    }
+    -- return (API.VB_FindPSett(2874, 0).state == 589923) or (API.VB_FindPSett(2874, 0).state == 3244050)
 end
 
 local function findObj(objectid, distance)
