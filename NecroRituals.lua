@@ -280,19 +280,25 @@ while (API.Read_LoopyLoop()) do
 
     CheckForNewMessages()
 
-    if CURRENT_CYCLE <= 6 and not REPAIR_CHECK and not findDepleted() then
-        if findObj(ID.PEDESTAL.NOT_FOCUSED, 30) then
-            if isRitualOpen() then
-                performRitual()
-            else
-                clickPedestal()
-                souls = souls + 3
+    if API.VB_FindPSett(10937).state == 0 then
+        if CURRENT_CYCLE <= 6 and not REPAIR_CHECK and not findDepleted() then
+            if findObj(ID.PEDESTAL.NOT_FOCUSED, 30) then
+                if isRitualOpen() then
+                    performRitual()
+                else
+                    clickPedestal()
+                    souls = souls + 3
+                end
+            elseif findObj(ID.PEDESTAL.FOCUSED, 30) then
+                clickPlatform(SOUL_DIMISSED)
             end
-        elseif findObj(ID.PEDESTAL.FOCUSED, 30) then
-            clickPlatform(SOUL_DIMISSED)
+        else
+            repairGlyphs()
         end
     else
-        repairGlyphs()
+        if findObj(ID.PEDESTAL.FOCUSED, 30) then
+            clickPlatform(SOUL_DIMISSED)
+        end
     end
 
     ::continue::
