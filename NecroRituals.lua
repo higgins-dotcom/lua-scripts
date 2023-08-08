@@ -51,6 +51,8 @@ CURRENT_CYCLE = 0
 PLATFORM_TILE = { 1038.5, 1770.5 }
 AFK_CHECK_TIME, LAST_FOUND = os.time(), os.time()
 REPAIR_CHECK, SOUL_DIMISSED = false, false
+startXp = API.VB_FindPSett(7224).state
+startTime = os.time()
 
 local function clickPedestal()
     if API.DoAction_Object1(0x29, 0, { ID.PEDESTAL.NOT_FOCUSED }, 50) then
@@ -94,6 +96,18 @@ end
 local function findNPC(npcid, distance)
     local distance = distance or 20
     return #API.GetAllObjArrayInteract({ npcid }, distance, 1) > 0
+end
+
+local function findDepleted()
+    local objs = API.ReadAllObjectsArray(true, 1)
+    if #objs > 0 then
+        for _, a in ipairs(objs) do
+            if string.find(tostring(a.Name), "depleted") then
+                return true
+            end
+        end
+    end
+    return false
 end
 
 local function performRitual()
@@ -152,8 +166,100 @@ function CheckForNewMessages()
     end
 end
 
+-- Rounds a number to the nearest integer or to a specified number of decimal places.
+local function round(val, decimal)
+    if decimal then
+        return math.floor((val * 10 ^ decimal) + 0.5) / (10 ^ decimal)
+    else
+        return math.floor(val + 0.5)
+    end
+end
+
+-- Format a number with commas as thousands separator
+local function formatNumberWithCommas(amount)
+    local formatted = tostring(amount)
+    while true do
+        formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
+        if (k == 0) then
+            break
+        end
+    end
+    return formatted
+end
+
+-- Format script elapsed time to [hh:mm:ss]
+local function formatElapsedTime(startTime)
+    local currentTime = os.time()
+    local elapsedTime = currentTime - startTime
+    local hours = math.floor(elapsedTime / 3600)
+    local minutes = math.floor((elapsedTime % 3600) / 60)
+    local seconds = elapsedTime % 60
+    return string.format("[%02d:%02d:%02d]", hours, minutes, seconds)
+end
+
+local function printProgressReport(final)
+    local currentXp = API.VB_FindPSett(7224).state
+    local elapsedMinutes = (os.time() - startTime) / 60
+    local diffXp = math.abs(currentXp - startXp);
+    local xpPH = round((diffXp * 60) / elapsedMinutes);
+    local stringPH = round((souls * 60) / elapsedMinutes);
+    local time = formatElapsedTime(startTime)
+    IG.string_value = "Crafting XP : " .. formatNumberWithCommas(diffXp) .. " (" .. formatNumberWithCommas(xpPH) .. ")"
+    IG2.string_value = "  Souls : " .. formatNumberWithCommas(souls) .. " (" .. formatNumberWithCommas(stringPH) .. ")"
+    IG4.string_value = time
+    if final then
+        print(os.date("%H:%M:%S") .. " Script Finished\nRuntime : " .. time .. "\nCrafting XP : " .. formatNumberWithCommas(diffXp) .. " \nBowsouls : " .. formatNumberWithCommas(souls))
+    end
+end
+
+local function setupGUI()
+    IG = API.CreateIG_answer()
+    IG.box_start = FFPOINT.new(15, 40, 0)
+    IG.box_name = "NECRO"
+    IG.colour = ImColor.new(255, 255, 255);
+    IG.string_value = "Necromancy XP : 0 (0)"
+
+    IG2 = API.CreateIG_answer()
+    IG2.box_start = FFPOINT.new(15, 55, 0)
+    IG2.box_name = "STRING"
+    IG2.colour = ImColor.new(255, 255, 255);
+    IG2.string_value = "  Souls : 0 (0)"
+
+    IG3 = API.CreateIG_answer()
+    IG3.box_start = FFPOINT.new(40, 5, 0)
+    IG3.box_name = "TITLE"
+    IG3.colour = ImColor.new(0, 255, 0);
+    IG3.string_value = "- Necromany Rituals -"
+
+    IG4 = API.CreateIG_answer()
+    IG4.box_start = FFPOINT.new(70, 21, 0)
+    IG4.box_name = "TIME"
+    IG4.colour = ImColor.new(255, 255, 255);
+    IG4.string_value = "[00:00:00]"
+
+    IG_Back = API.CreateIG_answer();
+    IG_Back.box_name = "back";
+    IG_Back.box_start = FFPOINT.new(0, 0, 0)
+    IG_Back.box_size = FFPOINT.new(220, 80, 0)
+    IG_Back.colour = ImColor.new(15, 13, 18, 255)
+    IG_Back.string_value = ""
+end
+
+function drawGUI()
+    API.DrawSquareFilled(IG_Back)
+    API.DrawTextAt(IG)
+    API.DrawTextAt(IG2)
+    API.DrawTextAt(IG3)
+    API.DrawTextAt(IG4)
+end
+
+setupGUI()
+souls = 0
+
 while (API.Read_LoopyLoop()) do
+
     idleCheck()
+    drawGUI()
 
     if API.InvStackSize(REQUIRED_ITEMS[1][1]) <= REQUIRED_ITEMS[1][2] or API.InvStackSize(REQUIRED_ITEMS[1][1]) <= REQUIRED_ITEMS[1][2] then
         API.Write_LoopyLoop(false)
@@ -174,12 +280,13 @@ while (API.Read_LoopyLoop()) do
 
     CheckForNewMessages()
 
-    if CURRENT_CYCLE <= 6 and not REPAIR_CHECK then
+    if CURRENT_CYCLE <= 6 and not REPAIR_CHECK and not findDepleted() then
         if findObj(ID.PEDESTAL.NOT_FOCUSED, 30) then
             if isRitualOpen() then
                 performRitual()
             else
                 clickPedestal()
+                souls = souls + 3
             end
         elseif findObj(ID.PEDESTAL.FOCUSED, 30) then
             clickPlatform(SOUL_DIMISSED)
@@ -189,6 +296,6 @@ while (API.Read_LoopyLoop()) do
     end
 
     ::continue::
-
+    printProgressReport()
     API.RandomSleep2(100, 200, 200)
 end
