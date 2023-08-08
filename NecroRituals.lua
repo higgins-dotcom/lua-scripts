@@ -48,7 +48,7 @@ MAX_IDLE_TIME_MINUTES = 5
 --
 
 CURRENT_CYCLE = 0
-PLATFORM_TILE = {1038.5, 1770.5}
+PLATFORM_TILE = { 1038.5, 1770.5 }
 AFK_CHECK_TIME, LAST_FOUND = os.time(), os.time()
 REPAIR_CHECK, SOUL_DIMISSED = false, false
 
@@ -70,7 +70,7 @@ local function clickPlatform(soulDismissed)
 end
 
 local function isRitualOpen()
-    return (API.VB_FindPSett(2874, 0).state == 589923)
+    return (API.VB_FindPSett(2874, 0).state == 589923) or (API.VB_FindPSett(2874, 0).state == 3244050)
 end
 
 local function findObj(objectid, distance)
@@ -84,8 +84,14 @@ local function findNPC(npcid, distance)
 end
 
 local function performRitual()
-    API.DoAction_Interface(0x24, 0xffffffff, 1, 1224, 44, -1, 5392)
-    API.RandomSleep2(300, 300, 200)
+    local r = API.VB_FindPSett(11181, 0).state
+    if r == 10 then
+        API.DoAction_Interface(0x24, 0xffffffff, 1, 1224, 44, -1, 5392)
+        API.RandomSleep2(300, 300, 200)
+    else
+        API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1224, 34, 10, 5392);
+        API.RandomSleep2(300, 300, 200)
+    end
 end
 
 local function repairGlyphs()
@@ -119,7 +125,6 @@ function CheckForNewMessages()
     if chatTexts then
         for k, v in pairs(chatTexts) do
             if string.find(tostring(v.text), "durability of 1") then
-
                 local hour, min, sec = string.match(v.text, "(%d+):(%d+):(%d+)")
                 local currentDate = os.date("*t")
                 currentDate.hour, currentDate.min, currentDate.sec = tonumber(hour), tonumber(min), tonumber(sec)
@@ -133,7 +138,6 @@ function CheckForNewMessages()
         end
     end
 end
-
 
 while (API.Read_LoopyLoop()) do
     idleCheck()
