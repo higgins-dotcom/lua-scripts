@@ -48,9 +48,10 @@ MAX_IDLE_TIME_MINUTES = 5
 --[[ NO CHANGES ARE NEEDED BELOW ]]
 --
 
-CURRENT_CYCLE, SOUL_DIMISSED = 0, false
+CURRENT_CYCLE = 0
 PLATFORM_TILE = {1038.5, 1770.5}
-AFK_CHECK_TIME = os.time()
+AFK_CHECK_TIME, LAST_FOUND = os.time(), os.time()
+REPAIR_CHECK, SOUL_DIMISSED = false, false
 
 local function clickPedestal()
     if API.DoAction_Object1(0x29, 0, { ID.PEDESTAL.NOT_FOCUSED }, 50) then
@@ -63,6 +64,8 @@ local function clickPlatform(soulDismissed)
         API.RandomSleep2(4500, 500, 500)
         if not soulDismissed then
             CURRENT_CYCLE = CURRENT_CYCLE + 1
+        else
+            SOUL_DIMISSED = false
         end
     end
 end
@@ -89,7 +92,8 @@ end
 local function repairGlyphs()
     if API.DoAction_Object1(0x29, 160, { ID.PEDESTAL.NOT_FOCUSED, ID.PEDESTAL.FOCUSED }, 50) then
         CURRENT_CYCLE = 0
-        API.RandomSleep2(1000, 300, 200)
+        REPAIR_CHECK = false
+        API.RandomSleep2(2000, 500, 500)
     end
 end
 
@@ -108,6 +112,26 @@ local function idleCheck()
     if timeDiff > randomTime then
         API.PIdle2()
         AFK_CHECK_TIME = os.time()
+    end
+end
+
+function CheckForNewMessages()
+    local chatTexts = ChatGetMessages()
+    if chatTexts then
+        for k, v in pairs(chatTexts) do
+            if string.find(tostring(v.text), "durability of 1") then
+
+                local hour, min, sec = string.match(v.text, "(%d+):(%d+):(%d+)")
+                local currentDate = os.date("*t")
+                currentDate.hour, currentDate.min, currentDate.sec = tonumber(hour), tonumber(min), tonumber(sec)
+                local timestamp = os.time(currentDate)
+
+                if timestamp > LAST_FOUND then
+                    REPAIR_CHECK = true
+                    LAST_FOUND = timestamp
+                end
+            end
+        end
     end
 end
 
@@ -132,7 +156,9 @@ while (API.Read_LoopyLoop()) do
         API.RandomSleep2(200, 200, 200)
     end
 
-    if CURRENT_CYCLE <= 6 then
+    CheckForNewMessages()
+
+    if CURRENT_CYCLE <= 6 and not REPAIR_CHECK then
         if findObj(ID.PEDESTAL.NOT_FOCUSED, 30) then
             if isRitualOpen() then
                 performRitual()
@@ -141,7 +167,6 @@ while (API.Read_LoopyLoop()) do
             end
         elseif findObj(ID.PEDESTAL.FOCUSED, 30) then
             clickPlatform(SOUL_DIMISSED)
-            SOUL_DIMISSED = false
         end
     else
         repairGlyphs()
