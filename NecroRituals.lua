@@ -6,7 +6,13 @@
 @date 08/08/2023
 @version 1.0
 
+Change settings below - required items, max idle time check, dismiss wandering souls...
+Setup the "Place Focus" as required (the script will just click Start)
+Ensure that ALL tiles are fully repaired
+Start script
+
 ** BASIC/EARLY RELEASE - PLEASE WATCH BOT AND BE HAPPY BEFORE LEAVING ON ITS OWN **
+** GREAT FOR LESSER NECROPLASM RITUAL **
 
 --]]
 
@@ -42,7 +48,8 @@ MAX_IDLE_TIME_MINUTES = 5
 --[[ NO CHANGES ARE NEEDED BELOW ]]
 --
 
-CURRENT_CYCLE = 0
+CURRENT_CYCLE, SOUL_DIMISSED = 0, false
+PLATFORM_TILE = {1038.5, 1770.5}
 AFK_CHECK_TIME = os.time()
 
 local function clickPedestal()
@@ -51,10 +58,12 @@ local function clickPedestal()
     end
 end
 
-local function clickPlatform()
+local function clickPlatform(soulDismissed)
     if API.DoAction_Object1(0x29, 0, ID.PLATFORM, 50) then
         API.RandomSleep2(4500, 500, 500)
-        CURRENT_CYCLE = CURRENT_CYCLE + 1
+        if not soulDismissed then
+            CURRENT_CYCLE = CURRENT_CYCLE + 1
+        end
     end
 end
 
@@ -78,8 +87,8 @@ local function performRitual()
 end
 
 local function repairGlyphs()
-    if API.DoAction_Object1(0x29, 160, { ID.PEDESTAL.NOT_FOCUSED }, 50) then
-        step = 0
+    if API.DoAction_Object1(0x29, 160, { ID.PEDESTAL.NOT_FOCUSED, ID.PEDESTAL.FOCUSED }, 50) then
+        CURRENT_CYCLE = 0
         API.RandomSleep2(1000, 300, 200)
     end
 end
@@ -87,6 +96,7 @@ end
 local function watchForSoul()
     if DISMISS_WANDERING_SOULS and findNPC(ID.WANDERING_SOUL) then
         API.DoAction_NPC(0x29, 3120, { ID.WANDERING_SOUL }, 50)
+        SOUL_DIMISSED = true
         API.RandomSleep2(5000, 300, 200)
     end
 end
@@ -113,7 +123,7 @@ while (API.Read_LoopyLoop()) do
     if API.CheckAnim(10) or API.ReadPlayerMovin2() then
         if not API.ReadPlayerMovin2() then
             local p = API.PlayerCoordfloat()
-            if (p.x == 1038.5 and p.y == 1770.5) and API.VB_FindPSett(10937).state > 0 then
+            if (p.x == PLATFORM_TILE[1] and p.y == PLATFORM_TILE[2]) and API.VB_FindPSett(10937).state > 0 then
                 API.RandomSleep2(100, 200, 200)
                 watchForSoul()
                 goto continue
@@ -130,7 +140,8 @@ while (API.Read_LoopyLoop()) do
                 clickPedestal()
             end
         elseif findObj(ID.PEDESTAL.FOCUSED, 30) then
-            clickPlatform()
+            clickPlatform(SOUL_DIMISSED)
+            SOUL_DIMISSED = false
         end
     else
         repairGlyphs()
