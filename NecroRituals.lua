@@ -17,7 +17,10 @@ Start script
 
 local API = require("api")
 
--- [[ ID & SETTINGS ]] --
+-- [[ IDS & SETTINGS ]] --
+
+DISMISS_WANDERING_SOULS = true
+MAX_IDLE_TIME_MINUTES = 5
 
 ID = {
     PEDESTAL = {
@@ -40,9 +43,6 @@ REQUIRED_ITEMS = {
         ID.WEAK_NECROPLASM, 250
     }
 }
-
-DISMISS_WANDERING_SOULS = true
-MAX_IDLE_TIME_MINUTES = 5
 
 --[[ NO CHANGES ARE NEEDED BELOW ]]
 --
