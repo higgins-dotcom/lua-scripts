@@ -1,3 +1,15 @@
+--[[
+
+@title Basic Necromancy Rituals
+@description Peforms rituals
+@author Higgins <discord@higginshax>
+@date 08/08/2023
+@version 1.0
+
+** BASIC/EARLY RELEASE - PLEASE WATCH BOT AND BE HAPPY BEFORE LEAVING ON ITS OWN **
+
+--]]
+
 local API = require("api")
 
 -- [[ ID & SETTINGS ]] --
