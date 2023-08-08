@@ -1,7 +1,7 @@
 --[[
 
-@title Basic Necromancy Rituals
-@description Peforms rituals
+@title Necromancy Lesser Necroplasm Ritual
+@description Peforms Lesser Necroplasm Ritual
 @author Higgins <discord@higginshax>
 @date 08/08/2023
 @version 1.0
@@ -12,7 +12,6 @@ Ensure that ALL tiles are fully repaired
 Start script
 
 ** BASIC/EARLY RELEASE - PLEASE WATCH BOT AND BE HAPPY BEFORE LEAVING ON ITS OWN **
-** GREAT FOR LESSER NECROPLASM RITUAL **
 
 --]]
 
