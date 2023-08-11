@@ -251,7 +251,7 @@ local function setupGUI()
     IG_Back = API.CreateIG_answer();
     IG_Back.box_name = "back";
     IG_Back.box_start = FFPOINT.new(0, 0, 0)
-    IG_Back.box_size = FFPOINT.new(220, 80, 0)
+    IG_Back.box_size = FFPOINT.new(235, 80, 0)
     IG_Back.colour = ImColor.new(15, 13, 18, 255)
     IG_Back.string_value = ""
 end
