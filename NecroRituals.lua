@@ -123,21 +123,18 @@ local function repairGlyphs()
     local pedestal = findPedestal()
     if API.DoAction_Object1(0x29, 160, { pedestal.Id }, 50) then
         REPAIR_CHECK = false
-        API.RandomSleep2(200, 500, 500)
+        API.RandomSleep2(200, 200, 200)
     end
 end
 
 local function watchForSoul()
     if DISMISS_WANDERING_SOULS and findNpc(ID.WANDERING_SOUL) then
-        API.DoAction_NPC(0x29, 3120, { ID.WANDERING_SOUL }, 50)
         API.RandomSleep2(400, 300, 200)
+        API.DoAction_NPC(0x29, 3120, { ID.WANDERING_SOUL }, 50)
+        API.RandomSleep2(300, 300, 200)
         API.WaitUntilMovingEnds()
         API.RandomSleep2(300, 300, 200)
-        if findNpc(ID.WANDERING_SOUL) then
-            API.DoAction_NPC(0x29, 3120, { ID.WANDERING_SOUL }, 50)
-        end
         SOUL_DIMISSED = true
-        API.RandomSleep2(200, 300, 200)
     end
 end
 
@@ -299,14 +296,12 @@ while (API.Read_LoopyLoop()) do
                 clickPlatform(SOUL_DIMISSED)
             end
         else
-            print(3)
             repairGlyphs()
             if CheckForNewMessages("have the materials to repair the following") then
                 print("No materials for repair")
-                API.Write_LoopyLoop(false)
                 break;
             end
-            API.RandomSleep2(300, 300, 300)
+            API.RandomSleep2(600, 300, 300)
         end
     else
         if findPedestal() then
