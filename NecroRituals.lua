@@ -96,6 +96,18 @@ local function findNpc(npcid, distance)
     return #API.GetAllObjArrayInteract({ npcid }, distance, 1) > 0
 end
 
+local function findRestore()
+    local objs = API.ReadAllObjectsArray(true, 1)
+    if #objs > 0 then
+        for _, a in ipairs(objs) do
+            if string.find(a.Action, "Restore") or string.find(a.Name, "Sparkling glyph") then
+                return a
+            end
+        end
+    end
+    return false
+end
+
 local function findDepleted()
     local objs = API.ReadAllObjectsArray(true, 1)
     if #objs > 0 then
@@ -278,6 +290,13 @@ while (API.Read_LoopyLoop()) do
             if (p.x == PLATFORM_TILE[1] and p.y == PLATFORM_TILE[2]) and API.VB_FindPSett(10937).state > 0 then
                 API.RandomSleep2(100, 200, 200)
                 watchForSoul()
+                local restore = findRestore()
+                if restore then
+                    API.DoAction_NPC(0x29, 3120, { restore.Id }, 50)
+                    API.RandomSleep2(400, 200, 200)
+                    API.WaitUntilMovingEnds()
+                    API.RandomSleep2(700, 200, 200)
+                end
                 goto continue
             end
         end
