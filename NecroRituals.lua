@@ -290,6 +290,11 @@ while (API.Read_LoopyLoop()) do
             if (p.x == PLATFORM_TILE[1] and p.y == PLATFORM_TILE[2]) and API.VB_FindPSett(10937).state > 0 then
                 API.RandomSleep2(100, 200, 200)
                 watchForSoul()
+                if API.DoAction_NPC(0x29, 3120, { 30419 }, 10) then
+                    API.RandomSleep2(400, 200, 200)
+                    API.WaitUntilMovingEnds()
+                    API.RandomSleep2(700, 200, 200)
+                end
                 local restore = findRestore()
                 if restore then
                     API.DoAction_NPC(0x29, 3120, { restore.Id }, 50)
