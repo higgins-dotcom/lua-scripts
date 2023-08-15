@@ -39,7 +39,7 @@ CURRENT_CYCLE = 0
 PLATFORM_TILE = { 1038.5, 1770.5 }
 LAST_FOUND = os.time()
 REPAIR_CHECK, SOUL_DIMISSED = false, false
-startXp = API.VB_FindPSett(7224).state
+startXp = API.GetSkillXP("NECROMANCY")
 startTime, afk = os.time(), os.time()
 
 LAST_FOUND = {
@@ -218,7 +218,7 @@ local function formatElapsedTime(startTime)
 end
 
 local function printProgressReport(final)
-    local currentXp = API.VB_FindPSett(7224).state
+    local currentXp = API.GetSkillXP("NECROMANCY")
     local elapsedMinutes = (os.time() - startTime) / 60
     local diffXp = math.abs(currentXp - startXp);
     local xpPH = round((diffXp * 60) / elapsedMinutes);
