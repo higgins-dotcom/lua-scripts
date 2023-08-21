@@ -4,7 +4,7 @@
 @description Peforms Lesser Necroplasm Ritual
 @author Higgins <discord@higginshax>
 @date 08/08/2023
-@version 1.2
+@version 1.5
 
 Change settings below - max idle time check, dismiss wandering souls...
 Setup the "Place Focus" as required
@@ -321,7 +321,7 @@ while (API.Read_LoopyLoop()) do
             end
         else
             repairGlyphs()
-            if CheckForNewMessages("have the materials to repair the following") then
+            if CheckForNewMessages("You need the following materials to repair") then
                 print("No materials for repair")
                 break;
             end
