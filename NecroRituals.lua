@@ -7,7 +7,9 @@
 @version 2.0
 
 Disturbances handled
+0-300%
 [X] Moth
+[X] Wandering Soul
 [X] Sparking Glyph
 [X] Shambling Horror
 [X] Corrupt Glyphs
