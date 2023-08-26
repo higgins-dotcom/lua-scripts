@@ -4,9 +4,15 @@
 @description Peforms Lesser Necroplasm Ritual
 @author Higgins <discord@higginshax>
 @date 08/08/2023
-@version 1.5
+@version 2.0
 
-Change settings below - max idle time check, dismiss wandering souls...
+Disturbances handled
+[X] Moth
+[X] Sparking Glyph
+[X] Shambling Horror
+[X] Corrupt Glyphs
+
+Change settings below - max idle time check
 Setup the "Place Focus" as required
 Ensure that ALL tiles are fully repaired
 Start script
@@ -19,26 +25,18 @@ local API = require("api")
 
 -- [[ IDS & SETTINGS ]] --
 
-DISMISS_WANDERING_SOULS = true
 MAX_IDLE_TIME_MINUTES = 5
 
 ID = {
-    PEDESTAL = {
-        NOT_FOCUSED = 127319,
-        FOCUSED = 127320
-    },
     PLATFORM = { 127315, 127316, 127314 },
     WANDERING_SOUL = 30493,
-    BASIC_GHOSTLY_INK = 55594,
-    WEAK_NECROPLASM = 55599
+    SHAMBLING_HORROR = 30494
 }
 
 --[[ NO CHANGES ARE NEEDED BELOW ]]
 
-CURRENT_CYCLE = 0
 PLATFORM_TILE = { 1038.5, 1770.5 }
-LAST_FOUND = os.time()
-REPAIR_CHECK, SOUL_DIMISSED = false, false
+REPAIR_CHECK = false
 startXp = API.GetSkillXP("NECROMANCY")
 startTime, afk = os.time(), os.time()
 
@@ -48,32 +46,10 @@ LAST_FOUND = {
     ["have the materials to repair the following"] = startTime + 10
 }
 
-local function clickPlatform(soulDismissed)
+local function clickPlatform()
     if API.DoAction_Object1(0x29, 0, ID.PLATFORM, 50) then
         API.RandomSleep2(4500, 500, 500)
-        if not soulDismissed then
-            CURRENT_CYCLE = CURRENT_CYCLE + 1
-        else
-            SOUL_DIMISSED = false
-        end
     end
-end
-
-local function scanForInterface(interfaceComps)
-    return #(ScanForInterfaceTest2Get(true, interfaceComps)) > 0
-end
-
-local function isRitualOpen()
-    return scanForInterface {
-        InterfaceComp5.new(1224, 0, -1, -1, 0),
-        InterfaceComp5.new(1224, 2, -1, 0, 0),
-        InterfaceComp5.new(1224, 3, -1, 2, 0),
-        InterfaceComp5.new(1224, 6, -1, 3, 0),
-        InterfaceComp5.new(1224, 11, -1, 6, 0),
-        InterfaceComp5.new(1224, 43, -1, 11, 0),
-        -- InterfaceComp5.new(1224,43,3,43,0 )
-    }
-    -- return (API.VB_FindPSett(2874, 0).state == 589923) or (API.VB_FindPSett(2874, 0).state == 3244050)
 end
 
 local function findPedestal()
@@ -84,11 +60,6 @@ local function findPedestal()
         end
     end
     return false
-end
-
-local function findObj(objectid, distance)
-    local distance = distance or 20
-    return #API.GetAllObjArrayInteract({ objectid }, distance, 0) > 0
 end
 
 local function findNpc(npcid, distance)
@@ -120,17 +91,6 @@ local function findDepleted()
     return false
 end
 
-local function performRitual()
-    local r = API.VB_FindPSett(11181, 0).state
-    if r == 10 then
-        API.DoAction_Interface(0x24, 0xffffffff, 1, 1224, 44, -1, 5392)
-        API.RandomSleep2(300, 300, 200)
-    else
-        API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1224, 34, 10, 5392);
-        API.RandomSleep2(300, 300, 200)
-    end
-end
-
 local function repairGlyphs()
     local pedestal = findPedestal()
     if API.DoAction_Object1(0x29, 160, { pedestal.Id }, 50) then
@@ -140,14 +100,136 @@ local function repairGlyphs()
 end
 
 local function watchForSoul()
-    if DISMISS_WANDERING_SOULS and findNpc(ID.WANDERING_SOUL) then
+    if findNpc(ID.WANDERING_SOUL, 15) then
         API.RandomSleep2(400, 300, 200)
-        API.DoAction_NPC(0x29, 3120, { ID.WANDERING_SOUL }, 50)
-        API.RandomSleep2(300, 300, 200)
+        API.DoAction_NPC(0x29, 3120, { ID.WANDERING_SOUL }, 15)
+        API.RandomSleep2(600, 300, 200)
         API.WaitUntilMovingEnds()
         API.RandomSleep2(300, 300, 200)
-        SOUL_DIMISSED = true
     end
+end
+
+local function watchForMoth()
+    if API.DoAction_NPC(0x29, 3120, { 30419 }, 12) then
+        API.RandomSleep2(600, 200, 200)
+        API.WaitUntilMovingEnds()
+        API.RandomSleep2(400, 200, 200)
+    end
+end
+
+local function watchForSparkling()
+    local restore = findRestore()
+    if restore then
+        API.DoAction_NPC(0x29, 3120, { restore.Id }, 50)
+        API.RandomSleep2(400, 200, 200)
+        API.WaitUntilMovingEnds()
+        API.RandomSleep2(1000, 200, 200)
+    end
+end
+
+local function waitForCondition(condition, maxIterations, interval)
+    for _ = 1, maxIterations do
+        local result = condition()
+        if result then
+            return result
+        end
+        API.RandomSleep2(interval, interval, interval)
+    end
+    return false
+end
+
+local function findCorrupt()
+    local objects = API.ReadAllObjectsArray(true, 1)
+    for _, obj in ipairs(objects) do
+        if string.find(tostring(obj.Action), "Deactivate") then
+            return obj
+        end
+    end
+    return nil
+end
+
+local function watchForCorrupt()
+    while findCorrupt() do
+        API.RandomSleep2(500, 500, 500)
+
+        local npcIDs = { 30495, 30496, 30497 }
+        local npcFound = false
+
+        for _, npcID in ipairs(npcIDs) do
+            if API.DoAction_NPC(0x29, 3120, { npcID }, 20) then
+                API.RandomSleep2(400, 500, 600)
+                npcFound = true
+                break
+            end
+        end
+
+        API.RandomSleep2(200, 200, 200)
+
+        if not npcFound then
+            break
+        end
+    end
+end
+
+local function findNpcAtTile(tile)
+    local allNpc = API.ReadAllObjectsArray(true, 1)
+    for _, v in pairs(allNpc) do
+        if math.floor(v.TileX / 512) == tile.x and math.floor(v.TileY / 512) == tile.y then
+            return v
+        end
+    end
+    return false
+end
+
+local function findGlint()
+    local objects = API.ReadAllObjectsArray(true, 4)
+    for _, obj in ipairs(objects) do
+        if obj.Id == 7977 then
+            return obj
+        end
+    end
+    return nil
+end
+
+local function clickTile(tile)
+    local action = string.find(tile.Action, "depleted") and 0xAE or 0x29
+    API.DoAction_NPC(action, 3120, { tile.Id }, 50)
+    API.RandomSleep2(300, 300, 300)
+end
+
+local function processGlintTile(glintTile)
+    local tile = findNpcAtTile(glintTile)
+    if tile then
+        clickTile(tile)
+        API.RandomSleep2(800, 600, 600)
+        return true
+    end
+    return false
+end
+
+local function watchForHorror()
+    if findNpc(ID.SHAMBLING_HORROR, 50) then
+        API.RandomSleep2(600, 800, 1200)
+        API.DoAction_NPC(0x29, 3120, { ID.SHAMBLING_HORROR }, 50)
+        API.RandomSleep2(400, 600, 900)
+        local glint = waitForCondition(findGlint, 12, 100)
+        if glint then
+            local glintTile = WPOINT.new(math.floor(glint.TileX / 512), math.floor(glint.TileY / 512), 0)
+            if processGlintTile(glintTile) then
+                return true
+            end
+        end
+        API.RandomSleep2(200, 200, 400)
+    end
+    return false
+end
+
+local function watchForDisturbances()
+    watchForCorrupt()
+    watchForSoul()
+    watchForHorror()
+    watchForMoth()
+    watchForSparkling()
 end
 
 local function idleCheck()
@@ -207,6 +289,16 @@ local function formatNumberWithCommas(amount)
     return formatted
 end
 
+function formatNumber(num)
+    if num >= 1e6 then
+        return string.format("%.1fM", num / 1e6)
+    elseif num >= 1e3 then
+        return string.format("%.1fK", num / 1e3)
+    else
+        return tostring(num)
+    end
+end
+
 -- Format script elapsed time to [hh:mm:ss]
 local function formatElapsedTime(startTime)
     local currentTime = os.time()
@@ -218,59 +310,27 @@ local function formatElapsedTime(startTime)
 end
 
 local function printProgressReport(final)
-    local currentXp = API.GetSkillXP("NECROMANCY")
+    local skill = "NECROMANCY"
+    local currentXp = API.GetSkillXP(skill)
     local elapsedMinutes = (os.time() - startTime) / 60
     local diffXp = math.abs(currentXp - startXp);
     local xpPH = round((diffXp * 60) / elapsedMinutes);
     local time = formatElapsedTime(startTime)
-    IG.string_value = "Necromancy XP : " .. formatNumberWithCommas(diffXp) .. " (" .. formatNumberWithCommas(xpPH) .. ")"
-    IG2.string_value = ""
-    IG4.string_value = time
-    if final then
-        print(os.date("%H:%M:%S") ..
-        " Script Finished\nRuntime : " .. time .. "\nNecromancy XP : " .. formatNumberWithCommas(diffXp))
-    end
+    local currentLevel = API.XPLevelTable(API.GetSkillXP(skill))
+    IGP.radius = 1.0
+    IGP.string_value = time .. " | " .. string.lower(skill):gsub("^%l", string.upper) .. ": " .. currentLevel .." | XP/H: " .. formatNumber(xpPH) .. " | XP: " .. formatNumber(diffXp)
 end
 
 local function setupGUI()
-    IG = API.CreateIG_answer()
-    IG.box_start = FFPOINT.new(15, 40, 0)
-    IG.box_name = "NECRO"
-    IG.colour = ImColor.new(255, 255, 255);
-    IG.string_value = "Necromancy XP : 0 (0)"
-
-    IG2 = API.CreateIG_answer()
-    IG2.box_start = FFPOINT.new(15, 55, 0)
-    IG2.box_name = "STRING"
-    IG2.colour = ImColor.new(255, 255, 255);
-    IG2.string_value = ""
-
-    IG3 = API.CreateIG_answer()
-    IG3.box_start = FFPOINT.new(40, 5, 0)
-    IG3.box_name = "TITLE"
-    IG3.colour = ImColor.new(0, 255, 0);
-    IG3.string_value = "- Necromancy Rituals -"
-
-    IG4 = API.CreateIG_answer()
-    IG4.box_start = FFPOINT.new(70, 21, 0)
-    IG4.box_name = "TIME"
-    IG4.colour = ImColor.new(255, 255, 255);
-    IG4.string_value = "[00:00:00]"
-
-    IG_Back = API.CreateIG_answer();
-    IG_Back.box_name = "back";
-    IG_Back.box_start = FFPOINT.new(0, 0, 0)
-    IG_Back.box_size = FFPOINT.new(235, 80, 0)
-    IG_Back.colour = ImColor.new(15, 13, 18, 255)
-    IG_Back.string_value = ""
+    IGP = API.CreateIG_answer()
+    IGP.box_start = FFPOINT.new(5, 5, 0)
+    IGP.box_name = "PROGRESSBAR"
+    IGP.colour = ImColor.new(116, 2, 179);
+    IGP.string_value = "NECROMANY RITUALS"
 end
 
 function drawGUI()
-    API.DrawSquareFilled(IG_Back)
-    API.DrawTextAt(IG)
-    API.DrawTextAt(IG2)
-    API.DrawTextAt(IG3)
-    API.DrawTextAt(IG4)
+    DrawProgressBar(IGP)
 end
 
 setupGUI()
@@ -279,36 +339,20 @@ while (API.Read_LoopyLoop()) do
     idleCheck()
     drawGUI()
 
-    -- if CheckForNewMessages("necroplasm for this ritual") then
-    --     API.Write_LoopyLoop(false)
-    --     break;
-    -- end
+    if API.VB_FindPSett(10937).state > 0 then
+        watchForDisturbances()
+    end
 
     if API.CheckAnim(10) or API.ReadPlayerMovin2() then
         if not API.ReadPlayerMovin2() then
             local p = API.PlayerCoordfloat()
             if (p.x == PLATFORM_TILE[1] and p.y == PLATFORM_TILE[2]) and API.VB_FindPSett(10937).state > 0 then
                 API.RandomSleep2(100, 200, 200)
-                watchForSoul()
-                if API.DoAction_NPC(0x29, 3120, { 30419 }, 10) then
-                    API.RandomSleep2(400, 200, 200)
-                    API.WaitUntilMovingEnds()
-                    API.RandomSleep2(700, 200, 200)
-                end
-                local restore = findRestore()
-                if restore then
-                    API.DoAction_NPC(0x29, 3120, { restore.Id }, 50)
-                    API.RandomSleep2(400, 200, 200)
-                    API.WaitUntilMovingEnds()
-                    API.RandomSleep2(700, 200, 200)
-                end
                 goto continue
             end
         end
         API.RandomSleep2(400, 200, 200)
     end
-
-    -- CheckForNewMessages("durability of 1")
 
     if API.VB_FindPSett(10937).state == 0 then
         if not findDepleted() then
@@ -317,7 +361,7 @@ while (API.Read_LoopyLoop()) do
                 print("Focused Pedestal not found.. exiting")
                 break;
             else
-                clickPlatform(SOUL_DIMISSED)
+                clickPlatform()
             end
         else
             repairGlyphs()
@@ -329,7 +373,7 @@ while (API.Read_LoopyLoop()) do
         end
     else
         if findPedestal() then
-            clickPlatform(SOUL_DIMISSED)
+            clickPlatform()
         end
     end
 
