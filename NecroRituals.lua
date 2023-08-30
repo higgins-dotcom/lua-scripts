@@ -1,10 +1,10 @@
 --[[
 
-@title Necromancy Lesser Necroplasm Ritual
-@description Peforms Lesser Necroplasm Ritual
+@title Necromancy Rituals
+@description Peforms Rituals
 @author Higgins <discord@higginshax>
 @date 08/08/2023
-@version 2.0
+@version 2.1
 
 Disturbances handled
 0-300%
@@ -13,13 +13,12 @@ Disturbances handled
 [X] Sparking Glyph
 [X] Shambling Horror
 [X] Corrupt Glyphs
+[X] Soul Storm
 
 Change settings below - max idle time check
 Setup the "Place Focus" as required
 Ensure that ALL tiles are fully repaired
 Start script
-
-** BASIC/EARLY RELEASE - PLEASE WATCH BOT AND BE HAPPY BEFORE LEAVING ON ITS OWN **
 
 --]]
 
@@ -32,14 +31,16 @@ MAX_IDLE_TIME_MINUTES = 5
 ID = {
     PLATFORM = { 127315, 127316, 127314 },
     WANDERING_SOUL = 30493,
-    SHAMBLING_HORROR = 30494
+    SHAMBLING_HORROR = 30494,
+    MOTH = 30419
 }
+
+startXp = API.GetSkillXP("NECROMANCY")
 
 --[[ NO CHANGES ARE NEEDED BELOW ]]
 
 PLATFORM_TILE = { 1038.5, 1770.5 }
 REPAIR_CHECK = false
-startXp = API.GetSkillXP("NECROMANCY")
 startTime, afk = os.time(), os.time()
 
 LAST_FOUND = {
@@ -69,12 +70,12 @@ local function findNpc(npcid, distance)
     return #API.GetAllObjArrayInteract({ npcid }, distance, 1) > 0
 end
 
-local function findRestore()
-    local objs = API.ReadAllObjectsArray(true, 1)
-    if #objs > 0 then
-        for _, a in ipairs(objs) do
-            if string.find(a.Action, "Restore") or string.find(a.Name, "Sparkling glyph") then
-                return a
+local function findNpcByAction(action)
+    local npcs = API.ReadAllObjectsArray(true, 1)
+    if #npcs > 0 then
+        for _, npc in ipairs(npcs) do
+            if string.find(tostring(npc.Action), action) then
+                return npc
             end
         end
     end
@@ -93,11 +94,48 @@ local function findDepleted()
     return false
 end
 
+local function findRestore()
+    return findNpcByAction("Restore")
+end
+
+local function findDissipate()
+    return findNpcByAction("Dissipate")
+end
+
+local function findCorrupt()
+    return findNpcByAction("Deactivate")
+end
+
 local function repairGlyphs()
     local pedestal = findPedestal()
     if API.DoAction_Object1(0x29, 160, { pedestal.Id }, 50) then
         REPAIR_CHECK = false
         API.RandomSleep2(200, 200, 200)
+    end
+end
+
+local function findStorm()
+    local objs = API.ReadAllObjectsArray(true, 4)
+    for _, obj in ipairs(objs) do
+        if obj.Id == 7917 or obj.Id == 7916 then
+            return true
+        end
+    end
+    return false
+end
+
+local function watchForStorm()
+    if findStorm() then
+        for i = 1, 5, 1 do
+            local dissipate = findDissipate()
+            if dissipate then
+                API.DoAction_NPC(0x29, 3120, { dissipate.Id }, 50)
+                API.RandomSleep2(500, 400, 400)
+                API.WaitUntilMovingEnds()
+                API.RandomSleep2(300, 400, 400)
+            end
+        end
+        API.RandomSleep2(100, 200, 200)
     end
 end
 
@@ -112,7 +150,7 @@ local function watchForSoul()
 end
 
 local function watchForMoth()
-    if API.DoAction_NPC(0x29, 3120, { 30419 }, 12) then
+    if API.DoAction_NPC(0x29, 3120, { ID.MOTH }, 12) then
         API.RandomSleep2(600, 200, 200)
         API.WaitUntilMovingEnds()
         API.RandomSleep2(400, 200, 200)
@@ -138,16 +176,6 @@ local function waitForCondition(condition, maxIterations, interval)
         API.RandomSleep2(interval, interval, interval)
     end
     return false
-end
-
-local function findCorrupt()
-    local objects = API.ReadAllObjectsArray(true, 1)
-    for _, obj in ipairs(objects) do
-        if string.find(tostring(obj.Action), "Deactivate") then
-            return obj
-        end
-    end
-    return nil
 end
 
 local function watchForCorrupt()
@@ -232,6 +260,7 @@ local function watchForDisturbances()
     watchForHorror()
     watchForMoth()
     watchForSparkling()
+    watchForStorm()
 end
 
 local function idleCheck()
@@ -279,18 +308,6 @@ local function round(val, decimal)
     end
 end
 
--- Format a number with commas as thousands separator
-local function formatNumberWithCommas(amount)
-    local formatted = tostring(amount)
-    while true do
-        formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
-        if (k == 0) then
-            break
-        end
-    end
-    return formatted
-end
-
 function formatNumber(num)
     if num >= 1e6 then
         return string.format("%.1fM", num / 1e6)
@@ -311,6 +328,15 @@ local function formatElapsedTime(startTime)
     return string.format("[%02d:%02d:%02d]", hours, minutes, seconds)
 end
 
+local function calcProgressPercentage(skill, currentExp)
+    local currentLevel = API.XPLevelTable(API.GetSkillXP(skill))
+    if currentLevel == 120 then return 100 end
+    local nextLevelExp = XPForLevel(currentLevel + 1)
+    local currentLevelExp = XPForLevel(currentLevel)
+    local progressPercentage = (currentExp - currentLevelExp) / (nextLevelExp - currentLevelExp) * 100
+    return math.floor(progressPercentage)
+end
+
 local function printProgressReport(final)
     local skill = "NECROMANCY"
     local currentXp = API.GetSkillXP(skill)
@@ -319,7 +345,7 @@ local function printProgressReport(final)
     local xpPH = round((diffXp * 60) / elapsedMinutes);
     local time = formatElapsedTime(startTime)
     local currentLevel = API.XPLevelTable(API.GetSkillXP(skill))
-    IGP.radius = 1.0
+    IGP.radius = calcProgressPercentage(skill, API.GetSkillXP(skill)) / 100
     IGP.string_value = time .. " | " .. string.lower(skill):gsub("^%l", string.upper) .. ": " .. currentLevel .." | XP/H: " .. formatNumber(xpPH) .. " | XP: " .. formatNumber(diffXp)
 end
 
