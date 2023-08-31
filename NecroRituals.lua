@@ -114,28 +114,36 @@ local function repairGlyphs()
     end
 end
 
-local function findStorm()
-    local objs = API.ReadAllObjectsArray(true, 4)
-    for _, obj in ipairs(objs) do
-        if obj.Id == 7917 or obj.Id == 7916 then
-            return true
+local function waitForGfxChange(targetGfx, timeout)
+    local startTime = os.time()
+    while os.time() - startTime < timeout do
+        local objs = API.ReadAllObjectsArray(true, 4)
+        for _, obj in ipairs(objs) do
+            if obj.Id == targetGfx then
+                return true
+            end
         end
+        API.RandomSleep2(300, 500, 700)
     end
     return false
 end
 
 local function watchForStorm()
-    if findStorm() then
-        for i = 1, 5, 1 do
-            local dissipate = findDissipate()
-            if dissipate then
+    local dissipate = findDissipate()
+    if dissipate then
+        API.DoAction_NPC(0x29, 3120, { dissipate.Id }, 50)
+        API.RandomSleep2(800, 400, 400)
+        API.WaitUntilMovingEnds()
+        API.RandomSleep2(300, 400, 400)
+        if waitForGfxChange(7916, 30) then
+            API.DoAction_NPC(0x29, 3120, { dissipate.Id }, 50)
+            API.RandomSleep2(500, 400, 400)
+            if waitForGfxChange(7917, 30) then
                 API.DoAction_NPC(0x29, 3120, { dissipate.Id }, 50)
                 API.RandomSleep2(500, 400, 400)
-                API.WaitUntilMovingEnds()
-                API.RandomSleep2(300, 400, 400)
             end
         end
-        API.RandomSleep2(100, 200, 200)
+        return true
     end
 end
 
@@ -346,7 +354,10 @@ local function printProgressReport(final)
     local time = formatElapsedTime(startTime)
     local currentLevel = API.XPLevelTable(API.GetSkillXP(skill))
     IGP.radius = calcProgressPercentage(skill, API.GetSkillXP(skill)) / 100
-    IGP.string_value = time .. " | " .. string.lower(skill):gsub("^%l", string.upper) .. ": " .. currentLevel .." | XP/H: " .. formatNumber(xpPH) .. " | XP: " .. formatNumber(diffXp)
+    IGP.string_value = time ..
+    " | " ..
+    string.lower(skill):gsub("^%l", string.upper) ..
+    ": " .. currentLevel .. " | XP/H: " .. formatNumber(xpPH) .. " | XP: " .. formatNumber(diffXp)
 end
 
 local function setupGUI()
