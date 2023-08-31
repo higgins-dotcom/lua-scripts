@@ -136,9 +136,11 @@ local function watchForStorm()
         API.WaitUntilMovingEnds()
         API.RandomSleep2(300, 400, 400)
         if waitForGfxChange(7916, 30) then
+            dissipate = findDissipate()
             API.DoAction_NPC(0x29, 3120, { dissipate.Id }, 50)
             API.RandomSleep2(500, 400, 400)
             if waitForGfxChange(7917, 30) then
+                dissipate = findDissipate()
                 API.DoAction_NPC(0x29, 3120, { dissipate.Id }, 50)
                 API.RandomSleep2(500, 400, 400)
             end
