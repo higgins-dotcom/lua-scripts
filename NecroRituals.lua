@@ -3,8 +3,8 @@
 @title Necromancy Rituals
 @description Peforms Rituals
 @author Higgins <discord@higginshax>
-@date 08/08/2023
-@version 2.1
+@date 13/11/2023
+@version 2.2
 
 Disturbances handled
 0-300%
@@ -44,9 +44,10 @@ REPAIR_CHECK = false
 startTime, afk = os.time(), os.time()
 
 LAST_FOUND = {
-    ["necroplasm for this ritual"] = startTime + 10,
-    ["durability of 1"] = startTime + 10,
-    ["have the materials to repair the following"] = startTime + 10
+    ["necroplasm for this ritual"] = startTime,
+    ["durability of 1"] = startTime,
+    ["have the materials to repair the following"] = startTime,
+    ["need the following materials to repair"] = startTime
 }
 
 local function clickPlatform()
@@ -108,9 +109,10 @@ end
 
 local function repairGlyphs()
     local pedestal = findPedestal()
-    if API.DoAction_Object1(0x29, 160, { pedestal.Id }, 50) then
-        REPAIR_CHECK = false
-        API.RandomSleep2(200, 200, 200)
+    if pedestal then
+        if API.DoAction_Object1(0x29, 160, { pedestal.Id }, 50) then
+            REPAIR_CHECK = false
+        end 
     end
 end
 
@@ -249,7 +251,7 @@ end
 
 local function watchForHorror()
     if findNpc(ID.SHAMBLING_HORROR, 50) then
-        API.RandomSleep2(600, 800, 1200)
+        API.RandomSleep2(800, 800, 1200)
         API.DoAction_NPC(0x29, 3120, { ID.SHAMBLING_HORROR }, 50)
         API.RandomSleep2(400, 600, 900)
         local glint = waitForCondition(findGlint, 12, 100)
@@ -283,24 +285,32 @@ local function idleCheck()
     end
 end
 
-local function CheckForNewMessages(searchString)
+local function CheckForNewMessages()
     local chatTexts = ChatGetMessages()
+
     if chatTexts then
         for k, v in pairs(chatTexts) do
             if k > 5 then break end
-            if string.find(tostring(v.text), searchString) then
-                local hour, min, sec = string.match(v.text, "(%d+):(%d+):(%d+)")
-                local currentDate = os.date("*t")
-                currentDate.hour, currentDate.min, currentDate.sec = tonumber(hour), tonumber(min), tonumber(sec)
-                local timestamp = os.time(currentDate)
 
-                print(timestamp, LAST_FOUND[searchString])
-                if timestamp > LAST_FOUND[searchString] then
-                    LAST_FOUND[searchString] = timestamp
-                    if searchString == "durability of 1" then
-                        REPAIR_CHECK = true
+            local colorCode = string.match(v.text, "<col=(EB2F2F)>")
+
+            if colorCode then
+                for searchString, storedTimestamp in pairs(LAST_FOUND) do
+                    if string.find(v.text, searchString) then
+                        local hour, min, sec = string.match(v.text, "(%d+):(%d+):(%d+)")
+                        local currentDate = os.date("*t")
+                        currentDate.hour, currentDate.min, currentDate.sec = tonumber(hour), tonumber(min), tonumber(sec)
+                        local timestamp = os.time(currentDate)
+
+                        if timestamp > storedTimestamp then
+                            LAST_FOUND[searchString] = timestamp
+                            if searchString == "durability of 1" then
+                                REPAIR_CHECK = true
+                                return false
+                            end
+                            return true
+                        end
                     end
-                    return true
                 end
             end
         end
@@ -380,6 +390,7 @@ while (API.Read_LoopyLoop()) do
     idleCheck()
     drawGUI()
 
+    API.DoRandomEvents()
     if API.VB_FindPSett(10937).state > 0 then
         watchForDisturbances()
     end
@@ -396,20 +407,22 @@ while (API.Read_LoopyLoop()) do
     end
 
     if API.VB_FindPSett(10937).state == 0 then
+
+        if CheckForNewMessages() then
+            print("Script stopped")
+            break;
+        end
+
+        if not findPedestal() then
+            API.Write_LoopyLoop(false)
+            print("Focused Pedestal not found.. exiting")
+            break;
+        end
+
         if not findDepleted() then
-            if not findPedestal() then
-                API.Write_LoopyLoop(false)
-                print("Focused Pedestal not found.. exiting")
-                break;
-            else
-                clickPlatform()
-            end
+            clickPlatform()
         else
             repairGlyphs()
-            if CheckForNewMessages("You need the following materials to repair") then
-                print("No materials for repair")
-                break;
-            end
             API.RandomSleep2(600, 300, 300)
         end
     else
