@@ -146,11 +146,11 @@ while (API.Read_LoopyLoop()) do
         goto continue
     end
 
-    if not API.InventoryInterfaceCheckvarbit() then
-        API.KeyboardPress2(0x42, 60, 100)
-        API.RandomSleep2(600, 300, 300)
-        goto continue
-    end
+    -- if not API.InventoryInterfaceCheckvarbit() then
+    --     API.KeyboardPress2(0x42, 60, 100)
+    --     API.RandomSleep2(600, 300, 300)
+    --     goto continue
+    -- end
 
     if API.InvFull_() then
         if hasFrozenFish() then
