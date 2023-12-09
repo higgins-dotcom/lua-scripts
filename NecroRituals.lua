@@ -3,8 +3,8 @@
 @title Necromancy Rituals
 @description Peforms Rituals
 @author Higgins <discord@higginshax>
-@date 13/11/2023
-@version 2.2
+@date 27/11/2023
+@version 2.3
 
 Disturbances handled
 0-300%
@@ -14,6 +14,7 @@ Disturbances handled
 [X] Shambling Horror
 [X] Corrupt Glyphs
 [X] Soul Storm
+[X] Defile
 
 Change settings below - max idle time check
 Setup the "Place Focus" as required
@@ -59,7 +60,7 @@ end
 local function findPedestal()
     local objs = API.ReadAllObjectsArray(true, 0)
     for _, obj in pairs(objs) do
-        if obj.CalcX == 1038 and obj.CalcY == 1776 and obj.Id ~= 127319 then
+        if obj.CalcX == 1038 and obj.CalcY == 1776 and obj.Id ~= 127319 and obj.Action ~= "Place focus" then
             return obj
         end
     end
@@ -112,6 +113,7 @@ local function repairGlyphs()
     if pedestal then
         if API.DoAction_Object1(0x29, 160, { pedestal.Id }, 50) then
             REPAIR_CHECK = false
+            API.RandomSleep2(200, 200, 200)
         end 
     end
 end
@@ -130,21 +132,38 @@ local function waitForGfxChange(targetGfx, timeout)
     return false
 end
 
+local function watchForDefile()
+    local siphon = findNpcByAction("Siphon")
+    if siphon then
+        API.DoAction_NPC(0x29, 3120, { siphon.Id }, 50)
+        API.RandomSleep2(800, 400, 400)
+        API.WaitUntilMovingEnds()
+        API.RandomSleep2(300, 400, 400)
+        if waitForGfxChange(7930, 8) then
+            siphon = findNpcByAction("Siphon")
+            if API.DoAction_NPC(0x29, 3120, { siphon.Id }, 50) then
+                API.RandomSleep2(800, 400, 400)
+            end
+        end
+        return true
+    end
+end
+
 local function watchForStorm()
     local dissipate = findDissipate()
     if dissipate then
         API.DoAction_NPC(0x29, 3120, { dissipate.Id }, 50)
         API.RandomSleep2(800, 400, 400)
         API.WaitUntilMovingEnds()
-        API.RandomSleep2(300, 400, 400)
-        if waitForGfxChange(7916, 30) then
+        API.RandomSleep2(800, 400, 400)
+        if waitForGfxChange(7916, 8) then
             dissipate = findDissipate()
             API.DoAction_NPC(0x29, 3120, { dissipate.Id }, 50)
-            API.RandomSleep2(500, 400, 400)
-            if waitForGfxChange(7917, 30) then
+            API.RandomSleep2(800, 400, 400)
+            if waitForGfxChange(7917, 8) then
                 dissipate = findDissipate()
                 API.DoAction_NPC(0x29, 3120, { dissipate.Id }, 50)
-                API.RandomSleep2(500, 400, 400)
+                API.RandomSleep2(1200, 400, 400)
             end
         end
         return true
@@ -234,9 +253,12 @@ local function findGlint()
 end
 
 local function clickTile(tile)
-    local action = string.find(tile.Action, "depleted") and 0xAE or 0x29
-    API.DoAction_NPC(action, 3120, { tile.Id }, 50)
-    API.RandomSleep2(300, 300, 300)
+    local isDepleted = string.find(tile.Action, "depleted") ~= nil
+    local action = isDepleted and 0xAE or 0x29
+    local offset = isDepleted and 3328 or 3120
+
+    API.DoAction_NPC(action, offset, { tile.Id }, 50)
+    API.RandomSleep2(600, 300, 300)
 end
 
 local function processGlintTile(glintTile)
@@ -267,12 +289,13 @@ local function watchForHorror()
 end
 
 local function watchForDisturbances()
-    watchForCorrupt()
-    watchForSoul()
-    watchForHorror()
-    watchForMoth()
-    watchForSparkling()
-    watchForStorm()
+    return watchForCorrupt() or
+        watchForSoul() or
+        watchForHorror() or
+        watchForMoth() or
+        watchForSparkling() or
+        watchForStorm() or
+        watchForDefile()
 end
 
 local function idleCheck()
@@ -391,8 +414,11 @@ while (API.Read_LoopyLoop()) do
     drawGUI()
 
     API.DoRandomEvents()
+
     if API.VB_FindPSett(10937).state > 0 then
-        watchForDisturbances()
+        if watchForDisturbances() then
+            goto continue
+        end
     end
 
     if API.CheckAnim(10) or API.ReadPlayerMovin2() then
