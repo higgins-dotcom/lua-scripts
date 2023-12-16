@@ -253,7 +253,7 @@ local function findGlint()
 end
 
 local function clickTile(tile)
-    local isDepleted = string.find(tile.Action, "depleted") ~= nil
+    local isDepleted = string.find(tile.Name, "depleted") ~= nil
     local action = isDepleted and 0xAE or 0x29
     local offset = isDepleted and 3328 or 3120
 
