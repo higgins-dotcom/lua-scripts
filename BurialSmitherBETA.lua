@@ -18,8 +18,9 @@ local API = require("api")
 local MAX_IDLE_TIME_MINUTES = 15
 
 local tasks = {
-    { metalType = "RUNE",    itemType = "SCIMITAR" },
-    { metalType = "ADAMANT", itemType = "ARMOURED_BOOTS" }
+    { metalType = "ELDER_RUNE", itemType = "SET" },
+    -- { metalType = "RUNE",    itemType = "SCIMITAR" },
+    -- { metalType = "ADAMANT", itemType = "ARMOURED_BOOTS" }
     -- { metalType = "RUNE",    itemType = "GAUNTLETS" },
     -- { metalType = "RUNE",    itemType = "BATTLEAXE" },
     -- { metalType = "ADAMANT", itemType = "FULL_HELM" },
@@ -288,6 +289,11 @@ local ITEMS = {
             OUTPUT = 45840,
             INPUT = 45835,
         },
+        SET = {
+            BASE = 45440,
+            INPUT = { 45742, 45680, 45835, 45804, 45711 },
+            OUTPUT = 45440
+        }
     },
     NECRONIUM = {
         BATTLEAXE = {
@@ -595,7 +601,10 @@ local function printProgressReport()
     local time = formatElapsedTime(startTime)
     local currentLevel = API.XPLevelTable(API.GetSkillXP(skill))
     IGP.radius = calcProgressPercentage(skill, API.GetSkillXP(skill)) / 100
-    local progress = time .. " | " .. string.lower(skill):gsub("^%l", string.upper) .. ": " .. currentLevel .. " | XP/H: " .. formatNumber(xpPH) .. " | XP: " .. formatNumber(diffXp)
+    local progress = time ..
+        " | " ..
+        string.lower(skill):gsub("^%l", string.upper) ..
+        ": " .. currentLevel .. " | XP/H: " .. formatNumber(xpPH) .. " | XP: " .. formatNumber(diffXp)
     IGP.string_value = progress
 end
 
@@ -675,26 +684,76 @@ local function hasUnfinishedItems()
     return API.CheckInvStuff0(ID.UNFINISHED_SMITHING_ITEM)
 end
 
-local function bank(item)
-    if API.BankOpen2() then
-        if API.BankGetItemStack1(item) > 0 then
-            if API.VB_FindPSett(8958).state ~= 7 then
-                API.DoAction_Interface(0x2e, 0xffffffff, 1, 517, 103, -1, API.OFF_ACT_GeneralInterface_route)
-                API.RandomSleep2(800, 500, 300)
+local function invContains(item)
+    if type(item) == "number" then
+        return API.InvItemFound1(item)
+    elseif type(item) == "table" then
+        local items = API.ReadInvArrays33()
+        for _, tableItem in ipairs(item) do
+            local found = false
+            for k, v in pairs(items) do
+                if v.itemid1 > 0 and v.itemid1 == tableItem then
+                    found = true
+                    break
+                end
             end
-            if API.DoAction_Bank(item, 1, API.OFF_ACT_GeneralInterface_route) then
-                API.RandomSleep2(800, 500, 300)
+            if not found then
+                return false
+            end
+        end
+        return true
+    end
+end
+
+local function bank(item)
+    if type(item) == "number" then
+        if API.BankOpen2() then
+            if API.BankGetItemStack1(item) > 0 then
+                if API.VB_FindPSett(8958).state ~= 7 then
+                    API.DoAction_Interface(0x2e, 0xffffffff, 1, 517, 103, -1, API.OFF_ACT_GeneralInterface_route)
+                    API.RandomSleep2(800, 500, 300)
+                end
+                if API.DoAction_Bank(item, 1, API.OFF_ACT_GeneralInterface_route) then
+                    API.RandomSleep2(800, 500, 300)
+                end
+            else
+                return false
             end
         else
-            return false
+            if API.DoAction_Object1(0x2e, 0, { ID.BURIAL.BANK_CHEST }, 50) then
+                API.RandomSleep2(800, 500, 300)
+            end
         end
-    else
-        if API.DoAction_Object1(0x2e, 0, { ID.BURIAL.BANK_CHEST }, 50) then
-            API.RandomSleep2(800, 500, 300)
+    elseif type(item) == "table" then
+        local itemCount = #item
+        local slotsToWithdraw = math.floor(28 / itemCount)
+
+        if API.BankOpen2() then
+            for _, tableItem in ipairs(item) do
+                for i = 1, slotsToWithdraw do
+                    if API.BankGetItemStack1(tableItem) > 0 then
+                        if API.VB_FindPSett(8958).state ~= 2 then
+                            API.DoAction_Interface(0x2e, 0xffffffff, 1, 517, 93, -1, API.OFF_ACT_GeneralInterface_route)
+                            API.RandomSleep2(800, 500, 300)
+                        end
+                        if API.DoAction_Bank(tableItem, 1, API.OFF_ACT_GeneralInterface_route) then
+                            API.RandomSleep2(800, 500, 300)
+                        end
+                    else
+                        if i == 1 then return false end
+                        break
+                    end
+                end
+            end
+        else
+            if API.DoAction_Object1(0x2e, 0, { ID.BURIAL.BANK_CHEST }, 50) then
+                API.RandomSleep2(800, 500, 300)
+            end
         end
     end
     return true
 end
+
 
 local function setupGUI()
     IGP = API.CreateIG_answer()
@@ -752,7 +811,7 @@ while API.Read_LoopyLoop() do
         local choice = ITEMS[selectedBarType][selectedItemType]
 
         if choice then
-            if API.InvItemcount_1(choice.INPUT) < 1 and hasUnfinishedItems() then
+            if not invContains(choice.INPUT) and hasUnfinishedItems() then
                 if API.LocalPlayer_HoverProgress() <= 165 then
                     if API.LocalPlayer_HoverProgress() == 0 then
                         if e < 3 then
@@ -772,7 +831,7 @@ while API.Read_LoopyLoop() do
                         API.RandomSleep2(600, 800, 1000);
                     end
                 end
-            elseif API.InvItemcount_1(choice.INPUT) >= 1 then
+            elseif invContains(choice.INPUT) then
                 if isSmithingInterfaceOpen() then
                     if API.VB_FindPSett(8332).state == SETTING_IDS[selectedBarType].BAR and API.VB_FindPSett(8333).state == choice.BASE then
                         API.KeyboardPress2(0x20, 60, 100)
