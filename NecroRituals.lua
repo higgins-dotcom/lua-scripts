@@ -135,13 +135,13 @@ end
 local function watchForDefile()
     local siphon = findNpcByAction("Siphon")
     if siphon then
-        API.DoAction_NPC(0x29, 3120, { siphon.Id }, 50)
+        API.DoAction_NPC(0x29, 1488, { siphon.Id }, 50)
         API.RandomSleep2(800, 400, 400)
         API.WaitUntilMovingEnds()
         API.RandomSleep2(300, 400, 400)
         if waitForGfxChange(7930, 8) then
             siphon = findNpcByAction("Siphon")
-            if API.DoAction_NPC(0x29, 3120, { siphon.Id }, 50) then
+            if API.DoAction_NPC(0x29, 1488, { siphon.Id }, 50) then
                 API.RandomSleep2(800, 400, 400)
             end
         end
@@ -152,17 +152,17 @@ end
 local function watchForStorm()
     local dissipate = findDissipate()
     if dissipate then
-        API.DoAction_NPC(0x29, 3120, { dissipate.Id }, 50)
+        API.DoAction_NPC(0x29, 1488, { dissipate.Id }, 50)
         API.RandomSleep2(800, 400, 400)
         API.WaitUntilMovingEnds()
         API.RandomSleep2(800, 400, 400)
         if waitForGfxChange(7916, 8) then
             dissipate = findDissipate()
-            API.DoAction_NPC(0x29, 3120, { dissipate.Id }, 50)
+            API.DoAction_NPC(0x29, 1488, { dissipate.Id }, 50)
             API.RandomSleep2(800, 400, 400)
             if waitForGfxChange(7917, 8) then
                 dissipate = findDissipate()
-                API.DoAction_NPC(0x29, 3120, { dissipate.Id }, 50)
+                API.DoAction_NPC(0x29, 1488, { dissipate.Id }, 50)
                 API.RandomSleep2(1200, 400, 400)
             end
         end
@@ -173,7 +173,7 @@ end
 local function watchForSoul()
     if findNpc(ID.WANDERING_SOUL, 15) then
         API.RandomSleep2(400, 300, 200)
-        API.DoAction_NPC(0x29, 3120, { ID.WANDERING_SOUL }, 15)
+        API.DoAction_NPC(0x29, 1488, { ID.WANDERING_SOUL }, 15)
         API.RandomSleep2(600, 300, 200)
         API.WaitUntilMovingEnds()
         API.RandomSleep2(300, 300, 200)
@@ -181,7 +181,7 @@ local function watchForSoul()
 end
 
 local function watchForMoth()
-    if API.DoAction_NPC(0x29, 3120, { ID.MOTH }, 12) then
+    if API.DoAction_NPC(0x29, 1488, { ID.MOTH }, 12) then
         API.RandomSleep2(600, 200, 200)
         API.WaitUntilMovingEnds()
         API.RandomSleep2(400, 200, 200)
@@ -191,7 +191,7 @@ end
 local function watchForSparkling()
     local restore = findRestore()
     if restore then
-        API.DoAction_NPC(0x29, 3120, { restore.Id }, 50)
+        API.DoAction_NPC(0x29, 1488, { restore.Id }, 50)
         API.RandomSleep2(400, 200, 200)
         API.WaitUntilMovingEnds()
         API.RandomSleep2(1000, 200, 200)
@@ -217,7 +217,7 @@ local function watchForCorrupt()
         local npcFound = false
 
         for _, npcID in ipairs(npcIDs) do
-            if API.DoAction_NPC(0x29, 3120, { npcID }, 20) then
+            if API.DoAction_NPC(0x29, 1488, { npcID }, 20) then
                 API.RandomSleep2(400, 500, 600)
                 npcFound = true
                 break
@@ -255,7 +255,7 @@ end
 local function clickTile(tile)
     local isDepleted = string.find(tile.Name, "depleted") ~= nil
     local action = isDepleted and 0xAE or 0x29
-    local offset = isDepleted and 3328 or 3120
+    local offset = isDepleted and 3328 or 1488
 
     API.DoAction_NPC(action, offset, { tile.Id }, 50)
     API.RandomSleep2(600, 300, 300)
@@ -274,7 +274,7 @@ end
 local function watchForHorror()
     if findNpc(ID.SHAMBLING_HORROR, 50) then
         API.RandomSleep2(800, 800, 1200)
-        API.DoAction_NPC(0x29, 3120, { ID.SHAMBLING_HORROR }, 50)
+        API.DoAction_NPC(0x29, 1488, { ID.SHAMBLING_HORROR }, 50)
         API.RandomSleep2(400, 600, 900)
         local glint = waitForCondition(findGlint, 12, 100)
         if glint then
