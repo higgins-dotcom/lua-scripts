@@ -113,7 +113,7 @@ local function repairGlyphs()
     if pedestal then
         if API.DoAction_Object1(0x29, 160, { pedestal.Id }, 50) then
             REPAIR_CHECK = false
-            API.RandomSleep2(200, 200, 200)
+            API.RandomSleep2(800, 200, 200)
         end 
     end
 end
@@ -174,7 +174,7 @@ local function watchForSoul()
     if findNpc(ID.WANDERING_SOUL, 15) then
         API.RandomSleep2(400, 300, 200)
         API.DoAction_NPC(0x29, 1488, { ID.WANDERING_SOUL }, 15)
-        API.RandomSleep2(600, 300, 200)
+        API.RandomSleep2(1200, 300, 200)
         API.WaitUntilMovingEnds()
         API.RandomSleep2(300, 300, 200)
     end
