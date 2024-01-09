@@ -255,7 +255,7 @@ end
 local function clickTile(tile)
     local isDepleted = string.find(tile.Name, "depleted") ~= nil
     local action = isDepleted and 0xAE or 0x29
-    local offset = isDepleted and 3328 or 1488
+    local offset = isDepleted and 1696 or 1488
 
     API.DoAction_NPC(action, offset, { tile.Id }, 50)
     API.RandomSleep2(600, 300, 300)
