@@ -3,8 +3,8 @@
 @title Smithy
 @description AIO Smither for the Artisan Guild
 @author Higgins <discord@higginshax>
-@date 09/01/2024
-@version 1.0
+@date 10/01/2024
+@version 1.1
 
 Add tasks to the settings
 
@@ -21,19 +21,23 @@ local tasks = {
     -- Add more tasks as needed
     -- Tasks are done in order, so if you want to do Rune Armoured Boots from 0 to Burial then the example shows
     -- Replace any spaces with underscore so ELDER RUNE = ELDER_RUNE
-    -- Amount is related to how many times the item is made, so for items like arrowheads 1 = 75 (1x75 arrowheads)
     -- ARMOURED BOOTS = ARMOURED_BOOTS
+    -- Amount will be amount of times crafted, so for some items like Arrowheads amount 1 = 1x75 = 75 arrowheads
+    
     -- [ -- SMITHING example -- ]
-    -- { metalType = "RUNE", itemType = "ARMOURED_BOOTS", itemLevel = 0,        amount = 4 },
-    -- { metalType = "RUNE", itemType = "ARMOURED_BOOTS", itemLevel = 1,        amount = 4 },
-    -- { metalType = "RUNE", itemType = "ARMOURED_BOOTS", itemLevel = 2,        amount = 17 },
-    -- { metalType = "RUNE", itemType = "ARMOURED_BOOTS", itemLevel = 3,        amount = 31 },
-    -- { metalType = "RUNE", itemType = "ARMOURED_BOOTS", itemLevel = "BURIAL", amount = 31 },
+    -- { metalType = "RUNE",      itemType = "ARROWHEADS",      itemLevel = 0,        amount = 29 },
+    -- { metalType = "RUNE",      itemType = "ARMOURED_BOOTS",  itemLevel = 0,        amount = 35 },
+    -- { metalType = "RUNE",      itemType = "ARMOURED_BOOTS",  itemLevel = 1,        amount = 35 },
+    -- { metalType = "RUNE",      itemType = "ARMOURED_BOOTS",  itemLevel = 2,        amount = 35 },
+    -- { metalType = "RUNE",      itemType = "ARMOURED_BOOTS",  itemLevel = 3,        amount = 35 },
+    -- { metalType = "RUNE",      itemType = "ARMOURED_BOOTS",  itemLevel = "BURIAL", amount = 35 },
+    -- { metalType = "ORIKALKUM", itemType = "SET",             itemLevel = "BURIAL", amount = 1 },
+    
     -- If unsure - open the lib/smithing_data.json file and search for the item
-    -- 
+    --
     -- [ -- SMELTING example -- ]
     -- Set metalType as required, leave itemType as bar and itemLevel as 0
-    -- { metalType = "BRONZE", itemType = "BAR", itemLevel = 0, amount = 90 }
+    -- { metalType = "BRONZE",    itemType = "BAR",             itemLevel = 0,        amount = 90 }
     -- #########################################################################
 }
 
@@ -218,6 +222,7 @@ end
 
 local function isSmithingInterfaceOpen()
     return API.Compare2874Status(85, false)
+    -- return API.Container_Get_Check(858)
 end
 
 local function openSmithingInterface(area)
@@ -364,6 +369,7 @@ end
 setupGUI()
 
 local currentTaskIndex = 1
+local wasFull = false
 selectedItemType = nil
 
 loadJsonData()
@@ -401,12 +407,14 @@ while API.Read_LoopyLoop() do
         selectedBarType = currentTask.metalType
         selectedItemType = currentTask.itemType
         selectedItemLevel = currentTask.itemLevel
+        itemLevel = tostring(selectedItemLevel)
         if type(selectedItemLevel) == "number" then
-            itemLevel = tostring(selectedItemLevel)
             ID.ANVIL = ID.ANVIL
             ID.FORGE = ID.BURIAL.FORGE
         else
-            itemLevel = "BURIAL"
+            if selectedItemType == "SET" then
+                itemLevel = "0"
+            end
             ID.ANVIL = ID.BURIAL.ANVIL
             ID.FORGE = ID.BURIAL.FORGE
         end
@@ -420,7 +428,13 @@ while API.Read_LoopyLoop() do
             choice.ITEM_TYPE = selectedItemType
             choice.BAR = selectedBarType
 
-            if ((choice.INPUT == nil and not API.InvFull_()) or invContains(choice.INPUT)) and currentTask.amount > 0 then
+            if (
+                    (choice.INPUT == nil and not API.InvFull_()) or
+                    invContains(choice.INPUT)
+                ) and
+                currentTask.amount > 0 and not wasFull
+            then
+                wasFull = false
                 if isSmithingInterfaceOpen() then
                     if API.VB_FindPSett(8333).state == choice.BASE and checkItemText(choice.ITEM_LEVEL) then
                         if not checkStorage(choice) then
@@ -452,6 +466,7 @@ while API.Read_LoopyLoop() do
                     openSmithingInterface(area)
                 end
             elseif hasUnfinishedItems() then
+                wasFull = true
                 if API.LocalPlayer_HoverProgress() <= 165 then
                     if API.LocalPlayer_HoverProgress() == 0 then
                         if e < 3 then
@@ -473,11 +488,12 @@ while API.Read_LoopyLoop() do
             else
                 if currentTask.amount > 0 then
                     if not bank(choice.INPUT) then
-                        currentTaskIndex = currentTaskIndex + 1
+                        currentTaskIndex = currentTaskIndex + 1 
                     end
                 else
                     currentTaskIndex = currentTaskIndex + 1
                 end
+                wasFull = false
             end
         else
             print("Invalid item in tasks - please check task list for spelling errors/invalid levels etc")
