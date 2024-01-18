@@ -190,18 +190,14 @@ local function teleportToLodestone(id)
         API.RandomSleep2(1600, 800, 800)
     else
         API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1465, 18, -1, API.OFF_ACT_GeneralInterface_route)
-        API.RandomSleep2(300, 600, 600)
+        API.RandomSleep2(300, 300, 300)
     end
 end
 
 local function teleportToEdgeville()
-    if invContains(ID.WILDY_SWORD) then
-        if API.Compare2874Status(13) or API.Compare2874Status(22) then
-            API.KeyboardPress2(0x31, 60, 100)
-            API.RandomSleep2(200, 200, 200)
-        else
-            API.DoAction_Inventory2(ID.WILDY_SWORD, 0, 2, API.OFF_ACT_GeneralInterface_route)
-        end
+    local ws = API.GetABs_name1("Wilderness sword")
+    if ws.enabled and ws.action == "Edgeville" then
+        API.DoAction_Ability_Direct(ws, 1, API.OFF_ACT_GeneralInterface_route)
     else
         teleportToLodestone(LODESTONES.EDGEVILLE)
     end
