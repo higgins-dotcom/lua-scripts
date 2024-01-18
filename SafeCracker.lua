@@ -45,6 +45,7 @@ local AREA = {
     LUMBRIDGE_LODESTONE = { x = 3233, y = 3221, z = 0 },
     EDGEVILLE_LODESTONE = { x = 3067, y = 3505, z = 0 },
     DRAYNOR_LODESTONE = { x = 3106, y = 3299, z = 0 },
+    VARROCK_LODESTONE = { x = 3214, y = 3376, z = 0},
     BOBS_AXES = { x = 3230, y = 3203, z = 0 },
     RODDECKS_HOUSE = { x = 3231, y = 3231, z = 0 },
     WIZARDS_TOWER = { x = 3105, y = 3155, z = 0 },
@@ -375,7 +376,7 @@ local function walk()
     elseif location == LOCATIONS.VARROCK then
         if API.PInArea21(3200, 3206, 3469, 3475) then
             walking = false
-        elseif isAtLocation(AREA.GE, 10) then
+        elseif isAtLocation(AREA.GE, 10) or isAtLocation(AREA.VARROCK_LODESTONE, 10) then
             API.DoAction_WalkerW(WPOINT.new(3213, 3470, 0))
             API.RandomSleep2(300, 300, 300)
         elseif isAtLocation(AREA.VARROCK_CASTLE, 25) then
