@@ -3,11 +3,12 @@
     Description: Safe cracking
 
     Author: Higgins
-    Version: 1.0
+    Version: 1.1
     Release Date: 18/01/2024
 
     Release Notes:
     - Version 1.0 : Initial release
+    - Version 1.1 : Varrock Tele and Wildy Sword tele to Edgeville added
 ]]
 
 -- Misthalin route (Bobs Axes, Roddecks House, Wizard's Tower, Edgeville, Draynor Manor, Varrock
@@ -32,6 +33,7 @@ local ID = {
     CRACKING_ANIMATION = 31668,
     PULSE = 6882,
     WICKED_HOOD = 22332,
+    WILDY_SWORD = { 37904, 37905, 37906, 37907, 41376, 41377 },
     LOCKPICK = 1523,
     STETHOSCOPE = 5560,
     GUILD_TELEPORT = 42619,
@@ -45,7 +47,7 @@ local AREA = {
     LUMBRIDGE_LODESTONE = { x = 3233, y = 3221, z = 0 },
     EDGEVILLE_LODESTONE = { x = 3067, y = 3505, z = 0 },
     DRAYNOR_LODESTONE = { x = 3106, y = 3299, z = 0 },
-    VARROCK_LODESTONE = { x = 3214, y = 3376, z = 0},
+    VARROCK_LODESTONE = { x = 3214, y = 3376, z = 0 },
     BOBS_AXES = { x = 3230, y = 3203, z = 0 },
     RODDECKS_HOUSE = { x = 3231, y = 3231, z = 0 },
     WIZARDS_TOWER = { x = 3105, y = 3155, z = 0 },
@@ -191,13 +193,29 @@ local function teleportToLodestone(id)
     end
 end
 
+local function teleportToEdgeville()
+    if invContains(ID.WILDY_SWORD) then
+        if API.Compare2874Status(13) or API.Compare2874Status(22) then
+            API.KeyboardPress2(0x31, 60, 100)
+            API.RandomSleep2(200, 200, 200)
+        else
+            API.DoAction_Inventory2(ID.WILDY_SWORD, 0, 2, API.OFF_ACT_GeneralInterface_route)
+        end
+    else
+        teleportToLodestone(LODESTONES.EDGEVILLE)
+    end
+end
+
 local function teleportToVarrock()
     local lotd = API.GetABs_name1("Luck of the Dwarves")
     local rof = API.GetABs_name1("Ring of Fortune")
+    local vt = API.GetABs_name1("Varrock Teleport")
     if lotd.enabled and lotd.action == "Miscellania" then
         API.DoAction_Ability_Direct(lotd, 2, API.OFF_ACT_GeneralInterface_route)
     elseif rof.enabled and rof.action == "Miscellania" then
         API.DoAction_Ability_Direct(rof, 2, API.OFF_ACT_GeneralInterface_route)
+    elseif vt.enabled then
+        API.DoAction_Ability_Direct(vt, 1, API.OFF_ACT_GeneralInterface_route)
     else
         teleportToLodestone(LODESTONES.VARROCK)
     end
@@ -348,7 +366,7 @@ local function walk()
                 walking = false
             end
         else
-            teleportToLodestone(LODESTONES.EDGEVILLE)
+            teleportToEdgeville()
         end
     elseif location == LOCATIONS.DRAYNOR_MANOR then
         if isAtLocation(AREA.DRAYNOR_MANOR, 50) then
@@ -397,7 +415,6 @@ local function walk()
                 if not findDoor(15535, { 3219, 3472 }, 2) then
                     API.DoAction_Object2(0x31, API.OFF_ACT_GeneralObject_route0, { 15536 }, 50, WPOINT.new(3218, 3472, 0))
                 else
-                    -- if not inside area
                     if API.PInArea21(3200, 3206, 3469, 3475) then
                         walking = false
                     else
@@ -408,7 +425,7 @@ local function walk()
             end
         else
             teleportToVarrock()
-            API.RandomSleep2(800, 600, 600)
+            API.RandomSleep2(400, 600, 600)
         end
     elseif location == LOCATIONS.GUILD then
         if isAtLocation(AREA.GUILD, 50) then
