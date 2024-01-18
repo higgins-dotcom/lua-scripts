@@ -54,6 +54,7 @@ local AREA = {
     DRAYNOR_MANOR = { x = 3107, y = 3358, z = 0 },
     GE = { x = 3163, y = 3466, z = 0 },
     VARROCK_CASTLE = { x = 3211, y = 3476, z = 0 },
+    VARROCK_SQUARE = { x = 3212, y = 3428, z = 0 },
     GUILD = { x = 4761, y = 5775, z = 0 },
     TRAPDOOR = { x = 3222, y = 3268, z = 0 }
 }
@@ -394,7 +395,7 @@ local function walk()
     elseif location == LOCATIONS.VARROCK then
         if API.PInArea21(3200, 3206, 3469, 3475) then
             walking = false
-        elseif isAtLocation(AREA.GE, 10) or isAtLocation(AREA.VARROCK_LODESTONE, 10) then
+        elseif isAtLocation(AREA.GE, 10) or isAtLocation(AREA.VARROCK_LODESTONE, 10) or isAtLocation(AREA.VARROCK_SQUARE, 15) then
             API.DoAction_WalkerW(WPOINT.new(3213, 3470, 0))
             API.RandomSleep2(300, 300, 300)
         elseif isAtLocation(AREA.VARROCK_CASTLE, 25) then
