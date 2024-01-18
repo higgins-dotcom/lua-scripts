@@ -198,6 +198,7 @@ local function teleportToEdgeville()
     local ws = API.GetABs_name1("Wilderness sword")
     if ws.enabled and ws.action == "Edgeville" then
         API.DoAction_Ability_Direct(ws, 1, API.OFF_ACT_GeneralInterface_route)
+        API.RandomSleep2(800, 300, 300)
     else
         teleportToLodestone(LODESTONES.EDGEVILLE)
     end
@@ -209,10 +210,13 @@ local function teleportToVarrock()
     local vt = API.GetABs_name1("Varrock Teleport")
     if lotd.enabled and lotd.action == "Miscellania" then
         API.DoAction_Ability_Direct(lotd, 2, API.OFF_ACT_GeneralInterface_route)
+        API.RandomSleep2(800, 300, 300)
     elseif rof.enabled and rof.action == "Miscellania" then
         API.DoAction_Ability_Direct(rof, 2, API.OFF_ACT_GeneralInterface_route)
+        API.RandomSleep2(800, 300, 300)
     elseif vt.enabled then
         API.DoAction_Ability_Direct(vt, 1, API.OFF_ACT_GeneralInterface_route)
+        API.RandomSleep2(800, 300, 300)
     else
         teleportToLodestone(LODESTONES.VARROCK)
     end
@@ -422,7 +426,6 @@ local function walk()
             end
         else
             teleportToVarrock()
-            API.RandomSleep2(400, 600, 600)
         end
     elseif location == LOCATIONS.GUILD then
         if isAtLocation(AREA.GUILD, 50) then
