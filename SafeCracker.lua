@@ -187,7 +187,7 @@ end
 local function teleportToLodestone(id)
     if isLodestoneInterfaceUp() then
         API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1092, id, -1, API.OFF_ACT_GeneralInterface_route)
-        API.RandomSleep2(1600, 800, 800)
+        API.RandomSleep2(800, 800, 800)
     else
         API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1465, 18, -1, API.OFF_ACT_GeneralInterface_route)
         API.RandomSleep2(300, 300, 300)
@@ -306,7 +306,7 @@ local function walk()
             end
         else
             teleportToLodestone(LODESTONES.LUMBRIDGE)
-            API.RandomSleep2(1600, 600, 600)
+            API.RandomSleep2(800, 600, 600)
         end
     elseif location == LOCATIONS.RODDECKS_HOUSE then
         if isAtLocation(AREA.BOBS_AXES, 15) then
@@ -358,7 +358,7 @@ local function walk()
             API.RandomSleep2(3200, 600, 600)
         end
     elseif location == LOCATIONS.EDGEVILLE then
-        if isAtLocation(AREA.EDGEVILLE_LODESTONE, 20) then
+        if isAtLocation(AREA.EDGEVILLE_LODESTONE, 50) then
             if floor == 0 then
                 API.DoAction_Object2(0x34, API.OFF_ACT_GeneralObject_route0, { 26982 }, 50, WPOINT.new(3082, 3513, 0))
                 API.RandomSleep2(1800, 600, 600)
