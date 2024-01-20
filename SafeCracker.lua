@@ -892,8 +892,13 @@ while API.Read_LoopyLoop() do
     drawGUI()
     p = API.PlayerCoordfloat()
 
+    if API.Compare2874Status(12) then
+        API.KeyboardPress2(0x20, 60, 100)
+        API.RandomSleep2(100, 200, 200)
+    end
+
     if walking then
-        if API.CheckAnim(5) then
+        if API.CheckAnim(2) then
             goto continue
         end
     end
@@ -915,10 +920,6 @@ while API.Read_LoopyLoop() do
         walk()
     else
         if not crackSafe() then
-            if API.Compare2874Status(12) then
-                API.KeyboardPress2(0x20, 60, 100)
-                API.RandomSleep2(100, 200, 200)
-            end
 
             if location == LOCATIONS.GUILD then
                 -- location = oldLocation + 1
