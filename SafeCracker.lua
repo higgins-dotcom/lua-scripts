@@ -90,7 +90,7 @@ local ROUTES         = {
         ARDOUGNE_NORTH = 3,
         YANILLE = 4,
         YANILLE_PUB = 5,
-        VARROCK = 6,
+        WIZARDS_TOWER = 6,
         GUILD = 7
     },
 }
@@ -104,7 +104,7 @@ local LODESTONES     = {
 }
 
 local route          = nil
-local LOCATIONS      = nil
+LOCATIONS      = nil
 local location       = 1
 local oldLocation    = nil
 local lastTile       = nil
@@ -421,6 +421,12 @@ local function walk()
     walking = true
     local floor = API.GetFloorLv_2()
 
+    -- or (API.InvFull_() and hasLoot())
+    if (API.ChatFind("Your loot bag is full", 8).pos_found > 0 and location ~= LOCATIONS.GUILD) then
+        oldLocation = location
+        location = tableLength(LOCATIONS)
+    end
+
     if location == LOCATIONS.GUILD then
         if isAtLocation(AREA.GUILD, 50) then
             if hasLoot() then
@@ -433,6 +439,10 @@ local function walk()
             else
                 API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route2, { ID.ROBIN }, 50)
                 API.RandomSleep2(600, 300, 300)
+                if oldLocation ~= nil then
+                    location = oldLocation
+                    oldLocation = nil
+                end
                 walking = false
             end
         elseif isAtLocation(AREA.LUMBRIDGE_LODESTONE, 10) then
@@ -634,7 +644,7 @@ local function walk()
                     teleportToDestination("Camelot")
                 end
             else
-                print("Camelot safes are still cracked.. too fast lets wait a bit")
+                print("Camelot safes are already cracked.. waiting for them to be available.")
                 API.RandomSleep2(1000, 1000, 1000)
             end
         elseif location == LOCATIONS.ARDOUGNE_WEST then
@@ -727,45 +737,62 @@ local function walk()
             else
                 teleportToLodestone(LODESTONES.YANILLE)
             end
-        elseif location == LOCATIONS.VARROCK then
-            if API.PInArea21(3200, 3206, 3469, 3475) then
-                walking = false
-            elseif isAtLocation(AREA.GE, 10) or isAtLocation(AREA.VARROCK_LODESTONE, 10) or isAtLocation(AREA.VARROCK_SQUARE, 15) then
-                API.DoAction_WalkerW(WPOINT.new(3213, 3470, 0))
-                API.RandomSleep2(300, 300, 300)
-            elseif isAtLocation(AREA.VARROCK_CASTLE, 25) then
-                if floor == 0 then
-                    if API.DoAction_Object2(0x34, API.OFF_ACT_GeneralObject_route0, { 24367 }, 50, WPOINT.new(3212, 3474, 0)) then
-                        API.RandomSleep2(1200, 600, 600)
-                    end
-                elseif floor == 1 then
-                    if not findDoor(15535, { 3218, 3472 }, 1) then
-                        door = findDoor(15536, { 3219, 3472 }, 1)
-                        API.DoAction_Object_Direct(0x31, 0, door)
-                        API.RandomSleep2(800, 600, 600)
-                    else
-                        API.DoAction_Object2(0x34, API.OFF_ACT_GeneralObject_route0, { 24361 }, 50,
-                            WPOINT.new(3224, 3472, 0))
-                        API.RandomSleep2(1800, 600, 600)
-                    end
+        elseif location == LOCATIONS.WIZARDS_TOWER then
+            if isAtLocation(AREA.WIZARDS_TOWER, 20) then
+                if floor == 3 then
+                    API.DoAction_Object1(0x29, API.OFF_ACT_GeneralObject_route0, { 79776 }, 50) -- descend
+                    API.RandomSleep2(2300, 600, 600)
                 elseif floor == 2 then
-                    if not findDoor(15535, { 3219, 3472 }, 2) then
-                        API.DoAction_Object2(0x31, API.OFF_ACT_GeneralObject_route0, { 15536 }, 50,
-                            WPOINT.new(3218, 3472, 0))
-                    else
-                        if API.PInArea21(3200, 3206, 3469, 3475) then
-                            walking = false
-                        else
-                            API.DoAction_Object2(0xc3, 0, { 111230 }, 50, WPOINT.new(3203, 3476, 0))
-                            API.RandomSleep2(800, 800, 800)
-                        end
-                    end
+                    walking = false
                 end
             else
-                teleportToVarrock()
-                API.RandomSleep2(400, 600, 600)
+                API.DoAction_Inventory1(ID.WICKED_HOOD, 0, 3, API.OFF_ACT_GeneralInterface_route)
+                API.RandomSleep2(3200, 600, 600)
             end
         end
+        -- elseif location == LOCATIONS.VARROCK then
+        --     if not isCamelotCracked() then
+        --         walking = false
+        --     else
+        --         if API.PInArea21(3200, 3206, 3469, 3475) then
+        --             walking = false
+        --         elseif isAtLocation(AREA.GE, 10) or isAtLocation(AREA.VARROCK_LODESTONE, 10) or isAtLocation(AREA.VARROCK_SQUARE, 15) then
+        --             API.DoAction_WalkerW(WPOINT.new(3213, 3470, 0))
+        --             API.RandomSleep2(300, 300, 300)
+        --         elseif isAtLocation(AREA.VARROCK_CASTLE, 25) then
+        --             if floor == 0 then
+        --                 if API.DoAction_Object2(0x34, API.OFF_ACT_GeneralObject_route0, { 24367 }, 50, WPOINT.new(3212, 3474, 0)) then
+        --                     API.RandomSleep2(1200, 600, 600)
+        --                 end
+        --             elseif floor == 1 then
+        --                 if not findDoor(15535, { 3218, 3472 }, 1) then
+        --                     door = findDoor(15536, { 3219, 3472 }, 1)
+        --                     API.DoAction_Object_Direct(0x31, 0, door)
+        --                     API.RandomSleep2(800, 600, 600)
+        --                 else
+        --                     API.DoAction_Object2(0x34, API.OFF_ACT_GeneralObject_route0, { 24361 }, 50,
+        --                         WPOINT.new(3224, 3472, 0))
+        --                     API.RandomSleep2(1800, 600, 600)
+        --                 end
+        --             elseif floor == 2 then
+        --                 if not findDoor(15535, { 3219, 3472 }, 2) then
+        --                     API.DoAction_Object2(0x31, API.OFF_ACT_GeneralObject_route0, { 15536 }, 50,
+        --                         WPOINT.new(3218, 3472, 0))
+        --                 else
+        --                     if API.PInArea21(3200, 3206, 3469, 3475) then
+        --                         walking = false
+        --                     else
+        --                         API.DoAction_Object2(0xc3, 0, { 111230 }, 50, WPOINT.new(3203, 3476, 0))
+        --                         API.RandomSleep2(800, 800, 800)
+        --                     end
+        --                 end
+        --             end
+        --         else
+        --             teleportToVarrock()
+        --             API.RandomSleep2(400, 600, 600)
+        --         end
+        --     end
+        -- end
     end
 end
 
@@ -804,7 +831,6 @@ setupGUI()
 
 while API.Read_LoopyLoop() do
     if scriptPaused then
-
         if btnStop.return_click then
             API.Write_LoopyLoop(false)
         end
@@ -820,6 +846,7 @@ while API.Read_LoopyLoop() do
             comboRoute.remove = true
             comboReward.remove = true
 
+            rewardChoice = (comboReward.int_value == 1) and "Coins" or "Pilfer Points"
             needLockpick = not tickLockpick.box_ticked
             needStethoscope = not tickStethoscope.box_ticked
             route = (comboRoute.int_value == 1) and "KANDARIN" or "ASGARNIA"
@@ -875,19 +902,29 @@ while API.Read_LoopyLoop() do
                 API.RandomSleep2(100, 200, 200)
             end
 
-            if API.ChatFind("Your loot bag is full", 2).pos_found > 0 and location ~= LOCATIONS.GUILD then
-                oldLocation = location
-                location = LOCATIONS.GUILD
-                walking = true
+            if location == LOCATIONS.GUILD then
+                -- location = oldLocation + 1
             else
-                if location == LOCATIONS.GUILD then
-                    location = oldLocation + 1
-                else
-                    location = location + 1
-                end
-                if location > (tableLength(LOCATIONS) - 1) then location = 1 end
-                walking = true
+                location = location + 1
             end
+            if location > (tableLength(LOCATIONS) - 1) then
+                location = 1
+            end
+            walking = true
+
+            -- if API.ChatFind("Your loot bag is full", 2).pos_found > 0 and location ~= LOCATIONS.GUILD then
+            --     oldLocation = location
+            --     location = LOCATIONS.GUILD
+            --     walking = true
+            -- else
+            --     if location == LOCATIONS.GUILD then
+            --         location = oldLocation + 1
+            --     else
+            --         location = location + 1
+            --     end
+            --     if location > (tableLength(LOCATIONS) - 1) then location = 1 end
+            --     walking = true
+            -- end
             API.RandomSleep2(300, 300, 300)
         end
     end
