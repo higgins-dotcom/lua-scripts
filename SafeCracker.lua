@@ -767,6 +767,11 @@ setupGUI()
 
 while API.Read_LoopyLoop() do
     if scriptPaused then
+
+        if btnStop.return_click then
+            API.Write_LoopyLoop(false)
+        end
+
         if btnStart.return_click then
             IG_Back.remove = true
             btnStart.remove = true
