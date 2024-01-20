@@ -423,7 +423,8 @@ local function walk()
     local floor = API.GetFloorLv_2()
 
     -- or (API.InvFull_() and hasLoot())
-    if (API.ChatFind("Your loot bag is full", 2).pos_found > 0 and location ~= LOCATIONS.GUILD) then
+
+    if (API.InvFull_() and hasLoot()) or (API.ChatFind("Your loot bag is full", 2).pos_found > 0 and location ~= LOCATIONS.GUILD) then
         oldLocation = location
         location = tableLength(LOCATIONS)
     end
