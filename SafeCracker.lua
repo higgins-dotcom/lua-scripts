@@ -90,7 +90,8 @@ local ROUTES         = {
         ARDOUGNE_NORTH = 3,
         YANILLE = 4,
         YANILLE_PUB = 5,
-        GUILD = 6
+        VARROCK = 6,
+        GUILD = 7
     },
 }
 
@@ -726,8 +727,44 @@ local function walk()
             else
                 teleportToLodestone(LODESTONES.YANILLE)
             end
-        else
-            print("NO LOCATION??")
+        elseif location == LOCATIONS.VARROCK then
+            if API.PInArea21(3200, 3206, 3469, 3475) then
+                walking = false
+            elseif isAtLocation(AREA.GE, 10) or isAtLocation(AREA.VARROCK_LODESTONE, 10) or isAtLocation(AREA.VARROCK_SQUARE, 15) then
+                API.DoAction_WalkerW(WPOINT.new(3213, 3470, 0))
+                API.RandomSleep2(300, 300, 300)
+            elseif isAtLocation(AREA.VARROCK_CASTLE, 25) then
+                if floor == 0 then
+                    if API.DoAction_Object2(0x34, API.OFF_ACT_GeneralObject_route0, { 24367 }, 50, WPOINT.new(3212, 3474, 0)) then
+                        API.RandomSleep2(1200, 600, 600)
+                    end
+                elseif floor == 1 then
+                    if not findDoor(15535, { 3218, 3472 }, 1) then
+                        door = findDoor(15536, { 3219, 3472 }, 1)
+                        API.DoAction_Object_Direct(0x31, 0, door)
+                        API.RandomSleep2(800, 600, 600)
+                    else
+                        API.DoAction_Object2(0x34, API.OFF_ACT_GeneralObject_route0, { 24361 }, 50,
+                            WPOINT.new(3224, 3472, 0))
+                        API.RandomSleep2(1800, 600, 600)
+                    end
+                elseif floor == 2 then
+                    if not findDoor(15535, { 3219, 3472 }, 2) then
+                        API.DoAction_Object2(0x31, API.OFF_ACT_GeneralObject_route0, { 15536 }, 50,
+                            WPOINT.new(3218, 3472, 0))
+                    else
+                        if API.PInArea21(3200, 3206, 3469, 3475) then
+                            walking = false
+                        else
+                            API.DoAction_Object2(0xc3, 0, { 111230 }, 50, WPOINT.new(3203, 3476, 0))
+                            API.RandomSleep2(800, 800, 800)
+                        end
+                    end
+                end
+            else
+                teleportToVarrock()
+                API.RandomSleep2(400, 600, 600)
+            end
         end
     end
 end
