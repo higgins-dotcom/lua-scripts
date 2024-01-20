@@ -104,7 +104,7 @@ local LODESTONES     = {
 
 local route          = nil
 local LOCATIONS      = nil
-local location       = 2
+local location       = 1
 local oldLocation    = nil
 local lastTile       = nil
 local scriptPaused   = true
