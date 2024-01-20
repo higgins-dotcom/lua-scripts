@@ -445,7 +445,7 @@ local function walk()
                     location = oldLocation - 1
                     oldLocation = nil
                 end
-                walking = false
+                -- walking = false
             end
         elseif isAtLocation(AREA.TRAPDOOR, 15) then
             API.DoAction_Object2(0x39, 0, { ID.TRAPDOOR }, 50, WPOINT.new(3223, 3268, 0))
