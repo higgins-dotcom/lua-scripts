@@ -128,6 +128,15 @@ local function tableLength(tbl)
     return count
 end
 
+local function getKeyByValue(tbl, value)
+    for k, v in pairs(tbl) do
+        if v == value then
+            return k
+        end
+    end
+    return nil
+end
+
 local function round(val, decimal)
     if decimal then
         return math.floor((val * 10 ^ decimal) + 0.5) / (10 ^ decimal)
@@ -308,21 +317,28 @@ local function isLodestoneInterfaceUp()
         { { 1092, 1, -1, -1, 0 }, { 1092, 54, -1, 1, 0 } }) > 0
 end
 
-local function teleportToLodestone(id)
-    if isLodestoneInterfaceUp() then
-        API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1092, id, -1, API.OFF_ACT_GeneralInterface_route)
-        API.RandomSleep2(1600, 800, 800)
-    else
-        API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1465, 18, -1, API.OFF_ACT_GeneralInterface_route)
-        API.RandomSleep2(300, 300, 300)
-    end
-end
-
-local function teleportToDestination(destination)
-    local teleportAbility = API.GetABs_name1(destination .. " Teleport")
+local function teleportToDestination(destination, isLodestone)
+    local str = isLodestone and " Lodestone" or " Teleport"
+    local teleportAbility = API.GetABs_name1(destination .. str)
     if teleportAbility.enabled then
         API.DoAction_Ability_Direct(teleportAbility, 1, API.OFF_ACT_GeneralInterface_route)
         API.RandomSleep2(1200, 300, 300)
+        return true
+    end
+    return false
+end
+
+local function teleportToLodestone(id)
+    local key = getKeyByValue(LODESTONES, id)
+    local loc = key:sub(1, 1):upper() .. key:sub(2):lower()
+    if not teleportToDestination(loc, true) then
+        if isLodestoneInterfaceUp() then
+            API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1092, id, -1, API.OFF_ACT_GeneralInterface_route)
+            API.RandomSleep2(1600, 800, 800)
+        else
+            API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1465, 18, -1, API.OFF_ACT_GeneralInterface_route)
+            API.RandomSleep2(300, 300, 300)
+        end
     end
 end
 
