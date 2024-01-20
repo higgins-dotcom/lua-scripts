@@ -3,10 +3,11 @@
     Description: Safe cracking
 
     Author: Higgins
-    Version: 2.0
+    Version: 2.1
     Release Date: 18/01/2024
 
     Release Notes:
+    - Version 2.1 : Wizard Tower added to end of Kandarin route & Other fixes
     - Version 2.0 : Kandarin route added
     - Version 1.1 : Varrock Tele and Wildy Sword tele to Edgeville added
     - Version 1.0 : Initial release
@@ -104,7 +105,7 @@ local LODESTONES     = {
 }
 
 local route          = nil
-LOCATIONS      = nil
+LOCATIONS            = nil
 local location       = 1
 local oldLocation    = nil
 local lastTile       = nil
@@ -246,7 +247,7 @@ local function setupGUI()
     comboRoute.box_size = FFPOINT.new(190, 0, 0)
     comboRoute.stringsArr = { "Misthalin", "Kandarin" }
     comboRoute.tooltip_text =
-    "Misthalin (62+) - Lumbridge, Wizard Tower, Edgeville, Varrock, Draynor Manor\nKandarin (83+) - Camelot, Ardougne, Yanille"
+    "Misthalin (62+) - Lumbridge, Wizard Tower, Edgeville, Varrock, Draynor Manor\nKandarin (83+) - Camelot, Ardougne, Yanille, Wizard Tower"
 
     comboReward = API.CreateIG_answer()
     comboReward.box_name = "###REWARD"
@@ -395,7 +396,7 @@ end
 
 local function clickSafe(safe)
     API.DoAction_Object_Direct(0x29, 0, safe)
-    API.RandomSleep2(600, 600, 600)
+    API.RandomSleep2(600, 400, 400)
 end
 
 local function crackSafe()
@@ -404,7 +405,7 @@ local function crackSafe()
     if safe then
         if isCracking() then
             if hasPulse() then
-                API.RandomSleep2(300, 600, 600)
+                API.RandomSleep2(250, 200, 300)
                 clickSafe(safe)
             end
         else
@@ -422,7 +423,7 @@ local function walk()
     local floor = API.GetFloorLv_2()
 
     -- or (API.InvFull_() and hasLoot())
-    if (API.ChatFind("Your loot bag is full", 8).pos_found > 0 and location ~= LOCATIONS.GUILD) then
+    if (API.ChatFind("Your loot bag is full", 2).pos_found > 0 and location ~= LOCATIONS.GUILD) then
         oldLocation = location
         location = tableLength(LOCATIONS)
     end
@@ -440,18 +441,18 @@ local function walk()
                 API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route2, { ID.ROBIN }, 50)
                 API.RandomSleep2(600, 300, 300)
                 if oldLocation ~= nil then
-                    location = oldLocation
+                    location = oldLocation - 1
                     oldLocation = nil
                 end
                 walking = false
             end
+        elseif isAtLocation(AREA.TRAPDOOR, 15) then
+            API.DoAction_Object2(0x39, 0, { ID.TRAPDOOR }, 50, WPOINT.new(3223, 3268, 0))
+            API.RandomSleep2(3200, 1000, 1000)
         elseif isAtLocation(AREA.LUMBRIDGE_LODESTONE, 10) then
             local tile = WPOINT.new(3217 + math.random(-2, 2), 3264 + math.random(-2, 2), 0)
             walkToTile(tile)
             API.RandomSleep2(600, 300, 300)
-        elseif isAtLocation(AREA.TRAPDOOR, 10) then
-            API.DoAction_Object2(0x39, 0, { ID.TRAPDOOR }, 50, WPOINT.new(3223, 3268, 0))
-            API.RandomSleep2(3200, 1000, 1000)
         else
             if API.DoAction_Inventory1(ID.GUILD_TELEPORT, 0, 1, API.OFF_ACT_GeneralInterface_route) then
                 API.RandomSleep2(800, 600, 600)
@@ -809,7 +810,7 @@ end
 local function invCheck()
     local lockpickCheck = not needLockpick or (needLockpick and API.InvItemcount_1(ID.LOCKPICK) > 0)
     local stethoscopeCheck = not needStethoscope or (needStethoscope and API.InvItemcount_1(ID.STETHOSCOPE) > 0)
-    local wickedHoodCheck = (route ~= "ASGARNIA") or (route == "ASGARNIA" and API.InvItemcount_1(ID.WICKED_HOOD) > 0)
+    local wickedHoodCheck = API.InvItemcount_1(ID.WICKED_HOOD) > 0
 
     check(wickedHoodCheck, "You need a Wicked Hood in your inventory!")
     check(lockpickCheck, "You need lockpicks in your inventory!")
