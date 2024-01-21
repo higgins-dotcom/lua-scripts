@@ -99,12 +99,25 @@ local ROUTES         = {
 }
 
 local LODESTONES     = {
-    EDGEVILLE = 16,
-    LUMBRIDGE = 18,
-    DRAYNOR = 15,
-    VARROCK = 22,
-    YANILLE = 26,
-    ARDOUGNE = 12
+    ["Edgeville"] = 16,
+    ["Lumbridge"] = 18,
+    ["Draynor"] = 15,
+    ["Varrock"] = 22,
+    ["Yanille"] = 26,
+    ["Ardougne"] = 12,
+}
+
+local TELEPORTS      = {
+    ["Ardougne Teleport"] = 14340,
+    ["Camelot Teleport"] = 14339,
+    ["Varrock Teleport"] = 14336,
+    ["Lumbridge Teleport"] = 14334,
+    ["Draynor Lodestone"] = 31868,
+    ["Edgeville Lodestone"] = 31870,
+    ["Ardougne Lodestone"] = 31862,
+    ["Varrock Lodestone"] = 31860,
+    ["Lumbridge Lodestone"] = 31859,
+    ["Yanille Lodestone"] = 31869,
 }
 
 local route          = nil
@@ -320,29 +333,40 @@ local function isLodestoneInterfaceUp()
         { { 1092, 1, -1, -1, 0 }, { 1092, 54, -1, 1, 0 } }) > 0
 end
 
-local function teleportToDestination(destination, isLodestone)
-    local str = isLodestone and " Lodestone" or " Teleport"
-    local teleportAbility = API.GetABs_name1(destination .. str)
-    if teleportAbility.enabled then
-        API.DoAction_Ability_Direct(teleportAbility, 1, API.OFF_ACT_GeneralInterface_route)
-        API.RandomSleep2(1200, 300, 300)
-        return true
+local function getABS_id(id, name)
+    for i = 0, 4, 1 do
+        local ab = API.GetAB_id(i, id)
+        if ab.id == id then
+            return ab
+        end
     end
     return false
 end
 
-local function teleportToLodestone(id)
-    local key = getKeyByValue(LODESTONES, id)
-    local loc = key:sub(1, 1):upper() .. key:sub(2):lower()
-    if not teleportToDestination(loc, true) then
-        if isLodestoneInterfaceUp() then
-            API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1092, id, -1, API.OFF_ACT_GeneralInterface_route)
-            API.RandomSleep2(1600, 800, 800)
-        else
-            API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1465, 18, -1, API.OFF_ACT_GeneralInterface_route)
-            API.RandomSleep2(300, 300, 300)
-        end
+local function teleportToLodestone(name)
+    local id = LODESTONES[name]
+    if isLodestoneInterfaceUp() then
+        API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1092, id, -1, API.OFF_ACT_GeneralInterface_route)
+        API.RandomSleep2(1600, 800, 800)
+    else
+        API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1465, 18, -1, API.OFF_ACT_GeneralInterface_route)
+        API.RandomSleep2(300, 300, 300)
     end
+end
+
+local function teleportToDestination(destination, isLodestone)
+    local str = isLodestone and " Lodestone" or " Teleport"
+    local destinationStr = destination .. str
+    local id = TELEPORTS[destinationStr]
+    local teleportAbility = (id ~= nil) and getABS_id(id, destinationStr) or API.GetABs_name1(destinationStr)
+    if teleportAbility.enabled then
+        API.DoAction_Ability_Direct(teleportAbility, 1, API.OFF_ACT_GeneralInterface_route)
+        API.RandomSleep2(1200, 300, 300)
+        return true
+    elseif isLodestone then
+        teleportToLodestone(destination)
+    end
+    return false
 end
 
 local function teleportToEdgeville()
@@ -350,7 +374,7 @@ local function teleportToEdgeville()
     if ws.enabled and ws.action == "Edgeville" then
         API.DoAction_Ability_Direct(ws, 1, API.OFF_ACT_GeneralInterface_route)
     else
-        teleportToLodestone(LODESTONES.EDGEVILLE)
+        teleportToDestination("Edgeville", true)
     end
 end
 
@@ -365,7 +389,7 @@ local function teleportToVarrock()
     elseif vt.enabled then
         API.DoAction_Ability_Direct(vt, 1, API.OFF_ACT_GeneralInterface_route)
     else
-        teleportToLodestone(LODESTONES.VARROCK)
+        teleportToDestination("Varrock", true)
     end
 end
 
@@ -441,9 +465,10 @@ local function walk()
     walking = true
     local floor = API.GetFloorLv_2()
 
-    print("Location", location, "OldLocation", oldLocation)
+    print("Location", location, "oldLocation", oldLocation)
 
     if (API.InvFull_() and hasLoot()) or (API.ChatFind("Your loot bag is full", 2).pos_found > 0 and location ~= LOCATIONS.GUILD) then
+        print("Going to guild...", API.ChatFind("Your loot bag is full", 2).pos_found, location, oldLocation)
         oldLocation = location
         location = tableLength(LOCATIONS)
     end
@@ -497,7 +522,7 @@ local function walk()
             elseif API.DoAction_Inventory1(ID.GUILD_TELEPORT, 0, 1, API.OFF_ACT_GeneralInterface_route) then
                 API.RandomSleep2(800, 600, 600)
             else
-                teleportToLodestone(LODESTONES.LUMBRIDGE)
+                teleportToDestination("Lumbridge", true)
             end
         end
     end
@@ -522,7 +547,7 @@ local function walk()
                     end
                 end
             else
-                teleportToLodestone(LODESTONES.LUMBRIDGE)
+                teleportToDestination("Lumbridge", true)
                 API.RandomSleep2(1600, 600, 600)
             end
         elseif location == LOCATIONS.RODDECKS_HOUSE then
@@ -561,7 +586,7 @@ local function walk()
                     end
                 end
             else
-                teleportToLodestone(LODESTONES.LUMBRIDGE)
+                teleportToDestination("Lumbridge", true)
             end
         elseif location == LOCATIONS.WIZARDS_TOWER then
             if isAtLocation(AREA.WIZARDS_TOWER, 20) then
@@ -608,7 +633,7 @@ local function walk()
                 local tile = WPOINT.new(3108 + math.random(-2, 2), 3345 + math.random(-2, 2), 0)
                 walkToTile(tile)
             else
-                teleportToLodestone(LODESTONES.DRAYNOR)
+                teleportToDestination("Draynor", true)
             end
         elseif location == LOCATIONS.VARROCK then
             if API.PInArea21(3200, 3206, 3469, 3475) then
@@ -713,8 +738,8 @@ local function walk()
                 local tile = WPOINT.new(2656 + math.random(-2, 2), 3310 + math.random(-2, 2), 0)
                 walkToTile(tile)
             else
-                if not teleportToDestination("Ardougne", false) then
-                    teleportToLodestone(LODESTONES.ARDOUGNE)
+                if not teleportToDestination("Ardougne") then
+                    teleportToDestination("Ardougne", true)
                 end
             end
         elseif location == LOCATIONS.ARDOUGNE_NORTH then
@@ -755,9 +780,7 @@ local function walk()
                     end
                 end
             else
-                if not teleportToDestination("Ardougne", false) then
-                    teleportToLodestone(LODESTONES.ARDOUGNE)
-                end
+                teleportToDestination("Ardougne")
             end
         elseif location == LOCATIONS.YANILLE then
             if isAtLocation(AREA.YANILLE, 50) then
@@ -769,7 +792,7 @@ local function walk()
                     walking = false
                 end
             else
-                teleportToLodestone(LODESTONES.YANILLE)
+                teleportToDestination("Yanille", true)
             end
         elseif location == LOCATIONS.YANILLE_PUB then
             if isAtLocation(AREA.YANILLE, 50) then
@@ -797,7 +820,7 @@ local function walk()
                     walking = false
                 end
             else
-                teleportToLodestone(LODESTONES.YANILLE)
+                teleportToDestination("Yanille", true)
             end
         elseif location == LOCATIONS.WIZARDS_TOWER then
             if isAtLocation(AREA.WIZARDS_TOWER, 20) then
@@ -963,6 +986,8 @@ while API.Read_LoopyLoop() do
             goto continue
         end
     end
+
+    print(location)
 
     if walking then
         walk()
