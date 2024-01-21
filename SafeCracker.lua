@@ -3,10 +3,11 @@
     Description: Safe cracking
 
     Author: Higgins
-    Version: 2.1
+    Version: 2.2
     Release Date: 18/01/2024
 
     Release Notes:
+    - Version 2.2 : Several fixes
     - Version 2.1 : Wizard Tower added to end of Kandarin route & Other fixes
     - Version 2.0 : Kandarin route added
     - Version 1.1 : Varrock Tele and Wildy Sword tele to Edgeville added
@@ -118,7 +119,7 @@ local rewardChoice
 local needLockpick
 local needStethoscope
 local errors         = {}
-local version        = "2.0"
+local version        = "2.2"
 
 local function tableLength(tbl)
     local count = 0
@@ -454,14 +455,18 @@ local function walk()
                     API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route2, { ID.DARREN }, 50) -- Darren
                     API.RandomSleep2(400, 300, 300)
                 end
-            else
-                API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route2, { ID.ROBIN }, 50)
+            elseif API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route2, { ID.ROBIN }, 50) then
                 API.RandomSleep2(600, 300, 300)
                 if oldLocation ~= nil then
                     location = oldLocation - 1
                     oldLocation = nil
                 end
                 -- walking = false
+            else
+                print("Something went wrong with Guild...")
+                print("Location:", location, "Old Location", oldLocation, "Version:", version)
+                location = oldLocation - 1
+                oldLocation = nil
             end
         elseif isAtLocation(AREA.TRAPDOOR, 15) then
             API.DoAction_Object2(0x39, 0, { ID.TRAPDOOR }, 50, WPOINT.new(3223, 3268, 0))
