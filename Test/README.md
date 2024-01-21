@@ -58,7 +58,7 @@ Start the script and complete GUI setup
 
 ## 📖 Supported Optionals
 
-Lodestone teleporation will be a fallback if you do not have these optional items/unlocks
+Lodestone teleporation will be a fallback if you do not have these optional items/unlocks<br>
 Items need to be on the action bar, including the Master camouflage head etc
 
 - Thieves' Guild teleport
