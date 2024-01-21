@@ -7,7 +7,7 @@
     Release Date: 18/01/2024
 
     Release Notes:
-    - Version 2.2 : Several fixes
+    - Version 2.2 : Several fixes, added support for Master camouflage head teleport
     - Version 2.1 : Wizard Tower added to end of Kandarin route & Other fixes
     - Version 2.0 : Kandarin route added
     - Version 1.1 : Varrock Tele and Wildy Sword tele to Edgeville added
@@ -476,7 +476,23 @@ local function walk()
             walkToTile(tile)
             API.RandomSleep2(600, 300, 300)
         else
-            if API.DoAction_Inventory1(ID.GUILD_TELEPORT, 0, 1, API.OFF_ACT_GeneralInterface_route) then
+            local mch = API.GetABs_name1("Master camouflage head")
+            if #mch.name > 0 then
+                if mch.enabled and mch.action == "Teleport" then
+                    API.DoAction_Ability_Direct(mch, 1, API.OFF_ACT_GeneralInterface_route)
+                end
+
+                if API.Compare2874Status(13, true) then
+                    local opts = API.ScanForInterfaceTest2Get(true, { { 720, 2, -1, -1, 0 }, { 720, 16, -1, 2, 0 } })
+                    if opts[1].y > 35 then
+                        API.KeyboardPress2(0x33, 60, 100)
+                        API.RandomSleep2(300, 300, 300)
+                    else
+                        API.KeyboardPress2(0x30, 60, 100)
+                        API.RandomSleep2(300, 300, 300)
+                    end
+                end
+            elseif API.DoAction_Inventory1(ID.GUILD_TELEPORT, 0, 1, API.OFF_ACT_GeneralInterface_route) then
                 API.RandomSleep2(800, 600, 600)
             else
                 teleportToLodestone(LODESTONES.LUMBRIDGE)
@@ -927,7 +943,6 @@ while API.Read_LoopyLoop() do
         walk()
     else
         if not crackSafe() then
-
             if location == LOCATIONS.GUILD then
                 -- location = oldLocation + 1
             else
