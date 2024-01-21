@@ -760,7 +760,7 @@ local function walk()
                 end
             end
         elseif location == LOCATIONS.YANILLE then
-            if isAtLocation(AREA.YANILLE, 15) then
+            if isAtLocation(AREA.YANILLE, 50) then
                 if not findDoor(17090, { 2537, 3090 }, floor) then
                     if API.DoAction_Object2(0x31, API.OFF_ACT_GeneralObject_route0, { 17089 }, 50, WPOINT.new(2537, 3089, 0)) then
                         API.RandomSleep2(600, 600, 600)
