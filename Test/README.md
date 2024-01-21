@@ -5,7 +5,7 @@
   </a>
   <h3 align="center">SafeCracker by Higgins</h3>
 
-  <img src="images/gui.png" alt="Logo" width="120" height="120">
+  <img src="images/gui.png" alt="Logo">
 </div>
 
 
