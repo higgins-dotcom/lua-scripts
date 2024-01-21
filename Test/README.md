@@ -6,6 +6,16 @@
   <h3 align="center">SafeCracker by Higgins</h3>
 
   <p align="center">
+    
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
   </p>
 </div>
 
@@ -36,7 +46,7 @@
   </ol>
 </details>
 
-## Getting Started
+### Getting Started
 
 Download the SafeCracker.lua file and place into the Lua_scripts folder
 Start the script and complete GUI setup
@@ -59,6 +69,8 @@ Start the script and complete GUI setup
   - Items
     - Wicked Hood
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Supported Optionals
 
 Lodestone teleporation will be a fallback if you do not have these optional items/unlocks
@@ -69,3 +81,26 @@ Items need to be on the action bar, including the Master camouflage head etc
 - Master camouflage outfit
 - Luck of the Dwarves or Ring of Fortune
 - Ardougne Teleport
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Routes
+
+comboRoute.stringsArr = { "Misthalin", "Kandarin" }
+comboRoute.tooltip_text =
+"Misthalin (65+) - Lumbridge, Wizard Tower, Edgeville, Varrock, Draynor Manor\nKandarin (83+) - Camelot, Ardougne, Yanille, Wizard Tower"
+
+- Misthalin
+  - Lumbridge
+  - Wizard Tower
+  - Edgeville
+  - Draynor Manor
+  - Varrock
+
+- Kandarin
+  - Camelot
+  - Ardougne
+  - Yanille
+  - Wizard Tower
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
