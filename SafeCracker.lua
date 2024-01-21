@@ -879,11 +879,11 @@ local function invCheck()
 
     local ct = API.GetABs_name1("Camelot Teleport")
     local ctCheck = ct.enabled
-    local at = API.GetABs_name1("Ardougne Teleport")
-    local atCheck = at.enabled
+    -- local at = API.GetABs_name1("Ardougne Teleport")
+    -- local atCheck = at.enabled
 
     check(ctCheck, "You need to have Camelot Teleport on your action bar")
-    check(atCheck, "You need to have Ardougne Teleport on your action bar")
+    -- check(atCheck, "You need to have Ardougne Teleport on your action bar")
     check(apiCheck, "Please ensure you have the latest api.lua file from the ME release")
 
     return lockpickCheck and stethoscopeCheck and wickedHoodCheck and hasLootBag()
