@@ -54,8 +54,6 @@ Start the script and complete GUI setup
   - Items
     - Wicked Hood
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ### Supported Optionals
 
 Lodestone teleporation will be a fallback if you do not have these optional items/unlocks
@@ -83,8 +81,6 @@ Items need to be on the action bar, including the Master camouflage head etc
   - Ardougne
   - Yanille
   - Wizard Tower
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Roadmap
 
