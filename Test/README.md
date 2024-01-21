@@ -32,10 +32,14 @@ Start the script and complete GUI setup
 
 ### Prerequisites
 
-- Theiving 63+
-- <a href="https://dereferer.me/?https://runescape.wiki/w/Lockpick">Lockpick</a> or <a href="https://dereferer.me/?https://runescape.wiki/w/Master_thief%27s_Lockpick">Master thief's lockpick</a>
-- <a href="https://dereferer.me/?https://runescape.wiki/w/Stethoscope">Stethoscope</a> or <a href="https://dereferer.me/?https://runescape.wiki/w/Master_thief%27s_stethoscope">Master thief's stethoscope</a>
-- Loot Bag
+- Levels
+  - Theiving 63+
+
+- Items
+    - <a href="https://dereferer.me/?https://runescape.wiki/w/Lockpick">Lockpick</a> or <a href="https://dereferer.me/?https://runescape.wiki/w/Master_thief%27s_Lockpick">Master thief's lockpick</a>
+    - <a href="https://dereferer.me/?https://runescape.wiki/w/Stethoscope">Stethoscope</a> or <a href="https://dereferer.me/?https://runescape.wiki/w/Master_thief%27s_stethoscope">Master thief's stethoscope</a>
+    - Loot Bag
+    - Wicked Hood
 
 - Teleportation
   - Lodestones
@@ -45,8 +49,8 @@ Start the script and complete GUI setup
     - Lumbridge
     - Ardougne
     - Yanille
-  - Items
-    - Wicked Hood
+  - Teleports
+    - Camelot
 
 ### Supported Optionals
 
