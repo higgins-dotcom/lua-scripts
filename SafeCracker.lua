@@ -940,7 +940,7 @@ while API.Read_LoopyLoop() do
 
     if API.Compare2874Status(12) then
         API.KeyboardPress2(0x20, 60, 100)
-        API.RandomSleep2(100, 200, 200)
+        API.RandomSleep2(400, 200, 200)
     end
 
     if walking then
