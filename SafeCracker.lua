@@ -3,10 +3,11 @@
     Description: Safe cracking
 
     Author: Higgins
-    Version: 2.2
+    Version: 2.3
     Release Date: 18/01/2024
 
     Release Notes:
+    - Version 2.3 : Added color code check for game message check & revamp of teleport handling
     - Version 2.2 : Several fixes, added support for Master camouflage head teleport
     - Version 2.1 : Wizard Tower added to end of Kandarin route & Other fixes
     - Version 2.0 : Kandarin route added
@@ -211,6 +212,22 @@ local function idleCheck()
         API.PIdle2()
         afk = os.time()
     end
+end
+
+local function checkForLootBagFullMessage()
+    local chatTexts = ChatGetMessages()
+    if chatTexts then
+        for k, v in pairs(chatTexts) do
+            if k > 3 then break end
+            local colorCode = string.match(v.text, "<col=(7fa9ff)>")
+            if colorCode then
+                if string.find(v.text, "Your loot bag is full") then
+                    return true
+                end
+            end
+        end
+    end
+    return false
 end
 
 local function setupGUI()
@@ -467,10 +484,12 @@ local function walk()
 
     print("Location", location, "oldLocation", oldLocation)
 
-    if (API.InvFull_() and hasLoot()) or (API.ChatFind("Your loot bag is full", 2).pos_found > 0 and location ~= LOCATIONS.GUILD) then
+    local lootBagFull = checkForLootBagFullMessage()
+
+    if (API.InvFull_() and hasLoot()) or (lootBagFull and location ~= LOCATIONS.GUILD) then
         print("Going to guild...", API.ChatFind("Your loot bag is full", 2).pos_found, location, oldLocation)
-        print(API.ChatFind("Your loot bag is full", 2).text)
         oldLocation = location
+        oldLocation = 3
         location = tableLength(LOCATIONS)
     end
 
@@ -678,7 +697,7 @@ local function walk()
     elseif route == "KANDARIN" then
         if location == LOCATIONS.CAMELOT then
             if not isCamelotCracked() then
-                if isAtLocation(AREA.CAMELOT, 50) then
+                if isAtLocation(AREA.CAMELOT, 100) then
                     if API.PInArea(2750, 3, 3500, 3, 0) then
                         walking = false
                     elseif p.y < 3483 then
