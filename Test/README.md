@@ -44,6 +44,7 @@ Start the script and complete GUI setup
     - <a href="https://dereferer.me/?https://runescape.wiki/w/Stethoscope">Stethoscope</a> or <a href="https://dereferer.me/?https://runescape.wiki/w/Master_thief%27s_stethoscope">Master thief's stethoscope</a>
     - Loot Bag
     - Wicked Hood
+    - Plenty of runes for the teleport spells
 
 - Teleportation
   - Lodestones
