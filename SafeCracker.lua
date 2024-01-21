@@ -53,6 +53,7 @@ local AREA           = {
     EDGEVILLE_LODESTONE = { x = 3067, y = 3505, z = 0 },
     DRAYNOR_LODESTONE = { x = 3106, y = 3299, z = 0 },
     VARROCK_LODESTONE = { x = 3214, y = 3376, z = 0 },
+    ARDOUGNE_LODESTONE = { x = 2634, y = 3348, z = 0 },
     BOBS_AXES = { x = 3230, y = 3203, z = 0 },
     RODDECKS_HOUSE = { x = 3231, y = 3231, z = 0 },
     WIZARDS_TOWER = { x = 3105, y = 3155, z = 0 },
@@ -65,7 +66,7 @@ local AREA           = {
     CAMELOT = { x = 2757, y = 3477, z = 0 },
     ARDOUGNE = { x = 2663, y = 3302, z = 0 },
     YANILLE = { x = 2529, y = 3094, z = 0 },
-    YANILLE_PUB = { x = 2553, y = 3080, z = 0 }
+    YANILLE_PUB = { x = 2553, y = 3080, z = 0 },
 }
 
 local SAFES          = {
@@ -102,7 +103,8 @@ local LODESTONES     = {
     LUMBRIDGE = 18,
     DRAYNOR = 15,
     VARROCK = 22,
-    YANILLE = 26
+    YANILLE = 26,
+    ARDOUGNE = 12
 }
 
 local route          = nil
@@ -687,7 +689,7 @@ local function walk()
                 API.RandomSleep2(1000, 1000, 1000)
             end
         elseif location == LOCATIONS.ARDOUGNE_WEST then
-            if isAtLocation(AREA.ARDOUGNE, 50) then
+            if isAtLocation(AREA.ARDOUGNE, 25) then
                 if floor == 0 then
                     if not findDoor(34808, { 2651, 3302 }, floor) then
                         if API.DoAction_Object2(0x31, API.OFF_ACT_GeneralObject_route0, { 34807 }, 15, WPOINT.new(2652, 3302, 0)) then
@@ -707,20 +709,39 @@ local function walk()
                         walking = false
                     end
                 end
+            elseif isAtLocation(AREA.ARDOUGNE_LODESTONE, 10) then
+                local tile = WPOINT.new(2656 + math.random(-2, 2), 3310 + math.random(-2, 2), 0)
+                walkToTile(tile)
             else
-                teleportToDestination("Ardougne")
+                if not teleportToDestination("Ardougne") then
+                    teleportToLodestone(LODESTONES.ARDOUGNE)
+                end
             end
         elseif location == LOCATIONS.ARDOUGNE_NORTH then
-            if API.PInArea(2650, 2, 3301, 2, 0) and floor == 1 then
-                teleportToDestination("Ardougne")
-            elseif isAtLocation(AREA.ARDOUGNE, 50) then
-                if floor == 0 then
+            if API.PInArea(2650, 5, 3301, 5, 0) and floor == 1 then
+                if not teleportToDestination("Ardougne") then
+                    if not findDoor(34813, { 2649, 3300 }, floor) then
+                        if API.DoAction_Object2(0x31, API.OFF_ACT_GeneralObject_route0, { 34811 }, 8, WPOINT.new(2648, 3300, 0)) then
+                            API.RandomSleep2(300, 600, 600)
+                        end
+                    else
+                        API.DoAction_Object2(0x35, API.OFF_ACT_GeneralObject_route0, { 34499 }, 50,
+                            WPOINT.new(2649, 3297, 0))
+                        API.RandomSleep2(800, 800, 800)
+                    end
+                end
+            elseif isAtLocation(AREA.ARDOUGNE, 40) then
+                if API.PInArea(2650, 10, 3301, 10, 0) and not findDoor(34808, { 2651, 3302 }, floor) then
+                    if API.DoAction_Object2(0x31, API.OFF_ACT_GeneralObject_route0, { 34807 }, 15, WPOINT.new(2652, 3302, 0)) then
+                        API.RandomSleep2(300, 600, 600)
+                    end
+                elseif floor == 0 then
                     if not findDoor(34808, { 2659, 3320 }, floor) then
                         if API.DoAction_Object2(0x31, API.OFF_ACT_GeneralObject_route0, { 34807 }, 50, WPOINT.new(2659, 3319, 0)) then
                             API.RandomSleep2(600, 600, 600)
                         end
                     else
-                        if API.DoAction_Object2(0x34, 0, { 34498 }, 50, WPOINT.new(2663, 3321, 0)) then
+                        if API.DoAction_Object2(0x34, API.OFF_ACT_GeneralObject_route0, { 34498 }, 50, WPOINT.new(2663, 3321, 0)) then
                             API.RandomSleep2(3600, 600, 600)
                         end
                     end
