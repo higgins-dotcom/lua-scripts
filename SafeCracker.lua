@@ -828,6 +828,7 @@ local function invCheck()
     local lockpickCheck = not needLockpick or (needLockpick and API.InvItemcount_1(ID.LOCKPICK) > 0)
     local stethoscopeCheck = not needStethoscope or (needStethoscope and API.InvItemcount_1(ID.STETHOSCOPE) > 0)
     local wickedHoodCheck = API.InvItemcount_1(ID.WICKED_HOOD) > 0
+    local apiCheck = API.OFF_ACT_InteractNPC_route2 ~= nil
 
     check(wickedHoodCheck, "You need a Wicked Hood in your inventory!")
     check(lockpickCheck, "You need lockpicks in your inventory!")
@@ -841,6 +842,7 @@ local function invCheck()
 
     check(ctCheck, "You need to have Camelot Teleport on your action bar")
     check(atCheck, "You need to have Ardougne Teleport on your action bar")
+    check(apiCheck, "Please ensure you have the latest api.lua file from the ME release")
 
     return lockpickCheck and stethoscopeCheck and wickedHoodCheck and hasLootBag()
 end
