@@ -27,8 +27,8 @@
 
 ### Getting Started
 
-Download the SafeCracker.lua file and place into the Lua_scripts folder
-Start the script and complete GUI setup
+<small>Download the SafeCracker.lua file and place into the Lua_scripts folder
+Start the script and complete GUI setup</small>
 
 ### Prerequisites
 
