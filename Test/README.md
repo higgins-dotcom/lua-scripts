@@ -1,4 +1,4 @@
-<br />
+[![Forks][forks-shield]][forks-url]
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
     <img src="https://media.discordapp.net/attachments/1114353556275871754/1198651901886075050/safe.png?ex=65bfae93&is=65ad3993&hm=782ac0282a719cca740a2dd3cc26def75880cd09309c9a04fc2f4b8f35dada80&=&format=webp&quality=lossless" alt="Logo" width="120" height="120">
@@ -7,6 +7,7 @@
 
   <img src="images/gui.png" alt="Logo">
 </div>
+<a name="readme-top"></a>
 
 
 <!-- TABLE OF CONTENTS -->
