@@ -16,7 +16,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#quick-start">Quick start</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#supported-optionals">Supported Optionals</a></li>
@@ -27,12 +27,12 @@
   </ol>
 </details>
 
-### Getting Started
+## ⚡️ Quick start
 
 Download the SafeCracker.lua file and place into the Lua_scripts folder
 Start the script and complete GUI setup
 
-### Prerequisites
+## ⚙️ Prerequisites
 
 - Levels
   - Theiving 63+
@@ -56,7 +56,7 @@ Start the script and complete GUI setup
   - Teleports
     - Camelot
 
-### Supported Optionals
+## 📖 Supported Optionals
 
 Lodestone teleporation will be a fallback if you do not have these optional items/unlocks
 Items need to be on the action bar, including the Master camouflage head etc
@@ -69,7 +69,7 @@ Items need to be on the action bar, including the Master camouflage head etc
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Routes
+## 🚚 Routes
 
 - Misthalin (Level 65+)
   - Lumbridge
@@ -84,7 +84,7 @@ Items need to be on the action bar, including the Master camouflage head etc
   - Yanille
   - Wizard Tower
 
-## Roadmap
+## 📝 Roadmap
 
 - [ ] None
 
