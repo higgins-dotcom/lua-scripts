@@ -469,6 +469,7 @@ local function walk()
 
     if (API.InvFull_() and hasLoot()) or (API.ChatFind("Your loot bag is full", 2).pos_found > 0 and location ~= LOCATIONS.GUILD) then
         print("Going to guild...", API.ChatFind("Your loot bag is full", 2).pos_found, location, oldLocation)
+        print(API.ChatFind("Your loot bag is full", 2).text)
         oldLocation = location
         location = tableLength(LOCATIONS)
     end
