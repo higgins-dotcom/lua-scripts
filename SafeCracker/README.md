@@ -3,7 +3,7 @@
   <a href="https://github.com/higgins-dotcom/lua-scripts">
     <img src="https://media.discordapp.net/attachments/1114353556275871754/1198651901886075050/safe.png?ex=65bfae93&is=65ad3993&hm=782ac0282a719cca740a2dd3cc26def75880cd09309c9a04fc2f4b8f35dada80&=&format=webp&quality=lossless" alt="Logo" width="120" height="120">
   </a>
-  <h3 align="center">SafeCracker by Higgins</h3>
+  <h3 align="center">SafeCracker</h3>
 
   <img src="images/gui.png" alt="GUI">
   <br>
