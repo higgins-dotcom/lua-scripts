@@ -441,7 +441,7 @@ local function walk()
     walking = true
     local floor = API.GetFloorLv_2()
 
-    -- or (API.InvFull_() and hasLoot())
+    print("Location", location, "OldLocation", oldLocation)
 
     if (API.InvFull_() and hasLoot()) or (API.ChatFind("Your loot bag is full", 2).pos_found > 0 and location ~= LOCATIONS.GUILD) then
         oldLocation = location
@@ -713,7 +713,7 @@ local function walk()
                 local tile = WPOINT.new(2656 + math.random(-2, 2), 3310 + math.random(-2, 2), 0)
                 walkToTile(tile)
             else
-                if not teleportToDestination("Ardougne") then
+                if not teleportToDestination("Ardougne", false) then
                     teleportToLodestone(LODESTONES.ARDOUGNE)
                 end
             end
@@ -755,7 +755,9 @@ local function walk()
                     end
                 end
             else
-                teleportToDestination("Ardougne")
+                if not teleportToDestination("Ardougne", false) then
+                    teleportToLodestone(LODESTONES.ARDOUGNE)
+                end
             end
         elseif location == LOCATIONS.YANILLE then
             if isAtLocation(AREA.YANILLE, 15) then
