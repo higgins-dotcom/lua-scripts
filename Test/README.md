@@ -56,6 +56,8 @@ Start the script and complete GUI setup
   - Teleports
     - Camelot
 
+<img src="images/bar.png"/>
+
 ## 📖 Supported Optionals
 
 Lodestone teleporation will be a fallback if you do not have these optional items/unlocks<br>
