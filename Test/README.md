@@ -5,7 +5,9 @@
   </a>
   <h3 align="center">SafeCracker by Higgins</h3>
 
-  <img src="images/gui.png" alt="Logo">
+  <img src="images/gui.png" alt="GUI">
+
+  
 </div>
 
 
@@ -34,6 +36,8 @@ Start the script and complete GUI setup
 
 - Levels
   - Theiving 63+
+
+<img src="images/inv.png"/>
 
 - Items
     - <a href="https://dereferer.me/?https://runescape.wiki/w/Lockpick">Lockpick</a> or <a href="https://dereferer.me/?https://runescape.wiki/w/Master_thief%27s_Lockpick">Master thief's lockpick</a>
