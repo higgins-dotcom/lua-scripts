@@ -259,7 +259,7 @@ local function setupGUI()
     comboRoute.box_size = FFPOINT.new(190, 0, 0)
     comboRoute.stringsArr = { "Misthalin", "Kandarin" }
     comboRoute.tooltip_text =
-    "Misthalin (62+) - Lumbridge, Wizard Tower, Edgeville, Varrock, Draynor Manor\nKandarin (83+) - Camelot, Ardougne, Yanille, Wizard Tower"
+    "Misthalin (65+) - Lumbridge, Wizard Tower, Edgeville, Varrock, Draynor Manor\nKandarin (83+) - Camelot, Ardougne, Yanille, Wizard Tower"
 
     comboReward = API.CreateIG_answer()
     comboReward.box_name = "###REWARD"
@@ -871,11 +871,13 @@ local function invCheck()
     local stethoscopeCheck = not needStethoscope or (needStethoscope and API.InvItemcount_1(ID.STETHOSCOPE) > 0)
     local wickedHoodCheck = API.InvItemcount_1(ID.WICKED_HOOD) > 0
     local apiCheck = API.OFF_ACT_InteractNPC_route2 ~= nil
+    local levelCheck = API.XPLevelTable(API.GetSkillXP(skill)) >= 65
 
     check(wickedHoodCheck, "You need a Wicked Hood in your inventory!")
     check(lockpickCheck, "You need lockpicks in your inventory!")
     check(stethoscopeCheck, "You need a Stethoscope in your inventory!")
     check(hasLootBag(), "You need a loot bag in your inventory!")
+    check(levelCheck, "You need at least Level 65 Thieving")
 
     local ct = API.GetABs_name1("Camelot Teleport")
     local ctCheck = ct.enabled
@@ -886,7 +888,7 @@ local function invCheck()
     -- check(atCheck, "You need to have Ardougne Teleport on your action bar")
     check(apiCheck, "Please ensure you have the latest api.lua file from the ME release")
 
-    return lockpickCheck and stethoscopeCheck and wickedHoodCheck and hasLootBag()
+    return lockpickCheck and stethoscopeCheck and wickedHoodCheck and hasLootBag() and apiCheck and levelCheck
 end
 
 setupGUI()
