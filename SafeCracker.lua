@@ -135,7 +135,7 @@ local rewardChoice
 local needLockpick
 local needStethoscope
 local errors         = {}
-local version        = "2.2"
+local version        = "2.3"
 
 local function tableLength(tbl)
     local count = 0
