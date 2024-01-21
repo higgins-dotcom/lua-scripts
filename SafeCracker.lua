@@ -460,14 +460,14 @@ local function walk()
             elseif API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route2, { ID.ROBIN }, 50) then
                 API.RandomSleep2(600, 300, 300)
                 if oldLocation ~= nil then
-                    location = oldLocation - 1
+                    location = oldLocation
                     oldLocation = nil
                 end
                 -- walking = false
             else
                 print("Something went wrong with Guild...")
                 print("Location:", location, "Old Location", oldLocation, "Version:", version)
-                location = oldLocation - 1
+                location = oldLocation
                 oldLocation = nil
             end
         elseif isAtLocation(AREA.TRAPDOOR, 15) then
