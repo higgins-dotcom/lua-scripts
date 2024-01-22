@@ -483,8 +483,6 @@ local function walk()
     walking = true
     local floor = API.GetFloorLv_2()
 
-    print("Location", location, "oldLocation", oldLocation)
-
     local lootBagFull = checkForLootBagFullMessage()
 
     if (API.InvFull_() and hasLoot()) or (lootBagFull and location ~= LOCATIONS.GUILD) then
@@ -936,10 +934,7 @@ end
 
 setupGUI()
 
-teleportToDestination("Ardougne")
-
 while API.Read_LoopyLoop() do
-    break
     if scriptPaused then
         if btnStop.return_click then
             API.Write_LoopyLoop(false)
