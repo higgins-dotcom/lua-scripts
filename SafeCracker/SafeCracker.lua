@@ -375,12 +375,13 @@ local function teleportToDestination(destination, isLodestone)
     local str = isLodestone and " Lodestone" or " Teleport"
     local destinationStr = destination .. str
     local id = TELEPORTS[destinationStr]
+    local hasLodestone = LODESTONES[destination]
     local teleportAbility = (id ~= nil) and getABS_id(id, destinationStr) or API.GetABs_name1(destinationStr)
     if teleportAbility.enabled then
         API.DoAction_Ability_Direct(teleportAbility, 1, API.OFF_ACT_GeneralInterface_route)
         API.RandomSleep2(1200, 300, 300)
         return true
-    elseif isLodestone then
+    elseif isLodestone or hasLodestone then
         teleportToLodestone(destination)
     end
     return false
@@ -934,6 +935,8 @@ local function invCheck()
 end
 
 setupGUI()
+
+teleportToDestination("Ardougne")
 
 while API.Read_LoopyLoop() do
     if scriptPaused then
