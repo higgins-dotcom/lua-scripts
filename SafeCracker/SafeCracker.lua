@@ -489,7 +489,6 @@ local function walk()
     if (API.InvFull_() and hasLoot()) or (lootBagFull and location ~= LOCATIONS.GUILD) then
         print("Going to guild...", API.ChatFind("Your loot bag is full", 2).pos_found, location, oldLocation)
         oldLocation = location
-        oldLocation = 3
         location = tableLength(LOCATIONS)
     end
 
@@ -510,8 +509,6 @@ local function walk()
                 end
                 -- walking = false
             else
-                print("Something went wrong with Guild...")
-                print("Location:", location, "Old Location", oldLocation, "Version:", version)
                 location = oldLocation
                 oldLocation = nil
             end
@@ -962,6 +959,7 @@ while API.Read_LoopyLoop() do
             MAX_IDLE_TIME_MINUTES = (tickJagexAcc.box_ticked == 1) and 5 or 15
             LOCATIONS = ROUTES[route]
             scriptPaused = false
+            startTime = os.time()
         end
         goto continue
     end
@@ -1006,8 +1004,6 @@ while API.Read_LoopyLoop() do
             goto continue
         end
     end
-
-    print(location)
 
     if walking then
         walk()
