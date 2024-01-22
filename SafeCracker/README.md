@@ -37,7 +37,7 @@ Start the script and complete GUI setup
 ## ⚙️ Prerequisites
 
 - Levels
-  - Theiving 63+
+  - Thieving 65+
 
 <img src="images/inv.png"/>
 
