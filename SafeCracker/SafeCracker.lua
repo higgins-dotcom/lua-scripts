@@ -219,11 +219,8 @@ local function checkForLootBagFullMessage()
     if chatTexts then
         for k, v in pairs(chatTexts) do
             if k > 3 then break end
-            local colorCode = string.match(v.text, "<col=(7fa9ff)>")
-            if colorCode then
-                if string.find(v.text, "Your loot bag is full") then
-                    return true
-                end
+            if string.find(v.text, "<col=EB2F2F>Your loot bag is full") then
+                return true
             end
         end
     end
