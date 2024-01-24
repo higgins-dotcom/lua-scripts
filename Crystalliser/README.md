@@ -9,11 +9,11 @@
   <!-- <br> -->
   <!-- <img src="images/chop.jpg" alt="chop"> -->
 
-  
+<img src="images/bar2.png"><br>
+<img src="images/bar.png">  
 </div>
 
-<img src="images/bar.png"><br>
-<img src="images/bar2.png">
+
 
 
 <!-- TABLE OF CONTENTS -->
