@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 <div align="center">
   <a href="https://github.com/higgins-dotcom/lua-scripts">
-    <img src="images/chop.jg" alt="Logo">
+    <img src="images/chop.jpg" alt="Logo">
   </a>
   <h3 align="center">Crystalliser</h3>
 
