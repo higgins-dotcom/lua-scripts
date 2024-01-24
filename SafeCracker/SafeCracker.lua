@@ -3,10 +3,11 @@
     Description: Safe cracking
 
     Author: Higgins
-    Version: 2.3
+    Version: 2.4
     Release Date: 18/01/2024
 
     Release Notes:
+    - Version 2.4 : Added inCombat check and more precise Camelot safe area check
     - Version 2.3 : Added color code check for game message check & revamp of teleport handling
     - Version 2.2 : Several fixes, added support for Master camouflage head teleport
     - Version 2.1 : Wizard Tower added to end of Kandarin route & Other fixes
@@ -135,7 +136,7 @@ local rewardChoice
 local needLockpick
 local needStethoscope
 local errors         = {}
-local version        = "2.3"
+local version        = "2.4"
 
 local function tableLength(tbl)
     local count = 0
@@ -691,7 +692,7 @@ local function walk()
         if location == LOCATIONS.CAMELOT then
             if not isCamelotCracked() then
                 if isAtLocation(AREA.CAMELOT, 100) then
-                    if API.PInArea(2750, 3, 3500, 3, 0) then
+                    if API.PInArea21(2749, 2751, 3496, 3503) then
                         walking = false
                     elseif p.y < 3483 then
                         local doorId = (math.random() < 0.5) and 26081 or 26082
@@ -984,7 +985,9 @@ while API.Read_LoopyLoop() do
 
     if walking then
         if API.CheckAnim(2) then
-            goto continue
+            if (not API.IsTargeting() and not (API.GetTargetHealth() > 0)) then
+                goto continue 
+            end
         end
     end
 
