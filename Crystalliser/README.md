@@ -12,6 +12,9 @@
   
 </div>
 
+<img src="images/bar.png"><br>
+<img src="images/bar2.png">
+
 
 <!-- TABLE OF CONTENTS -->
 <details>
