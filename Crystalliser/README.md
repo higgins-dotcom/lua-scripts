@@ -40,6 +40,8 @@ Start the script and complete GUI setup
 
 Script is written around the [Woodcutting Training to 200M XP Guide](https://dereferer.me/?https://runescape.wiki/w/Pay-to-play_Woodcutting_training#Training_to_200m_XP)
 
+** EXP RATES WILL DEPEND ON YOUR SETUP **
+
 <!-- <img src="images/bar.png"/> -->
 
 ## 📖 Supported Buffs
