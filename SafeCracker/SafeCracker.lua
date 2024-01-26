@@ -129,6 +129,7 @@ local oldLocation    = nil
 local lastTile       = nil
 local scriptPaused   = true
 local walking        = true
+local lastVisit      = os.time()
 local skill          = "THIEVING"
 local startXp        = API.GetSkillXP(skill)
 local startTime, afk = os.time(), os.time()
@@ -483,11 +484,13 @@ local function walk()
 
     local lootBagFull = checkForLootBagFullMessage()
 
-    if (API.InvFull_() and hasLoot() or lootBagFull) and location ~= LOCATIONS.GUILD then
-        print("Going to guild...", API.ChatFind("Your loot bag is full", 2).pos_found, location, oldLocation)
-        print(API.InvFull_(), hasLoot(), lootBagFull, location)
-        oldLocation = location
-        location = tableLength(LOCATIONS)
+    if (os.time() - lastVisit) > 300 then
+        if (API.InvFull_() and hasLoot() or lootBagFull) and location ~= LOCATIONS.GUILD then
+            print("Going to guild...", API.ChatFind("Your loot bag is full", 2).pos_found, location, oldLocation)
+            print(API.InvFull_(), hasLoot(), lootBagFull, location)
+            oldLocation = location
+            location = tableLength(LOCATIONS)
+        end
     end
 
     if location == LOCATIONS.GUILD then
@@ -502,11 +505,14 @@ local function walk()
                 end
             elseif API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route2, { ID.ROBIN }, 50) then
                 API.RandomSleep2(600, 300, 300)
+
+                lastVisit = os.time()
+
                 if oldLocation ~= nil then
                     location = oldLocation
                     oldLocation = nil
                 else
-                    
+
                 end
                 -- walking = false
             else
@@ -990,7 +996,7 @@ while API.Read_LoopyLoop() do
     if walking then
         if API.CheckAnim(2) then
             if (not API.IsTargeting() and not (API.GetTargetHealth() > 0)) then
-                goto continue 
+                goto continue
             end
         end
     end
