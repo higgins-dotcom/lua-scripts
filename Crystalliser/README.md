@@ -34,7 +34,7 @@
 ## ⚡️ Quick start
 
 Download [Crystalliser](Crystalliser.lua) and place into the Lua_Scripts folder<br>
-Replace TREE variable with ID of tree you wish to cut
+Replace TREE variable with ID of tree you wish to cut<br>
 Start the script
 
 ## ⚙️ Prerequisites
