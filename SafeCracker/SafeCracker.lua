@@ -483,7 +483,7 @@ local function walk()
 
     local lootBagFull = checkForLootBagFullMessage()
 
-    if (API.InvFull_() and hasLoot()) or (lootBagFull and location ~= LOCATIONS.GUILD) then
+    if (API.InvFull_() and hasLoot() or lootBagFull) and location ~= LOCATIONS.GUILD then
         print("Going to guild...", API.ChatFind("Your loot bag is full", 2).pos_found, location, oldLocation)
         oldLocation = location
         location = tableLength(LOCATIONS)
@@ -503,6 +503,8 @@ local function walk()
                 if oldLocation ~= nil then
                     location = oldLocation
                     oldLocation = nil
+                else
+                    
                 end
                 -- walking = false
             else
