@@ -37,7 +37,7 @@ Start Script
 Start in Artisans' Workshop
 AIO Smither & Smelter
 
-<img src="images/code.png">
+<img src="images/code.png" width="70%">
 
 ## 📝 Roadmap
 
