@@ -485,11 +485,13 @@ local function walk()
 
     if (API.InvFull_() and hasLoot() or lootBagFull) and location ~= LOCATIONS.GUILD then
         print("Going to guild...", API.ChatFind("Your loot bag is full", 2).pos_found, location, oldLocation)
+        print(API.InvFull_(), hasLoot(), lootBagFull, location)
         oldLocation = location
         location = tableLength(LOCATIONS)
     end
 
     if location == LOCATIONS.GUILD then
+        print("G:", API.InvFull_(), hasLoot(), lootBagFull, location, oldLocation)
         if isAtLocation(AREA.GUILD, 50) then
             if hasLoot() then
                 if API.Select_Option(rewardChoice) then
