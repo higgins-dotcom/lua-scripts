@@ -27,7 +27,7 @@
 
 ## ⚡️ Quick start
 
-Download [Smithy](Smithy.lua) and place into the Lua_Scripts folder<br>
+Download [Smithy](Smithy.zip) and extract into the Lua_Scripts folder<br>
 Open Smithy.lua and add your tasks to the TASKS section<br>
 Update any other settings<br>
 Start Script
