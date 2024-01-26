@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 <div align="center">
   <a href="https://github.com/higgins-dotcom/lua-scripts">
-    <img src="images/logo.png" alt="Logo" width="120" height="120">
+    <img src="images/logo.png" alt="Logo">
   </a>
   <h3 align="center">Smithy<br>Artisans' Workshop AIO Smither/Smelter</h3>
 
