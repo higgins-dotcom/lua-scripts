@@ -36,7 +36,7 @@ Start Script
 
 Start in Artisans' Workshop
 
-<img src="images/code.png" width="70%">
+<img src="images/code1.png" width="70%">
 
 ## 📝 Roadmap
 
