@@ -1,0 +1,44 @@
+<a name="readme-top"></a>
+<div align="center">
+  <a href="https://github.com/higgins-dotcom/lua-scripts">
+    <img src="images/logo.png" alt="Logo" width="120" height="120">
+  </a>
+  <h3 align="center">Smithy<br>Artisans' Workshop AIO Smither/Smelter</h3>
+
+  <img src="images/bar.png" alt="GUI">
+
+  
+</div>
+
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#quick-start">Quick start</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+      </ul>
+    </li>
+    <li><a href="#roadmap">Roadmap</a></li>
+  </ol>
+</details>
+
+## ⚡️ Quick start
+
+Download [Smithy](Smithy.lua) and place into the Lua_Scripts folder<br>
+Open Smithy.lua and add your tasks to the TASKS section<br>
+Update any other settings<br>
+Start Script
+
+## ⚙️ Prerequisites
+
+Start in Artisans' Workshop
+AIO Smither & Smelter
+
+## 📝 Roadmap
+
+- [ ] None
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
