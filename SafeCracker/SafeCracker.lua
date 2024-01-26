@@ -219,7 +219,7 @@ local function checkForLootBagFullMessage()
     local chatTexts = ChatGetMessages()
     if chatTexts then
         for k, v in pairs(chatTexts) do
-            if k > 3 then break end
+            if k > 2 then break end
             if string.find(v.text, "<col=EB2F2F>Your loot bag is full") then
                 return true
             end
