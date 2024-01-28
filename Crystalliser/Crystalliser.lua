@@ -7,14 +7,15 @@
     Release Date: 
 
     Release Notes:
-    - Version 0.1 : Initial Development
+    - Version 1.0 : Initial Development
 ]]
 
 local API                   = require('api')
 
 local ID                    = {
-    -- TREE = 70075,
-    TREE = 92442,
+    TREE = 70075,     -- Mahogany
+    -- TREE = 92442,  -- Yew
+    -- TREE = 104009, -- Acadia
     EXCALIBUR = 14632,
     EXCALIBUR_AUGMENTED = 36619,
     ELVEN_SHARD = 43358,
@@ -152,6 +153,9 @@ local function healthCheck()
     if not elvenCD.found and elvenFound > 0 then
         API.DoAction_Inventory1(ID.ELVEN_SHARD, 43358, 1, API.OFF_ACT_GeneralInterface_route)
         doneAction = true
+    elseif prayer <= 12 then
+        API.DoAction_Inventory2(ID.POTIONS, 0, 1, API.OFF_ACT_GeneralInterface_route)
+        doneAction = true
     elseif prayer > 50 and not lightForm.found then
         local lf = API.GetABs_name1("Light Form")
         API.DoAction_Ability_Direct(lf, 1, API.OFF_ACT_GeneralInterface_route)
@@ -205,6 +209,25 @@ local function chopTree()
     end
 end
 
+local function checkRunes()
+
+    local runes = {5887, 5898, 5888, 5905}
+    local pass = true
+    for index, rune in ipairs(runes) do
+        local psett = API.VB_FindPSett(rune, 1)
+        if psett.SumOfstate > 0 then
+            if psett.SumOfstate & 0xFFFF <= 10 then
+                pass = false
+            end
+        else
+            if psett.state <= 10 then
+                pass = false
+            end
+        end
+    end
+    return pass
+end
+
 setupGUI()
 
 while API.Read_LoopyLoop() do
@@ -212,6 +235,7 @@ while API.Read_LoopyLoop() do
     API.DoRandomEvents()
 
     healthCheck()
+    if not checkRunes() then break end
 
     if API.ReadPlayerMovin2() or (API.CheckAnim(40) and findCrystallise()) then
         goto continue
@@ -220,9 +244,7 @@ while API.Read_LoopyLoop() do
     if findCrystallise() then
         chopTree()
     else
-        if not castCrystallise() then
-            break
-        end
+        castCrystallise()
     end
 
     ::continue::
