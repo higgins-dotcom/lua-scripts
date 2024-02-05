@@ -5666,6 +5666,22 @@
           "OUTPUT": 49564,
           "INPUT": null
         }
+      },
+      "ARMOUR_SPIKES": {
+        "0": {
+          "NAME": "Armour spikes",
+          "BASE": 47071,
+          "OUTPUT": 47071,
+          "INPUT": null
+        }
+      },
+      "ARMOUR_SPIKES_ALLOY": {
+        "0": {
+          "NAME": "Armour spikes (alloy)",
+          "BASE": 47872,
+          "OUTPUT": 47872,
+          "INPUT": null
+        }
       }
     },
     "PARTIALLY": {
@@ -5700,24 +5716,6 @@
           "NAME": "Masterwork trim",
           "BASE": 46036,
           "OUTPUT": 46036,
-          "INPUT": null
-        }
-      }
-    },
-    "ARMOUR": {
-      "SPIKES": {
-        "0": {
-          "NAME": "Armour spikes",
-          "BASE": 47071,
-          "OUTPUT": 47071,
-          "INPUT": null
-        }
-      },
-      "SPIKES_(ALLOY)": {
-        "0": {
-          "NAME": "Armour spikes (alloy)",
-          "BASE": 47872,
-          "OUTPUT": 47872,
           "INPUT": null
         }
       }
