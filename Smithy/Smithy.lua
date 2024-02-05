@@ -4,7 +4,7 @@
 @description AIO Smither for the Artisan Guild
 @author Higgins <discord@higginshax>
 @date 10/01/2024
-@version 1.3
+@version 1.4
 
 Add tasks to the settings
 
@@ -257,7 +257,7 @@ local function checkStorage(choice)
         return API.VB_FindPSett(8336).state > 0
     else
         local barId = ITEMS[choice.BAR]["BAR"]["0"]["BASE"]
-        if (API.Container_Get_s(858, barId).y < 10) then
+        if (API.Container_Get_s(858, barId).item_stack < 10) then
             return false
         end
         return true
