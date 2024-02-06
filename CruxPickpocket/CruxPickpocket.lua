@@ -123,7 +123,7 @@ local function setupGUI()
     IGP.box_start = FFPOINT.new(5, 5, 0)
     IGP.box_name = "PROGRESSBAR"
     IGP.colour = ImColor.new(6, 82, 221);
-    IGP.string_value = "SWAMP LIZARDS"
+    IGP.string_value = "CRUX EQAL KNIGHTS"
 end
 
 local function drawGUI()
