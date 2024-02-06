@@ -3,7 +3,7 @@
     Description: Safe cracking
 
     Author: Higgins
-    Version: 2.4
+    Version: 2.5
     Release Date: 18/01/2024
 
     Release Notes:
