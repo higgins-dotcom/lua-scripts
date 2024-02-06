@@ -16,7 +16,8 @@ local ID = {
     EXCALIBUR = 14632,
     EXCALIBUR_AUGMENTED = 36619,
     ELVEN_SHARD = 43358,
-    CRUX_EQAL_KNIGHT = {29639, 29640}
+    CRUX_EQAL_KNIGHT = {29639, 29640},
+    SAND_SEED = 54003
 }
 
 local AREA = {
@@ -113,7 +114,7 @@ local function teleportToWar()
 end
 
 local function teleportToKnight()
-    API.DoAction_Inventory1(54003, 0, 1, API.OFF_ACT_GeneralInterface_route)
+    API.DoAction_Inventory1(ID.SAND_SEED, 0, 1, API.OFF_ACT_GeneralInterface_route)
     API.RandomSleep2(800, 500, 500)
 end
 
