@@ -7,6 +7,7 @@
     Release Date: 18/01/2024
 
     Release Notes:
+    - Version 2.5 : Added teleportWithHood - place Wicked Hood on actionbar
     - Version 2.4 : Added inCombat check and more precise Camelot safe area check
     - Version 2.3 : Added color code check for game message check & revamp of teleport handling
     - Version 2.2 : Several fixes, added support for Master camouflage head teleport
@@ -929,28 +930,31 @@ local function check(condition, errorMessage)
 end
 
 local function invCheck()
-    local lockpickCheck = not needLockpick or (needLockpick and API.InvItemcount_1(ID.LOCKPICK) > 0)
-    local stethoscopeCheck = not needStethoscope or (needStethoscope and API.InvItemcount_1(ID.STETHOSCOPE) > 0)
+    -- Inventory checks
+    local lockpickCheck = not needLockpick or API.InvItemcount_1(ID.LOCKPICK) > 0
+    local stethoscopeCheck = not needStethoscope or API.InvItemcount_1(ID.STETHOSCOPE) > 0
     local wickedHoodCheck = API.InvItemcount_1(ID.WICKED_HOOD) > 0
-    local apiCheck = API.OFF_ACT_InteractNPC_route2 ~= nil
-    local levelCheck = API.XPLevelTable(API.GetSkillXP(skill)) >= 65
-
     check(wickedHoodCheck, "You need a Wicked Hood in your inventory!")
     check(lockpickCheck, "You need lockpicks in your inventory!")
     check(stethoscopeCheck, "You need a Stethoscope in your inventory!")
-    check(hasLootBag(), "You need a loot bag in your inventory!")
-    check(levelCheck, "You need at least Level 65 Thieving")
 
-    local ct = API.GetABs_name1("Camelot Teleport")
-    local ctCheck = ct.enabled
-    -- local at = API.GetABs_name1("Ardougne Teleport")
-    -- local atCheck = at.enabled
+    -- Other checks
+    local hasRequiredLevel = API.XPLevelTable(API.GetSkillXP(skill)) >= 65
+    local hasLootBag = hasLootBag()
+    check(hasRequiredLevel, "You need at least Level 65 Thieving")
+    check(hasLootBag, "You need a loot bag in your inventory!")
 
+    -- Action bar checks
+    local ctCheck = API.GetABs_name1("Camelot Teleport").enabled
+    local whCheck = route == "KANDARIN" and API.GetABs_name1("Wicked hood").enabled
     check(ctCheck, "You need to have Camelot Teleport on your action bar")
-    -- check(atCheck, "You need to have Ardougne Teleport on your action bar")
+    check(whCheck, "You need to have Wicked Hood on your action bar")
+
+    -- API check
+    local apiCheck = API.OFF_ACT_InteractNPC_route2 ~= nil
     check(apiCheck, "Please ensure you have the latest api.lua file from the ME release")
 
-    return lockpickCheck and stethoscopeCheck and wickedHoodCheck and hasLootBag() and apiCheck and levelCheck
+    return #errors == 0
 end
 
 setupGUI()
