@@ -359,6 +359,15 @@ local function getABS_id(id, name)
     return false
 end
 
+local function teleportWithHood()
+    local hd = API.GetABs_name1("Wicked hood")
+    if hd.enabled then
+        API.DoAction_Ability_Direct(hd, 3, API.OFF_ACT_GeneralInterface_route)
+        return true
+    end
+    return false
+end
+
 local function teleportToLodestone(name)
     local id = LODESTONES[name]
     if isLodestoneInterfaceUp() then
@@ -621,7 +630,9 @@ local function walk()
                     walking = false
                 end
             else
-                API.DoAction_Inventory1(ID.WICKED_HOOD, 0, 3, API.OFF_ACT_GeneralInterface_route)
+                if not teleportWithHood() then
+                    API.DoAction_Inventory1(ID.WICKED_HOOD, 0, 3, API.OFF_ACT_GeneralInterface_route) 
+                end
                 API.RandomSleep2(3200, 600, 600)
             end
         elseif location == LOCATIONS.EDGEVILLE then
@@ -810,7 +821,7 @@ local function walk()
             if isAtLocation(AREA.YANILLE, 50) then
                 if not findDoor(17090, { 2537, 3090 }, floor) then
                     if API.DoAction_Object2(0x31, API.OFF_ACT_GeneralObject_route0, { 17089 }, 50, WPOINT.new(2537, 3089, 0)) then
-                        API.RandomSleep2(600, 600, 600)
+                        API.RandomSleep2(900, 600, 600)
                     end
                 else
                     walking = false
@@ -824,7 +835,7 @@ local function walk()
                     if API.PInArea(2534, 5, 3084, 5) then
                         if not findDoor(17090, { 2537, 3090 }, floor) then
                             if API.DoAction_Object2(0x31, API.OFF_ACT_GeneralObject_route0, { 17089 }, 50, WPOINT.new(2537, 3089, 0)) then
-                                API.RandomSleep2(600, 600, 600)
+                                API.RandomSleep2(900, 600, 600)
                             end
                         else
                             local tile = WPOINT.new(2549 + math.random(-2, 2), 3085 + math.random(-2, 2), 0)
@@ -833,7 +844,7 @@ local function walk()
                     else
                         if not findDoor(1534, { 2551, 3083 }, floor) then
                             if API.DoAction_Object2(0x31, API.OFF_ACT_GeneralObject_route0, { 1533 }, 50, WPOINT.new(2551, 3082, 0)) then
-                                API.RandomSleep2(600, 600, 600)
+                                API.RandomSleep2(900, 600, 600)
                             end
                         else
                             API.DoAction_Object2(0x34, 0, { 117943 }, 50, WPOINT.new(2556, 3081, 0))
@@ -855,7 +866,9 @@ local function walk()
                     walking = false
                 end
             else
-                API.DoAction_Inventory1(ID.WICKED_HOOD, 0, 3, API.OFF_ACT_GeneralInterface_route)
+                if not teleportWithHood() then
+                    API.DoAction_Inventory1(ID.WICKED_HOOD, 0, 3, API.OFF_ACT_GeneralInterface_route) 
+                end
                 API.RandomSleep2(3200, 600, 600)
             end
         end
