@@ -17,7 +17,7 @@ local ID = {
     EXCALIBUR_AUGMENTED = 36619,
     ELVEN_SHARD = 43358,
     CRUX_EQAL_KNIGHT = {29639, 29640},
-    SAND_SEED = 54003
+    SAND_SEED = 54004
 }
 
 local AREA = {
@@ -114,7 +114,11 @@ local function teleportToWar()
 end
 
 local function teleportToKnight()
-    API.DoAction_Inventory1(ID.SAND_SEED, 0, 1, API.OFF_ACT_GeneralInterface_route)
+    local ss = API.GetABs_name1("Mystical sand seed")
+    if ss.enabled then
+        API.DoAction_Ability_Direct(ss, 1, API.OFF_ACT_GeneralInterface_route)
+    end
+    -- API.DoAction_Inventory1(ID.SAND_SEED, 0, 1, API.OFF_ACT_GeneralInterface_route)
     API.RandomSleep2(800, 500, 500)
 end
 
