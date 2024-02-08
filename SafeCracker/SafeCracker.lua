@@ -343,8 +343,6 @@ end
 local function isTeleportOptionsUp()
     local vb2874 = API.VB_FindPSett(2874, 0)
     return (vb2874.state == 13) or (vb2874.stateAlt == 13)
-    -- local base = API.ScanForInterfaceTest2Get(false,  { { 720,2,-1,-1,0 }, { 720,16,-1,2,0 }, { 720,3,-1,16,0 } })
-    -- return base[1].y > 0
 end
 
 local function isAtLocation(location, distance)
@@ -544,11 +542,9 @@ local function walk()
             walkToTile(tile)
             API.RandomSleep2(600, 300, 300)
         else
-            print("Master camouflage head teleport")
             local mch = API.GetABs_name1("Master camouflage head")
-            print(mch.enabled, mch.action, isTeleportOptionsUp())
             if #mch.name > 0 then
-                if API.Compare2874Status(13, true) or isTeleportOptionsUp() then
+                if isTeleportOptionsUp() then
                     local opts = API.ScanForInterfaceTest2Get(true, { { 720, 2, -1, -1, 0 }, { 720, 16, -1, 2, 0 } })
                     if opts[1].y > 35 then
                         API.KeyboardPress2(0x33, 60, 100)
