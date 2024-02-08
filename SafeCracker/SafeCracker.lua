@@ -542,7 +542,9 @@ local function walk()
             walkToTile(tile)
             API.RandomSleep2(600, 300, 300)
         else
+            print("Master camouflage head teleport")
             local mch = API.GetABs_name1("Master camouflage head")
+            print(mch.enabled, mch.action, isTeleportOptionsUp())
             if #mch.name > 0 then
                 if API.Compare2874Status(13, true) or isTeleportOptionsUp() then
                     local opts = API.ScanForInterfaceTest2Get(true, { { 720, 2, -1, -1, 0 }, { 720, 16, -1, 2, 0 } })
