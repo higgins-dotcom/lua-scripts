@@ -546,6 +546,7 @@ local function walk()
             if #mch.name > 0 then
                 if isTeleportOptionsUp() then
                     local opts = API.ScanForInterfaceTest2Get(true, { { 720, 2, -1, -1, 0 }, { 720, 16, -1, 2, 0 } })
+                    print("opts debug:", #opts, opts[1].y)
                     if opts[1].y > 35 then
                         API.KeyboardPress2(0x33, 60, 100)
                         API.RandomSleep2(300, 300, 300)
