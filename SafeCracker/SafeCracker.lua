@@ -340,6 +340,11 @@ local function isCamelotCracked()
     return false
 end
 
+local function isTeleportOptionsUp()
+    local base = API.ScanForInterfaceTest2Get(false,  { { 720,2,-1,-1,0 }, { 720,16,-1,2,0 }, { 720,3,-1,16,0 } })
+    return base[1].y > 0
+end
+
 local function isAtLocation(location, distance)
     local distance = distance or 20
     return API.PInArea(location.x, distance, location.y, distance, location.z)
@@ -539,11 +544,7 @@ local function walk()
         else
             local mch = API.GetABs_name1("Master camouflage head")
             if #mch.name > 0 then
-                if mch.enabled and mch.action == "Teleport" then
-                    API.DoAction_Ability_Direct(mch, 1, API.OFF_ACT_GeneralInterface_route)
-                end
-
-                if API.Compare2874Status(13, true) then
+                if API.Compare2874Status(13, true) or isTeleportOptionsUp() then
                     local opts = API.ScanForInterfaceTest2Get(true, { { 720, 2, -1, -1, 0 }, { 720, 16, -1, 2, 0 } })
                     if opts[1].y > 35 then
                         API.KeyboardPress2(0x33, 60, 100)
@@ -551,6 +552,10 @@ local function walk()
                     else
                         API.KeyboardPress2(0x30, 60, 100)
                         API.RandomSleep2(300, 300, 300)
+                    end
+                else
+                    if mch.enabled and mch.action == "Teleport" then
+                        API.DoAction_Ability_Direct(mch, 1, API.OFF_ACT_GeneralInterface_route)
                     end
                 end
             elseif API.DoAction_Inventory1(ID.GUILD_TELEPORT, 0, 1, API.OFF_ACT_GeneralInterface_route) then
