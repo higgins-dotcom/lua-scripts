@@ -341,8 +341,10 @@ local function isCamelotCracked()
 end
 
 local function isTeleportOptionsUp()
-    local base = API.ScanForInterfaceTest2Get(false,  { { 720,2,-1,-1,0 }, { 720,16,-1,2,0 }, { 720,3,-1,16,0 } })
-    return base[1].y > 0
+    local vb2874 = API.VB_FindPSett(2874, 0)
+    return (vb2874.state == 13) or (vb2874.stateAlt == 13)
+    -- local base = API.ScanForInterfaceTest2Get(false,  { { 720,2,-1,-1,0 }, { 720,16,-1,2,0 }, { 720,3,-1,16,0 } })
+    -- return base[1].y > 0
 end
 
 local function isAtLocation(location, distance)
