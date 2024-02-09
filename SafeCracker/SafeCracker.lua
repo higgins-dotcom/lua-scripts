@@ -130,6 +130,7 @@ local oldLocation    = nil
 local lastTile       = nil
 local scriptPaused   = true
 local walking        = true
+local firstRun       = true
 local lastVisit      = os.time()
 local skill          = "THIEVING"
 local startXp        = API.GetSkillXP(skill)
@@ -546,7 +547,6 @@ local function walk()
             if #mch.name > 0 then
                 if isTeleportOptionsUp() then
                     local opts = API.ScanForInterfaceTest2Get(true, { { 720, 2, -1, -1, 0 }, { 720, 16, -1, 2, 0 } })
-                    print("opts debug:", #opts, opts[1].y)
                     if opts[1].y > 35 then
                         API.KeyboardPress2(0x33, 60, 100)
                         API.RandomSleep2(300, 300, 300)
@@ -638,7 +638,7 @@ local function walk()
                 end
             else
                 if not teleportWithHood() then
-                    API.DoAction_Inventory1(ID.WICKED_HOOD, 0, 3, API.OFF_ACT_GeneralInterface_route) 
+                    API.DoAction_Inventory1(ID.WICKED_HOOD, 0, 3, API.OFF_ACT_GeneralInterface_route)
                 end
                 API.RandomSleep2(3200, 600, 600)
             end
@@ -874,7 +874,7 @@ local function walk()
                 end
             else
                 if not teleportWithHood() then
-                    API.DoAction_Inventory1(ID.WICKED_HOOD, 0, 3, API.OFF_ACT_GeneralInterface_route) 
+                    API.DoAction_Inventory1(ID.WICKED_HOOD, 0, 3, API.OFF_ACT_GeneralInterface_route)
                 end
                 API.RandomSleep2(3200, 600, 600)
             end
@@ -959,7 +959,7 @@ local function invCheck()
     -- API check
     local apiCheck = API.OFF_ACT_InteractNPC_route2 ~= nil
     check(apiCheck, "Please ensure you have the latest api.lua file from the ME release")
-
+    firstRun = false
     return #errors == 0
 end
 
@@ -994,7 +994,7 @@ while API.Read_LoopyLoop() do
         goto continue
     end
 
-    if not invCheck() then
+    if firstRun and not invCheck() then
         print("!!! Startup Check Failed !!!")
         if #errors > 0 then
             print("Errors:")
