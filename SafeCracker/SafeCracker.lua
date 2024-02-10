@@ -951,10 +951,12 @@ local function invCheck()
     check(hasLootBag, "You need a loot bag in your inventory!")
 
     -- Action bar checks
-    local ctCheck = API.GetABs_name1("Camelot Teleport").enabled
-    local whCheck = route == "KANDARIN" and API.GetABs_name1("Wicked hood").enabled
-    check(ctCheck, "You need to have Camelot Teleport on your action bar")
-    check(whCheck, "You need to have Wicked Hood on your action bar")
+    if not isTeleportOptionsUp() then
+        local ctCheck = API.GetABs_name1("Camelot Teleport").enabled
+        local whCheck = route == "KANDARIN" and API.GetABs_name1("Wicked hood").enabled
+        check(ctCheck, "You need to have Camelot Teleport on your action bar")
+        check(whCheck, "You need to have Wicked Hood on your action bar")
+    end
 
     -- API check
     local apiCheck = API.OFF_ACT_InteractNPC_route2 ~= nil
