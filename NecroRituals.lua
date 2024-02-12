@@ -69,7 +69,8 @@ end
 
 local function findNpc(npcid, distance)
     local distance = distance or 20
-    return #API.GetAllObjArrayInteract({ npcid }, distance, 1) > 0
+    local npcs = API.GetAllObjArrayInteract({ npcid }, distance, 1)
+    if #npcs > 0 then return npcs[1] else return false end
 end
 
 local function findNpcByAction(action)
@@ -171,7 +172,8 @@ local function watchForStorm()
 end
 
 local function watchForSoul()
-    if findNpc(ID.WANDERING_SOUL, 15) then
+    local soul = findNpc(ID.WANDERING_SOUL, 15)
+    if soul then
         API.RandomSleep2(400, 300, 200)
         API.DoAction_NPC(0x29, 1488, { ID.WANDERING_SOUL }, 15)
         API.RandomSleep2(1200, 300, 200)
@@ -211,23 +213,25 @@ end
 
 local function watchForCorrupt()
     while findCorrupt() do
-        API.RandomSleep2(500, 500, 500)
+        if not API.ReadPlayerMovin2() then
+            API.RandomSleep2(500, 500, 500)
 
-        local npcIDs = { 30495, 30496, 30497 }
-        local npcFound = false
-
-        for _, npcID in ipairs(npcIDs) do
-            if API.DoAction_NPC(0x29, 1488, { npcID }, 20) then
-                API.RandomSleep2(400, 500, 600)
-                npcFound = true
-                break
+            local npcIDs = { 30495, 30496, 30497 }
+            local npcFound = false
+    
+            for _, npcID in ipairs(npcIDs) do
+                if API.DoAction_NPC(0x29, 1488, { npcID }, 20) then
+                    API.RandomSleep2(400, 500, 600)
+                    npcFound = true
+                    break
+                end
             end
-        end
-
-        API.RandomSleep2(200, 200, 200)
-
-        if not npcFound then
-            break
+    
+            -- API.RandomSleep2(200, 200, 200)
+    
+            if not npcFound then
+                break
+            end 
         end
     end
 end
@@ -265,14 +269,15 @@ local function processGlintTile(glintTile)
     local tile = findNpcAtTile(glintTile)
     if tile then
         clickTile(tile)
-        API.RandomSleep2(800, 600, 600)
+        API.RandomSleep2(300, 300, 300)
         return true
     end
     return false
 end
 
 local function watchForHorror()
-    if findNpc(ID.SHAMBLING_HORROR, 50) then
+    local horror = findNpc(ID.SHAMBLING_HORROR, 50)
+    if horror and horror.Anim < 0 then
         API.RandomSleep2(800, 800, 1200)
         API.DoAction_NPC(0x29, 1488, { ID.SHAMBLING_HORROR }, 50)
         API.RandomSleep2(400, 600, 900)
