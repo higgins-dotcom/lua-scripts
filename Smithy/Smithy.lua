@@ -183,7 +183,7 @@ end
 
 local function selectItem(bar, choice)
 
-    if not (API.VB_FindPSett(8332).state == SETTING_IDS[bar].BAR) and (choice.ITEM_TYPE ~= "BAR") then
+    if not (API.VB_FindPSett(8332, -1, -1).state == SETTING_IDS[bar].BAR) and (choice.ITEM_TYPE ~= "BAR") then
         API.DoAction_Interface(0xffffffff, 0x93b, 1, 37, 52, SETTING_IDS[bar].INTERFACE,
             API.OFF_ACT_GeneralInterface_route)
         API.RandomSleep2(600, 600, 600)
@@ -254,7 +254,7 @@ end
 
 local function checkStorage(choice)
     if choice.ITEM_TYPE == "BAR" then
-        return API.VB_FindPSett(8336).state > 0
+        return API.VB_FindPSett(8336, -1, -1).state > 0
     else
         local barId = ITEMS[choice.BAR]["BAR"]["0"]["BASE"]
         if (API.Container_Get_s(858, barId).item_stack < 10) then
@@ -304,7 +304,7 @@ local function bank(item)
 
             if type(item) == "number" then
                 if API.BankGetItemStack1(item) > 0 then
-                    if API.VB_FindPSett(8958).state ~= 7 then
+                    if API.VB_FindPSett(8958, -1, -1).state ~= 7 then
                         API.DoAction_Interface(0x2e, 0xffffffff, 1, 517, 103, -1, API.OFF_ACT_GeneralInterface_route)
                         API.RandomSleep2(800, 500, 300)
                     end
@@ -321,7 +321,7 @@ local function bank(item)
                 for _, tableItem in ipairs(item) do
                     for i = 1, slotsToWithdraw do
                         if API.BankGetItemStack1(tableItem) > 0 then
-                            if API.VB_FindPSett(8958).state ~= 2 then
+                            if API.VB_FindPSett(8958, -1, -1).state ~= 2 then
                                 API.DoAction_Interface(0x2e, 0xffffffff, 1, 517, 93, -1,
                                     API.OFF_ACT_GeneralInterface_route)
                                 API.RandomSleep2(800, 500, 300)
@@ -445,7 +445,7 @@ while API.Read_LoopyLoop() do
             then
                 wasFull = false
                 if isSmithingInterfaceOpen() then
-                    if API.VB_FindPSett(8333).state == choice.BASE and checkItemText(choice.ITEM_LEVEL) then
+                    if API.VB_FindPSett(8333, -1, -1).state == choice.BASE and checkItemText(choice.ITEM_LEVEL) then
                         if not checkStorage(choice) then
                             print("Bar quantity less than 10 - halting task")
                             currentTaskIndex = currentTaskIndex + 1
@@ -453,12 +453,12 @@ while API.Read_LoopyLoop() do
                         end
 
                         if selectedItemType == "BAR" then
-                            local quantity = API.VB_FindPSett(8336).state
+                            local quantity = API.VB_FindPSett(8336, -1, -1).state
                             API.KeyboardPress2(0x20, 60, 100)
                             API.RandomSleep2(600, 800, 1200)
                             currentTask.amount = currentTask.amount - quantity
                         else
-                            if API.VB_FindPSett(8332).state == SETTING_IDS[selectedBarType].BAR then
+                            if API.VB_FindPSett(8332, -1, -1).state == SETTING_IDS[selectedBarType].BAR then
                                 API.KeyboardPress2(0x20, 60, 100)
                                 API.RandomSleep2(600, 800, 1200)
                                 currentTask.amount = currentTask.amount - 1
