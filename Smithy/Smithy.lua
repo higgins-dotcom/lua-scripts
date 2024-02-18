@@ -25,7 +25,7 @@ local tasks = {
     -- Amount will be amount of times crafted, so for some items like Arrowheads amount 1 = 1x75 = 75 arrowheads
 
     -- [ -- SMITHING example -- ]
-    -- -- { metalType = "BRONZE",      itemType = "KNIFE",  itemLevel = 0,        amount = 28 },
+    { metalType = "BRONZE",      itemType = "ARROWHEADS",  itemLevel = 0,        amount = 2 },
     -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 0,        amount = 28 },
     -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 1,        amount = 28 },
     -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 2,        amount = 28 },
