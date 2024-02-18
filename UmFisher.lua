@@ -134,7 +134,7 @@ local function deposit()
     local inventory = API.FetchBankInvArray()
     for _, inv in ipairs(inventory) do
         if inv.itemid1 == ID.SOLE then
-            API.DoAction_Interface(0xffffffff, 0xd806, 1, 517, 15, _ - 1, API.OFF_ACT_GeneralInterface_route)
+            API.DoAction_Interface(-1, inv.itemid1, 1, inv.id1, inv.id2, inv.id3, API.OFF_ACT_GeneralInterface_route)
             API.RandomSleep2(300, 600, 600)
             break
         end
