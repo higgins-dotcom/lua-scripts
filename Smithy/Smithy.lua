@@ -291,6 +291,17 @@ local function invContains(item)
     end
 end
 
+local function Action_Bank(item)
+    local inventory = API.FetchBankArray()
+    for _, inv in ipairs(inventory) do
+        if inv.itemid1 == item then
+            API.DoAction_Interface(-1, inv.itemid1, 1, inv.id1, inv.id2, inv.id3, API.OFF_ACT_GeneralInterface_route)
+            API.RandomSleep2(300, 600, 600)
+            break
+        end
+    end
+end
+
 local function bank(item)
     if selectedItemType == "BAR" then
         API.DoAction_Object1(0x29, 80, ID.NORMAL.FURNACE, 50)
@@ -308,9 +319,10 @@ local function bank(item)
                         API.DoAction_Interface(0x2e, 0xffffffff, 1, 517, 103, -1, API.OFF_ACT_GeneralInterface_route)
                         API.RandomSleep2(800, 500, 300)
                     end
-                    if API.DoAction_Bank(item, 1, API.OFF_ACT_GeneralInterface_route) then
-                        API.RandomSleep2(800, 500, 300)
+                    if not API.DoAction_Bank(item, 1, API.OFF_ACT_GeneralInterface_route) then
+                        Action_Bank(item)
                     end
+                    API.RandomSleep2(800, 500, 300)
                 else
                     return false
                 end
@@ -326,9 +338,10 @@ local function bank(item)
                                     API.OFF_ACT_GeneralInterface_route)
                                 API.RandomSleep2(800, 500, 300)
                             end
-                            if API.DoAction_Bank(tableItem, 1, API.OFF_ACT_GeneralInterface_route) then
-                                API.RandomSleep2(800, 500, 300)
+                            if not API.DoAction_Bank(tableItem, 1, API.OFF_ACT_GeneralInterface_route) then
+                                Action_Bank(item)
                             end
+                            API.RandomSleep2(800, 500, 300)
                         else
                             if i == 1 then return false end
                             break
