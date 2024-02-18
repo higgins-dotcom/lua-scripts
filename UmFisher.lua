@@ -134,7 +134,7 @@ local function bank()
     if API.BankOpen2() then
         sole = sole + API.InvItemcount_1(ID.SOLE)
 
-        if API.VB_FindPSett(8958).state ~= 7 then
+        if API2.VB_FindPSett(8958, -1, -1).state ~= 7 then
             API.DoAction_Interface(0x2e, 0xffffffff, 1, 517, 103, -1, API.OFF_ACT_GeneralInterface_route)
             API.RandomSleep2(800, 500, 300)
         end
