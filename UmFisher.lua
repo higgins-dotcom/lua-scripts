@@ -130,16 +130,29 @@ local function drawGUI()
     DrawProgressBar(IGP)
 end
 
+local function deposit()
+    local inventory = API.FetchBankInvArray()
+    for _, inv in ipairs(inventory) do
+        if inv.itemid1 == 55302 then
+            API.DoAction_Interface(0xffffffff, 0xd806, 1, 517, 15, _ - 1, API.OFF_ACT_GeneralInterface_route)
+            API.RandomSleep2(600, 600, 600)
+            break
+        end
+    end
+end
+
 local function bank()
     if API.BankOpen2() then
         sole = sole + API.InvItemcount_1(ID.SOLE)
 
-        if API2.VB_FindPSett(8958, -1, -1).state ~= 7 then
+        if API.VB_FindPSett(8958, -1, -1).state ~= 7 then
             API.DoAction_Interface(0x2e, 0xffffffff, 1, 517, 103, -1, API.OFF_ACT_GeneralInterface_route)
             API.RandomSleep2(800, 500, 300)
         end
 
-        API.DoAction_Bank_Inv(ID.SOLE, 1, API.OFF_ACT_GeneralInterface_route2)
+        if not API.DoAction_Bank_Inv(ID.SOLE, 1, API.OFF_ACT_GeneralInterface_route2) then
+            deposit()
+        end
         API.RandomSleep2(300, 400, 400)
     else
         API.DoAction_Object1(0x5, 80, ID.BANK_CHEST, 50)
