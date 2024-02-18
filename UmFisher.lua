@@ -135,7 +135,7 @@ local function deposit()
     for _, inv in ipairs(inventory) do
         if inv.itemid1 == ID.SOLE then
             API.DoAction_Interface(0xffffffff, 0xd806, 1, 517, 15, _ - 1, API.OFF_ACT_GeneralInterface_route)
-            API.RandomSleep2(600, 600, 600)
+            API.RandomSleep2(300, 600, 600)
             break
         end
     end
