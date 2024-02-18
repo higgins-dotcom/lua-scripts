@@ -420,6 +420,10 @@ while (API.Read_LoopyLoop()) do
 
     API.DoRandomEvents()
 
+    if API.DoAction_Inventory1(55633, 0, 1, API.OFF_ACT_GeneralInterface_route) then
+        API.RandomSleep2(400, 400, 400)
+    end
+
     if API.VB_FindPSett(10937).state > 0 then
         if watchForDisturbances() then
             goto continue
