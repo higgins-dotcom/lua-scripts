@@ -223,12 +223,12 @@ while API.Read_LoopyLoop() do
         break
     end
 
-    local p = API.PlayerCoordfloat()
+    p = API.PlayerCoordfloat()
 
     if API.ReadPlayerMovin2() or API.CheckAnim(3) then
         if lastTile then
             local dist = math.sqrt((lastTile.x - p.x) ^ 2 + (lastTile.y - p.y) ^ 2)
-            if dist > 12 then
+            if dist > 8 then
                 goto continue
             else
                 lastTile = nil
