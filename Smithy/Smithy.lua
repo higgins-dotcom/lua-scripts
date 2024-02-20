@@ -35,7 +35,7 @@ local tasks = {
     -- { metalType = "ELDER_RUNE",      itemType = "SET",  itemLevel = "BURIAL",        amount = 0 }
     -- { metalType = "ORIKALKUM",      itemType = "PLATEBODY",  itemLevel = 2,        amount = 1 },
     -- { metalType = "ORIKALKUM",      itemType = "PLATEBODY",  itemLevel = 3,        amount = 50 },
-    { metalType = "STEEL",      itemType = "FULL_HELM",  itemLevel = 0, amount = 5 },
+    -- { metalType = "STEEL",      itemType = "FULL_HELM",  itemLevel = 0, amount = 5 },
 
     -- If unsure - open the lib/smithing_data.json file and search for the item
     --
