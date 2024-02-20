@@ -25,7 +25,7 @@ local tasks = {
     -- Amount will be amount of times crafted, so for some items like Arrowheads amount 1 = 1x75 = 75 arrowheads
 
     -- [ -- SMITHING example -- ]
-    { metalType = "ELDER_RUNE", itemType = "FULL_HELM", itemLevel = "BURIAL", amount = 2 },
+    -- { metalType = "ELDER_RUNE", itemType = "FULL_HELM", itemLevel = "BURIAL", amount = 1 },
     -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 0,        amount = 28 },
     -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 1,        amount = 28 },
     -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 2,        amount = 28 },
@@ -35,7 +35,7 @@ local tasks = {
     -- { metalType = "ELDER_RUNE",      itemType = "SET",  itemLevel = "BURIAL",        amount = 0 }
     -- { metalType = "ORIKALKUM",      itemType = "PLATEBODY",  itemLevel = 2,        amount = 1 },
     -- { metalType = "ORIKALKUM",      itemType = "PLATEBODY",  itemLevel = 3,        amount = 50 },
-    -- { metalType = "RUNE",      itemType = "ARMOURED_BOOTS",  itemLevel = "BURIAL", amount = 35 },
+    { metalType = "STEEL",      itemType = "FULL_HELM",  itemLevel = 0, amount = 5 },
 
     -- If unsure - open the lib/smithing_data.json file and search for the item
     --
