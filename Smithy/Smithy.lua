@@ -4,7 +4,7 @@
 @description AIO Smither for the Artisan Guild
 @author Higgins <discord@higginshax>
 @date 10/01/2024
-@version 1.4
+@version 1.5
 
 Add tasks to the settings
 
