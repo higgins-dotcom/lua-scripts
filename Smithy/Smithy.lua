@@ -226,8 +226,7 @@ local function selectItem(bar, choice)
 end
 
 local function isSmithingInterfaceOpen()
-    return API.Compare2874Status(85, false) or (API.VB_FindPSett(2874, -1, -1).state == 85) or
-    API.Container_Get_Check(858)
+    return API.Compare2874Status(85, false)
 end
 
 local function openSmithingInterface(area)
@@ -474,12 +473,14 @@ while API.Read_LoopyLoop() do
                             -- local quantity = API.VB_FindPSett(8336, -1, -1).state
                             API.KeyboardPress2(0x20, 60, 100)
                             API.RandomSleep2(600, 800, 1200)
+                            print(quantity)
                             currentTask.amount = currentTask.amount - quantity
                         else
                             if VB_FindPSettinOrder(8332, -1).state == SETTING_IDS[selectedBarType].BAR then
                                 -- if API.VB_FindPSett(8332, -1, -1).state == SETTING_IDS[selectedBarType].BAR then
                                 API.KeyboardPress2(0x20, 60, 100)
                                 API.RandomSleep2(600, 800, 1200)
+                                print(currentTask.amount)
                                 currentTask.amount = currentTask.amount - 1
                             else
                                 selectItem(selectedBarType, choice)
