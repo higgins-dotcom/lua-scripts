@@ -433,7 +433,7 @@ local function walkToTile(tile)
 end
 
 local function findDoor(doorId, tile, floor)
-    local allObj = API.ReadAllObjectsArray(true, -1)
+    local allObj = API.ReadAllObjectsArray({0, 12}, {doorId}, {})
     for _, v in pairs(allObj) do
         if v.Id > 0 and v.Id == doorId and v.CalcX == tile[1] and v.CalcY == tile[2] and v.Floor == floor then
             return v
