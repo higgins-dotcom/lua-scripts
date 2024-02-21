@@ -114,7 +114,7 @@ local function hasPouches()
 end
 
 local function findCrystallise()
-    local objects = API.ReadAllObjectsArray(true, 4)
+    local objects = API.ReadAllObjectsArray({4}, {5802}, {})
     for _, obj in ipairs(objects) do
         if obj.Id == 5802 then
             return obj
@@ -124,7 +124,7 @@ local function findCrystallise()
 end
 
 local function findTree()
-    local trees = API.ReadAllObjectsArray(true, 12)
+    local trees = API.ReadAllObjectsArray({12}, {ID.TREE}, {})
     local crystallise = findCrystallise()
     if crystallise then
         local crystalliseTile = WPOINT.new(math.floor(crystallise.TileX / 512), math.floor(crystallise.TileY / 512), 0)
