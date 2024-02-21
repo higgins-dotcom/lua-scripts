@@ -414,6 +414,11 @@ end
 
 setupGUI()
 
+if API.VERSION and API.VERSION < 1 then
+    print("ERROR: INCORRECT API.LUA FILE - DOWNLOAD NEW RELEASE")
+    API.Write_LoopyLoop(false)
+end
+
 while (API.Read_LoopyLoop()) do
     idleCheck()
     drawGUI()
