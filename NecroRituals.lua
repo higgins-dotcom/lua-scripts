@@ -58,7 +58,7 @@ local function clickPlatform()
 end
 
 local function findPedestal()
-    local objs = API.ReadAllObjectsArray(true, 0)
+    local objs = API.ReadAllObjectsArray({0}, {-1}, {})
     for _, obj in pairs(objs) do
         if obj.CalcX == 1038 and obj.CalcY == 1776 and obj.Id ~= 127319 and obj.Action ~= "Place focus" then
             return obj
@@ -74,7 +74,7 @@ local function findNpc(npcid, distance)
 end
 
 local function findNpcByAction(action)
-    local npcs = API.ReadAllObjectsArray(true, 1)
+    local npcs = API.ReadAllObjectsArray({1}, {-1}, {})
     if #npcs > 0 then
         for _, npc in ipairs(npcs) do
             if string.find(tostring(npc.Action), action) then
@@ -86,7 +86,7 @@ local function findNpcByAction(action)
 end
 
 local function findDepleted()
-    local objs = API.ReadAllObjectsArray(true, 1)
+    local objs = API.ReadAllObjectsArray({1}, {-1}, {})
     if #objs > 0 then
         for _, a in ipairs(objs) do
             if string.find(tostring(a.Name), "depleted") then
@@ -122,7 +122,7 @@ end
 local function waitForGfxChange(targetGfx, timeout)
     local startTime = os.time()
     while os.time() - startTime < timeout do
-        local objs = API.ReadAllObjectsArray(true, 4)
+        local objs = API.ReadAllObjectsArray({4}, {targetGfx}, {})
         for _, obj in ipairs(objs) do
             if obj.Id == targetGfx then
                 return true
@@ -237,7 +237,7 @@ local function watchForCorrupt()
 end
 
 local function findNpcAtTile(tile)
-    local allNpc = API.ReadAllObjectsArray(true, 1)
+    local allNpc = API.ReadAllObjectsArray({1}, {-1}, {})
     for _, v in pairs(allNpc) do
         if math.floor(v.TileX / 512) == tile.x and math.floor(v.TileY / 512) == tile.y then
             return v
@@ -247,7 +247,7 @@ local function findNpcAtTile(tile)
 end
 
 local function findGlint()
-    local objects = API.ReadAllObjectsArray(true, 4)
+    local objects = API.ReadAllObjectsArray({4}, {7977}, {})
     for _, obj in ipairs(objects) do
         if obj.Id == 7977 then
             return obj
