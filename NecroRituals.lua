@@ -4,7 +4,7 @@
 @description Peforms Rituals
 @author Higgins <discord@higginshax>
 @date 27/11/2023
-@version 2.3
+@version 2.4
 
 Disturbances handled
 0-300%
