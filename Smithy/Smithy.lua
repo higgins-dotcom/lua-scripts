@@ -256,6 +256,7 @@ local function hasOption()
 end
 
 local function checkStorage(choice)
+    if choice.ITEM_LEVEL == "BURIAL" then return true end
     if choice.ITEM_TYPE == "BAR" then
         return VB_FindPSettinOrder(8336, -1).state > 0
         -- return API.VB_FindPSett(8336, -1, -1).state > 0
