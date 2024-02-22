@@ -92,9 +92,13 @@ local AREA_ACTIONS = {
     },
 }
 
+local function getCurrentDirectory()
+    local str = debug.getinfo(1, "S").source:sub(2)
+    return str:match("(.*\\)") or ""
+end
+
 local function loadJsonData()
-    local userProfile = os.getenv("USERPROFILE")
-    local filename = userProfile .. "\\Documents\\MemoryError\\Lua_scripts\\lib\\smithing_data.json"
+    local filename = getCurrentDirectory() .. "lib\\smithing_data.json"
     local file = io.open(filename, "r")
     local content = file:read("*all")
     file:close()
