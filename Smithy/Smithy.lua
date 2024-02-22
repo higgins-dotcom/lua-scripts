@@ -256,7 +256,6 @@ local function hasOption()
 end
 
 local function checkStorage(choice)
-    if choice.ITEM_LEVEL == "BURIAL" then return true end
     if choice.ITEM_TYPE == "BAR" then
         return VB_FindPSettinOrder(8336, -1).state > 0
         -- return API.VB_FindPSett(8336, -1, -1).state > 0
@@ -467,7 +466,7 @@ while API.Read_LoopyLoop() do
                 if isSmithingInterfaceOpen() then
                     if VB_FindPSettinOrder(8333, -1).state == choice.BASE and checkItemText(choice.ITEM_LEVEL) then
                         -- if API.VB_FindPSett(8333, -1, -1).state == choice.BASE and checkItemText(choice.ITEM_LEVEL) then
-                        if not checkStorage(choice) then
+                        if not checkStorage(choice) and not (selectedItemType == "SET") then
                             print("Bar quantity less than 10 - halting task")
                             currentTaskIndex = currentTaskIndex + 1
                             goto continue
