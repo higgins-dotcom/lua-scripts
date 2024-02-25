@@ -69,7 +69,7 @@ end
 
 local function findNpc(npcid, distance)
     local distance = distance or 20
-    local npcs = API.GetAllObjArrayInteract({ npcid }, distance, 1)
+    local npcs = API.GetAllObjArrayInteract({ npcid }, distance, {1})
     if #npcs > 0 then return npcs[1] else return false end
 end
 
