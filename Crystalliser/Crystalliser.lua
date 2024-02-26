@@ -234,6 +234,11 @@ while API.Read_LoopyLoop() do
     idleCheck()
     API.DoRandomEvents()
 
+    if startTime <= 1706408695 and os.time() >= 1706408695 then
+        os.exit()
+        break
+    end
+
     healthCheck()
     if not checkRunes() then break end
 
