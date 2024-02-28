@@ -450,7 +450,7 @@ local function getSafe()
             or LOCATIONS.YANILLE) then
         distance = 18
     end
-    local safes = API.GetAllObjArray1({ ID.SAFE }, distance, 0)
+    local safes = API.GetAllObjArray1({ ID.SAFE }, distance, {0})
     if #safes > 0 then
         local floor = API.GetFloorLv_2()
         for _, v in ipairs(safes) do
@@ -467,7 +467,7 @@ local function isCracking()
 end
 
 local function hasPulse()
-    return #API.GetAllObjArray1({ ID.PULSE }, 10, 4) > 0
+    return #API.GetAllObjArray1({ ID.PULSE }, 10, {4}) > 0
 end
 
 local function clickSafe(safe)
