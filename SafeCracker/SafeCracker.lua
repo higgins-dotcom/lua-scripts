@@ -334,7 +334,7 @@ end
 
 local function isCamelotCracked()
     local SAFE_DATA = SAFES.ROUTES.KANDARIN.CAMELOT
-    local state = API.VB_FindPSett(SAFE_DATA[1]).state
+    local state = API.VB_FindPSettinOrder(SAFE_DATA[1], -1).state
     local isCracked = (state & (1 << SAFE_DATA[2][1])) == (1 << SAFE_DATA[2][1]) and
         (state & (1 << SAFE_DATA[2][2])) == (1 << SAFE_DATA[2][2])
     if isCracked then return true end
@@ -342,7 +342,7 @@ local function isCamelotCracked()
 end
 
 local function isTeleportOptionsUp()
-    local vb2874 = API.VB_FindPSett(2874, 0)
+    local vb2874 = API.VB_FindPSettinOrder(2874, -1)
     return (vb2874.state == 13) or (vb2874.stateAlt == 13)
 end
 
