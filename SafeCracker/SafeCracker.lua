@@ -953,7 +953,7 @@ local function invCheck()
     -- Action bar checks
     if not isTeleportOptionsUp() then
         local ctCheck = API.GetABs_name1("Camelot Teleport").enabled
-        local whCheck = route == "KANDARIN" and API.GetABs_name1("Wicked hood").enabled
+        local whCheck = API.GetABs_name1("Wicked hood").enabled
         check(ctCheck, "You need to have Camelot Teleport on your action bar")
         check(whCheck, "You need to have Wicked Hood on your action bar")
     end
