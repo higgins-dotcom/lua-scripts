@@ -47,7 +47,7 @@ local lastTile = nil
 
 local function findNpc(npcID, distance)
     distance = distance or 25
-    local allNpc = API.GetAllObjArrayInteract(npcID, distance, 1)
+    local allNpc = API.GetAllObjArrayInteract(npcID, distance, {1})
     return allNpc[1] or false
 end
 
