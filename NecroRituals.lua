@@ -429,7 +429,7 @@ while (API.Read_LoopyLoop()) do
         API.RandomSleep2(400, 400, 400)
     end
 
-    if API.VB_FindPSett(10937).state > 0 then
+    if API.VB_FindPSettinOrder(10937, -1).state > 0 then
         if watchForDisturbances() then
             goto continue
         end
@@ -438,7 +438,7 @@ while (API.Read_LoopyLoop()) do
     if API.CheckAnim(10) or API.ReadPlayerMovin2() then
         if not API.ReadPlayerMovin2() then
             local p = API.PlayerCoordfloat()
-            if (p.x == PLATFORM_TILE[1] and p.y == PLATFORM_TILE[2]) and API.VB_FindPSett(10937).state > 0 then
+            if (p.x == PLATFORM_TILE[1] and p.y == PLATFORM_TILE[2]) and API.VB_FindPSettinOrder(10937, -1).state > 0 then
                 API.RandomSleep2(100, 200, 200)
                 goto continue
             end
@@ -446,7 +446,7 @@ while (API.Read_LoopyLoop()) do
         API.RandomSleep2(400, 200, 200)
     end
 
-    if API.VB_FindPSett(10937).state == 0 then
+    if API.VB_FindPSettinOrder(10937, -1).state == 0 then
 
         if CheckForNewMessages() then
             print("Script stopped")
