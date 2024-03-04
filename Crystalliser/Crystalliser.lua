@@ -214,7 +214,7 @@ local function checkRunes()
     local runes = {5887, 5898, 5888, 5905}
     local pass = true
     for index, rune in ipairs(runes) do
-        local psett = API.VB_FindPSett(rune, -1, -1)
+        local psett = API.VB_FindPSettinOrder(rune, -1)
         if psett.state <= 10 then
             pass = false
         end
