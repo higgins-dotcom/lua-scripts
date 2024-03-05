@@ -3,10 +3,11 @@
     Description: Casts Crystallise onto trees and keeps popular woodcutting buffs active
 
     Author: Higgins
-    Version: 1.0
+    Version: 1.1
     Release Date: 
 
     Release Notes:
+    - Version 1.1 : Fixes
     - Version 1.0 : Initial Development
 ]]
 
