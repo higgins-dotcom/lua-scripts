@@ -13,9 +13,9 @@
 local API                   = require('api')
 
 local ID                    = {
-    TREE = 70075,     -- Mahogany
-    -- TREE = 92442,  -- Yew
-    -- TREE = 104009, -- Acadia
+    -- TREE = {70075},     -- Mahogany
+    -- TREE = {92442},  -- Yew
+    TREE = {109001, 109003, 109005, 109007}, -- Acadia
     EXCALIBUR = 14632,
     EXCALIBUR_AUGMENTED = 36619,
     ELVEN_SHARD = 43358,
@@ -124,12 +124,12 @@ local function findCrystallise()
 end
 
 local function findTree()
-    local trees = API.ReadAllObjectsArray({12}, {ID.TREE}, {})
+    local trees = API.ReadAllObjectsArray({0}, ID.TREE, {})
     local crystallise = findCrystallise()
     if crystallise then
         local crystalliseTile = WPOINT.new(math.floor(crystallise.TileX / 512), math.floor(crystallise.TileY / 512), 0)
         for _, treeObj in ipairs(trees) do
-            if treeObj.Id == ID.TREE and treeObj.Bool1 == 0 then
+            if treeObj.Bool1 == 0 then
                 if math.floor(treeObj.TileX / 512) == crystalliseTile.x and math.floor(treeObj.TileY / 512) == crystalliseTile.y then
                     return treeObj
                 end
@@ -191,9 +191,9 @@ end
 local function castCrystallise()
     local c = API.GetABs_name1("Crystallise")
     if c.enabled then
-        API.DoAction_Ability("Crystallise", 1, API.OFF_ACT_GeneralInterface_route)
+        API.DoAction_Ability_Direct(c, 1, API.OFF_ACT_GeneralInterface_route)
         API.RandomSleep2(300, 300, 300)
-        if API.DoAction_Object_valid1(0x9D, API.OFF_ACT_GeneralObject_route00, { ID.TREE }, 20, true) then
+        if API.DoAction_Object_valid1(0x9D, API.OFF_ACT_GeneralObject_route00, ID.TREE, 20, true) then
             API.RandomSleep2(200, 300, 300)
         end
         return true
@@ -214,7 +214,7 @@ local function checkRunes()
     local runes = {5887, 5898, 5888, 5905}
     local pass = true
     for index, rune in ipairs(runes) do
-        local psett = API.VB_FindPSettinOrder(rune, -1)
+        local psett = VB_FindPSettinOrder(rune, -1)
         if psett.state <= 10 then
             pass = false
         end
@@ -243,7 +243,10 @@ while API.Read_LoopyLoop() do
     if findCrystallise() then
         chopTree()
     else
-        castCrystallise()
+        if not castCrystallise() then
+            print("Error: Something wrong with casting Crystallise")
+            break
+        end
     end
 
     ::continue::
