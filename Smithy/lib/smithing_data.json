@@ -1,6 +1,14 @@
 {
   "ITEMS": {
     "BRONZE": {
+      "OFF-HAND_BRONZE_KNIFE": {
+        "0": {
+          "NAME": "Off-hand bronze knife",
+          "BASE": 25897,
+          "OUTPUT": 25897,
+          "INPUT": null
+        }
+      },
       "ARROWHEADS": {
         "0": {
           "NAME": "Bronze arrowheads",
@@ -339,6 +347,14 @@
       }
     },
     "IRON": {
+      "ORE_BOX": {
+        "0": {
+          "NAME": "Iron ore box",
+          "BASE": 44781,
+          "OUTPUT": 44781,
+          "INPUT": 44779
+        }
+      },
       "ARROWHEADS": {
         "0": {
           "NAME": "Iron arrowheads",
