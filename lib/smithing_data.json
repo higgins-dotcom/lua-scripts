@@ -1,6 +1,14 @@
 {
   "ITEMS": {
     "BRONZE": {
+      "OFF-HAND_BRONZE_KNIFE": {
+        "0": {
+          "NAME": "Off-hand bronze knife",
+          "BASE": 25897,
+          "OUTPUT": 25897,
+          "INPUT": null
+        }
+      },
       "ARROWHEADS": {
         "0": {
           "NAME": "Bronze arrowheads",
@@ -339,6 +347,14 @@
       }
     },
     "IRON": {
+      "ORE_BOX": {
+        "0": {
+          "NAME": "Iron ore box",
+          "BASE": 44781,
+          "OUTPUT": 44781,
+          "INPUT": 44779
+        }
+      },
       "ARROWHEADS": {
         "0": {
           "NAME": "Iron arrowheads",
@@ -5666,6 +5682,22 @@
           "OUTPUT": 49564,
           "INPUT": null
         }
+      },
+      "ARMOUR_SPIKES": {
+        "0": {
+          "NAME": "Armour spikes",
+          "BASE": 47071,
+          "OUTPUT": 47071,
+          "INPUT": null
+        }
+      },
+      "ARMOUR_SPIKES_ALLOY": {
+        "0": {
+          "NAME": "Armour spikes (alloy)",
+          "BASE": 47872,
+          "OUTPUT": 47872,
+          "INPUT": null
+        }
       }
     },
     "PARTIALLY": {
@@ -5700,24 +5732,6 @@
           "NAME": "Masterwork trim",
           "BASE": 46036,
           "OUTPUT": 46036,
-          "INPUT": null
-        }
-      }
-    },
-    "ARMOUR": {
-      "SPIKES": {
-        "0": {
-          "NAME": "Armour spikes",
-          "BASE": 47071,
-          "OUTPUT": 47071,
-          "INPUT": null
-        }
-      },
-      "SPIKES_(ALLOY)": {
-        "0": {
-          "NAME": "Armour spikes (alloy)",
-          "BASE": 47872,
-          "OUTPUT": 47872,
           "INPUT": null
         }
       }
