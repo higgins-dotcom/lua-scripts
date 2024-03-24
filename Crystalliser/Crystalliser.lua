@@ -125,7 +125,7 @@ local function findCrystallise()
 end
 
 local function findTree()
-    local trees = API.ReadAllObjectsArray({0}, ID.TREE, {})
+    local trees = API.ReadAllObjectsArray({0, 12}, ID.TREE, {})
     local crystallise = findCrystallise()
     if crystallise then
         local crystalliseTile = WPOINT.new(math.floor(crystallise.TileX / 512), math.floor(crystallise.TileY / 512), 0)
