@@ -352,8 +352,7 @@ local function isAtLocation(location, distance)
 end
 
 local function isLodestoneInterfaceUp()
-    return #API.ScanForInterfaceTest2Get(true,
-        { { 1092, 1, -1, -1, 0 }, { 1092, 54, -1, 1, 0 } }) > 0
+    return (#API.ScanForInterfaceTest2Get(true, { { 1092, 1, -1, -1, 0 }, { 1092, 54, -1, 1, 0 } }) > 0) or API.Compare2874Status(30)
 end
 
 local function getABS_id(id, name)
