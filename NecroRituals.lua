@@ -4,7 +4,7 @@
 @description Peforms Rituals
 @author Higgins <discord@higginshax>
 @date 27/11/2023
-@version 2.4
+@version 2.5
 
 Disturbances handled
 0-300%
@@ -30,7 +30,7 @@ local API = require("api")
 MAX_IDLE_TIME_MINUTES = 5
 
 ID = {
-    PLATFORM = { 127315, 127316, 127314 },
+    PLATFORM = { 127315, 127316, 127314, 129034, 129033, 129032 },
     WANDERING_SOUL = 30493,
     SHAMBLING_HORROR = 30494,
     MOTH = 30419
@@ -40,7 +40,10 @@ startXp = API.GetSkillXP("NECROMANCY")
 
 --[[ NO CHANGES ARE NEEDED BELOW ]]
 
-PLATFORM_TILE = { 1038.5, 1770.5 }
+PLATFORM_TILE = { 
+    { 1038.5, 1770.5 },
+    { 5794.5, 6448.5 },
+}
 REPAIR_CHECK = false
 startTime, afk = os.time(), os.time()
 
@@ -60,7 +63,8 @@ end
 local function findPedestal()
     local objs = API.ReadAllObjectsArray({0}, {-1}, {})
     for _, obj in pairs(objs) do
-        if obj.CalcX == 1038 and obj.CalcY == 1776 and obj.Id ~= 127319 and obj.Action ~= "Place focus" then
+        if (obj.CalcX == 1038 and obj.CalcY == 1776 and obj.Id ~= 127319 and obj.Action ~= "Place focus") or
+           (obj.CalcX == 5787 and obj.CalcY == 6448 and obj.Id ~= 129035 and obj.Action ~= "Place focus") then
             return obj
         end
     end
@@ -438,7 +442,16 @@ while (API.Read_LoopyLoop()) do
     if API.CheckAnim(10) or API.ReadPlayerMovin2() then
         if not API.ReadPlayerMovin2() then
             local p = API.PlayerCoordfloat()
-            if (p.x == PLATFORM_TILE[1] and p.y == PLATFORM_TILE[2]) and API.VB_FindPSettinOrder(10937, -1).state > 0 then
+
+            local match = false
+            for _, tile in ipairs(PLATFORM_TILE) do
+                if p.x == tile[1] and p.y == tile[2] then
+                    match = true
+                    break
+                end
+            end
+
+            if match and API.VB_FindPSettinOrder(10937, -1).state > 0 then
                 API.RandomSleep2(100, 200, 200)
                 goto continue
             end
