@@ -40,7 +40,7 @@ startXp = API.GetSkillXP("NECROMANCY")
 
 --[[ NO CHANGES ARE NEEDED BELOW ]]
 
-PLATFORM_TILE = { 
+PLATFORM_TILE = {
     { 1038.5, 1770.5 },
     { 5794.5, 6448.5 },
 }
@@ -61,10 +61,10 @@ local function clickPlatform()
 end
 
 local function findPedestal()
-    local objs = API.ReadAllObjectsArray({0}, {-1}, {})
+    local objs = API.ReadAllObjectsArray({ 0 }, { -1 }, {})
     for _, obj in pairs(objs) do
         if (obj.CalcX == 1038 and obj.CalcY == 1776 and obj.Id ~= 127319 and obj.Action ~= "Place focus") or
-           (obj.CalcX == 5787 and obj.CalcY == 6448 and obj.Id ~= 129035 and obj.Action ~= "Place focus") then
+            (obj.CalcX == 5787 and obj.CalcY == 6448 and obj.Id ~= 129035 and obj.Action ~= "Place focus") then
             return obj
         end
     end
@@ -73,12 +73,12 @@ end
 
 local function findNpc(npcid, distance)
     local distance = distance or 20
-    local npcs = API.GetAllObjArrayInteract({ npcid }, distance, {1})
+    local npcs = API.GetAllObjArrayInteract({ npcid }, distance, { 1 })
     if #npcs > 0 then return npcs[1] else return false end
 end
 
 local function findNpcByAction(action)
-    local npcs = API.ReadAllObjectsArray({1}, {-1}, {})
+    local npcs = API.ReadAllObjectsArray({ 1 }, { -1 }, {})
     if #npcs > 0 then
         for _, npc in ipairs(npcs) do
             if string.find(tostring(npc.Action), action) then
@@ -90,7 +90,7 @@ local function findNpcByAction(action)
 end
 
 local function findDepleted()
-    local objs = API.ReadAllObjectsArray({1}, {-1}, {})
+    local objs = API.ReadAllObjectsArray({ 1 }, { -1 }, {})
     if #objs > 0 then
         for _, a in ipairs(objs) do
             if string.find(tostring(a.Name), "depleted") then
@@ -119,14 +119,14 @@ local function repairGlyphs()
         if API.DoAction_Object1(0x29, API.OFF_ACT_GeneralObject_route2, { pedestal.Id }, 50) then
             REPAIR_CHECK = false
             API.RandomSleep2(800, 200, 200)
-        end 
+        end
     end
 end
 
 local function waitForGfxChange(targetGfx, timeout)
     local startTime = os.time()
     while os.time() - startTime < timeout do
-        local objs = API.ReadAllObjectsArray({4}, {targetGfx}, {})
+        local objs = API.ReadAllObjectsArray({ 4 }, { targetGfx }, {})
         for _, obj in ipairs(objs) do
             if obj.Id == targetGfx then
                 return true
@@ -222,7 +222,7 @@ local function watchForCorrupt()
 
             local npcIDs = { 30495, 30496, 30497 }
             local npcFound = false
-    
+
             for _, npcID in ipairs(npcIDs) do
                 if API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route, { npcID }, 20) then
                     API.RandomSleep2(400, 500, 600)
@@ -230,18 +230,18 @@ local function watchForCorrupt()
                     break
                 end
             end
-    
+
             -- API.RandomSleep2(200, 200, 200)
-    
+
             if not npcFound then
                 break
-            end 
+            end
         end
     end
 end
 
 local function findNpcAtTile(tile)
-    local allNpc = API.ReadAllObjectsArray({1}, {-1}, {})
+    local allNpc = API.ReadAllObjectsArray({ 1 }, { -1 }, {})
     for _, v in pairs(allNpc) do
         if math.floor(v.TileX / 512) == tile.x and math.floor(v.TileY / 512) == tile.y then
             return v
@@ -251,7 +251,7 @@ local function findNpcAtTile(tile)
 end
 
 local function findGlint()
-    local objects = API.ReadAllObjectsArray({4}, {7977}, {})
+    local objects = API.ReadAllObjectsArray({ 4 }, { 7977 }, {})
     for _, obj in ipairs(objects) do
         if obj.Id == 7977 then
             return obj
@@ -399,9 +399,9 @@ local function printProgressReport(final)
     local currentLevel = API.XPLevelTable(API.GetSkillXP(skill))
     IGP.radius = calcProgressPercentage(skill, API.GetSkillXP(skill)) / 100
     IGP.string_value = time ..
-    " | " ..
-    string.lower(skill):gsub("^%l", string.upper) ..
-    ": " .. currentLevel .. " | XP/H: " .. formatNumber(xpPH) .. " | XP: " .. formatNumber(diffXp)
+        " | " ..
+        string.lower(skill):gsub("^%l", string.upper) ..
+        ": " .. currentLevel .. " | XP/H: " .. formatNumber(xpPH) .. " | XP: " .. formatNumber(diffXp)
 end
 
 local function setupGUI()
@@ -417,11 +417,7 @@ function drawGUI()
 end
 
 setupGUI()
-
-if API.VERSION and API.VERSION < 1 then
-    print("ERROR: INCORRECT API.LUA FILE - DOWNLOAD NEW RELEASE")
-    API.Write_LoopyLoop(false)
-end
+API.SetDrawTrackedSkills(true)
 
 while (API.Read_LoopyLoop()) do
     idleCheck()
@@ -460,7 +456,6 @@ while (API.Read_LoopyLoop()) do
     end
 
     if API.VB_FindPSettinOrder(10937, -1).state == 0 then
-
         if CheckForNewMessages() then
             print("Script stopped")
             break;
