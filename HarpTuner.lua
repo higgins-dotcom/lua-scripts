@@ -111,7 +111,7 @@ while API.Read_LoopyLoop() do
     if anim ~= 25021 and anim ~= 25026 then
         API.DoAction_Object1(0xae, API.OFF_ACT_GeneralObject_route0, ID.HARP, 50)
         API.RandomSleep2(1500, 800, 800)
-    elseif VB_FindPSettinOrder(4892).state / 65536 >= 17152 then
+    elseif VB_FindPSettinOrder(4892).state / 65536 >= 25344 then
         API.DoAction_Object1(0xae, API.OFF_ACT_GeneralObject_route0, ID.HARP, 50)
         API.RandomSleep2(2500, 800, 800)
     end
