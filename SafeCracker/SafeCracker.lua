@@ -3,10 +3,11 @@
     Description: Safe cracking
 
     Author: Higgins
-    Version: 2.5
+    Version: 2.6
     Release Date: 18/01/2024
 
     Release Notes:
+    - Version 2.6 : Added support for teleport tabs
     - Version 2.5 : Added teleportWithHood - place Wicked Hood on actionbar
     - Version 2.4 : Added inCombat check and more precise Camelot safe area check
     - Version 2.3 : Added color code check for game message check & revamp of teleport handling
@@ -139,7 +140,7 @@ local rewardChoice
 local needLockpick
 local needStethoscope
 local errors         = {}
-local version        = "2.4"
+local version        = "2.5"
 
 local function tableLength(tbl)
     local count = 0
@@ -342,7 +343,7 @@ local function isCamelotCracked()
 end
 
 local function isTeleportOptionsUp()
-    local vb2874 = API.VB_FindPSettinOrder(2874, -1)
+    local vb2874 = VB_FindPSettinOrder(2874, -1)
     return (vb2874.state == 13) or (vb2874.stateAlt == 13)
 end
 
@@ -388,10 +389,13 @@ end
 local function teleportToDestination(destination, isLodestone)
     local str = isLodestone and " Lodestone" or " Teleport"
     local destinationStr = destination .. str
-    local id = TELEPORTS[destinationStr]
+    local destinationStrLower = destination .. string.lower(str)
+    -- local id = TELEPORTS[destinationStr]
     local hasLodestone = LODESTONES[destination] ~= nil
-    local teleportAbility = (id ~= nil) and getABS_id(id, destinationStr) or API.GetABs_name1(destinationStr)
-    if teleportAbility.enabled then
+    -- local teleportAbility = (id ~= nil) and getABS_id(id, destinationStr) or API.GetABs_name1(destinationStr) or API.GetABs_name1(destinationStrLower)
+    local teleportAbility = API.GetABs_name1(destinationStr)
+    teleportAbility = teleportAbility.enabled and teleportAbility or API.GetABs_name1(destinationStrLower).enabled and API.GetABs_name1(destinationStrLower) or nil
+    if teleportAbility and teleportAbility.enabled then
         API.DoAction_Ability_Direct(teleportAbility, 1, API.OFF_ACT_GeneralInterface_route)
         API.RandomSleep2(1200, 300, 300)
         return true
@@ -951,7 +955,7 @@ local function invCheck()
 
     -- Action bar checks
     if not isTeleportOptionsUp() then
-        local ctCheck = API.GetABs_name1("Camelot Teleport").enabled
+        local ctCheck = API.GetABs_name1("Camelot Teleport").enabled or API.GetABs_name1("Camelot teleport").enabled
         local whCheck = API.GetABs_name1("Wicked hood").enabled
         check(ctCheck, "You need to have Camelot Teleport on your action bar")
         check(whCheck, "You need to have Wicked Hood on your action bar")
