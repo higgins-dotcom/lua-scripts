@@ -4,7 +4,7 @@
 @description Peforms Rituals
 @author Higgins <discord@higginshax>
 @date 27/11/2023
-@version 2.6
+@version 2.7
 
 Disturbances handled
 0-300%
@@ -51,7 +51,8 @@ LAST_FOUND = {
     ["necroplasm for this ritual"] = startTime,
     ["durability of 1"] = startTime,
     ["have the materials to repair the following"] = startTime,
-    ["need the following materials to repair"] = startTime
+    ["need the following materials to repair"] = startTime,
+    ["nothing to repair"] = startTime
 }
 
 local function clickPlatform()
@@ -318,30 +319,21 @@ local function idleCheck()
 end
 
 local function CheckForNewMessages()
-    local chatTexts = ChatGetMessages()
-
-    if chatTexts then
-        for k, v in pairs(chatTexts) do
-            if k > 5 then break end
-
-            local colorCode = string.match(v.text, "<col=(EB2F2F)>")
-
-            if colorCode then
-                for searchString, storedTimestamp in pairs(LAST_FOUND) do
-                    if string.find(v.text, searchString) then
-                        local hour, min, sec = string.match(v.text, "(%d+):(%d+):(%d+)")
-                        local currentDate = os.date("*t")
-                        currentDate.hour, currentDate.min, currentDate.sec = tonumber(hour), tonumber(min), tonumber(sec)
-                        local timestamp = os.time(currentDate)
-
-                        if timestamp > storedTimestamp then
-                            LAST_FOUND[searchString] = timestamp
-                            if searchString == "durability of 1" then
-                                REPAIR_CHECK = true
-                                return false
-                            end
-                            return true
+    local chatTexts = API.GatherEvents_chat_check()
+    for k, v in pairs(chatTexts) do
+        if k > 5 then break end
+        local colorCode = string.match(v.text, "<col=EB2F2F>")
+        if colorCode then
+            for searchString, storedTimestamp in pairs(LAST_FOUND) do
+                if string.find(v.text, searchString) then
+                    local timestamp = v.timestamp1
+                    if timestamp > storedTimestamp then
+                        LAST_FOUND[searchString] = timestamp
+                        if searchString == "durability of 1" then
+                            REPAIR_CHECK = true
+                            return false
                         end
+                        return true
                     end
                 end
             end
@@ -351,9 +343,15 @@ local function CheckForNewMessages()
 end
 
 API.SetDrawTrackedSkills(true)
+API.GatherEvents_chat_check()
 
 while (API.Read_LoopyLoop()) do
-    idleCheck()
+
+    if type(API.SetMaxIdleTime) == "function" then
+        API.SetMaxIdleTime(MAX_IDLE_TIME_MINUTES)
+    else
+        idleCheck()
+    end
 
     API.DoRandomEvents()
 
