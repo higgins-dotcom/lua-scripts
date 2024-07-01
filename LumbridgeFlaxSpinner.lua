@@ -30,52 +30,6 @@ ID = {
     BANK_BOOTH = 36786
 }
 
--- Rounds a number to the nearest integer or to a specified number of decimal places.
-local function round(val, decimal)
-    if decimal then
-        return math.floor((val * 10 ^ decimal) + 0.5) / (10 ^ decimal)
-    else
-        return math.floor(val + 0.5)
-    end
-end
-
--- Format a number with commas as thousands separator
-local function formatNumberWithCommas(amount)
-    local formatted = tostring(amount)
-    while true do
-        formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
-        if (k == 0) then
-            break
-        end
-    end
-    return formatted
-end
-
--- Format script elapsed time to [hh:mm:ss]
-local function formatElapsedTime(startTime)
-    local currentTime = os.time()
-    local elapsedTime = currentTime - startTime
-    local hours = math.floor(elapsedTime / 3600)
-    local minutes = math.floor((elapsedTime % 3600) / 60)
-    local seconds = elapsedTime % 60
-    return string.format("[%02d:%02d:%02d]", hours, minutes, seconds)
-end
-
-local function printProgressReport(final)
-    local currentXp = API.GetSkillXP("CRAFTING")
-    local elapsedMinutes = (os.time() - startTime) / 60
-    local diffXp = math.abs(currentXp - startXp);
-    local xpPH = round((diffXp * 60) / elapsedMinutes);
-    local stringPH = round((strings * 60) / elapsedMinutes);
-    local time = formatElapsedTime(startTime)
-    IG.string_value = "Crafting XP : " .. formatNumberWithCommas(diffXp) .. " (" .. formatNumberWithCommas(xpPH) .. ")"
-    IG2.string_value = "  Bowstring : " .. formatNumberWithCommas(strings) .. " (" .. formatNumberWithCommas(stringPH) .. ")"
-    IG4.string_value = time
-    if final then
-        print(os.date("%H:%M:%S") .. " Script Finished\nRuntime : " .. time .. "\nCrafting XP : " .. formatNumberWithCommas(diffXp) .. " \nBowstrings : " .. formatNumberWithCommas(strings))
-    end
-end
-
 local function scanForInterface(interfaceComps)
     return #(API.ScanForInterfaceTest2Get(true, interfaceComps)) > 0
 end
@@ -120,52 +74,7 @@ local function bank()
     end
 end
 
-local function setupGUI()
-    IG = API.CreateIG_answer()
-    IG.box_start = FFPOINT.new(15, 40, 0)
-    IG.box_name = "CRAFT"
-    IG.colour = ImColor.new(255, 255, 255);
-    IG.string_value = "Crafting XP : 0 (0)"
-
-    IG2 = API.CreateIG_answer()
-    IG2.box_start = FFPOINT.new(15, 55, 0)
-    IG2.box_name = "STRING"
-    IG2.colour = ImColor.new(255, 255, 255);
-    IG2.string_value = "  Bowstring : 0 (0)"
-
-    IG3 = API.CreateIG_answer()
-    IG3.box_start = FFPOINT.new(40, 5, 0)
-    IG3.box_name = "TITLE"
-    IG3.colour = ImColor.new(0, 255, 0);
-    IG3.string_value = "- Flax Spinner v1.1 -"
-
-    IG4 = API.CreateIG_answer()
-    IG4.box_start = FFPOINT.new(70, 21, 0)
-    IG4.box_name = "TIME"
-    IG4.colour = ImColor.new(255, 255, 255);
-    IG4.string_value = "[00:00:00]"
-
-    IG_Back = API.CreateIG_answer();
-    IG_Back.box_name = "back";
-    IG_Back.box_start = FFPOINT.new(0, 0, 0)
-    IG_Back.box_size = FFPOINT.new(220, 80, 0)
-    IG_Back.colour = ImColor.new(15, 13, 18, 255)
-    IG_Back.string_value = ""
-end
-
-function drawGUI()
-    API.DrawSquareFilled(IG_Back)
-    API.DrawTextAt(IG)
-    API.DrawTextAt(IG2)
-    API.DrawTextAt(IG3)
-    API.DrawTextAt(IG4)
-end
-
-setupGUI()
-
 while API.Read_LoopyLoop() do
-
-    drawGUI()
 
     if API.CheckAnim(10) or API.isProcessing() or API.ReadPlayerMovin2() then
         API.RandomSleep2(50, 100, 100)
@@ -180,7 +89,6 @@ while API.Read_LoopyLoop() do
             end
             if fail > 2 then
                 API.Write_LoopyLoop(0)
-                printProgressReport(true)
                 break
             end
         else
@@ -196,6 +104,5 @@ while API.Read_LoopyLoop() do
     end
 
     ::continue::
-    printProgressReport()
     API.RandomSleep2(100, 200, 200)
 end
