@@ -45,6 +45,7 @@ PLATFORM_TILE = {
     { 5794.5, 6448.5 },
 }
 REPAIR_CHECK = false
+REPAIR_FAIL = 0
 startTime, afk = os.time(), os.time()
 
 LAST_FOUND = {
@@ -58,6 +59,7 @@ LAST_FOUND = {
 local function clickPlatform()
     if API.DoAction_Object1(0x29, 0, ID.PLATFORM, 50) then
         API.RandomSleep2(4500, 500, 500)
+        REPAIR_FAIL = 0
     end
 end
 
@@ -164,12 +166,15 @@ local function watchForStorm()
         API.RandomSleep2(800, 400, 400)
         if waitForGfxChange(7916, 8) then
             dissipate = findDissipate()
-            API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route, { dissipate.Id }, 50)
-            API.RandomSleep2(800, 400, 400)
-            if waitForGfxChange(7917, 8) then
-                dissipate = findDissipate()
+            if dissipate then
                 API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route, { dissipate.Id }, 50)
-                API.RandomSleep2(1200, 400, 400)
+                API.RandomSleep2(800, 400, 400)
+            end
+            if waitForGfxChange(7917, 8) then
+                if dissipate then
+                    API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route, { dissipate.Id }, 50)
+                    API.RandomSleep2(900, 400, 400)
+                end
             end
         end
         return true
@@ -201,7 +206,7 @@ local function watchForSparkling()
         API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route, { restore.Id }, 50)
         API.RandomSleep2(400, 200, 200)
         API.WaitUntilMovingEnds()
-        API.RandomSleep2(1000, 200, 200)
+        API.RandomSleep2(600, 200, 200)
     end
 end
 
@@ -333,6 +338,10 @@ local function CheckForNewMessages()
                             REPAIR_CHECK = true
                             return false
                         end
+                        if searchString == "nothing to repair" then
+                            REPAIR_FAIL = REPAIR_FAIL + 1
+                            return false
+                        end
                         return true
                     end
                 end
@@ -346,7 +355,6 @@ API.SetDrawTrackedSkills(true)
 API.GatherEvents_chat_check()
 
 while (API.Read_LoopyLoop()) do
-
     if type(API.SetMaxIdleTime) == "function" then
         API.SetMaxIdleTime(MAX_IDLE_TIME_MINUTES)
     else
