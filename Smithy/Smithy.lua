@@ -363,9 +363,15 @@ local function bank(item)
                 API.RandomSleep2(800, 600, 600)
             end
         else
-            if API.DoAction_Object1(0x2e, API.OFF_ACT_GeneralObject_route1, { ID.BANK_CHEST }, 50) then
+            
+            -- if API.DoAction_Object1(0x2e, API.OFF_ACT_GeneralObject_route1, { ID.BANK_CHEST }, 50) then
+            --     API.RandomSleep2(800, 500, 300)
+            -- end
+
+            if API.DoAction_Object1(0x33, API.OFF_ACT_GeneralObject_route3, { ID.BANK_CHEST }, 50) then
                 API.RandomSleep2(800, 500, 300)
             end
+            
         end
     end
     return true

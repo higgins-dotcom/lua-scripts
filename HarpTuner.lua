@@ -13,7 +13,7 @@ local MAX_IDLE_TIME_MINUTES = 5
 local API = require("api")
 
 local startTime, afk = os.time(), os.time()
-local skill = "CRAFTING"
+local skill = "CONSTRUCTION"
 local startXp = API.GetSkillXP(skill)
 
 local ID = {

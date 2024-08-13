@@ -3,8 +3,8 @@
 @title Icy Fishing
 @description Fishes at the Icy Fishing spot at Christmas Village
 @author Higgins <discord@higginshax>
-@date 27/11/2023
-@version 1.0
+@date 02/12/2023
+@version 1.1
 
 --]]
 
@@ -27,9 +27,15 @@ local startChristmasSpirits
 
 local function readChristmasSpirits()
     local base = { { 1272,6,-1,-1,0 }, { 1272,2,-1,6,0 }, { 1272,8,-1,2,0 } }
-    local spirits = API.ScanForInterfaceTest2Get(false, base)[1].textids
-    local str = spirits:gsub("[^%d]+", "")
-    return tonumber(str:match("(%d[%d,]*)"))
+    local result = API.ScanForInterfaceTest2Get(false, base)[1]
+
+    if result and result.textids then
+        local spirits = result.textids
+        local str = spirits:gsub("[^%d]+", "")
+        return tonumber(str:match("(%d[%d,]*)")) or 0
+    else
+        return 0
+    end
 end
 
 local function idleCheck()
@@ -139,7 +145,6 @@ startChristmasSpirits = readChristmasSpirits()
 while (API.Read_LoopyLoop()) do
     idleCheck()
     drawGUI()
-    readChristmasSpirits()
     API.DoRandomEvents()
 
     if API.ReadPlayerMovin2() or (API.ReadPlayerAnim() > 0) then
