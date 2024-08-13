@@ -84,7 +84,7 @@ local function cook()
         API.KeyboardPress2(0x20, 60, 120)
         API.RandomSleep2(600, 200, 200)
     else
-        if not API.DoAction_Object1(0x2e, 4048, { 70755 }, 10) then
+        if not API.DoAction_Object1(0x2e, API.OFF_ACT_GeneralObject_route_useon, { 70755 }, 10) then
             if API.InvItemcount_1(1511) > 0 then
                 API.DoAction_Inventory1(1511, 0, 2, API.OFF_ACT_GeneralInterface_route) -- create fire
                 API.RandomSleep2(600, 300, 300)
