@@ -1,0 +1,7123 @@
+{
+  "ITEMS": {
+    "CANNONBALL": {
+      "": {
+        "0": {
+          "NAME": "Cannonball",
+          "BASE": 2,
+          "OUTPUT": 2,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      }
+    },
+    "BRONZE": {
+      "ARROWHEADS": {
+        "0": {
+          "NAME": "Bronze arrowheads",
+          "BASE": 39,
+          "OUTPUT": 39,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "THROWING_AXE": {
+        "0": {
+          "NAME": "Bronze throwing axe",
+          "BASE": 800,
+          "OUTPUT": 800,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "DART_TIP": {
+        "0": {
+          "NAME": "Bronze dart tip",
+          "BASE": 819,
+          "OUTPUT": 819,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "KNIFE": {
+        "0": {
+          "NAME": "Bronze knife",
+          "BASE": 864,
+          "OUTPUT": 864,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "PLATELEGS": {
+        "0": {
+          "NAME": "Bronze platelegs",
+          "BASE": 1075,
+          "OUTPUT": 1075,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "PLATESKIRT": {
+        "0": {
+          "NAME": "Bronze plateskirt",
+          "BASE": 1087,
+          "OUTPUT": 1087,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "CHAINBODY": {
+        "0": {
+          "NAME": "Bronze chainbody",
+          "BASE": 1103,
+          "OUTPUT": 1103,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "PLATEBODY": {
+        "0": {
+          "NAME": "Bronze platebody",
+          "BASE": 1117,
+          "OUTPUT": 1117,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "MED_HELM": {
+        "0": {
+          "NAME": "Bronze med helm",
+          "BASE": 1139,
+          "OUTPUT": 1139,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "FULL_HELM": {
+        "0": {
+          "NAME": "Bronze full helm",
+          "BASE": 1155,
+          "OUTPUT": 1155,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "SQUARE_SHIELD": {
+        "0": {
+          "NAME": "Bronze square shield",
+          "BASE": 1173,
+          "OUTPUT": 1173,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "KITESHIELD": {
+        "0": {
+          "NAME": "Bronze kiteshield",
+          "BASE": 1189,
+          "OUTPUT": 1189,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "DAGGER": {
+        "0": {
+          "NAME": "Bronze dagger",
+          "BASE": 1205,
+          "OUTPUT": 1205,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "SPEAR": {
+        "0": {
+          "NAME": "Bronze spear",
+          "BASE": 1237,
+          "OUTPUT": 1237,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "PICKAXE": {
+        "0": {
+          "NAME": "Bronze pickaxe",
+          "BASE": 1265,
+          "OUTPUT": 1265,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "SWORD": {
+        "0": {
+          "NAME": "Bronze sword",
+          "BASE": 1277,
+          "OUTPUT": 1277,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "LONGSWORD": {
+        "0": {
+          "NAME": "Bronze longsword",
+          "BASE": 1291,
+          "OUTPUT": 1291,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "2H_SWORD": {
+        "0": {
+          "NAME": "Bronze 2h sword",
+          "BASE": 1307,
+          "OUTPUT": 1307,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "SCIMITAR": {
+        "0": {
+          "NAME": "Bronze scimitar",
+          "BASE": 1321,
+          "OUTPUT": 1321,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "WARHAMMER": {
+        "0": {
+          "NAME": "Bronze warhammer",
+          "BASE": 1337,
+          "OUTPUT": 1337,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "HATCHET": {
+        "0": {
+          "NAME": "Bronze hatchet",
+          "BASE": 1351,
+          "OUTPUT": 1351,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "BATTLEAXE": {
+        "0": {
+          "NAME": "Bronze battleaxe",
+          "BASE": 1375,
+          "OUTPUT": 1375,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "MACE": {
+        "0": {
+          "NAME": "Bronze mace",
+          "BASE": 1422,
+          "OUTPUT": 1422,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "WIRE": {
+        "0": {
+          "NAME": "Bronze wire",
+          "BASE": 1794,
+          "OUTPUT": 1794,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "BAR": {
+        "0": {
+          "NAME": "Bronze bar",
+          "BASE": 2349,
+          "OUTPUT": 2349,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "CLAWS": {
+        "0": {
+          "NAME": "Bronze claws",
+          "BASE": 3095,
+          "OUTPUT": 3095,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "ARMOURED_BOOTS": {
+        "0": {
+          "NAME": "Bronze armoured boots",
+          "BASE": 4119,
+          "OUTPUT": 4119,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "NAILS": {
+        "0": {
+          "NAME": "Bronze nails",
+          "BASE": 4819,
+          "OUTPUT": 4819,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "BOLTS_(UNF)": {
+        "0": {
+          "NAME": "Bronze bolts (unf)",
+          "BASE": 9375,
+          "OUTPUT": 9375,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "LIMBS": {
+        "0": {
+          "NAME": "Bronze limbs",
+          "BASE": 9420,
+          "OUTPUT": 9420,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "HASTA": {
+        "0": {
+          "NAME": "Bronze hasta",
+          "BASE": 11367,
+          "OUTPUT": 11367,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_MACE": {
+        "0": {
+          "NAME": "Bronze off hand mace",
+          "BASE": 25674,
+          "OUTPUT": 25674,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_DAGGER": {
+        "0": {
+          "NAME": "Bronze off hand dagger",
+          "BASE": 25692,
+          "OUTPUT": 25692,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_SWORD": {
+        "0": {
+          "NAME": "Bronze off hand sword",
+          "BASE": 25710,
+          "OUTPUT": 25710,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_LONGSWORD": {
+        "0": {
+          "NAME": "Bronze off hand longsword",
+          "BASE": 25725,
+          "OUTPUT": 25725,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_SCIMITAR": {
+        "0": {
+          "NAME": "Bronze off hand scimitar",
+          "BASE": 25743,
+          "OUTPUT": 25743,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_BATTLEAXE": {
+        "0": {
+          "NAME": "Bronze off hand battleaxe",
+          "BASE": 25761,
+          "OUTPUT": 25761,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_WARHAMMER": {
+        "0": {
+          "NAME": "Bronze off hand warhammer",
+          "BASE": 25779,
+          "OUTPUT": 25779,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_CLAWS": {
+        "0": {
+          "NAME": "Bronze off hand claws",
+          "BASE": 25933,
+          "OUTPUT": 25933,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "ORE_BOX": {
+        "0": {
+          "NAME": "Bronze ore box",
+          "BASE": 44779,
+          "OUTPUT": 44779,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "GAUNTLETS": {
+        "0": {
+          "NAME": "Bronze gauntlets",
+          "BASE": 45431,
+          "OUTPUT": 45431,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "MATTOCK": {
+        "0": {
+          "NAME": "Bronze mattock",
+          "BASE": 49539,
+          "OUTPUT": 49539,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "IRON": {
+      "ARROWHEADS": {
+        "0": {
+          "NAME": "Iron arrowheads",
+          "BASE": 40,
+          "OUTPUT": 40,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "THROWING_AXE": {
+        "0": {
+          "NAME": "Iron throwing axe",
+          "BASE": 801,
+          "OUTPUT": 801,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "DART_TIP": {
+        "0": {
+          "NAME": "Iron dart tip",
+          "BASE": 820,
+          "OUTPUT": 820,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "KNIFE": {
+        "0": {
+          "NAME": "Iron knife",
+          "BASE": 863,
+          "OUTPUT": 863,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "PLATELEGS": {
+        "0": {
+          "NAME": "Iron platelegs",
+          "BASE": 1067,
+          "OUTPUT": 1067,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron platelegs + 1",
+          "BASE": 1067,
+          "OUTPUT": 45918,
+          "INPUT": 1067,
+          "STACKABLE": false
+        }
+      },
+      "PLATESKIRT": {
+        "0": {
+          "NAME": "Iron plateskirt",
+          "BASE": 1081,
+          "OUTPUT": 1081,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron plateskirt + 1",
+          "BASE": 1081,
+          "OUTPUT": 45922,
+          "INPUT": 1081,
+          "STACKABLE": false
+        }
+      },
+      "CHAINBODY": {
+        "0": {
+          "NAME": "Iron chainbody",
+          "BASE": 1101,
+          "OUTPUT": 1101,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron chainbody + 1",
+          "BASE": 1101,
+          "OUTPUT": 45930,
+          "INPUT": 1101,
+          "STACKABLE": false
+        }
+      },
+      "PLATEBODY": {
+        "0": {
+          "NAME": "Iron platebody",
+          "BASE": 1115,
+          "OUTPUT": 1115,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron platebody + 1",
+          "BASE": 1115,
+          "OUTPUT": 45926,
+          "INPUT": 1115,
+          "STACKABLE": false
+        }
+      },
+      "MED_HELM": {
+        "0": {
+          "NAME": "Iron med helm",
+          "BASE": 1137,
+          "OUTPUT": 1137,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron med helm + 1",
+          "BASE": 1137,
+          "OUTPUT": 45914,
+          "INPUT": 1137,
+          "STACKABLE": false
+        }
+      },
+      "FULL_HELM": {
+        "0": {
+          "NAME": "Iron full helm",
+          "BASE": 1153,
+          "OUTPUT": 1153,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron full helm + 1",
+          "BASE": 1153,
+          "OUTPUT": 45910,
+          "INPUT": 1153,
+          "STACKABLE": false
+        }
+      },
+      "SQUARE_SHIELD": {
+        "0": {
+          "NAME": "Iron square shield",
+          "BASE": 1175,
+          "OUTPUT": 1175,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron square shield + 1",
+          "BASE": 1175,
+          "OUTPUT": 45934,
+          "INPUT": 1175,
+          "STACKABLE": false
+        }
+      },
+      "KITESHIELD": {
+        "0": {
+          "NAME": "Iron kiteshield",
+          "BASE": 1191,
+          "OUTPUT": 1191,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron kiteshield + 1",
+          "BASE": 1191,
+          "OUTPUT": 45938,
+          "INPUT": 1191,
+          "STACKABLE": false
+        }
+      },
+      "DAGGER": {
+        "0": {
+          "NAME": "Iron dagger",
+          "BASE": 1203,
+          "OUTPUT": 1203,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron dagger + 1",
+          "BASE": 1203,
+          "OUTPUT": 45842,
+          "INPUT": 1203,
+          "STACKABLE": false
+        }
+      },
+      "SPEAR": {
+        "0": {
+          "NAME": "Iron spear",
+          "BASE": 1239,
+          "OUTPUT": 1239,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "PICKAXE": {
+        "0": {
+          "NAME": "Iron pickaxe",
+          "BASE": 1267,
+          "OUTPUT": 1267,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron pickaxe + 1",
+          "BASE": 1267,
+          "OUTPUT": 45952,
+          "INPUT": 1267,
+          "STACKABLE": false
+        }
+      },
+      "SWORD": {
+        "0": {
+          "NAME": "Iron sword",
+          "BASE": 1279,
+          "OUTPUT": 1279,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron sword + 1",
+          "BASE": 1279,
+          "OUTPUT": 45858,
+          "INPUT": 1279,
+          "STACKABLE": false
+        }
+      },
+      "LONGSWORD": {
+        "0": {
+          "NAME": "Iron longsword",
+          "BASE": 1293,
+          "OUTPUT": 1293,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron longsword + 1",
+          "BASE": 1293,
+          "OUTPUT": 45874,
+          "INPUT": 1293,
+          "STACKABLE": false
+        }
+      },
+      "2H_SWORD": {
+        "0": {
+          "NAME": "Iron 2h sword",
+          "BASE": 1309,
+          "OUTPUT": 1309,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron 2h sword + 1",
+          "BASE": 1309,
+          "OUTPUT": 45906,
+          "INPUT": 1309,
+          "STACKABLE": false
+        }
+      },
+      "SCIMITAR": {
+        "0": {
+          "NAME": "Iron scimitar",
+          "BASE": 1323,
+          "OUTPUT": 1323,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron scimitar + 1",
+          "BASE": 1323,
+          "OUTPUT": 45866,
+          "INPUT": 1323,
+          "STACKABLE": false
+        }
+      },
+      "WARHAMMER": {
+        "0": {
+          "NAME": "Iron warhammer",
+          "BASE": 1335,
+          "OUTPUT": 1335,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron warhammer + 1",
+          "BASE": 1335,
+          "OUTPUT": 45882,
+          "INPUT": 1335,
+          "STACKABLE": false
+        }
+      },
+      "HATCHET": {
+        "0": {
+          "NAME": "Iron hatchet",
+          "BASE": 1349,
+          "OUTPUT": 1349,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "BATTLEAXE": {
+        "0": {
+          "NAME": "Iron battleaxe",
+          "BASE": 1363,
+          "OUTPUT": 1363,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron battleaxe + 1",
+          "BASE": 1363,
+          "OUTPUT": 45890,
+          "INPUT": 1363,
+          "STACKABLE": false
+        }
+      },
+      "MACE": {
+        "0": {
+          "NAME": "Iron mace",
+          "BASE": 1420,
+          "OUTPUT": 1420,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron mace + 1",
+          "BASE": 1420,
+          "OUTPUT": 45850,
+          "INPUT": 1420,
+          "STACKABLE": false
+        }
+      },
+      "BAR": {
+        "0": {
+          "NAME": "Iron bar",
+          "BASE": 2351,
+          "OUTPUT": 2351,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "CLAWS": {
+        "0": {
+          "NAME": "Iron claws",
+          "BASE": 3096,
+          "OUTPUT": 3096,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron claws + 1",
+          "BASE": 3096,
+          "OUTPUT": 45898,
+          "INPUT": 3096,
+          "STACKABLE": false
+        }
+      },
+      "ARMOURED_BOOTS": {
+        "0": {
+          "NAME": "Iron armoured boots",
+          "BASE": 4121,
+          "OUTPUT": 4121,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron armoured boots + 1",
+          "BASE": 4121,
+          "OUTPUT": 45942,
+          "INPUT": 4121,
+          "STACKABLE": false
+        }
+      },
+      "NAILS": {
+        "0": {
+          "NAME": "Iron nails",
+          "BASE": 4820,
+          "OUTPUT": 4820,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "SPIT": {
+        "0": {
+          "NAME": "Iron spit",
+          "BASE": 7225,
+          "OUTPUT": 7225,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "BOLTS_(UNF)": {
+        "0": {
+          "NAME": "Iron bolts (unf)",
+          "BASE": 9377,
+          "OUTPUT": 9377,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "LIMBS": {
+        "0": {
+          "NAME": "Iron limbs",
+          "BASE": 9423,
+          "OUTPUT": 9423,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "HASTA": {
+        "0": {
+          "NAME": "Iron hasta",
+          "BASE": 11369,
+          "OUTPUT": 11369,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_MACE": {
+        "0": {
+          "NAME": "Iron off hand mace",
+          "BASE": 25676,
+          "OUTPUT": 25676,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron off hand mace + 1",
+          "BASE": 25676,
+          "OUTPUT": 45854,
+          "INPUT": 25676,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_DAGGER": {
+        "0": {
+          "NAME": "Iron off hand dagger",
+          "BASE": 25694,
+          "OUTPUT": 25694,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron off hand dagger + 1",
+          "BASE": 25694,
+          "OUTPUT": 45846,
+          "INPUT": 25694,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_SWORD": {
+        "0": {
+          "NAME": "Iron off hand sword",
+          "BASE": 25712,
+          "OUTPUT": 25712,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron off hand sword + 1",
+          "BASE": 25712,
+          "OUTPUT": 45862,
+          "INPUT": 25712,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_LONGSWORD": {
+        "0": {
+          "NAME": "Iron off hand longsword",
+          "BASE": 25727,
+          "OUTPUT": 25727,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron off hand longsword + 1",
+          "BASE": 25727,
+          "OUTPUT": 45878,
+          "INPUT": 25727,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_SCIMITAR": {
+        "0": {
+          "NAME": "Iron off hand scimitar",
+          "BASE": 25745,
+          "OUTPUT": 25745,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron off hand scimitar + 1",
+          "BASE": 25745,
+          "OUTPUT": 45870,
+          "INPUT": 25745,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_BATTLEAXE": {
+        "0": {
+          "NAME": "Iron off hand battleaxe",
+          "BASE": 25763,
+          "OUTPUT": 25763,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron off hand battleaxe + 1",
+          "BASE": 25763,
+          "OUTPUT": 45894,
+          "INPUT": 25763,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_WARHAMMER": {
+        "0": {
+          "NAME": "Iron off hand warhammer",
+          "BASE": 25781,
+          "OUTPUT": 25781,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron off hand warhammer + 1",
+          "BASE": 25781,
+          "OUTPUT": 45886,
+          "INPUT": 25781,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_CLAWS": {
+        "0": {
+          "NAME": "Iron off hand claws",
+          "BASE": 25935,
+          "OUTPUT": 25935,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron off hand claws + 1",
+          "BASE": 25935,
+          "OUTPUT": 45902,
+          "INPUT": 25935,
+          "STACKABLE": false
+        }
+      },
+      "GAUNTLETS": {
+        "0": {
+          "NAME": "Iron gauntlets",
+          "BASE": 45945,
+          "OUTPUT": 45945,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Iron gauntlets + 1",
+          "BASE": 45945,
+          "OUTPUT": 45948,
+          "INPUT": 45945,
+          "STACKABLE": false
+        }
+      },
+      "INGOT": {
+        "0": {
+          "NAME": "Iron ingot",
+          "BASE": 47072,
+          "OUTPUT": 47072,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "MATTOCK": {
+        "0": {
+          "NAME": "Iron mattock",
+          "BASE": 49542,
+          "OUTPUT": 49542,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "STEEL": {
+      "ARROWHEADS": {
+        "0": {
+          "NAME": "Steel arrowheads",
+          "BASE": 41,
+          "OUTPUT": 41,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "THROWING_AXE": {
+        "0": {
+          "NAME": "Steel throwing axe",
+          "BASE": 802,
+          "OUTPUT": 802,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "DART_TIP": {
+        "0": {
+          "NAME": "Steel dart tip",
+          "BASE": 821,
+          "OUTPUT": 821,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "KNIFE": {
+        "0": {
+          "NAME": "Steel knife",
+          "BASE": 865,
+          "OUTPUT": 865,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "SPEAR": {
+        "0": {
+          "NAME": "Steel spear",
+          "BASE": 1241,
+          "OUTPUT": 1241,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "HATCHET": {
+        "0": {
+          "NAME": "Steel hatchet",
+          "BASE": 1353,
+          "OUTPUT": 1353,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "NAILS": {
+        "0": {
+          "NAME": "Steel nails",
+          "BASE": 1539,
+          "OUTPUT": 1539,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "BAR": {
+        "0": {
+          "NAME": "Steel bar",
+          "BASE": 2353,
+          "OUTPUT": 2353,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "STUDS": {
+        "0": {
+          "NAME": "Steel studs",
+          "BASE": 2370,
+          "OUTPUT": 2370,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "BOLTS_(UNF)": {
+        "0": {
+          "NAME": "Steel bolts (unf)",
+          "BASE": 9378,
+          "OUTPUT": 9378,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "LIMBS": {
+        "0": {
+          "NAME": "Steel limbs",
+          "BASE": 9425,
+          "OUTPUT": 9425,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "HASTA": {
+        "0": {
+          "NAME": "Steel hasta",
+          "BASE": 11371,
+          "OUTPUT": 11371,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "DAGGER": {
+        "0": {
+          "NAME": "Steel dagger",
+          "BASE": 45441,
+          "OUTPUT": 45441,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel dagger + 1",
+          "BASE": 45441,
+          "OUTPUT": 46953,
+          "INPUT": 45441,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_DAGGER": {
+        "0": {
+          "NAME": "Steel off hand dagger",
+          "BASE": 45442,
+          "OUTPUT": 45442,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel off hand dagger + 1",
+          "BASE": 45442,
+          "OUTPUT": 46957,
+          "INPUT": 45442,
+          "STACKABLE": false
+        }
+      },
+      "MACE": {
+        "0": {
+          "NAME": "Steel mace",
+          "BASE": 45443,
+          "OUTPUT": 45443,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel mace + 1",
+          "BASE": 45443,
+          "OUTPUT": 46961,
+          "INPUT": 45443,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_MACE": {
+        "0": {
+          "NAME": "Steel off hand mace",
+          "BASE": 45444,
+          "OUTPUT": 45444,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel off hand mace + 1",
+          "BASE": 45444,
+          "OUTPUT": 46965,
+          "INPUT": 45444,
+          "STACKABLE": false
+        }
+      },
+      "SWORD": {
+        "0": {
+          "NAME": "Steel sword",
+          "BASE": 45445,
+          "OUTPUT": 45445,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel sword + 1",
+          "BASE": 45445,
+          "OUTPUT": 46969,
+          "INPUT": 45445,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_SWORD": {
+        "0": {
+          "NAME": "Steel off hand sword",
+          "BASE": 45446,
+          "OUTPUT": 45446,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel off hand sword + 1",
+          "BASE": 45446,
+          "OUTPUT": 46973,
+          "INPUT": 45446,
+          "STACKABLE": false
+        }
+      },
+      "SCIMITAR": {
+        "0": {
+          "NAME": "Steel scimitar",
+          "BASE": 45447,
+          "OUTPUT": 45447,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel scimitar + 1",
+          "BASE": 45447,
+          "OUTPUT": 46977,
+          "INPUT": 45447,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_SCIMITAR": {
+        "0": {
+          "NAME": "Steel off hand scimitar",
+          "BASE": 45448,
+          "OUTPUT": 45448,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel off hand scimitar + 1",
+          "BASE": 45448,
+          "OUTPUT": 46981,
+          "INPUT": 45448,
+          "STACKABLE": false
+        }
+      },
+      "LONGSWORD": {
+        "0": {
+          "NAME": "Steel longsword",
+          "BASE": 45449,
+          "OUTPUT": 45449,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel longsword + 1",
+          "BASE": 45449,
+          "OUTPUT": 46985,
+          "INPUT": 45449,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_LONGSWORD": {
+        "0": {
+          "NAME": "Steel off hand longsword",
+          "BASE": 45450,
+          "OUTPUT": 45450,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel off hand longsword + 1",
+          "BASE": 45450,
+          "OUTPUT": 46989,
+          "INPUT": 45450,
+          "STACKABLE": false
+        }
+      },
+      "WARHAMMER": {
+        "0": {
+          "NAME": "Steel warhammer",
+          "BASE": 45451,
+          "OUTPUT": 45451,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel warhammer + 1",
+          "BASE": 45451,
+          "OUTPUT": 46993,
+          "INPUT": 45451,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_WARHAMMER": {
+        "0": {
+          "NAME": "Steel off hand warhammer",
+          "BASE": 45452,
+          "OUTPUT": 45452,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel off hand warhammer + 1",
+          "BASE": 45452,
+          "OUTPUT": 46997,
+          "INPUT": 45452,
+          "STACKABLE": false
+        }
+      },
+      "BATTLEAXE": {
+        "0": {
+          "NAME": "Steel battleaxe",
+          "BASE": 45453,
+          "OUTPUT": 45453,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel battleaxe + 1",
+          "BASE": 45453,
+          "OUTPUT": 47001,
+          "INPUT": 45453,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_BATTLEAXE": {
+        "0": {
+          "NAME": "Steel off hand battleaxe",
+          "BASE": 45454,
+          "OUTPUT": 45454,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel off hand battleaxe + 1",
+          "BASE": 45454,
+          "OUTPUT": 47005,
+          "INPUT": 45454,
+          "STACKABLE": false
+        }
+      },
+      "CLAWS": {
+        "0": {
+          "NAME": "Steel claws",
+          "BASE": 45455,
+          "OUTPUT": 45455,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel claws + 1",
+          "BASE": 45455,
+          "OUTPUT": 47009,
+          "INPUT": 45455,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_CLAWS": {
+        "0": {
+          "NAME": "Steel off hand claws",
+          "BASE": 45456,
+          "OUTPUT": 45456,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel off hand claws + 1",
+          "BASE": 45456,
+          "OUTPUT": 47013,
+          "INPUT": 45456,
+          "STACKABLE": false
+        }
+      },
+      "2H_SWORD": {
+        "0": {
+          "NAME": "Steel 2h sword",
+          "BASE": 45457,
+          "OUTPUT": 45457,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel 2h sword + 1",
+          "BASE": 45457,
+          "OUTPUT": 47017,
+          "INPUT": 45457,
+          "STACKABLE": false
+        }
+      },
+      "FULL_HELM": {
+        "0": {
+          "NAME": "Steel full helm",
+          "BASE": 45458,
+          "OUTPUT": 45458,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel full helm + 1",
+          "BASE": 45458,
+          "OUTPUT": 47021,
+          "INPUT": 45458,
+          "STACKABLE": false
+        }
+      },
+      "MED_HELM": {
+        "0": {
+          "NAME": "Steel med helm",
+          "BASE": 45459,
+          "OUTPUT": 45459,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel med helm + 1",
+          "BASE": 45459,
+          "OUTPUT": 47025,
+          "INPUT": 45459,
+          "STACKABLE": false
+        }
+      },
+      "PLATELEGS": {
+        "0": {
+          "NAME": "Steel platelegs",
+          "BASE": 45460,
+          "OUTPUT": 45460,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel platelegs + 1",
+          "BASE": 45460,
+          "OUTPUT": 47029,
+          "INPUT": 45460,
+          "STACKABLE": false
+        }
+      },
+      "PLATESKIRT": {
+        "0": {
+          "NAME": "Steel plateskirt",
+          "BASE": 45461,
+          "OUTPUT": 45461,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel plateskirt + 1",
+          "BASE": 45461,
+          "OUTPUT": 47033,
+          "INPUT": 45461,
+          "STACKABLE": false
+        }
+      },
+      "PLATEBODY": {
+        "0": {
+          "NAME": "Steel platebody",
+          "BASE": 45462,
+          "OUTPUT": 45462,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel platebody + 1",
+          "BASE": 45462,
+          "OUTPUT": 47037,
+          "INPUT": 45462,
+          "STACKABLE": false
+        }
+      },
+      "CHAINBODY": {
+        "0": {
+          "NAME": "Steel chainbody",
+          "BASE": 45463,
+          "OUTPUT": 45463,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel chainbody + 1",
+          "BASE": 45463,
+          "OUTPUT": 47041,
+          "INPUT": 45463,
+          "STACKABLE": false
+        }
+      },
+      "SQUARE_SHIELD": {
+        "0": {
+          "NAME": "Steel square shield",
+          "BASE": 45464,
+          "OUTPUT": 45464,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel square shield + 1",
+          "BASE": 45464,
+          "OUTPUT": 47045,
+          "INPUT": 45464,
+          "STACKABLE": false
+        }
+      },
+      "KITESHIELD": {
+        "0": {
+          "NAME": "Steel kiteshield",
+          "BASE": 45465,
+          "OUTPUT": 45465,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel kiteshield + 1",
+          "BASE": 45465,
+          "OUTPUT": 47049,
+          "INPUT": 45465,
+          "STACKABLE": false
+        }
+      },
+      "ARMOURED_BOOTS": {
+        "0": {
+          "NAME": "Steel armoured boots",
+          "BASE": 45466,
+          "OUTPUT": 45466,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel armoured boots + 1",
+          "BASE": 45466,
+          "OUTPUT": 47053,
+          "INPUT": 45466,
+          "STACKABLE": false
+        }
+      },
+      "PICKAXE": {
+        "0": {
+          "NAME": "Steel pickaxe",
+          "BASE": 45467,
+          "OUTPUT": 45467,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel pickaxe + 1",
+          "BASE": 45467,
+          "OUTPUT": 47063,
+          "INPUT": 45467,
+          "STACKABLE": false
+        }
+      },
+      "GAUNTLETS": {
+        "0": {
+          "NAME": "Steel gauntlets",
+          "BASE": 47056,
+          "OUTPUT": 47056,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Steel gauntlets + 1",
+          "BASE": 47056,
+          "OUTPUT": 47059,
+          "INPUT": 47056,
+          "STACKABLE": false
+        }
+      },
+      "INGOT": {
+        "0": {
+          "NAME": "Steel ingot",
+          "BASE": 47074,
+          "OUTPUT": 47074,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "MATTOCK": {
+        "0": {
+          "NAME": "Steel mattock",
+          "BASE": 49545,
+          "OUTPUT": 49545,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "MITHRIL": {
+      "ARROWHEADS": {
+        "0": {
+          "NAME": "Mithril arrowheads",
+          "BASE": 42,
+          "OUTPUT": 42,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "THROWING_AXE": {
+        "0": {
+          "NAME": "Mithril throwing axe",
+          "BASE": 803,
+          "OUTPUT": 803,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "DART_TIP": {
+        "0": {
+          "NAME": "Mithril dart tip",
+          "BASE": 822,
+          "OUTPUT": 822,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "KNIFE": {
+        "0": {
+          "NAME": "Mithril knife",
+          "BASE": 866,
+          "OUTPUT": 866,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "SPEAR": {
+        "0": {
+          "NAME": "Mithril spear",
+          "BASE": 1243,
+          "OUTPUT": 1243,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "HATCHET": {
+        "0": {
+          "NAME": "Mithril hatchet",
+          "BASE": 1355,
+          "OUTPUT": 1355,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "BAR": {
+        "0": {
+          "NAME": "Mithril bar",
+          "BASE": 2359,
+          "OUTPUT": 2359,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "NAILS": {
+        "0": {
+          "NAME": "Mithril nails",
+          "BASE": 4822,
+          "OUTPUT": 4822,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "BOLTS_(UNF)": {
+        "0": {
+          "NAME": "Mithril bolts (unf)",
+          "BASE": 9379,
+          "OUTPUT": 9379,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "GRAPPLE_TIP": {
+        "0": {
+          "NAME": "Mithril grapple tip",
+          "BASE": 9416,
+          "OUTPUT": 9416,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "LIMBS": {
+        "0": {
+          "NAME": "Mithril limbs",
+          "BASE": 9427,
+          "OUTPUT": 9427,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "HASTA": {
+        "0": {
+          "NAME": "Mithril hasta",
+          "BASE": 11373,
+          "OUTPUT": 11373,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "DAGGER": {
+        "0": {
+          "NAME": "Mithril dagger",
+          "BASE": 45468,
+          "OUTPUT": 45468,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril dagger + 1",
+          "BASE": 45468,
+          "OUTPUT": 46097,
+          "INPUT": 45468,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril dagger + 2",
+          "BASE": 45468,
+          "OUTPUT": 46100,
+          "INPUT": 46097,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_DAGGER": {
+        "0": {
+          "NAME": "Mithril off hand dagger",
+          "BASE": 45469,
+          "OUTPUT": 45469,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril off hand dagger + 1",
+          "BASE": 45469,
+          "OUTPUT": 46104,
+          "INPUT": 45469,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril off hand dagger + 2",
+          "BASE": 45469,
+          "OUTPUT": 46107,
+          "INPUT": 46104,
+          "STACKABLE": false
+        }
+      },
+      "MACE": {
+        "0": {
+          "NAME": "Mithril mace",
+          "BASE": 45470,
+          "OUTPUT": 45470,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril mace + 1",
+          "BASE": 45470,
+          "OUTPUT": 46111,
+          "INPUT": 45470,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril mace + 2",
+          "BASE": 45470,
+          "OUTPUT": 46114,
+          "INPUT": 46111,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_MACE": {
+        "0": {
+          "NAME": "Mithril off hand mace",
+          "BASE": 45471,
+          "OUTPUT": 45471,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril off hand mace + 1",
+          "BASE": 45471,
+          "OUTPUT": 46118,
+          "INPUT": 45471,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril off hand mace + 2",
+          "BASE": 45471,
+          "OUTPUT": 46121,
+          "INPUT": 46118,
+          "STACKABLE": false
+        }
+      },
+      "SWORD": {
+        "0": {
+          "NAME": "Mithril sword",
+          "BASE": 45472,
+          "OUTPUT": 45472,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril sword + 1",
+          "BASE": 45472,
+          "OUTPUT": 46125,
+          "INPUT": 45472,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril sword + 2",
+          "BASE": 45472,
+          "OUTPUT": 46128,
+          "INPUT": 46125,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_SWORD": {
+        "0": {
+          "NAME": "Mithril off hand sword",
+          "BASE": 45473,
+          "OUTPUT": 45473,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril off hand sword + 1",
+          "BASE": 45473,
+          "OUTPUT": 46132,
+          "INPUT": 45473,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril off hand sword + 2",
+          "BASE": 45473,
+          "OUTPUT": 46135,
+          "INPUT": 46132,
+          "STACKABLE": false
+        }
+      },
+      "SCIMITAR": {
+        "0": {
+          "NAME": "Mithril scimitar",
+          "BASE": 45474,
+          "OUTPUT": 45474,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril scimitar + 1",
+          "BASE": 45474,
+          "OUTPUT": 46139,
+          "INPUT": 45474,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril scimitar + 2",
+          "BASE": 45474,
+          "OUTPUT": 46142,
+          "INPUT": 46139,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_SCIMITAR": {
+        "0": {
+          "NAME": "Mithril off hand scimitar",
+          "BASE": 45475,
+          "OUTPUT": 45475,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril off hand scimitar + 1",
+          "BASE": 45475,
+          "OUTPUT": 46146,
+          "INPUT": 45475,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril off hand scimitar + 2",
+          "BASE": 45475,
+          "OUTPUT": 46149,
+          "INPUT": 46146,
+          "STACKABLE": false
+        }
+      },
+      "LONGSWORD": {
+        "0": {
+          "NAME": "Mithril longsword",
+          "BASE": 45476,
+          "OUTPUT": 45476,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril longsword + 1",
+          "BASE": 45476,
+          "OUTPUT": 46153,
+          "INPUT": 45476,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril longsword + 2",
+          "BASE": 45476,
+          "OUTPUT": 46156,
+          "INPUT": 46153,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_LONGSWORD": {
+        "0": {
+          "NAME": "Mithril off hand longsword",
+          "BASE": 45477,
+          "OUTPUT": 45477,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril off hand longsword + 1",
+          "BASE": 45477,
+          "OUTPUT": 46160,
+          "INPUT": 45477,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril off hand longsword + 2",
+          "BASE": 45477,
+          "OUTPUT": 46163,
+          "INPUT": 46160,
+          "STACKABLE": false
+        }
+      },
+      "WARHAMMER": {
+        "0": {
+          "NAME": "Mithril warhammer",
+          "BASE": 45478,
+          "OUTPUT": 45478,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril warhammer + 1",
+          "BASE": 45478,
+          "OUTPUT": 46167,
+          "INPUT": 45478,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril warhammer + 2",
+          "BASE": 45478,
+          "OUTPUT": 46170,
+          "INPUT": 46167,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_WARHAMMER": {
+        "0": {
+          "NAME": "Mithril off hand warhammer",
+          "BASE": 45479,
+          "OUTPUT": 45479,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril off hand warhammer + 1",
+          "BASE": 45479,
+          "OUTPUT": 46174,
+          "INPUT": 45479,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril off hand warhammer + 2",
+          "BASE": 45479,
+          "OUTPUT": 46177,
+          "INPUT": 46174,
+          "STACKABLE": false
+        }
+      },
+      "BATTLEAXE": {
+        "0": {
+          "NAME": "Mithril battleaxe",
+          "BASE": 45480,
+          "OUTPUT": 45480,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril battleaxe + 1",
+          "BASE": 45480,
+          "OUTPUT": 46181,
+          "INPUT": 45480,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril battleaxe + 2",
+          "BASE": 45480,
+          "OUTPUT": 46184,
+          "INPUT": 46181,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_BATTLEAXE": {
+        "0": {
+          "NAME": "Mithril off hand battleaxe",
+          "BASE": 45481,
+          "OUTPUT": 45481,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril off hand battleaxe + 1",
+          "BASE": 45481,
+          "OUTPUT": 46188,
+          "INPUT": 45481,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril off hand battleaxe + 2",
+          "BASE": 45481,
+          "OUTPUT": 46191,
+          "INPUT": 46188,
+          "STACKABLE": false
+        }
+      },
+      "CLAWS": {
+        "0": {
+          "NAME": "Mithril claws",
+          "BASE": 45482,
+          "OUTPUT": 45482,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril claws + 1",
+          "BASE": 45482,
+          "OUTPUT": 46195,
+          "INPUT": 45482,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril claws + 2",
+          "BASE": 45482,
+          "OUTPUT": 46198,
+          "INPUT": 46195,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_CLAWS": {
+        "0": {
+          "NAME": "Mithril off hand claws",
+          "BASE": 45483,
+          "OUTPUT": 45483,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril off hand claws + 1",
+          "BASE": 45483,
+          "OUTPUT": 46202,
+          "INPUT": 45483,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril off hand claws + 2",
+          "BASE": 45483,
+          "OUTPUT": 46205,
+          "INPUT": 46202,
+          "STACKABLE": false
+        }
+      },
+      "2H_SWORD": {
+        "0": {
+          "NAME": "Mithril 2h sword",
+          "BASE": 45484,
+          "OUTPUT": 45484,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril 2h sword + 1",
+          "BASE": 45484,
+          "OUTPUT": 46209,
+          "INPUT": 45484,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril 2h sword + 2",
+          "BASE": 45484,
+          "OUTPUT": 46212,
+          "INPUT": 46209,
+          "STACKABLE": false
+        }
+      },
+      "FULL_HELM": {
+        "0": {
+          "NAME": "Mithril full helm",
+          "BASE": 45485,
+          "OUTPUT": 45485,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril full helm + 1",
+          "BASE": 45485,
+          "OUTPUT": 46216,
+          "INPUT": 45485,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril full helm + 2",
+          "BASE": 45485,
+          "OUTPUT": 46219,
+          "INPUT": 46216,
+          "STACKABLE": false
+        }
+      },
+      "MED_HELM": {
+        "0": {
+          "NAME": "Mithril med helm",
+          "BASE": 45486,
+          "OUTPUT": 45486,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril med helm + 1",
+          "BASE": 45486,
+          "OUTPUT": 46223,
+          "INPUT": 45486,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril med helm + 2",
+          "BASE": 45486,
+          "OUTPUT": 46226,
+          "INPUT": 46223,
+          "STACKABLE": false
+        }
+      },
+      "PLATELEGS": {
+        "0": {
+          "NAME": "Mithril platelegs",
+          "BASE": 45487,
+          "OUTPUT": 45487,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril platelegs + 1",
+          "BASE": 45487,
+          "OUTPUT": 46230,
+          "INPUT": 45487,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril platelegs + 2",
+          "BASE": 45487,
+          "OUTPUT": 46233,
+          "INPUT": 46230,
+          "STACKABLE": false
+        }
+      },
+      "PLATESKIRT": {
+        "0": {
+          "NAME": "Mithril plateskirt",
+          "BASE": 45488,
+          "OUTPUT": 45488,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril plateskirt + 1",
+          "BASE": 45488,
+          "OUTPUT": 46237,
+          "INPUT": 45488,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril plateskirt + 2",
+          "BASE": 45488,
+          "OUTPUT": 46240,
+          "INPUT": 46237,
+          "STACKABLE": false
+        }
+      },
+      "PLATEBODY": {
+        "0": {
+          "NAME": "Mithril platebody",
+          "BASE": 45489,
+          "OUTPUT": 45489,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril platebody + 1",
+          "BASE": 45489,
+          "OUTPUT": 46244,
+          "INPUT": 45489,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril platebody + 2",
+          "BASE": 45489,
+          "OUTPUT": 46247,
+          "INPUT": 46244,
+          "STACKABLE": false
+        }
+      },
+      "CHAINBODY": {
+        "0": {
+          "NAME": "Mithril chainbody",
+          "BASE": 45490,
+          "OUTPUT": 45490,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril chainbody + 1",
+          "BASE": 45490,
+          "OUTPUT": 46251,
+          "INPUT": 45490,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril chainbody + 2",
+          "BASE": 45490,
+          "OUTPUT": 46254,
+          "INPUT": 46251,
+          "STACKABLE": false
+        }
+      },
+      "SQUARE_SHIELD": {
+        "0": {
+          "NAME": "Mithril square shield",
+          "BASE": 45491,
+          "OUTPUT": 45491,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril square shield + 1",
+          "BASE": 45491,
+          "OUTPUT": 46258,
+          "INPUT": 45491,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril square shield + 2",
+          "BASE": 45491,
+          "OUTPUT": 46261,
+          "INPUT": 46258,
+          "STACKABLE": false
+        }
+      },
+      "KITESHIELD": {
+        "0": {
+          "NAME": "Mithril kiteshield",
+          "BASE": 45492,
+          "OUTPUT": 45492,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril kiteshield + 1",
+          "BASE": 45492,
+          "OUTPUT": 46265,
+          "INPUT": 45492,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril kiteshield + 2",
+          "BASE": 45492,
+          "OUTPUT": 46268,
+          "INPUT": 46265,
+          "STACKABLE": false
+        }
+      },
+      "ARMOURED_BOOTS": {
+        "0": {
+          "NAME": "Mithril armoured boots",
+          "BASE": 45493,
+          "OUTPUT": 45493,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril armoured boots + 1",
+          "BASE": 45493,
+          "OUTPUT": 46272,
+          "INPUT": 45493,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril armoured boots + 2",
+          "BASE": 45493,
+          "OUTPUT": 46275,
+          "INPUT": 46272,
+          "STACKABLE": false
+        }
+      },
+      "PICKAXE": {
+        "0": {
+          "NAME": "Mithril pickaxe",
+          "BASE": 45494,
+          "OUTPUT": 45494,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril pickaxe + 1",
+          "BASE": 45494,
+          "OUTPUT": 46288,
+          "INPUT": 45494,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril pickaxe + 2",
+          "BASE": 45494,
+          "OUTPUT": 46291,
+          "INPUT": 46288,
+          "STACKABLE": false
+        }
+      },
+      "GAUNTLETS": {
+        "0": {
+          "NAME": "Mithril gauntlets",
+          "BASE": 46278,
+          "OUTPUT": 46278,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Mithril gauntlets + 1",
+          "BASE": 46278,
+          "OUTPUT": 46281,
+          "INPUT": 46278,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Mithril gauntlets + 2",
+          "BASE": 46278,
+          "OUTPUT": 46284,
+          "INPUT": 46281,
+          "STACKABLE": false
+        }
+      },
+      "MATTOCK": {
+        "0": {
+          "NAME": "Mithril mattock",
+          "BASE": 49548,
+          "OUTPUT": 49548,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "ADAMANT": {
+      "ARROWHEADS": {
+        "0": {
+          "NAME": "Adamant arrowheads",
+          "BASE": 43,
+          "OUTPUT": 43,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "THROWING_AXE": {
+        "0": {
+          "NAME": "Adamant throwing axe",
+          "BASE": 804,
+          "OUTPUT": 804,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "DART_TIP": {
+        "0": {
+          "NAME": "Adamant dart tip",
+          "BASE": 823,
+          "OUTPUT": 823,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "KNIFE": {
+        "0": {
+          "NAME": "Adamant knife",
+          "BASE": 867,
+          "OUTPUT": 867,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "SPEAR": {
+        "0": {
+          "NAME": "Adamant spear",
+          "BASE": 1245,
+          "OUTPUT": 1245,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "HATCHET": {
+        "0": {
+          "NAME": "Adamant hatchet",
+          "BASE": 1357,
+          "OUTPUT": 1357,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "BAR": {
+        "0": {
+          "NAME": "Adamant bar",
+          "BASE": 2361,
+          "OUTPUT": 2361,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "NAILS": {
+        "0": {
+          "NAME": "Adamant nails",
+          "BASE": 4823,
+          "OUTPUT": 4823,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "BOLTS_(UNF)": {
+        "0": {
+          "NAME": "Adamant bolts (unf)",
+          "BASE": 9380,
+          "OUTPUT": 9380,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "LIMBS": {
+        "0": {
+          "NAME": "Adamant limbs",
+          "BASE": 9429,
+          "OUTPUT": 9429,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "HASTA": {
+        "0": {
+          "NAME": "Adamant hasta",
+          "BASE": 11375,
+          "OUTPUT": 11375,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "DAGGER": {
+        "0": {
+          "NAME": "Adamant dagger",
+          "BASE": 45495,
+          "OUTPUT": 45495,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant dagger + 1",
+          "BASE": 45495,
+          "OUTPUT": 44847,
+          "INPUT": 45495,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant dagger + 2",
+          "BASE": 45495,
+          "OUTPUT": 44850,
+          "INPUT": 44847,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial dagger",
+          "BASE": 45495,
+          "OUTPUT": 44853,
+          "INPUT": 44850,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_DAGGER": {
+        "0": {
+          "NAME": "Adamant off hand dagger",
+          "BASE": 45496,
+          "OUTPUT": 45496,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant off hand dagger + 1",
+          "BASE": 45496,
+          "OUTPUT": 44855,
+          "INPUT": 45496,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant off hand dagger + 2",
+          "BASE": 45496,
+          "OUTPUT": 44858,
+          "INPUT": 44855,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial off hand dagger",
+          "BASE": 45496,
+          "OUTPUT": 44861,
+          "INPUT": 44858,
+          "STACKABLE": false
+        }
+      },
+      "MACE": {
+        "0": {
+          "NAME": "Adamant mace",
+          "BASE": 45497,
+          "OUTPUT": 45497,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant mace + 1",
+          "BASE": 45497,
+          "OUTPUT": 44863,
+          "INPUT": 45497,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant mace + 2",
+          "BASE": 45497,
+          "OUTPUT": 44866,
+          "INPUT": 44863,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial mace",
+          "BASE": 45497,
+          "OUTPUT": 44869,
+          "INPUT": 44866,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_MACE": {
+        "0": {
+          "NAME": "Adamant off hand mace",
+          "BASE": 45498,
+          "OUTPUT": 45498,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant off hand mace + 1",
+          "BASE": 45498,
+          "OUTPUT": 44871,
+          "INPUT": 45498,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant off hand mace + 2",
+          "BASE": 45498,
+          "OUTPUT": 44874,
+          "INPUT": 44871,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial off hand mace",
+          "BASE": 45498,
+          "OUTPUT": 44877,
+          "INPUT": 44874,
+          "STACKABLE": false
+        }
+      },
+      "SWORD": {
+        "0": {
+          "NAME": "Adamant sword",
+          "BASE": 45499,
+          "OUTPUT": 45499,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant sword + 1",
+          "BASE": 45499,
+          "OUTPUT": 44879,
+          "INPUT": 45499,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant sword + 2",
+          "BASE": 45499,
+          "OUTPUT": 44882,
+          "INPUT": 44879,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial sword",
+          "BASE": 45499,
+          "OUTPUT": 44885,
+          "INPUT": 44882,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_SWORD": {
+        "0": {
+          "NAME": "Adamant off hand sword",
+          "BASE": 45500,
+          "OUTPUT": 45500,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant off hand sword + 1",
+          "BASE": 45500,
+          "OUTPUT": 44887,
+          "INPUT": 45500,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant off hand sword + 2",
+          "BASE": 45500,
+          "OUTPUT": 44890,
+          "INPUT": 44887,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial off hand sword",
+          "BASE": 45500,
+          "OUTPUT": 44893,
+          "INPUT": 44890,
+          "STACKABLE": false
+        }
+      },
+      "SCIMITAR": {
+        "0": {
+          "NAME": "Adamant scimitar",
+          "BASE": 45501,
+          "OUTPUT": 45501,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant scimitar + 1",
+          "BASE": 45501,
+          "OUTPUT": 44895,
+          "INPUT": 45501,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant scimitar + 2",
+          "BASE": 45501,
+          "OUTPUT": 44898,
+          "INPUT": 44895,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial scimitar",
+          "BASE": 45501,
+          "OUTPUT": 44901,
+          "INPUT": 44898,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_SCIMITAR": {
+        "0": {
+          "NAME": "Adamant off hand scimitar",
+          "BASE": 45502,
+          "OUTPUT": 45502,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant off hand scimitar + 1",
+          "BASE": 45502,
+          "OUTPUT": 44903,
+          "INPUT": 45502,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant off hand scimitar + 2",
+          "BASE": 45502,
+          "OUTPUT": 44906,
+          "INPUT": 44903,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial off hand scimitar",
+          "BASE": 45502,
+          "OUTPUT": 44909,
+          "INPUT": 44906,
+          "STACKABLE": false
+        }
+      },
+      "LONGSWORD": {
+        "0": {
+          "NAME": "Adamant longsword",
+          "BASE": 45503,
+          "OUTPUT": 45503,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant longsword + 1",
+          "BASE": 45503,
+          "OUTPUT": 44911,
+          "INPUT": 45503,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant longsword + 2",
+          "BASE": 45503,
+          "OUTPUT": 44914,
+          "INPUT": 44911,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial longsword",
+          "BASE": 45503,
+          "OUTPUT": 44917,
+          "INPUT": 44914,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_LONGSWORD": {
+        "0": {
+          "NAME": "Adamant off hand longsword",
+          "BASE": 45504,
+          "OUTPUT": 45504,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant off hand longsword + 1",
+          "BASE": 45504,
+          "OUTPUT": 44919,
+          "INPUT": 45504,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant off hand longsword + 2",
+          "BASE": 45504,
+          "OUTPUT": 44922,
+          "INPUT": 44919,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial off hand longsword",
+          "BASE": 45504,
+          "OUTPUT": 44925,
+          "INPUT": 44922,
+          "STACKABLE": false
+        }
+      },
+      "WARHAMMER": {
+        "0": {
+          "NAME": "Adamant warhammer",
+          "BASE": 44926,
+          "OUTPUT": 44926,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant warhammer + 1",
+          "BASE": 44926,
+          "OUTPUT": 44929,
+          "INPUT": 44926,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant warhammer + 2",
+          "BASE": 44926,
+          "OUTPUT": 44932,
+          "INPUT": 44929,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial warhammer",
+          "BASE": 44926,
+          "OUTPUT": 44935,
+          "INPUT": 44932,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_WARHAMMER": {
+        "0": {
+          "NAME": "Adamant off hand warhammer",
+          "BASE": 44936,
+          "OUTPUT": 44936,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant off hand warhammer + 1",
+          "BASE": 44936,
+          "OUTPUT": 44939,
+          "INPUT": 44936,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant off hand warhammer + 2",
+          "BASE": 44936,
+          "OUTPUT": 44942,
+          "INPUT": 44939,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial off hand warhammer",
+          "BASE": 44936,
+          "OUTPUT": 44945,
+          "INPUT": 44942,
+          "STACKABLE": false
+        }
+      },
+      "BATTLEAXE": {
+        "0": {
+          "NAME": "Adamant battleaxe",
+          "BASE": 45507,
+          "OUTPUT": 45507,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant battleaxe + 1",
+          "BASE": 45507,
+          "OUTPUT": 44947,
+          "INPUT": 45507,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant battleaxe + 2",
+          "BASE": 45507,
+          "OUTPUT": 44950,
+          "INPUT": 44947,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial battleaxe",
+          "BASE": 45507,
+          "OUTPUT": 44953,
+          "INPUT": 44950,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_BATTLEAXE": {
+        "0": {
+          "NAME": "Adamant off hand battleaxe",
+          "BASE": 45508,
+          "OUTPUT": 45508,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant off hand battleaxe + 1",
+          "BASE": 45508,
+          "OUTPUT": 44955,
+          "INPUT": 45508,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant off hand battleaxe + 2",
+          "BASE": 45508,
+          "OUTPUT": 44958,
+          "INPUT": 44955,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial off hand battleaxe",
+          "BASE": 45508,
+          "OUTPUT": 44961,
+          "INPUT": 44958,
+          "STACKABLE": false
+        }
+      },
+      "CLAWS": {
+        "0": {
+          "NAME": "Adamant claws",
+          "BASE": 45509,
+          "OUTPUT": 45509,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant claws + 1",
+          "BASE": 45509,
+          "OUTPUT": 44963,
+          "INPUT": 45509,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant claws + 2",
+          "BASE": 45509,
+          "OUTPUT": 44966,
+          "INPUT": 44963,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial claws",
+          "BASE": 45509,
+          "OUTPUT": 44969,
+          "INPUT": 44966,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_CLAWS": {
+        "0": {
+          "NAME": "Adamant off hand claws",
+          "BASE": 45510,
+          "OUTPUT": 45510,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant off hand claws + 1",
+          "BASE": 45510,
+          "OUTPUT": 44971,
+          "INPUT": 45510,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant off hand claws + 2",
+          "BASE": 45510,
+          "OUTPUT": 44974,
+          "INPUT": 44971,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial off hand claws",
+          "BASE": 45510,
+          "OUTPUT": 44977,
+          "INPUT": 44974,
+          "STACKABLE": false
+        }
+      },
+      "2H_SWORD": {
+        "0": {
+          "NAME": "Adamant 2h sword",
+          "BASE": 45511,
+          "OUTPUT": 45511,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant 2h sword + 1",
+          "BASE": 45511,
+          "OUTPUT": 44979,
+          "INPUT": 45511,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant 2h sword + 2",
+          "BASE": 45511,
+          "OUTPUT": 44982,
+          "INPUT": 44979,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial 2h sword",
+          "BASE": 45511,
+          "OUTPUT": 44985,
+          "INPUT": 44982,
+          "STACKABLE": false
+        }
+      },
+      "FULL_HELM": {
+        "0": {
+          "NAME": "Adamant full helm",
+          "BASE": 45512,
+          "OUTPUT": 45512,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant full helm + 1",
+          "BASE": 45512,
+          "OUTPUT": 44987,
+          "INPUT": 45512,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant full helm + 2",
+          "BASE": 45512,
+          "OUTPUT": 44990,
+          "INPUT": 44987,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial full helm",
+          "BASE": 45512,
+          "OUTPUT": 44993,
+          "INPUT": 44990,
+          "STACKABLE": false
+        }
+      },
+      "MED_HELM": {
+        "0": {
+          "NAME": "Adamant med helm",
+          "BASE": 45513,
+          "OUTPUT": 45513,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant med helm + 1",
+          "BASE": 45513,
+          "OUTPUT": 44995,
+          "INPUT": 45513,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant med helm + 2",
+          "BASE": 45513,
+          "OUTPUT": 44998,
+          "INPUT": 44995,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial med helm",
+          "BASE": 45513,
+          "OUTPUT": 45001,
+          "INPUT": 44998,
+          "STACKABLE": false
+        }
+      },
+      "PLATELEGS": {
+        "0": {
+          "NAME": "Adamant platelegs",
+          "BASE": 45514,
+          "OUTPUT": 45514,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant platelegs + 1",
+          "BASE": 45514,
+          "OUTPUT": 45003,
+          "INPUT": 45514,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant platelegs + 2",
+          "BASE": 45514,
+          "OUTPUT": 45006,
+          "INPUT": 45003,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial platelegs",
+          "BASE": 45514,
+          "OUTPUT": 45009,
+          "INPUT": 45006,
+          "STACKABLE": false
+        }
+      },
+      "PLATESKIRT": {
+        "0": {
+          "NAME": "Adamant plateskirt",
+          "BASE": 45515,
+          "OUTPUT": 45515,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant plateskirt + 1",
+          "BASE": 45515,
+          "OUTPUT": 45011,
+          "INPUT": 45515,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant plateskirt + 2",
+          "BASE": 45515,
+          "OUTPUT": 45014,
+          "INPUT": 45011,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial plateskirt",
+          "BASE": 45515,
+          "OUTPUT": 45017,
+          "INPUT": 45014,
+          "STACKABLE": false
+        }
+      },
+      "PLATEBODY": {
+        "0": {
+          "NAME": "Adamant platebody",
+          "BASE": 45516,
+          "OUTPUT": 45516,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant platebody + 1",
+          "BASE": 45516,
+          "OUTPUT": 45019,
+          "INPUT": 45516,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant platebody + 2",
+          "BASE": 45516,
+          "OUTPUT": 45022,
+          "INPUT": 45019,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial platebody",
+          "BASE": 45516,
+          "OUTPUT": 45025,
+          "INPUT": 45022,
+          "STACKABLE": false
+        }
+      },
+      "CHAINBODY": {
+        "0": {
+          "NAME": "Adamant chainbody",
+          "BASE": 45517,
+          "OUTPUT": 45517,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant chainbody + 1",
+          "BASE": 45517,
+          "OUTPUT": 45027,
+          "INPUT": 45517,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant chainbody + 2",
+          "BASE": 45517,
+          "OUTPUT": 45030,
+          "INPUT": 45027,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial chainbody",
+          "BASE": 45517,
+          "OUTPUT": 45033,
+          "INPUT": 45030,
+          "STACKABLE": false
+        }
+      },
+      "SQUARE_SHIELD": {
+        "0": {
+          "NAME": "Adamant square shield",
+          "BASE": 45518,
+          "OUTPUT": 45518,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant square shield + 1",
+          "BASE": 45518,
+          "OUTPUT": 45035,
+          "INPUT": 45518,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant square shield + 2",
+          "BASE": 45518,
+          "OUTPUT": 45038,
+          "INPUT": 45035,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial square shield",
+          "BASE": 45518,
+          "OUTPUT": 45041,
+          "INPUT": 45038,
+          "STACKABLE": false
+        }
+      },
+      "KITESHIELD": {
+        "0": {
+          "NAME": "Adamant kiteshield",
+          "BASE": 45519,
+          "OUTPUT": 45519,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant kiteshield + 1",
+          "BASE": 45519,
+          "OUTPUT": 45043,
+          "INPUT": 45519,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant kiteshield + 2",
+          "BASE": 45519,
+          "OUTPUT": 45046,
+          "INPUT": 45043,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial kiteshield",
+          "BASE": 45519,
+          "OUTPUT": 45049,
+          "INPUT": 45046,
+          "STACKABLE": false
+        }
+      },
+      "ARMOURED_BOOTS": {
+        "0": {
+          "NAME": "Adamant armoured boots",
+          "BASE": 45520,
+          "OUTPUT": 45520,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant armoured boots + 1",
+          "BASE": 45520,
+          "OUTPUT": 45051,
+          "INPUT": 45520,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant armoured boots + 2",
+          "BASE": 45520,
+          "OUTPUT": 45054,
+          "INPUT": 45051,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial armoured boots",
+          "BASE": 45520,
+          "OUTPUT": 45057,
+          "INPUT": 45054,
+          "STACKABLE": false
+        }
+      },
+      "GAUNTLETS": {
+        "0": {
+          "NAME": "Adamant gauntlets",
+          "BASE": 45058,
+          "OUTPUT": 45058,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant gauntlets + 1",
+          "BASE": 45058,
+          "OUTPUT": 45061,
+          "INPUT": 45058,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant gauntlets + 2",
+          "BASE": 45058,
+          "OUTPUT": 45064,
+          "INPUT": 45061,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial gauntlets",
+          "BASE": 45058,
+          "OUTPUT": 45067,
+          "INPUT": 45064,
+          "STACKABLE": false
+        }
+      },
+      "PICKAXE": {
+        "0": {
+          "NAME": "Adamant pickaxe",
+          "BASE": 45521,
+          "OUTPUT": 45521,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Adamant pickaxe + 1",
+          "BASE": 45521,
+          "OUTPUT": 45069,
+          "INPUT": 45521,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Adamant pickaxe + 2",
+          "BASE": 45521,
+          "OUTPUT": 45072,
+          "INPUT": 45069,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Adamant burial pickaxe",
+          "BASE": 45521,
+          "OUTPUT": 45075,
+          "INPUT": 45072,
+          "STACKABLE": false
+        }
+      },
+      "SET": {
+        "0": {
+          "NAME": "Adamant burial set",
+          "BASE": 45435,
+          "OUTPUT": 45435,
+          "INPUT": {
+            "0": 45022,
+            "1": 44990,
+            "2": 45064,
+            "3": 45054,
+            "4": 45006
+          },
+          "STACKABLE": false
+        }
+      },
+      "MATTOCK": {
+        "0": {
+          "NAME": "Adamant mattock",
+          "BASE": 49551,
+          "OUTPUT": 49551,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "RUNE": {
+      "ARROWHEADS": {
+        "0": {
+          "NAME": "Rune arrowheads",
+          "BASE": 44,
+          "OUTPUT": 44,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "THROWING_AXE": {
+        "0": {
+          "NAME": "Rune throwing axe",
+          "BASE": 805,
+          "OUTPUT": 805,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "DART_TIP": {
+        "0": {
+          "NAME": "Rune dart tip",
+          "BASE": 824,
+          "OUTPUT": 824,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "KNIFE": {
+        "0": {
+          "NAME": "Rune knife",
+          "BASE": 868,
+          "OUTPUT": 868,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "SPEAR": {
+        "0": {
+          "NAME": "Rune spear",
+          "BASE": 1247,
+          "OUTPUT": 1247,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "HATCHET": {
+        "0": {
+          "NAME": "Rune hatchet",
+          "BASE": 1359,
+          "OUTPUT": 1359,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "BAR": {
+        "0": {
+          "NAME": "Rune bar",
+          "BASE": 2363,
+          "OUTPUT": 2363,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "NAILS": {
+        "0": {
+          "NAME": "Rune nails",
+          "BASE": 4824,
+          "OUTPUT": 4824,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "BOLTS_(UNF)": {
+        "0": {
+          "NAME": "Rune bolts (unf)",
+          "BASE": 9381,
+          "OUTPUT": 9381,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "LIMBS": {
+        "0": {
+          "NAME": "Rune limbs",
+          "BASE": 9431,
+          "OUTPUT": 9431,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "HASTA": {
+        "0": {
+          "NAME": "Rune hasta",
+          "BASE": 11377,
+          "OUTPUT": 11377,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "SET": {
+        "0": {
+          "NAME": "Rune burial set",
+          "BASE": 45436,
+          "OUTPUT": 45436,
+          "INPUT": {
+            "0": 46885,
+            "1": 46845,
+            "2": 46938,
+            "3": 46925,
+            "4": 46865
+          },
+          "STACKABLE": false
+        }
+      },
+      "DAGGER": {
+        "0": {
+          "NAME": "Rune dagger",
+          "BASE": 45522,
+          "OUTPUT": 45522,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune dagger + 1",
+          "BASE": 45522,
+          "OUTPUT": 46669,
+          "INPUT": 45522,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune dagger + 2",
+          "BASE": 45522,
+          "OUTPUT": 46672,
+          "INPUT": 46669,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune dagger + 3",
+          "BASE": 45522,
+          "OUTPUT": 46675,
+          "INPUT": 46672,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial dagger",
+          "BASE": 45522,
+          "OUTPUT": 46678,
+          "INPUT": 46675,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_DAGGER": {
+        "0": {
+          "NAME": "Rune off hand dagger",
+          "BASE": 45523,
+          "OUTPUT": 45523,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune off hand dagger + 1",
+          "BASE": 45523,
+          "OUTPUT": 46679,
+          "INPUT": 45523,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune off hand dagger + 2",
+          "BASE": 45523,
+          "OUTPUT": 46682,
+          "INPUT": 46679,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune off hand dagger + 3",
+          "BASE": 45523,
+          "OUTPUT": 46685,
+          "INPUT": 46682,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial off hand dagger",
+          "BASE": 45523,
+          "OUTPUT": 46688,
+          "INPUT": 46685,
+          "STACKABLE": false
+        }
+      },
+      "MACE": {
+        "0": {
+          "NAME": "Rune mace",
+          "BASE": 45524,
+          "OUTPUT": 45524,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune mace + 1",
+          "BASE": 45524,
+          "OUTPUT": 46689,
+          "INPUT": 45524,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune mace + 2",
+          "BASE": 45524,
+          "OUTPUT": 46692,
+          "INPUT": 46689,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune mace + 3",
+          "BASE": 45524,
+          "OUTPUT": 46695,
+          "INPUT": 46692,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial mace",
+          "BASE": 45524,
+          "OUTPUT": 46698,
+          "INPUT": 46695,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_MACE": {
+        "0": {
+          "NAME": "Rune off hand mace",
+          "BASE": 45525,
+          "OUTPUT": 45525,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune off hand mace + 1",
+          "BASE": 45525,
+          "OUTPUT": 46699,
+          "INPUT": 45525,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune off hand mace + 2",
+          "BASE": 45525,
+          "OUTPUT": 46702,
+          "INPUT": 46699,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune off hand mace + 3",
+          "BASE": 45525,
+          "OUTPUT": 46705,
+          "INPUT": 46702,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial off hand mace",
+          "BASE": 45525,
+          "OUTPUT": 46708,
+          "INPUT": 46705,
+          "STACKABLE": false
+        }
+      },
+      "SWORD": {
+        "0": {
+          "NAME": "Rune sword",
+          "BASE": 45526,
+          "OUTPUT": 45526,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune sword + 1",
+          "BASE": 45526,
+          "OUTPUT": 46709,
+          "INPUT": 45526,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune sword + 2",
+          "BASE": 45526,
+          "OUTPUT": 46712,
+          "INPUT": 46709,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune sword + 3",
+          "BASE": 45526,
+          "OUTPUT": 46715,
+          "INPUT": 46712,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial sword",
+          "BASE": 45526,
+          "OUTPUT": 46718,
+          "INPUT": 46715,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_SWORD": {
+        "0": {
+          "NAME": "Rune off hand sword",
+          "BASE": 45527,
+          "OUTPUT": 45527,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune off hand sword + 1",
+          "BASE": 45527,
+          "OUTPUT": 46719,
+          "INPUT": 45527,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune off hand sword + 2",
+          "BASE": 45527,
+          "OUTPUT": 46722,
+          "INPUT": 46719,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune off hand sword + 3",
+          "BASE": 45527,
+          "OUTPUT": 46725,
+          "INPUT": 46722,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial off hand sword",
+          "BASE": 45527,
+          "OUTPUT": 46728,
+          "INPUT": 46725,
+          "STACKABLE": false
+        }
+      },
+      "SCIMITAR": {
+        "0": {
+          "NAME": "Rune scimitar",
+          "BASE": 45528,
+          "OUTPUT": 45528,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune scimitar + 1",
+          "BASE": 45528,
+          "OUTPUT": 46729,
+          "INPUT": 45528,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune scimitar + 2",
+          "BASE": 45528,
+          "OUTPUT": 46732,
+          "INPUT": 46729,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune scimitar + 3",
+          "BASE": 45528,
+          "OUTPUT": 46735,
+          "INPUT": 46732,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial scimitar",
+          "BASE": 45528,
+          "OUTPUT": 46738,
+          "INPUT": 46735,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_SCIMITAR": {
+        "0": {
+          "NAME": "Rune off hand scimitar",
+          "BASE": 45529,
+          "OUTPUT": 45529,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune off hand scimitar + 1",
+          "BASE": 45529,
+          "OUTPUT": 46739,
+          "INPUT": 45529,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune off hand scimitar + 2",
+          "BASE": 45529,
+          "OUTPUT": 46742,
+          "INPUT": 46739,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune off hand scimitar + 3",
+          "BASE": 45529,
+          "OUTPUT": 46745,
+          "INPUT": 46742,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial off hand scimitar",
+          "BASE": 45529,
+          "OUTPUT": 46748,
+          "INPUT": 46745,
+          "STACKABLE": false
+        }
+      },
+      "LONGSWORD": {
+        "0": {
+          "NAME": "Rune longsword",
+          "BASE": 45530,
+          "OUTPUT": 45530,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune longsword + 1",
+          "BASE": 45530,
+          "OUTPUT": 46749,
+          "INPUT": 45530,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune longsword + 2",
+          "BASE": 45530,
+          "OUTPUT": 46752,
+          "INPUT": 46749,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune longsword + 3",
+          "BASE": 45530,
+          "OUTPUT": 46755,
+          "INPUT": 46752,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial longsword",
+          "BASE": 45530,
+          "OUTPUT": 46758,
+          "INPUT": 46755,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_LONGSWORD": {
+        "0": {
+          "NAME": "Rune off hand longsword",
+          "BASE": 45531,
+          "OUTPUT": 45531,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune off hand longsword + 1",
+          "BASE": 45531,
+          "OUTPUT": 46759,
+          "INPUT": 45531,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune off hand longsword + 2",
+          "BASE": 45531,
+          "OUTPUT": 46762,
+          "INPUT": 46759,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune off hand longsword + 3",
+          "BASE": 45531,
+          "OUTPUT": 46765,
+          "INPUT": 46762,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial off hand longsword",
+          "BASE": 45531,
+          "OUTPUT": 46768,
+          "INPUT": 46765,
+          "STACKABLE": false
+        }
+      },
+      "WARHAMMER": {
+        "0": {
+          "NAME": "Rune warhammer",
+          "BASE": 45532,
+          "OUTPUT": 45532,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune warhammer + 1",
+          "BASE": 45532,
+          "OUTPUT": 46769,
+          "INPUT": 45532,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune warhammer + 2",
+          "BASE": 45532,
+          "OUTPUT": 46772,
+          "INPUT": 46769,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune warhammer + 3",
+          "BASE": 45532,
+          "OUTPUT": 46775,
+          "INPUT": 46772,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial warhammer",
+          "BASE": 45532,
+          "OUTPUT": 46778,
+          "INPUT": 46775,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_WARHAMMER": {
+        "0": {
+          "NAME": "Rune off hand warhammer",
+          "BASE": 45533,
+          "OUTPUT": 45533,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune off hand warhammer + 1",
+          "BASE": 45533,
+          "OUTPUT": 46779,
+          "INPUT": 45533,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune off hand warhammer + 2",
+          "BASE": 45533,
+          "OUTPUT": 46782,
+          "INPUT": 46779,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune off hand warhammer + 3",
+          "BASE": 45533,
+          "OUTPUT": 46785,
+          "INPUT": 46782,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial off hand warhammer",
+          "BASE": 45533,
+          "OUTPUT": 46788,
+          "INPUT": 46785,
+          "STACKABLE": false
+        }
+      },
+      "BATTLEAXE": {
+        "0": {
+          "NAME": "Rune battleaxe",
+          "BASE": 45534,
+          "OUTPUT": 45534,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune battleaxe + 1",
+          "BASE": 45534,
+          "OUTPUT": 46789,
+          "INPUT": 45534,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune battleaxe + 2",
+          "BASE": 45534,
+          "OUTPUT": 46792,
+          "INPUT": 46789,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune battleaxe + 3",
+          "BASE": 45534,
+          "OUTPUT": 46795,
+          "INPUT": 46792,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial battleaxe",
+          "BASE": 45534,
+          "OUTPUT": 46798,
+          "INPUT": 46795,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_BATTLEAXE": {
+        "0": {
+          "NAME": "Rune off hand battleaxe",
+          "BASE": 45535,
+          "OUTPUT": 45535,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune off hand battleaxe + 1",
+          "BASE": 45535,
+          "OUTPUT": 46799,
+          "INPUT": 45535,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune off hand battleaxe + 2",
+          "BASE": 45535,
+          "OUTPUT": 46802,
+          "INPUT": 46799,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune off hand battleaxe + 3",
+          "BASE": 45535,
+          "OUTPUT": 46805,
+          "INPUT": 46802,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial off hand battleaxe",
+          "BASE": 45535,
+          "OUTPUT": 46808,
+          "INPUT": 46805,
+          "STACKABLE": false
+        }
+      },
+      "CLAWS": {
+        "0": {
+          "NAME": "Rune claws",
+          "BASE": 45536,
+          "OUTPUT": 45536,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune claws + 1",
+          "BASE": 45536,
+          "OUTPUT": 46809,
+          "INPUT": 45536,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune claws + 2",
+          "BASE": 45536,
+          "OUTPUT": 46812,
+          "INPUT": 46809,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune claws + 3",
+          "BASE": 45536,
+          "OUTPUT": 46815,
+          "INPUT": 46812,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial claws",
+          "BASE": 45536,
+          "OUTPUT": 46818,
+          "INPUT": 46815,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_CLAWS": {
+        "0": {
+          "NAME": "Rune off hand claws",
+          "BASE": 45537,
+          "OUTPUT": 45537,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune off hand claws + 1",
+          "BASE": 45537,
+          "OUTPUT": 46819,
+          "INPUT": 45537,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune off hand claws + 2",
+          "BASE": 45537,
+          "OUTPUT": 46822,
+          "INPUT": 46819,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune off hand claws + 3",
+          "BASE": 45537,
+          "OUTPUT": 46825,
+          "INPUT": 46822,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial off hand claws",
+          "BASE": 45537,
+          "OUTPUT": 46828,
+          "INPUT": 46825,
+          "STACKABLE": false
+        }
+      },
+      "2H_SWORD": {
+        "0": {
+          "NAME": "Rune 2h sword",
+          "BASE": 45538,
+          "OUTPUT": 45538,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune 2h sword + 1",
+          "BASE": 45538,
+          "OUTPUT": 46829,
+          "INPUT": 45538,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune 2h sword + 2",
+          "BASE": 45538,
+          "OUTPUT": 46832,
+          "INPUT": 46829,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune 2h sword + 3",
+          "BASE": 45538,
+          "OUTPUT": 46835,
+          "INPUT": 46832,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial 2h sword",
+          "BASE": 45538,
+          "OUTPUT": 46838,
+          "INPUT": 46835,
+          "STACKABLE": false
+        }
+      },
+      "FULL_HELM": {
+        "0": {
+          "NAME": "Rune full helm",
+          "BASE": 45539,
+          "OUTPUT": 45539,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune full helm + 1",
+          "BASE": 45539,
+          "OUTPUT": 46839,
+          "INPUT": 45539,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune full helm + 2",
+          "BASE": 45539,
+          "OUTPUT": 46842,
+          "INPUT": 46839,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune full helm + 3",
+          "BASE": 45539,
+          "OUTPUT": 46845,
+          "INPUT": 46842,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial full helm",
+          "BASE": 45539,
+          "OUTPUT": 46848,
+          "INPUT": 46845,
+          "STACKABLE": false
+        }
+      },
+      "MED_HELM": {
+        "0": {
+          "NAME": "Rune med helm",
+          "BASE": 45540,
+          "OUTPUT": 45540,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune med helm + 1",
+          "BASE": 45540,
+          "OUTPUT": 46849,
+          "INPUT": 45540,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune med helm + 2",
+          "BASE": 45540,
+          "OUTPUT": 46852,
+          "INPUT": 46849,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune med helm + 3",
+          "BASE": 45540,
+          "OUTPUT": 46855,
+          "INPUT": 46852,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial med helm",
+          "BASE": 45540,
+          "OUTPUT": 46858,
+          "INPUT": 46855,
+          "STACKABLE": false
+        }
+      },
+      "PLATELEGS": {
+        "0": {
+          "NAME": "Rune platelegs",
+          "BASE": 45541,
+          "OUTPUT": 45541,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune platelegs + 1",
+          "BASE": 45541,
+          "OUTPUT": 46859,
+          "INPUT": 45541,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune platelegs + 2",
+          "BASE": 45541,
+          "OUTPUT": 46862,
+          "INPUT": 46859,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune platelegs + 3",
+          "BASE": 45541,
+          "OUTPUT": 46865,
+          "INPUT": 46862,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial platelegs",
+          "BASE": 45541,
+          "OUTPUT": 46868,
+          "INPUT": 46865,
+          "STACKABLE": false
+        }
+      },
+      "PLATESKIRT": {
+        "0": {
+          "NAME": "Rune plateskirt",
+          "BASE": 45542,
+          "OUTPUT": 45542,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune plateskirt + 1",
+          "BASE": 45542,
+          "OUTPUT": 46869,
+          "INPUT": 45542,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune plateskirt + 2",
+          "BASE": 45542,
+          "OUTPUT": 46872,
+          "INPUT": 46869,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune plateskirt + 3",
+          "BASE": 45542,
+          "OUTPUT": 46875,
+          "INPUT": 46872,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial plateskirt",
+          "BASE": 45542,
+          "OUTPUT": 46878,
+          "INPUT": 46875,
+          "STACKABLE": false
+        }
+      },
+      "PLATEBODY": {
+        "0": {
+          "NAME": "Rune platebody",
+          "BASE": 45543,
+          "OUTPUT": 45543,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune platebody + 1",
+          "BASE": 45543,
+          "OUTPUT": 46879,
+          "INPUT": 45543,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune platebody + 2",
+          "BASE": 45543,
+          "OUTPUT": 46882,
+          "INPUT": 46879,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune platebody + 3",
+          "BASE": 45543,
+          "OUTPUT": 46885,
+          "INPUT": 46882,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial platebody",
+          "BASE": 45543,
+          "OUTPUT": 46888,
+          "INPUT": 46885,
+          "STACKABLE": false
+        }
+      },
+      "CHAINBODY": {
+        "0": {
+          "NAME": "Rune chainbody",
+          "BASE": 45544,
+          "OUTPUT": 45544,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune chainbody + 1",
+          "BASE": 45544,
+          "OUTPUT": 46889,
+          "INPUT": 45544,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune chainbody + 2",
+          "BASE": 45544,
+          "OUTPUT": 46892,
+          "INPUT": 46889,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune chainbody + 3",
+          "BASE": 45544,
+          "OUTPUT": 46895,
+          "INPUT": 46892,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial chainbody",
+          "BASE": 45544,
+          "OUTPUT": 46898,
+          "INPUT": 46895,
+          "STACKABLE": false
+        }
+      },
+      "SQUARE_SHIELD": {
+        "0": {
+          "NAME": "Rune square shield",
+          "BASE": 45545,
+          "OUTPUT": 45545,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune square shield + 1",
+          "BASE": 45545,
+          "OUTPUT": 46899,
+          "INPUT": 45545,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune square shield + 2",
+          "BASE": 45545,
+          "OUTPUT": 46902,
+          "INPUT": 46899,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune square shield + 3",
+          "BASE": 45545,
+          "OUTPUT": 46905,
+          "INPUT": 46902,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial square shield",
+          "BASE": 45545,
+          "OUTPUT": 46908,
+          "INPUT": 46905,
+          "STACKABLE": false
+        }
+      },
+      "KITESHIELD": {
+        "0": {
+          "NAME": "Rune kiteshield",
+          "BASE": 45546,
+          "OUTPUT": 45546,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune kiteshield + 1",
+          "BASE": 45546,
+          "OUTPUT": 46909,
+          "INPUT": 45546,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune kiteshield + 2",
+          "BASE": 45546,
+          "OUTPUT": 46912,
+          "INPUT": 46909,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune kiteshield + 3",
+          "BASE": 45546,
+          "OUTPUT": 46915,
+          "INPUT": 46912,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial kiteshield",
+          "BASE": 45546,
+          "OUTPUT": 46918,
+          "INPUT": 46915,
+          "STACKABLE": false
+        }
+      },
+      "ARMOURED_BOOTS": {
+        "0": {
+          "NAME": "Rune armoured boots",
+          "BASE": 45547,
+          "OUTPUT": 45547,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune armoured boots + 1",
+          "BASE": 45547,
+          "OUTPUT": 46919,
+          "INPUT": 45547,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune armoured boots + 2",
+          "BASE": 45547,
+          "OUTPUT": 46922,
+          "INPUT": 46919,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune armoured boots + 3",
+          "BASE": 45547,
+          "OUTPUT": 46925,
+          "INPUT": 46922,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial armoured boots",
+          "BASE": 45547,
+          "OUTPUT": 46928,
+          "INPUT": 46925,
+          "STACKABLE": false
+        }
+      },
+      "PICKAXE": {
+        "0": {
+          "NAME": "Rune pickaxe",
+          "BASE": 45548,
+          "OUTPUT": 45548,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune pickaxe + 1",
+          "BASE": 45548,
+          "OUTPUT": 46942,
+          "INPUT": 45548,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune pickaxe + 2",
+          "BASE": 45548,
+          "OUTPUT": 46945,
+          "INPUT": 46942,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune pickaxe + 3",
+          "BASE": 45548,
+          "OUTPUT": 46948,
+          "INPUT": 46945,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial pickaxe",
+          "BASE": 45548,
+          "OUTPUT": 46951,
+          "INPUT": 46948,
+          "STACKABLE": false
+        }
+      },
+      "GAUNTLETS": {
+        "0": {
+          "NAME": "Rune gauntlets",
+          "BASE": 46929,
+          "OUTPUT": 46929,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Rune gauntlets + 1",
+          "BASE": 46929,
+          "OUTPUT": 46932,
+          "INPUT": 46929,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Rune gauntlets + 2",
+          "BASE": 46929,
+          "OUTPUT": 46935,
+          "INPUT": 46932,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Rune gauntlets + 3",
+          "BASE": 46929,
+          "OUTPUT": 46938,
+          "INPUT": 46935,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Rune burial gauntlets",
+          "BASE": 46929,
+          "OUTPUT": 46941,
+          "INPUT": 46938,
+          "STACKABLE": false
+        }
+      },
+      "MATTOCK": {
+        "0": {
+          "NAME": "Rune mattock",
+          "BASE": 49554,
+          "OUTPUT": 49554,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "SILVER": {
+      "BAR": {
+        "0": {
+          "NAME": "Silver bar",
+          "BASE": 2355,
+          "OUTPUT": 2355,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "GOLD": {
+      "BAR": {
+        "0": {
+          "NAME": "Gold bar",
+          "BASE": 2357,
+          "OUTPUT": 2357,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "OIL": {
+      "LANTERN_FRAME": {
+        "0": {
+          "NAME": "Oil lantern frame",
+          "BASE": 4540,
+          "OUTPUT": 4540,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "BULLSEYE": {
+      "LANTERN": {
+        "0": {
+          "NAME": "Bullseye lantern",
+          "BASE": 4544,
+          "OUTPUT": 4544,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "OFF-HAND": {
+      "IRON_KNIFE": {
+        "0": {
+          "NAME": "Off-hand iron knife",
+          "BASE": 25896,
+          "OUTPUT": 25896,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "BRONZE_KNIFE": {
+        "0": {
+          "NAME": "Off-hand bronze knife",
+          "BASE": 25897,
+          "OUTPUT": 25897,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "STEEL_KNIFE": {
+        "0": {
+          "NAME": "Off-hand steel knife",
+          "BASE": 25898,
+          "OUTPUT": 25898,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "MITHRIL_KNIFE": {
+        "0": {
+          "NAME": "Off-hand mithril knife",
+          "BASE": 25899,
+          "OUTPUT": 25899,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "ADAMANT_KNIFE": {
+        "0": {
+          "NAME": "Off-hand adamant knife",
+          "BASE": 25900,
+          "OUTPUT": 25900,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "RUNE_KNIFE": {
+        "0": {
+          "NAME": "Off-hand rune knife",
+          "BASE": 25901,
+          "OUTPUT": 25901,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "BRONZE_THROWING_AXE": {
+        "0": {
+          "NAME": "Off-hand bronze throwing axe",
+          "BASE": 25903,
+          "OUTPUT": 25903,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "IRON_THROWING_AXE": {
+        "0": {
+          "NAME": "Off-hand iron throwing axe",
+          "BASE": 25904,
+          "OUTPUT": 25904,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "STEEL_THROWING_AXE": {
+        "0": {
+          "NAME": "Off-hand steel throwing axe",
+          "BASE": 25905,
+          "OUTPUT": 25905,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "MITHRIL_THROWING_AXE": {
+        "0": {
+          "NAME": "Off-hand mithril throwing axe",
+          "BASE": 25906,
+          "OUTPUT": 25906,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "ADAMANT_THROWING_AXE": {
+        "0": {
+          "NAME": "Off-hand adamant throwing axe",
+          "BASE": 25907,
+          "OUTPUT": 25907,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "RUNE_THROWING_AXE": {
+        "0": {
+          "NAME": "Off-hand rune throwing axe",
+          "BASE": 25908,
+          "OUTPUT": 25908,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      }
+    },
+    "PICKAXE": {
+      "OF_EARTH_AND_SONG": {
+        "0": {
+          "NAME": "Pickaxe of Earth and Song",
+          "BASE": 44834,
+          "OUTPUT": 44834,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "OF_LIFE_AND_DEATH": {
+        "0": {
+          "NAME": "Pickaxe of Life and Death",
+          "BASE": 57195,
+          "OUTPUT": 57195,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "ORIKALKUM": {
+      "BAR": {
+        "0": {
+          "NAME": "Orikalkum bar",
+          "BASE": 44838,
+          "OUTPUT": 44838,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "SET": {
+        "0": {
+          "NAME": "Orikalkum burial set",
+          "BASE": 45437,
+          "OUTPUT": 45437,
+          "INPUT": {
+            "0": 46626,
+            "1": 46600,
+            "2": 46665,
+            "3": 46652,
+            "4": 46613
+          },
+          "STACKABLE": false
+        }
+      },
+      "WARHAMMER": {
+        "0": {
+          "NAME": "Orikalkum warhammer",
+          "BASE": 46539,
+          "OUTPUT": 46539,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Orikalkum warhammer + 1",
+          "BASE": 46539,
+          "OUTPUT": 46542,
+          "INPUT": 46539,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Orikalkum warhammer + 2",
+          "BASE": 46539,
+          "OUTPUT": 46545,
+          "INPUT": 46542,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Orikalkum warhammer + 3",
+          "BASE": 46539,
+          "OUTPUT": 46548,
+          "INPUT": 46545,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Orikalkum burial warhammer",
+          "BASE": 46539,
+          "OUTPUT": 46551,
+          "INPUT": 46548,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_WARHAMMER": {
+        "0": {
+          "NAME": "Orikalkum off hand warhammer",
+          "BASE": 46552,
+          "OUTPUT": 46552,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Orikalkum off hand warhammer + 1",
+          "BASE": 46552,
+          "OUTPUT": 46555,
+          "INPUT": 46552,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Orikalkum off hand warhammer + 2",
+          "BASE": 46552,
+          "OUTPUT": 46558,
+          "INPUT": 46555,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Orikalkum off hand warhammer + 3",
+          "BASE": 46552,
+          "OUTPUT": 46561,
+          "INPUT": 46558,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Orikalkum burial off hand warhammer",
+          "BASE": 46552,
+          "OUTPUT": 46564,
+          "INPUT": 46561,
+          "STACKABLE": false
+        }
+      },
+      "2H_WARHAMMER": {
+        "0": {
+          "NAME": "Orikalkum 2h warhammer",
+          "BASE": 46565,
+          "OUTPUT": 46565,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Orikalkum 2h warhammer + 1",
+          "BASE": 46565,
+          "OUTPUT": 46568,
+          "INPUT": 46565,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Orikalkum 2h warhammer + 2",
+          "BASE": 46565,
+          "OUTPUT": 46571,
+          "INPUT": 46568,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Orikalkum 2h warhammer + 3",
+          "BASE": 46565,
+          "OUTPUT": 46574,
+          "INPUT": 46571,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Orikalkum burial 2h warhammer",
+          "BASE": 46565,
+          "OUTPUT": 46577,
+          "INPUT": 46574,
+          "STACKABLE": false
+        }
+      },
+      "PICKAXE": {
+        "0": {
+          "NAME": "Orikalkum pickaxe",
+          "BASE": 46578,
+          "OUTPUT": 46578,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Orikalkum pickaxe + 1",
+          "BASE": 46578,
+          "OUTPUT": 46581,
+          "INPUT": 46578,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Orikalkum pickaxe + 2",
+          "BASE": 46578,
+          "OUTPUT": 46584,
+          "INPUT": 46581,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Orikalkum pickaxe + 3",
+          "BASE": 46578,
+          "OUTPUT": 46587,
+          "INPUT": 46584,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Orikalkum burial pickaxe",
+          "BASE": 46578,
+          "OUTPUT": 46590,
+          "INPUT": 46587,
+          "STACKABLE": false
+        }
+      },
+      "FULL_HELM": {
+        "0": {
+          "NAME": "Orikalkum full helm",
+          "BASE": 46591,
+          "OUTPUT": 46591,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Orikalkum full helm + 1",
+          "BASE": 46591,
+          "OUTPUT": 46594,
+          "INPUT": 46591,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Orikalkum full helm + 2",
+          "BASE": 46591,
+          "OUTPUT": 46597,
+          "INPUT": 46594,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Orikalkum full helm + 3",
+          "BASE": 46591,
+          "OUTPUT": 46600,
+          "INPUT": 46597,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Orikalkum burial full helm",
+          "BASE": 46591,
+          "OUTPUT": 46603,
+          "INPUT": 46600,
+          "STACKABLE": false
+        }
+      },
+      "PLATELEGS": {
+        "0": {
+          "NAME": "Orikalkum platelegs",
+          "BASE": 46604,
+          "OUTPUT": 46604,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Orikalkum platelegs + 1",
+          "BASE": 46604,
+          "OUTPUT": 46607,
+          "INPUT": 46604,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Orikalkum platelegs + 2",
+          "BASE": 46604,
+          "OUTPUT": 46610,
+          "INPUT": 46607,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Orikalkum platelegs + 3",
+          "BASE": 46604,
+          "OUTPUT": 46613,
+          "INPUT": 46610,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Orikalkum burial platelegs",
+          "BASE": 46604,
+          "OUTPUT": 46616,
+          "INPUT": 46613,
+          "STACKABLE": false
+        }
+      },
+      "PLATEBODY": {
+        "0": {
+          "NAME": "Orikalkum platebody",
+          "BASE": 46617,
+          "OUTPUT": 46617,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Orikalkum platebody + 1",
+          "BASE": 46617,
+          "OUTPUT": 46620,
+          "INPUT": 46617,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Orikalkum platebody + 2",
+          "BASE": 46617,
+          "OUTPUT": 46623,
+          "INPUT": 46620,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Orikalkum platebody + 3",
+          "BASE": 46617,
+          "OUTPUT": 46626,
+          "INPUT": 46623,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Orikalkum burial platebody",
+          "BASE": 46617,
+          "OUTPUT": 46629,
+          "INPUT": 46626,
+          "STACKABLE": false
+        }
+      },
+      "KITESHIELD": {
+        "0": {
+          "NAME": "Orikalkum kiteshield",
+          "BASE": 46630,
+          "OUTPUT": 46630,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Orikalkum kiteshield + 1",
+          "BASE": 46630,
+          "OUTPUT": 46633,
+          "INPUT": 46630,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Orikalkum kiteshield + 2",
+          "BASE": 46630,
+          "OUTPUT": 46636,
+          "INPUT": 46633,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Orikalkum kiteshield + 3",
+          "BASE": 46630,
+          "OUTPUT": 46639,
+          "INPUT": 46636,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Orikalkum burial kiteshield",
+          "BASE": 46630,
+          "OUTPUT": 46642,
+          "INPUT": 46639,
+          "STACKABLE": false
+        }
+      },
+      "ARMOURED_BOOTS": {
+        "0": {
+          "NAME": "Orikalkum armoured boots",
+          "BASE": 46643,
+          "OUTPUT": 46643,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Orikalkum armoured boots + 1",
+          "BASE": 46643,
+          "OUTPUT": 46646,
+          "INPUT": 46643,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Orikalkum armoured boots + 2",
+          "BASE": 46643,
+          "OUTPUT": 46649,
+          "INPUT": 46646,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Orikalkum armoured boots + 3",
+          "BASE": 46643,
+          "OUTPUT": 46652,
+          "INPUT": 46649,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Orikalkum burial armoured boots",
+          "BASE": 46643,
+          "OUTPUT": 46655,
+          "INPUT": 46652,
+          "STACKABLE": false
+        }
+      },
+      "GAUNTLETS": {
+        "0": {
+          "NAME": "Orikalkum gauntlets",
+          "BASE": 46656,
+          "OUTPUT": 46656,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Orikalkum gauntlets + 1",
+          "BASE": 46656,
+          "OUTPUT": 46659,
+          "INPUT": 46656,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Orikalkum gauntlets + 2",
+          "BASE": 46656,
+          "OUTPUT": 46662,
+          "INPUT": 46659,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Orikalkum gauntlets + 3",
+          "BASE": 46656,
+          "OUTPUT": 46665,
+          "INPUT": 46662,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Orikalkum burial gauntlets",
+          "BASE": 46656,
+          "OUTPUT": 46668,
+          "INPUT": 46665,
+          "STACKABLE": false
+        }
+      },
+      "MATTOCK": {
+        "0": {
+          "NAME": "Orikalkum mattock",
+          "BASE": 49557,
+          "OUTPUT": 49557,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "NECRONIUM": {
+      "BAR": {
+        "0": {
+          "NAME": "Necronium bar",
+          "BASE": 44840,
+          "OUTPUT": 44840,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "SET": {
+        "0": {
+          "NAME": "Necronium burial set",
+          "BASE": 45438,
+          "OUTPUT": 45438,
+          "INPUT": {
+            "0": 46455,
+            "1": 46403,
+            "2": 46533,
+            "3": 46507,
+            "4": 46429
+          },
+          "STACKABLE": false
+        }
+      },
+      "BATTLEAXE": {
+        "0": {
+          "NAME": "Necronium battleaxe",
+          "BASE": 46294,
+          "OUTPUT": 46294,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Necronium battleaxe + 1",
+          "BASE": 46294,
+          "OUTPUT": 46299,
+          "INPUT": 46294,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Necronium battleaxe + 2",
+          "BASE": 46294,
+          "OUTPUT": 46304,
+          "INPUT": 46299,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Necronium battleaxe + 3",
+          "BASE": 46294,
+          "OUTPUT": 46309,
+          "INPUT": 46304,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Necronium battleaxe + 4",
+          "BASE": 46294,
+          "OUTPUT": 46314,
+          "INPUT": 46309,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Necronium burial battleaxe",
+          "BASE": 46294,
+          "OUTPUT": 46319,
+          "INPUT": 46314,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_BATTLEAXE": {
+        "0": {
+          "NAME": "Necronium off hand battleaxe",
+          "BASE": 46320,
+          "OUTPUT": 46320,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Necronium off hand battleaxe + 1",
+          "BASE": 46320,
+          "OUTPUT": 46325,
+          "INPUT": 46320,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Necronium off hand battleaxe + 2",
+          "BASE": 46320,
+          "OUTPUT": 46330,
+          "INPUT": 46325,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Necronium off hand battleaxe + 3",
+          "BASE": 46320,
+          "OUTPUT": 46335,
+          "INPUT": 46330,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Necronium off hand battleaxe + 4",
+          "BASE": 46320,
+          "OUTPUT": 46340,
+          "INPUT": 46335,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Necronium burial off hand battleaxe",
+          "BASE": 46320,
+          "OUTPUT": 46345,
+          "INPUT": 46340,
+          "STACKABLE": false
+        }
+      },
+      "2H_GREATAXE": {
+        "0": {
+          "NAME": "Necronium 2h greataxe",
+          "BASE": 46346,
+          "OUTPUT": 46346,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Necronium 2h greataxe + 1",
+          "BASE": 46346,
+          "OUTPUT": 46351,
+          "INPUT": 46346,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Necronium 2h greataxe + 2",
+          "BASE": 46346,
+          "OUTPUT": 46356,
+          "INPUT": 46351,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Necronium 2h greataxe + 3",
+          "BASE": 46346,
+          "OUTPUT": 46361,
+          "INPUT": 46356,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Necronium 2h greataxe + 4",
+          "BASE": 46346,
+          "OUTPUT": 46366,
+          "INPUT": 46361,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Necronium burial 2h greataxe",
+          "BASE": 46346,
+          "OUTPUT": 46371,
+          "INPUT": 46366,
+          "STACKABLE": false
+        }
+      },
+      "PICKAXE": {
+        "0": {
+          "NAME": "Necronium pickaxe",
+          "BASE": 46372,
+          "OUTPUT": 46372,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Necronium pickaxe + 1",
+          "BASE": 46372,
+          "OUTPUT": 46374,
+          "INPUT": 46372,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Necronium pickaxe + 2",
+          "BASE": 46372,
+          "OUTPUT": 46376,
+          "INPUT": 46374,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Necronium pickaxe + 3",
+          "BASE": 46372,
+          "OUTPUT": 46378,
+          "INPUT": 46376,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Necronium pickaxe + 4",
+          "BASE": 46372,
+          "OUTPUT": 46380,
+          "INPUT": 46378,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Necronium burial pickaxe",
+          "BASE": 46372,
+          "OUTPUT": 46382,
+          "INPUT": 46380,
+          "STACKABLE": false
+        }
+      },
+      "FULL_HELM": {
+        "0": {
+          "NAME": "Necronium full helm",
+          "BASE": 46383,
+          "OUTPUT": 46383,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Necronium full helm + 1",
+          "BASE": 46383,
+          "OUTPUT": 46388,
+          "INPUT": 46383,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Necronium full helm + 2",
+          "BASE": 46383,
+          "OUTPUT": 46393,
+          "INPUT": 46388,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Necronium full helm + 3",
+          "BASE": 46383,
+          "OUTPUT": 46398,
+          "INPUT": 46393,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Necronium full helm + 4",
+          "BASE": 46383,
+          "OUTPUT": 46403,
+          "INPUT": 46398,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Necronium burial full helm",
+          "BASE": 46383,
+          "OUTPUT": 46408,
+          "INPUT": 46403,
+          "STACKABLE": false
+        }
+      },
+      "PLATELEGS": {
+        "0": {
+          "NAME": "Necronium platelegs",
+          "BASE": 46409,
+          "OUTPUT": 46409,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Necronium platelegs + 1",
+          "BASE": 46409,
+          "OUTPUT": 46414,
+          "INPUT": 46409,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Necronium platelegs + 2",
+          "BASE": 46409,
+          "OUTPUT": 46419,
+          "INPUT": 46414,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Necronium platelegs + 3",
+          "BASE": 46409,
+          "OUTPUT": 46424,
+          "INPUT": 46419,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Necronium platelegs + 4",
+          "BASE": 46409,
+          "OUTPUT": 46429,
+          "INPUT": 46424,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Necronium burial platelegs",
+          "BASE": 46409,
+          "OUTPUT": 46434,
+          "INPUT": 46429,
+          "STACKABLE": false
+        }
+      },
+      "PLATEBODY": {
+        "0": {
+          "NAME": "Necronium platebody",
+          "BASE": 46435,
+          "OUTPUT": 46435,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Necronium platebody + 1",
+          "BASE": 46435,
+          "OUTPUT": 46440,
+          "INPUT": 46435,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Necronium platebody + 2",
+          "BASE": 46435,
+          "OUTPUT": 46445,
+          "INPUT": 46440,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Necronium platebody + 3",
+          "BASE": 46435,
+          "OUTPUT": 46450,
+          "INPUT": 46445,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Necronium platebody + 4",
+          "BASE": 46435,
+          "OUTPUT": 46455,
+          "INPUT": 46450,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Necronium burial platebody",
+          "BASE": 46435,
+          "OUTPUT": 46460,
+          "INPUT": 46455,
+          "STACKABLE": false
+        }
+      },
+      "KITESHIELD": {
+        "0": {
+          "NAME": "Necronium kiteshield",
+          "BASE": 46461,
+          "OUTPUT": 46461,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Necronium kiteshield + 1",
+          "BASE": 46461,
+          "OUTPUT": 46466,
+          "INPUT": 46461,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Necronium kiteshield + 2",
+          "BASE": 46461,
+          "OUTPUT": 46471,
+          "INPUT": 46466,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Necronium kiteshield + 3",
+          "BASE": 46461,
+          "OUTPUT": 46476,
+          "INPUT": 46471,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Necronium kiteshield + 4",
+          "BASE": 46461,
+          "OUTPUT": 46481,
+          "INPUT": 46476,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Necronium burial kiteshield",
+          "BASE": 46461,
+          "OUTPUT": 46486,
+          "INPUT": 46481,
+          "STACKABLE": false
+        }
+      },
+      "ARMOURED_BOOTS": {
+        "0": {
+          "NAME": "Necronium armoured boots",
+          "BASE": 46487,
+          "OUTPUT": 46487,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Necronium armoured boots + 1",
+          "BASE": 46487,
+          "OUTPUT": 46492,
+          "INPUT": 46487,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Necronium armoured boots + 2",
+          "BASE": 46487,
+          "OUTPUT": 46497,
+          "INPUT": 46492,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Necronium armoured boots + 3",
+          "BASE": 46487,
+          "OUTPUT": 46502,
+          "INPUT": 46497,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Necronium armoured boots + 4",
+          "BASE": 46487,
+          "OUTPUT": 46507,
+          "INPUT": 46502,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Necronium burial armoured boots",
+          "BASE": 46487,
+          "OUTPUT": 46512,
+          "INPUT": 46507,
+          "STACKABLE": false
+        }
+      },
+      "GAUNTLETS": {
+        "0": {
+          "NAME": "Necronium gauntlets",
+          "BASE": 46513,
+          "OUTPUT": 46513,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Necronium gauntlets + 1",
+          "BASE": 46513,
+          "OUTPUT": 46518,
+          "INPUT": 46513,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Necronium gauntlets + 2",
+          "BASE": 46513,
+          "OUTPUT": 46523,
+          "INPUT": 46518,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Necronium gauntlets + 3",
+          "BASE": 46513,
+          "OUTPUT": 46528,
+          "INPUT": 46523,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Necronium gauntlets + 4",
+          "BASE": 46513,
+          "OUTPUT": 46533,
+          "INPUT": 46528,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Necronium burial gauntlets",
+          "BASE": 46513,
+          "OUTPUT": 46538,
+          "INPUT": 46533,
+          "STACKABLE": false
+        }
+      },
+      "MATTOCK": {
+        "0": {
+          "NAME": "Necronium mattock",
+          "BASE": 49560,
+          "OUTPUT": 49560,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "BANE": {
+      "BAR": {
+        "0": {
+          "NAME": "Bane bar",
+          "BASE": 44842,
+          "OUTPUT": 44842,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "LONGSWORD": {
+        "0": {
+          "NAME": "Bane longsword",
+          "BASE": 45076,
+          "OUTPUT": 45076,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Bane longsword + 1",
+          "BASE": 45076,
+          "OUTPUT": 45081,
+          "INPUT": 45076,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Bane longsword + 2",
+          "BASE": 45076,
+          "OUTPUT": 45086,
+          "INPUT": 45081,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Bane longsword + 3",
+          "BASE": 45076,
+          "OUTPUT": 45091,
+          "INPUT": 45086,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Bane longsword + 4",
+          "BASE": 45076,
+          "OUTPUT": 45096,
+          "INPUT": 45091,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Bane burial longsword",
+          "BASE": 45076,
+          "OUTPUT": 45101,
+          "INPUT": 45096,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_LONGSWORD": {
+        "0": {
+          "NAME": "Bane off hand longsword",
+          "BASE": 45102,
+          "OUTPUT": 45102,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Bane off hand longsword + 1",
+          "BASE": 45102,
+          "OUTPUT": 45107,
+          "INPUT": 45102,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Bane off hand longsword + 2",
+          "BASE": 45102,
+          "OUTPUT": 45112,
+          "INPUT": 45107,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Bane off hand longsword + 3",
+          "BASE": 45102,
+          "OUTPUT": 45117,
+          "INPUT": 45112,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Bane off hand longsword + 4",
+          "BASE": 45102,
+          "OUTPUT": 45122,
+          "INPUT": 45117,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Bane burial off hand longsword",
+          "BASE": 45102,
+          "OUTPUT": 45127,
+          "INPUT": 45122,
+          "STACKABLE": false
+        }
+      },
+      "2H_SWORD": {
+        "0": {
+          "NAME": "Bane 2h sword",
+          "BASE": 45128,
+          "OUTPUT": 45128,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Bane 2h sword + 1",
+          "BASE": 45128,
+          "OUTPUT": 45133,
+          "INPUT": 45128,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Bane 2h sword + 2",
+          "BASE": 45128,
+          "OUTPUT": 45138,
+          "INPUT": 45133,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Bane 2h sword + 3",
+          "BASE": 45128,
+          "OUTPUT": 45143,
+          "INPUT": 45138,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Bane 2h sword + 4",
+          "BASE": 45128,
+          "OUTPUT": 45148,
+          "INPUT": 45143,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Bane burial 2h sword",
+          "BASE": 45128,
+          "OUTPUT": 45153,
+          "INPUT": 45148,
+          "STACKABLE": false
+        }
+      },
+      "PICKAXE": {
+        "0": {
+          "NAME": "Bane pickaxe",
+          "BASE": 45154,
+          "OUTPUT": 45154,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Bane pickaxe + 1",
+          "BASE": 45154,
+          "OUTPUT": 45156,
+          "INPUT": 45154,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Bane pickaxe + 2",
+          "BASE": 45154,
+          "OUTPUT": 45158,
+          "INPUT": 45156,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Bane pickaxe + 3",
+          "BASE": 45154,
+          "OUTPUT": 45160,
+          "INPUT": 45158,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Bane pickaxe + 4",
+          "BASE": 45154,
+          "OUTPUT": 45162,
+          "INPUT": 45160,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Bane burial pickaxe",
+          "BASE": 45154,
+          "OUTPUT": 45164,
+          "INPUT": 45162,
+          "STACKABLE": false
+        }
+      },
+      "FULL_HELM": {
+        "0": {
+          "NAME": "Bane full helm",
+          "BASE": 45165,
+          "OUTPUT": 45165,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Bane full helm + 1",
+          "BASE": 45165,
+          "OUTPUT": 45170,
+          "INPUT": 45165,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Bane full helm + 2",
+          "BASE": 45165,
+          "OUTPUT": 45175,
+          "INPUT": 45170,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Bane full helm + 3",
+          "BASE": 45165,
+          "OUTPUT": 45180,
+          "INPUT": 45175,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Bane full helm + 4",
+          "BASE": 45165,
+          "OUTPUT": 45185,
+          "INPUT": 45180,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Bane burial full helm",
+          "BASE": 45165,
+          "OUTPUT": 45190,
+          "INPUT": 45185,
+          "STACKABLE": false
+        }
+      },
+      "PLATELEGS": {
+        "0": {
+          "NAME": "Bane platelegs",
+          "BASE": 45191,
+          "OUTPUT": 45191,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Bane platelegs + 1",
+          "BASE": 45191,
+          "OUTPUT": 45196,
+          "INPUT": 45191,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Bane platelegs + 2",
+          "BASE": 45191,
+          "OUTPUT": 45201,
+          "INPUT": 45196,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Bane platelegs + 3",
+          "BASE": 45191,
+          "OUTPUT": 45206,
+          "INPUT": 45201,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Bane platelegs + 4",
+          "BASE": 45191,
+          "OUTPUT": 45211,
+          "INPUT": 45206,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Bane burial platelegs",
+          "BASE": 45191,
+          "OUTPUT": 45216,
+          "INPUT": 45211,
+          "STACKABLE": false
+        }
+      },
+      "PLATEBODY": {
+        "0": {
+          "NAME": "Bane platebody",
+          "BASE": 45217,
+          "OUTPUT": 45217,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Bane platebody + 1",
+          "BASE": 45217,
+          "OUTPUT": 45222,
+          "INPUT": 45217,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Bane platebody + 2",
+          "BASE": 45217,
+          "OUTPUT": 45227,
+          "INPUT": 45222,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Bane platebody + 3",
+          "BASE": 45217,
+          "OUTPUT": 45232,
+          "INPUT": 45227,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Bane platebody + 4",
+          "BASE": 45217,
+          "OUTPUT": 45237,
+          "INPUT": 45232,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Bane burial platebody",
+          "BASE": 45217,
+          "OUTPUT": 45242,
+          "INPUT": 45237,
+          "STACKABLE": false
+        }
+      },
+      "SQUARE_SHIELD": {
+        "0": {
+          "NAME": "Bane square shield",
+          "BASE": 45243,
+          "OUTPUT": 45243,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Bane square shield + 1",
+          "BASE": 45243,
+          "OUTPUT": 45248,
+          "INPUT": 45243,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Bane square shield + 2",
+          "BASE": 45243,
+          "OUTPUT": 45253,
+          "INPUT": 45248,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Bane square shield + 3",
+          "BASE": 45243,
+          "OUTPUT": 45258,
+          "INPUT": 45253,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Bane square shield + 4",
+          "BASE": 45243,
+          "OUTPUT": 45263,
+          "INPUT": 45258,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Bane burial square shield",
+          "BASE": 45243,
+          "OUTPUT": 45268,
+          "INPUT": 45263,
+          "STACKABLE": false
+        }
+      },
+      "ARMOURED_BOOTS": {
+        "0": {
+          "NAME": "Bane armoured boots",
+          "BASE": 45269,
+          "OUTPUT": 45269,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Bane armoured boots + 1",
+          "BASE": 45269,
+          "OUTPUT": 45274,
+          "INPUT": 45269,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Bane armoured boots + 2",
+          "BASE": 45269,
+          "OUTPUT": 45279,
+          "INPUT": 45274,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Bane armoured boots + 3",
+          "BASE": 45269,
+          "OUTPUT": 45284,
+          "INPUT": 45279,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Bane armoured boots + 4",
+          "BASE": 45269,
+          "OUTPUT": 45289,
+          "INPUT": 45284,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Bane burial armoured boots",
+          "BASE": 45269,
+          "OUTPUT": 45294,
+          "INPUT": 45289,
+          "STACKABLE": false
+        }
+      },
+      "GAUNTLETS": {
+        "0": {
+          "NAME": "Bane gauntlets",
+          "BASE": 45295,
+          "OUTPUT": 45295,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Bane gauntlets + 1",
+          "BASE": 45295,
+          "OUTPUT": 45300,
+          "INPUT": 45295,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Bane gauntlets + 2",
+          "BASE": 45295,
+          "OUTPUT": 45305,
+          "INPUT": 45300,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Bane gauntlets + 3",
+          "BASE": 45295,
+          "OUTPUT": 45310,
+          "INPUT": 45305,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Bane gauntlets + 4",
+          "BASE": 45295,
+          "OUTPUT": 45315,
+          "INPUT": 45310,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Bane burial gauntlets",
+          "BASE": 45295,
+          "OUTPUT": 45320,
+          "INPUT": 45315,
+          "STACKABLE": false
+        }
+      },
+      "SET": {
+        "0": {
+          "NAME": "Bane burial set",
+          "BASE": 45439,
+          "OUTPUT": 45439,
+          "INPUT": {
+            "0": 45237,
+            "1": 45185,
+            "2": 45315,
+            "3": 45289,
+            "4": 45211
+          },
+          "STACKABLE": false
+        }
+      },
+      "MATTOCK": {
+        "0": {
+          "NAME": "Bane mattock",
+          "BASE": 49562,
+          "OUTPUT": 49562,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "ELDER RUNE": {
+      "BAR": {
+        "0": {
+          "NAME": "Elder rune bar",
+          "BASE": 44844,
+          "OUTPUT": 44844,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "SET": {
+        "0": {
+          "NAME": "Elder rune burial set",
+          "BASE": 45440,
+          "OUTPUT": 45440,
+          "INPUT": {
+            "0": 45742,
+            "1": 45680,
+            "2": 45835,
+            "3": 45804,
+            "4": 45711
+          },
+          "STACKABLE": false
+        }
+      },
+      "LONGSWORD": {
+        "0": {
+          "NAME": "Elder rune longsword",
+          "BASE": 45549,
+          "OUTPUT": 45549,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Elder rune longsword + 1",
+          "BASE": 45549,
+          "OUTPUT": 45554,
+          "INPUT": 45549,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Elder rune longsword + 2",
+          "BASE": 45549,
+          "OUTPUT": 45559,
+          "INPUT": 45554,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Elder rune longsword + 3",
+          "BASE": 45549,
+          "OUTPUT": 45564,
+          "INPUT": 45559,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Elder rune longsword + 4",
+          "BASE": 45549,
+          "OUTPUT": 45569,
+          "INPUT": 45564,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Elder rune longsword + 5",
+          "BASE": 45549,
+          "OUTPUT": 45574,
+          "INPUT": 45569,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Elder rune burial longsword",
+          "BASE": 45549,
+          "OUTPUT": 45579,
+          "INPUT": 45574,
+          "STACKABLE": false
+        }
+      },
+      "OFF_HAND_LONGSWORD": {
+        "0": {
+          "NAME": "Elder rune off hand longsword",
+          "BASE": 45580,
+          "OUTPUT": 45580,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Elder rune off hand longsword + 1",
+          "BASE": 45580,
+          "OUTPUT": 45585,
+          "INPUT": 45580,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Elder rune off hand longsword + 2",
+          "BASE": 45580,
+          "OUTPUT": 45590,
+          "INPUT": 45585,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Elder rune off hand longsword + 3",
+          "BASE": 45580,
+          "OUTPUT": 45595,
+          "INPUT": 45590,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Elder rune off hand longsword + 4",
+          "BASE": 45580,
+          "OUTPUT": 45600,
+          "INPUT": 45595,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Elder rune off hand longsword + 5",
+          "BASE": 45580,
+          "OUTPUT": 45605,
+          "INPUT": 45600,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Elder rune burial off hand longsword",
+          "BASE": 45580,
+          "OUTPUT": 45610,
+          "INPUT": 45605,
+          "STACKABLE": false
+        }
+      },
+      "2H_SWORD": {
+        "0": {
+          "NAME": "Elder rune 2h sword",
+          "BASE": 45611,
+          "OUTPUT": 45611,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Elder rune 2h sword + 1",
+          "BASE": 45611,
+          "OUTPUT": 45616,
+          "INPUT": 45611,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Elder rune 2h sword + 2",
+          "BASE": 45611,
+          "OUTPUT": 45621,
+          "INPUT": 45616,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Elder rune 2h sword + 3",
+          "BASE": 45611,
+          "OUTPUT": 45626,
+          "INPUT": 45621,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Elder rune 2h sword + 4",
+          "BASE": 45611,
+          "OUTPUT": 45631,
+          "INPUT": 45626,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Elder rune 2h sword + 5",
+          "BASE": 45611,
+          "OUTPUT": 45636,
+          "INPUT": 45631,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Elder rune burial 2h sword",
+          "BASE": 45611,
+          "OUTPUT": 45641,
+          "INPUT": 45636,
+          "STACKABLE": false
+        }
+      },
+      "PICKAXE": {
+        "0": {
+          "NAME": "Elder rune pickaxe",
+          "BASE": 45642,
+          "OUTPUT": 45642,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Elder rune pickaxe + 1",
+          "BASE": 45642,
+          "OUTPUT": 45644,
+          "INPUT": 45642,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Elder rune pickaxe + 2",
+          "BASE": 45642,
+          "OUTPUT": 45646,
+          "INPUT": 45644,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Elder rune pickaxe + 3",
+          "BASE": 45642,
+          "OUTPUT": 45648,
+          "INPUT": 45646,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Elder rune pickaxe + 4",
+          "BASE": 45642,
+          "OUTPUT": 45650,
+          "INPUT": 45648,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Elder rune pickaxe + 5",
+          "BASE": 45642,
+          "OUTPUT": 45652,
+          "INPUT": 45650,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Elder rune burial pickaxe",
+          "BASE": 45642,
+          "OUTPUT": 45654,
+          "INPUT": 45652,
+          "STACKABLE": false
+        }
+      },
+      "FULL_HELM": {
+        "0": {
+          "NAME": "Elder rune full helm",
+          "BASE": 45655,
+          "OUTPUT": 45655,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Elder rune full helm + 1",
+          "BASE": 45655,
+          "OUTPUT": 45660,
+          "INPUT": 45655,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Elder rune full helm + 2",
+          "BASE": 45655,
+          "OUTPUT": 45665,
+          "INPUT": 45660,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Elder rune full helm + 3",
+          "BASE": 45655,
+          "OUTPUT": 45670,
+          "INPUT": 45665,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Elder rune full helm + 4",
+          "BASE": 45655,
+          "OUTPUT": 45675,
+          "INPUT": 45670,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Elder rune full helm + 5",
+          "BASE": 45655,
+          "OUTPUT": 45680,
+          "INPUT": 45675,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Elder rune burial full helm",
+          "BASE": 45655,
+          "OUTPUT": 45685,
+          "INPUT": 45680,
+          "STACKABLE": false
+        }
+      },
+      "PLATELEGS": {
+        "0": {
+          "NAME": "Elder rune platelegs",
+          "BASE": 45686,
+          "OUTPUT": 45686,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Elder rune platelegs + 1",
+          "BASE": 45686,
+          "OUTPUT": 45691,
+          "INPUT": 45686,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Elder rune platelegs + 2",
+          "BASE": 45686,
+          "OUTPUT": 45696,
+          "INPUT": 45691,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Elder rune platelegs + 3",
+          "BASE": 45686,
+          "OUTPUT": 45701,
+          "INPUT": 45696,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Elder rune platelegs + 4",
+          "BASE": 45686,
+          "OUTPUT": 45706,
+          "INPUT": 45701,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Elder rune platelegs + 5",
+          "BASE": 45686,
+          "OUTPUT": 45711,
+          "INPUT": 45706,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Elder rune burial platelegs",
+          "BASE": 45686,
+          "OUTPUT": 45716,
+          "INPUT": 45711,
+          "STACKABLE": false
+        }
+      },
+      "PLATEBODY": {
+        "0": {
+          "NAME": "Elder rune platebody",
+          "BASE": 45717,
+          "OUTPUT": 45717,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Elder rune platebody + 1",
+          "BASE": 45717,
+          "OUTPUT": 45722,
+          "INPUT": 45717,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Elder rune platebody + 2",
+          "BASE": 45717,
+          "OUTPUT": 45727,
+          "INPUT": 45722,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Elder rune platebody + 3",
+          "BASE": 45717,
+          "OUTPUT": 45732,
+          "INPUT": 45727,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Elder rune platebody + 4",
+          "BASE": 45717,
+          "OUTPUT": 45737,
+          "INPUT": 45732,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Elder rune platebody + 5",
+          "BASE": 45717,
+          "OUTPUT": 45742,
+          "INPUT": 45737,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Elder rune burial platebody",
+          "BASE": 45717,
+          "OUTPUT": 45747,
+          "INPUT": 45742,
+          "STACKABLE": false
+        }
+      },
+      "ROUND_SHIELD": {
+        "0": {
+          "NAME": "Elder rune round shield",
+          "BASE": 45748,
+          "OUTPUT": 45748,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Elder rune round shield + 1",
+          "BASE": 45748,
+          "OUTPUT": 45753,
+          "INPUT": 45748,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Elder rune round shield + 2",
+          "BASE": 45748,
+          "OUTPUT": 45758,
+          "INPUT": 45753,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Elder rune round shield + 3",
+          "BASE": 45748,
+          "OUTPUT": 45763,
+          "INPUT": 45758,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Elder rune round shield + 4",
+          "BASE": 45748,
+          "OUTPUT": 45768,
+          "INPUT": 45763,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Elder rune round shield + 5",
+          "BASE": 45748,
+          "OUTPUT": 45773,
+          "INPUT": 45768,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Elder rune burial round shield",
+          "BASE": 45748,
+          "OUTPUT": 45778,
+          "INPUT": 45773,
+          "STACKABLE": false
+        }
+      },
+      "ARMOURED_BOOTS": {
+        "0": {
+          "NAME": "Elder rune armoured boots",
+          "BASE": 45779,
+          "OUTPUT": 45779,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Elder rune armoured boots + 1",
+          "BASE": 45779,
+          "OUTPUT": 45784,
+          "INPUT": 45779,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Elder rune armoured boots + 2",
+          "BASE": 45779,
+          "OUTPUT": 45789,
+          "INPUT": 45784,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Elder rune armoured boots + 3",
+          "BASE": 45779,
+          "OUTPUT": 45794,
+          "INPUT": 45789,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Elder rune armoured boots + 4",
+          "BASE": 45779,
+          "OUTPUT": 45799,
+          "INPUT": 45794,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Elder rune armoured boots + 5",
+          "BASE": 45779,
+          "OUTPUT": 45804,
+          "INPUT": 45799,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Elder rune burial armoured boots",
+          "BASE": 45779,
+          "OUTPUT": 45809,
+          "INPUT": 45804,
+          "STACKABLE": false
+        }
+      },
+      "GAUNTLETS": {
+        "0": {
+          "NAME": "Elder rune gauntlets",
+          "BASE": 45810,
+          "OUTPUT": 45810,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Elder rune gauntlets + 1",
+          "BASE": 45810,
+          "OUTPUT": 45815,
+          "INPUT": 45810,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Elder rune gauntlets + 2",
+          "BASE": 45810,
+          "OUTPUT": 45820,
+          "INPUT": 45815,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Elder rune gauntlets + 3",
+          "BASE": 45810,
+          "OUTPUT": 45825,
+          "INPUT": 45820,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Elder rune gauntlets + 4",
+          "BASE": 45810,
+          "OUTPUT": 45830,
+          "INPUT": 45825,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Elder rune gauntlets + 5",
+          "BASE": 45810,
+          "OUTPUT": 45835,
+          "INPUT": 45830,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Elder rune burial gauntlets",
+          "BASE": 45810,
+          "OUTPUT": 45840,
+          "INPUT": 45835,
+          "STACKABLE": false
+        }
+      },
+      "MATTOCK": {
+        "0": {
+          "NAME": "Elder rune mattock",
+          "BASE": 49564,
+          "OUTPUT": 49564,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "PARTIALLY": {
+      "FOLDED_ALLOY_BAR": {
+        "0": {
+          "NAME": "Partially folded alloy bar",
+          "BASE": 45990,
+          "OUTPUT": 45990,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "MASTERWORK": {
+      "PLATE": {
+        "0": {
+          "NAME": "Masterwork plate",
+          "BASE": 45993,
+          "OUTPUT": 45993,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      },
+      "RIVETS": {
+        "0": {
+          "NAME": "Masterwork rivets",
+          "BASE": 46003,
+          "OUTPUT": 46003,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "ARMOUR_TRIM": {
+        "0": {
+          "NAME": "Masterwork armour trim",
+          "BASE": 46036,
+          "OUTPUT": 46036,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "ARMOUR": {
+      "SPIKES": {
+        "0": {
+          "NAME": "Armour spikes",
+          "BASE": 47071,
+          "OUTPUT": 47071,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "SPIKES_(ALLOY)": {
+        "0": {
+          "NAME": "Armour spikes (alloy)",
+          "BASE": 47872,
+          "OUTPUT": 47872,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      }
+    },
+    "DEATH": {
+      "GUARD": {
+        "0": {
+          "NAME": "Death guard",
+          "BASE": 55540,
+          "OUTPUT": 55540,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "SKULL": {
+      "LANTERN": {
+        "0": {
+          "NAME": "Skull lantern",
+          "BASE": 55542,
+          "OUTPUT": 55542,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "LESSER": {
+      "UNENSOULED_BAR": {
+        "0": {
+          "NAME": "Lesser unensouled bar",
+          "BASE": 55602,
+          "OUTPUT": 55602,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "UNENSOULED": {
+      "BAR": {
+        "0": {
+          "NAME": "Unensouled bar",
+          "BASE": 55604,
+          "OUTPUT": 55604,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "GREATER": {
+      "UNENSOULED_BAR": {
+        "0": {
+          "NAME": "Greater unensouled bar",
+          "BASE": 55606,
+          "OUTPUT": 55606,
+          "INPUT": null,
+          "STACKABLE": false
+        }
+      }
+    },
+    "PRIMAL": {
+      "ARMOURED_BOOTS": {
+        "0": {
+          "NAME": "Primal armoured boots",
+          "BASE": 57203,
+          "OUTPUT": 57203,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Primal armoured boots + 1",
+          "BASE": 57203,
+          "OUTPUT": 57208,
+          "INPUT": 57203,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Primal armoured boots + 2",
+          "BASE": 57203,
+          "OUTPUT": 57213,
+          "INPUT": 57208,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Primal armoured boots + 3",
+          "BASE": 57203,
+          "OUTPUT": 57218,
+          "INPUT": 57213,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Primal armoured boots + 4",
+          "BASE": 57203,
+          "OUTPUT": 57223,
+          "INPUT": 57218,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Primal armoured boots + 5",
+          "BASE": 57203,
+          "OUTPUT": 57228,
+          "INPUT": 57223,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Primal burial armoured boots",
+          "BASE": 57203,
+          "OUTPUT": 57233,
+          "INPUT": 57228,
+          "STACKABLE": false
+        }
+      },
+      "GAUNTLETS": {
+        "0": {
+          "NAME": "Primal gauntlets",
+          "BASE": 57234,
+          "OUTPUT": 57234,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Primal gauntlets + 1",
+          "BASE": 57234,
+          "OUTPUT": 57239,
+          "INPUT": 57234,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Primal gauntlets + 2",
+          "BASE": 57234,
+          "OUTPUT": 57244,
+          "INPUT": 57239,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Primal gauntlets + 3",
+          "BASE": 57234,
+          "OUTPUT": 57249,
+          "INPUT": 57244,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Primal gauntlets + 4",
+          "BASE": 57234,
+          "OUTPUT": 57254,
+          "INPUT": 57249,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Primal gauntlets + 5",
+          "BASE": 57234,
+          "OUTPUT": 57259,
+          "INPUT": 57254,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Primal burial gauntlets",
+          "BASE": 57234,
+          "OUTPUT": 57264,
+          "INPUT": 57259,
+          "STACKABLE": false
+        }
+      },
+      "FULL_HELM": {
+        "0": {
+          "NAME": "Primal full helm",
+          "BASE": 57265,
+          "OUTPUT": 57265,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Primal full helm + 1",
+          "BASE": 57265,
+          "OUTPUT": 57270,
+          "INPUT": 57265,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Primal full helm + 2",
+          "BASE": 57265,
+          "OUTPUT": 57275,
+          "INPUT": 57270,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Primal full helm + 3",
+          "BASE": 57265,
+          "OUTPUT": 57280,
+          "INPUT": 57275,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Primal full helm + 4",
+          "BASE": 57265,
+          "OUTPUT": 57285,
+          "INPUT": 57280,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Primal full helm + 5",
+          "BASE": 57265,
+          "OUTPUT": 57290,
+          "INPUT": 57285,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Primal burial full helm",
+          "BASE": 57265,
+          "OUTPUT": 57295,
+          "INPUT": 57290,
+          "STACKABLE": false
+        }
+      },
+      "KITESHIELD": {
+        "0": {
+          "NAME": "Primal kiteshield",
+          "BASE": 57296,
+          "OUTPUT": 57296,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Primal kiteshield + 1",
+          "BASE": 57296,
+          "OUTPUT": 57301,
+          "INPUT": 57296,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Primal kiteshield + 2",
+          "BASE": 57296,
+          "OUTPUT": 57306,
+          "INPUT": 57301,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Primal kiteshield + 3",
+          "BASE": 57296,
+          "OUTPUT": 57311,
+          "INPUT": 57306,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Primal kiteshield + 4",
+          "BASE": 57296,
+          "OUTPUT": 57316,
+          "INPUT": 57311,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Primal kiteshield + 5",
+          "BASE": 57296,
+          "OUTPUT": 57321,
+          "INPUT": 57316,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Primal burial kiteshield",
+          "BASE": 57296,
+          "OUTPUT": 57326,
+          "INPUT": 57321,
+          "STACKABLE": false
+        }
+      },
+      "PLATEBODY": {
+        "0": {
+          "NAME": "Primal platebody",
+          "BASE": 57327,
+          "OUTPUT": 57327,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Primal platebody + 1",
+          "BASE": 57327,
+          "OUTPUT": 57332,
+          "INPUT": 57327,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Primal platebody + 2",
+          "BASE": 57327,
+          "OUTPUT": 57337,
+          "INPUT": 57332,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Primal platebody + 3",
+          "BASE": 57327,
+          "OUTPUT": 57342,
+          "INPUT": 57337,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Primal platebody + 4",
+          "BASE": 57327,
+          "OUTPUT": 57347,
+          "INPUT": 57342,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Primal platebody + 5",
+          "BASE": 57327,
+          "OUTPUT": 57352,
+          "INPUT": 57347,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Primal burial platebody",
+          "BASE": 57327,
+          "OUTPUT": 57357,
+          "INPUT": 57352,
+          "STACKABLE": false
+        }
+      },
+      "PLATELEGS": {
+        "0": {
+          "NAME": "Primal platelegs",
+          "BASE": 57358,
+          "OUTPUT": 57358,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Primal platelegs + 1",
+          "BASE": 57358,
+          "OUTPUT": 57363,
+          "INPUT": 57358,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Primal platelegs + 2",
+          "BASE": 57358,
+          "OUTPUT": 57368,
+          "INPUT": 57363,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Primal platelegs + 3",
+          "BASE": 57358,
+          "OUTPUT": 57373,
+          "INPUT": 57368,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Primal platelegs + 4",
+          "BASE": 57358,
+          "OUTPUT": 57378,
+          "INPUT": 57373,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Primal platelegs + 5",
+          "BASE": 57358,
+          "OUTPUT": 57383,
+          "INPUT": 57378,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Primal burial platelegs",
+          "BASE": 57358,
+          "OUTPUT": 57388,
+          "INPUT": 57383,
+          "STACKABLE": false
+        }
+      },
+      "ARMOUR_SPIKES": {
+        "0": {
+          "NAME": "Primal armour spikes",
+          "BASE": 57389,
+          "OUTPUT": 57389,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "PICKAXE": {
+        "0": {
+          "NAME": "Primal pickaxe",
+          "BASE": 57391,
+          "OUTPUT": 57391,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Primal pickaxe + 1",
+          "BASE": 57391,
+          "OUTPUT": 57393,
+          "INPUT": 57391,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Primal pickaxe + 2",
+          "BASE": 57391,
+          "OUTPUT": 57395,
+          "INPUT": 57393,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Primal pickaxe + 3",
+          "BASE": 57391,
+          "OUTPUT": 57397,
+          "INPUT": 57395,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Primal pickaxe + 4",
+          "BASE": 57391,
+          "OUTPUT": 57399,
+          "INPUT": 57397,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Primal pickaxe + 5",
+          "BASE": 57391,
+          "OUTPUT": 57401,
+          "INPUT": 57399,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Primal burial pickaxe",
+          "BASE": 57391,
+          "OUTPUT": 57403,
+          "INPUT": 57401,
+          "STACKABLE": false
+        }
+      },
+      "2H_SWORD": {
+        "0": {
+          "NAME": "Primal 2h sword",
+          "BASE": 57404,
+          "OUTPUT": 57404,
+          "INPUT": null,
+          "STACKABLE": false
+        },
+        "1": {
+          "NAME": "Primal 2h sword + 1",
+          "BASE": 57404,
+          "OUTPUT": 57409,
+          "INPUT": 57404,
+          "STACKABLE": false
+        },
+        "2": {
+          "NAME": "Primal 2h sword + 2",
+          "BASE": 57404,
+          "OUTPUT": 57414,
+          "INPUT": 57409,
+          "STACKABLE": false
+        },
+        "3": {
+          "NAME": "Primal 2h sword + 3",
+          "BASE": 57404,
+          "OUTPUT": 57419,
+          "INPUT": 57414,
+          "STACKABLE": false
+        },
+        "4": {
+          "NAME": "Primal 2h sword + 4",
+          "BASE": 57404,
+          "OUTPUT": 57424,
+          "INPUT": 57419,
+          "STACKABLE": false
+        },
+        "5": {
+          "NAME": "Primal 2h sword + 5",
+          "BASE": 57404,
+          "OUTPUT": 57429,
+          "INPUT": 57424,
+          "STACKABLE": false
+        },
+        "BURIAL": {
+          "NAME": "Primal burial 2h sword",
+          "BASE": 57404,
+          "OUTPUT": 57434,
+          "INPUT": 57429,
+          "STACKABLE": false
+        }
+      },
+      "BAR": {
+        "0": {
+          "NAME": "Primal bar",
+          "BASE": 57435,
+          "OUTPUT": 57435,
+          "INPUT": null,
+          "STACKABLE": true
+        }
+      },
+      "SET": {
+        "0": {
+          "NAME": "Primal burial set",
+          "BASE": 57437,
+          "OUTPUT": 57437,
+          "INPUT": {
+            "0": 57352,
+            "1": 57290,
+            "2": 57259,
+            "3": 57228,
+            "4": 57383
+          },
+          "STACKABLE": false
+        }
+      }
+    }
+  },
+  "ITEM_LEVELS": {
+    "0": 149,
+    "1": 161,
+    "2": 159,
+    "3": 157,
+    "4": 155,
+    "5": 153,
+    "BURIAL": 151
+  },
+  "SETTING_IDS": {
+    "BRONZE": {
+      "BAR": 1490,
+      "INTERFACE": 1
+    },
+    "IRON": {
+      "BAR": 1491,
+      "INTERFACE": 3
+    },
+    "STEEL": {
+      "BAR": 1492,
+      "INTERFACE": 5
+    },
+    "MITHRIL": {
+      "BAR": 1493,
+      "INTERFACE": 7
+    },
+    "ADAMANT": {
+      "BAR": 1494,
+      "INTERFACE": 9
+    },
+    "RUNE": {
+      "BAR": 1495,
+      "INTERFACE": 11
+    },
+    "ORIKALKUM": {
+      "BAR": 1496,
+      "INTERFACE": 13
+    },
+    "NECRONIUM": {
+      "BAR": 1497,
+      "INTERFACE": 15
+    },
+    "BANE": {
+      "BAR": 1498,
+      "INTERFACE": 17
+    },
+    "ELDER_RUNE": {
+      "BAR": 1499,
+      "INTERFACE": 19
+    },
+    "PRIMAL": {
+      "BAR": 13879,
+      "INTERFACE": 21
+    }
+  }
+}
