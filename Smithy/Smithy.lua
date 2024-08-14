@@ -4,7 +4,7 @@
 @description AIO Smither for the Artisan Guild
 @author Higgins <discord@higginshax>
 @date 10/01/2024
-@version 1.5
+@version 1.6
 
 Add tasks to the settings
 
@@ -15,6 +15,7 @@ local API = require("api")
 -- [[ SETTINGS ]] --
 
 local MAX_IDLE_TIME_MINUTES = 15
+local USE_BEGIN_PROJECT_INTERFACE_BUTTON = false
 
 local tasks = {
     -- #########################################################################
@@ -363,7 +364,6 @@ local function bank(item)
                 API.RandomSleep2(800, 600, 600)
             end
         else
-            
             -- if API.DoAction_Object1(0x2e, API.OFF_ACT_GeneralObject_route1, { ID.BANK_CHEST }, 50) then
             --     API.RandomSleep2(800, 500, 300)
             -- end
@@ -371,7 +371,6 @@ local function bank(item)
             if API.DoAction_Object1(0x33, API.OFF_ACT_GeneralObject_route3, { ID.BANK_CHEST }, 50) then
                 API.RandomSleep2(800, 500, 300)
             end
-            
         end
     end
     return true
@@ -481,13 +480,21 @@ while API.Read_LoopyLoop() do
                         if selectedItemType == "BAR" then
                             local quantity = VB_FindPSettinOrder(8336, -1).state
                             -- local quantity = API.VB_FindPSett(8336, -1, -1).state
-                            API.KeyboardPress2(0x20, 60, 100)
+                            if USE_BEGIN_PROJECT_INTERFACE_BUTTON then
+                                API.DoAction_Interface(0x24, 0xffffffff, 1, 37, 163, -1, API.OFF_ACT_GeneralInterface_route) 
+                            else
+                                API.KeyboardPress2(0x20, 60, 100)
+                            end
                             API.RandomSleep2(600, 800, 1200)
                             currentTask.amount = currentTask.amount - quantity
                         else
                             if VB_FindPSettinOrder(8332, -1).state == SETTING_IDS[selectedBarType].BAR then
                                 -- if API.VB_FindPSett(8332, -1, -1).state == SETTING_IDS[selectedBarType].BAR then
-                                API.KeyboardPress2(0x20, 60, 100)
+                                if USE_BEGIN_PROJECT_INTERFACE_BUTTON then
+                                    API.DoAction_Interface(0x24, 0xffffffff, 1, 37, 163, -1, API.OFF_ACT_GeneralInterface_route) 
+                                else
+                                    API.KeyboardPress2(0x20, 60, 100)
+                                end
                                 API.RandomSleep2(600, 800, 1200)
                                 currentTask.amount = currentTask.amount - 1
                             else
