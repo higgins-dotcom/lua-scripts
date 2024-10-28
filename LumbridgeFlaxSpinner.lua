@@ -36,10 +36,10 @@ end
 
 local function isCrafterOpen()
     return scanForInterface {
-        InterfaceComp5.new(1371, 7, -1, -1, 0),
-        InterfaceComp5.new(1371, 0, -1, 7, 0),
-        InterfaceComp5.new(1371, 15, -1, 0, 0),
-        InterfaceComp5.new(1371, 21, -1, 15, 0)
+        {1371, 7, -1, -1, 0},
+        {1371, 0, -1, 7, 0},
+        {1371, 15, -1, 0, 0},
+        {1371, 21, -1, 15, 0},
     }
 end
 
