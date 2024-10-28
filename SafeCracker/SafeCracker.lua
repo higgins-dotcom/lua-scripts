@@ -970,9 +970,6 @@ end
 
 setupGUI()
 
-API.Write_LoopyLoop(false)
-print(isLodestoneInterfaceUp())
-
 while API.Read_LoopyLoop() do
     if scriptPaused then
         if btnStop.return_click then
