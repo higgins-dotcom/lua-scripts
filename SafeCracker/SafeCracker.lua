@@ -353,7 +353,7 @@ local function isAtLocation(location, distance)
 end
 
 local function isLodestoneInterfaceUp()
-    return (#API.ScanForInterfaceTest2Get(true, { { 1092, 1, -1, -1, 0 }, { 1092, 54, -1, 1, 0 } }) > 0) or API.Compare2874Status(30)
+    return (#API.ScanForInterfaceTest2Get(true, { { 1092, 1, -1, -1, 0 }, { 1092, 54, -1, 1, 0 } }) > 0) or API.VB_FindPSettinOrder(2874, 1).state == 30 or API.Compare2874Status(30)
 end
 
 local function getABS_id(id, name)
@@ -969,6 +969,9 @@ local function invCheck()
 end
 
 setupGUI()
+
+API.Write_LoopyLoop(false)
+print(isLodestoneInterfaceUp())
 
 while API.Read_LoopyLoop() do
     if scriptPaused then
