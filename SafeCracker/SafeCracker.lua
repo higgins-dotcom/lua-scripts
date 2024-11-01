@@ -220,7 +220,7 @@ local function idleCheck()
 end
 
 local function checkForLootBagFullMessage()
-    local chatTexts = ChatGetMessages()
+    local chatTexts = API.GatherEvents_chat_check()
     if chatTexts then
         for k, v in pairs(chatTexts) do
             if k > 2 then break end
@@ -969,6 +969,8 @@ local function invCheck()
 end
 
 setupGUI()
+
+API.GatherEvents_chat_check()
 
 while API.Read_LoopyLoop() do
     if scriptPaused then
