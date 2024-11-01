@@ -221,10 +221,8 @@ end
 
 local function checkForLootBagFullMessage()
     local chatTexts = API.GatherEvents_chat_check()
-    print("#chatTexts", #chatTexts)
     for k, v in pairs(chatTexts) do
         if k > 2 then break end
-        print(v.text)
         if string.find(v.text, "<col=EB2F2F>Your loot bag is full") then
             return true
         end
@@ -502,7 +500,6 @@ local function walk()
     local floor = API.GetFloorLv_2()
 
     local lootBagFull = checkForLootBagFullMessage()
-    print("lootBagFull", lootBagFull)
 
     if (os.time() - lastVisit) > 300 then
         if (API.InvFull_() and hasLoot() or lootBagFull) and location ~= LOCATIONS.GUILD then
