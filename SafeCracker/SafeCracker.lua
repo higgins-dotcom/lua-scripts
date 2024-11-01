@@ -221,12 +221,10 @@ end
 
 local function checkForLootBagFullMessage()
     local chatTexts = API.GatherEvents_chat_check()
-    if chatTexts then
-        for k, v in pairs(chatTexts) do
-            if k > 2 then break end
-            if string.find(v.text, "<col=EB2F2F>Your loot bag is full") then
-                return true
-            end
+    for k, v in pairs(chatTexts) do
+        if k > 2 then break end
+        if string.find(v.text, "<col=EB2F2F>Your loot bag is full") then
+            return true
         end
     end
     return false
