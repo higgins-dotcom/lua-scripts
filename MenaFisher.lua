@@ -45,9 +45,10 @@ end
 local function fish()
     local spot = findNpc(ID.FISHINGSPOT, 20)
     if spot then
-        lastSpot = { spot.CalcX, spot.CalcY }
-        API.DoAction_NPC(0x3c, API.OFF_ACT_InteractNPC_route, ID.FISHINGSPOT, 50);
-        API.RandomSleep2(600, 300, 300)
+        if API.DoAction_NPC(0x3c, API.OFF_ACT_InteractNPC_route, ID.FISHINGSPOT, 50) then
+            lastSpot = { spot.CalcX, spot.CalcY }
+            API.RandomSleep2(600, 300, 300)
+        end
     end
 end
 
