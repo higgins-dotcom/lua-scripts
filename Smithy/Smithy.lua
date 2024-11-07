@@ -278,8 +278,8 @@ local function invContains(item)
         return API.InvItemFound1(item)
     elseif type(item) == "table" then
         local items = API.ReadInvArrays33()
-        for _, tableItem in ipairs(item) do
-            local found = false
+        local found = false
+        for _, tableItem in pairs(item) do
             for k, v in pairs(items) do
                 if v.itemid1 > 0 and v.itemid1 == tableItem then
                     found = true
@@ -294,6 +294,7 @@ local function invContains(item)
     elseif item == nil then
         return false
     end
+    return false
 end
 
 local function Action_Bank(item)
@@ -312,6 +313,7 @@ local function bank(item)
         API.DoAction_Object1(0x29, 80, ID.NORMAL.FURNACE, 50)
         API.RandomSleep2(600, 600, 600)
     else
+
         if API.BankOpen2() then
             if API.Invfreecount_() < 26 then
                 API.KeyboardPress2(0x33, 60, 120)
@@ -333,10 +335,15 @@ local function bank(item)
                     return false
                 end
             elseif type(item) == "table" then
-                local itemCount = #item
+
+                local itemCount = 0
+                for _, tableItem in pairs(item) do
+                    itemCount = itemCount + 1
+                end
+
                 local slotsToWithdraw = math.floor(28 / itemCount)
 
-                for _, tableItem in ipairs(item) do
+                for _, tableItem in pairs(item) do
                     for i = 1, slotsToWithdraw do
                         if API.BankGetItemStack1(tableItem) > 0 then
                             if VB_FindPSettinOrder(8958, -1).state ~= 2 then
@@ -367,10 +374,6 @@ local function bank(item)
             if API.DoAction_Object1(0x2e, API.OFF_ACT_GeneralObject_route1, { ID.BANK_CHEST }, 50) then
                 API.RandomSleep2(800, 500, 300)
             end
-
-            -- if API.DoAction_Object1(0x33, API.OFF_ACT_GeneralObject_route3, { ID.BANK_CHEST }, 50) then
-            --     API.RandomSleep2(800, 500, 300)
-            -- end
         end
     end
     return true
