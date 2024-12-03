@@ -71,6 +71,5 @@ while (API.Read_LoopyLoop()) do
     end
 
     ::continue::
-    printProgressReport()
     API.RandomSleep2(100, 200, 200)
 end
