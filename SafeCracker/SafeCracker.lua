@@ -3,10 +3,11 @@
     Description: Safe cracking
 
     Author: Higgins
-    Version: 2.6
+    Version: 2.8
     Release Date: 18/01/2024
 
     Release Notes:
+    - Version 2.8 : Removed old progressBar code - uses XpTracker now
     - Version 2.7 : Switched to Chat Events
     - Version 2.6 : Added support for teleport tabs
     - Version 2.5 : Added teleportWithHood - place Wicked Hood on actionbar
