@@ -6504,6 +6504,15 @@
           "INPUT": null,
           "STACKABLE": false
         }
+      },
+      "HATCHET": {
+        "0": {
+          "NAME": "Elder rune hatchet",
+          "BASE": 58079,
+          "OUTPUT": 58079,
+          "INPUT": null,
+          "STACKABLE": false
+        }
       }
     },
     "PARTIALLY": {
