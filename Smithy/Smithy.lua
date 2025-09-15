@@ -465,7 +465,7 @@ while API.Read_LoopyLoop() do
             choice.BAR = selectedBarType
 
             if (
-                    (choice.INPUT == nil and not API.InvFull_()) or
+                    (choice.INPUT == nil and not Inventory:IsFull()) or
                     invContains(choice.INPUT)
                 ) and
                 currentTask.amount > 0 and not wasFull
