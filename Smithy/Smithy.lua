@@ -4,7 +4,7 @@
 @description AIO Smither for the Artisan Guild
 @author Higgins <discord@higginshax>
 @date 10/01/2024
-@version 1.6
+@version 1.7
 
 Add tasks to the settings
 
@@ -47,10 +47,6 @@ local tasks = {
 }
 
 -- [[ END SETTINGS ]] --
-
-local skill = "SMITHING"
-local startXp = API.GetSkillXP(skill)
-local startTime, afk = os.time(), os.time()
 
 local ID = {
     UNFINISHED_SMITHING_ITEM = 47068,
@@ -107,68 +103,6 @@ local function loadJsonData()
     ITEMS = data["ITEMS"]
     ITEM_LEVELS = data["ITEM_LEVELS"]
     SETTING_IDS = data["SETTING_IDS"]
-end
-
-local function round(val, decimal)
-    if decimal then
-        return math.floor((val * 10 ^ decimal) + 0.5) / (10 ^ decimal)
-    else
-        return math.floor(val + 0.5)
-    end
-end
-
-local function formatNumber(num)
-    if num >= 1e6 then
-        return string.format("%.1fM", num / 1e6)
-    elseif num >= 1e3 then
-        return string.format("%.1fK", num / 1e3)
-    else
-        return tostring(num)
-    end
-end
-
--- Format script elapsed time to [hh:mm:ss]
-local function formatElapsedTime(startTime)
-    local currentTime = os.time()
-    local elapsedTime = currentTime - startTime
-    local hours = math.floor(elapsedTime / 3600)
-    local minutes = math.floor((elapsedTime % 3600) / 60)
-    local seconds = elapsedTime % 60
-    return string.format("[%02d:%02d:%02d]", hours, minutes, seconds)
-end
-
-local function calcProgressPercentage(skill, currentExp)
-    local currentLevel = API.XPLevelTable(API.GetSkillXP(skill))
-    if currentLevel == 120 then return 100 end
-    local nextLevelExp = XPForLevel(currentLevel + 1)
-    local currentLevelExp = XPForLevel(currentLevel)
-    local progressPercentage = (currentExp - currentLevelExp) / (nextLevelExp - currentLevelExp) * 100
-    return math.floor(progressPercentage)
-end
-
-local function printProgressReport()
-    local currentXp = API.GetSkillXP(skill)
-    local elapsedMinutes = (os.time() - startTime) / 60
-    local diffXp = math.abs(currentXp - startXp)
-    local xpPH = round((diffXp * 60) / elapsedMinutes)
-    local time = formatElapsedTime(startTime)
-    local currentLevel = API.XPLevelTable(API.GetSkillXP(skill))
-    IGP.radius = calcProgressPercentage(skill, API.GetSkillXP(skill)) / 100
-    local progress = time ..
-        " | " ..
-        string.lower(skill):gsub("^%l", string.upper) ..
-        ": " .. currentLevel .. " | XP/H: " .. formatNumber(xpPH) .. " | XP: " .. formatNumber(diffXp)
-    IGP.string_value = progress
-end
-
-local function idleCheck()
-    local timeDiff = os.difftime(os.time(), afk)
-    local randomTime = math.random((MAX_IDLE_TIME_MINUTES * 60) * 0.6, (MAX_IDLE_TIME_MINUTES * 60) * 0.9)
-
-    if timeDiff > randomTime then
-        API.PIdle2()
-        afk = os.time()
-    end
 end
 
 local function getItemText()
@@ -270,12 +204,12 @@ local function checkStorage(choice)
 end
 
 local function hasUnfinishedItems()
-    return API.CheckInvStuff0(ID.UNFINISHED_SMITHING_ITEM)
+    return Inventory:Contains(ID.UNFINISHED_SMITHING_ITEM)
 end
 
 local function invContains(item)
     if type(item) == "number" then
-        return API.InvItemFound1(item)
+        return Inventory:InvItemFound(item)
     elseif type(item) == "table" then
         local items = API.ReadInvArrays33()
         local found = false
@@ -315,7 +249,7 @@ local function bank(item)
     else
 
         if API.BankOpen2() then
-            if API.Invfreecount_() < 26 then
+            if Inventory:FreeSpaces() < 26 then
                 API.KeyboardPress2(0x33, 60, 120)
                 API.RandomSleep2(300, 600, 600)
             end
@@ -363,7 +297,7 @@ local function bank(item)
                     end
                 end
             elseif item == nil then
-                if API.Invfreecount_() < 26 then
+                if Inventory:FreeSpaces() < 26 then
                     API.KeyboardPress2(0x33, 60, 120)
                     API.RandomSleep2(300, 600, 600)
                 end
@@ -379,32 +313,19 @@ local function bank(item)
     return true
 end
 
-local function setupGUI()
-    IGP = API.CreateIG_answer()
-    IGP.box_start = FFPOINT.new(5, 5, 0)
-    IGP.box_name = "PROGRESSBAR"
-    IGP.colour = ImColor.new(6, 82, 221);
-    IGP.string_value = "SMITHY LOADING..."
-    IGP.radius = 100.0
-end
-
-local function drawGUI()
-    API.DrawProgressBar(IGP)
-end
-
 -- sword stuff
 -- 8936 Lige
 -- DO::DoAction_NPC(0x2c,3120,{ ids },50);
 -- space
 -- sword 20561
 
-setupGUI()
-
 local currentTaskIndex = 1
 local wasFull = false
 selectedItemType = nil
 
 loadJsonData()
+
+API.SetMaxIdleTIme(MAX_IDLE_TIME_MINUTES)
 
 while API.Read_LoopyLoop() do
     if currentTaskIndex > #tasks then
@@ -415,8 +336,6 @@ while API.Read_LoopyLoop() do
 
     e = e or 0
     API.DoRandomEvents()
-    drawGUI()
-    idleCheck()
 
     if API.ReadPlayerMovin2() or API.isProcessing() then
         goto continue
@@ -549,6 +468,5 @@ while API.Read_LoopyLoop() do
     end
 
     ::continue::
-    printProgressReport()
     API.RandomSleep2(200, 200, 200)
 end
