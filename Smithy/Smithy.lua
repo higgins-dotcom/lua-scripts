@@ -217,7 +217,7 @@ end
 
 local function invContains(item)
     if type(item) == "number" then
-        return Inventory:InvItemFound(item)
+        return Inventory:Contains(item)
     elseif type(item) == "table" then
         local items = API.ReadInvArrays33()
         local found = false
