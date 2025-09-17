@@ -4,7 +4,7 @@
 @description AIO Smither for the Artisan Guild
 @author Higgins <discord@higginshax>
 @date 10/01/2024
-@version 1.7
+@version 1.8
 
 Add tasks to the settings
 
@@ -26,7 +26,7 @@ local tasks = {
     -- Amount will be amount of times crafted, so for some items like Arrowheads amount 1 = 1x75 = 75 arrowheads
 
     -- [ -- SMITHING example -- ]
-    -- { metalType = "ELDER_RUNE", itemType = "FULL_HELM", itemLevel = "BURIAL", amount = 1 },
+    -- { metalType = "SILVER", itemType = "BOLTS_(UNF)", itemLevel = 0, amount = 1000 },
     -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 0,        amount = 28 },
     -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 1,        amount = 28 },
     -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 2,        amount = 28 },
@@ -121,9 +121,14 @@ local function checkItemText(itemLevel)
 end
 
 local function selectItem(bar, choice)
-    if not (VB_FindPSettinOrder(8332, -1).state == SETTING_IDS[bar].BAR) and (choice.ITEM_TYPE ~= "BAR") then
-        -- if not (API.VB_FindPSett(8332, -1, -1).state == SETTING_IDS[bar].BAR) and (choice.ITEM_TYPE ~= "BAR") then
-        API.DoAction_Interface(0xffffffff, 0x93b, 1, 37, 52, SETTING_IDS[bar].INTERFACE,
+    local bar_setting = SETTING_IDS[tostring(choice.SKILL)]
+
+    if not (VB_FindPSettinOrder(8332, -1).state == bar_setting[bar].BAR) and (choice.ITEM_TYPE ~= "BAR") then
+        -- if not (API.VB_FindPSett(8332, -1, -1).state == SETTING_IDS[choice.SKILL][bar].BAR) and (choice.ITEM_TYPE ~= "BAR") then
+
+        local id = choice.SKILL == 14 and 52 or 62
+
+        API.DoAction_Interface(0xffffffff, string.format("0x%X", bar_setting[bar].ID), 1, 37, id, bar_setting[bar].INTERFACE,
             API.OFF_ACT_GeneralInterface_route)
         API.RandomSleep2(600, 600, 600)
     end
@@ -168,13 +173,16 @@ local function isSmithingInterfaceOpen()
     return API.Compare2874Status(85, false)
 end
 
-local function openSmithingInterface(area)
+local function openSmithingInterface(area, choice)
+    print("open")
     local forgeObject = area == AREA.BURIAL and ID.BURIAL.FORGE or ID.NORMAL.FORGE
-    if selectedItemType == "BAR" then
+    local furnace = false
+    if selectedItemType == "BAR" or choice.SKILL == 11 then
         forgeObject = ID.NORMAL.FURNACE
+        furnace = true
     end
-    local action = selectedItemType == "BAR" and 0x3f or 0x29
-    local offset = selectedItemType == "BAR" and 0 or 240
+    local action = furnace and 0x3f or 0x29
+    local offset = furnace and API.OFF_ACT_GeneralObject_route0 or API.OFF_ACT_GeneralObject_route3
     API.DoAction_Object1(action, offset, forgeObject, 50)
     API.RandomSleep2(800, 400, 600)
 end
@@ -325,7 +333,8 @@ selectedItemType = nil
 
 loadJsonData()
 
-API.SetMaxIdleTIme(MAX_IDLE_TIME_MINUTES)
+API.SetMaxIdleTime(MAX_IDLE_TIME_MINUTES)
+API.SetDrawTrackedSkills(true)
 
 while API.Read_LoopyLoop() do
     if currentTaskIndex > #tasks then
@@ -410,7 +419,7 @@ while API.Read_LoopyLoop() do
                             API.RandomSleep2(600, 800, 1200)
                             currentTask.amount = currentTask.amount - quantity
                         else
-                            if VB_FindPSettinOrder(8332, -1).state == SETTING_IDS[selectedBarType].BAR then
+                            if VB_FindPSettinOrder(8332, -1).state == SETTING_IDS[tostring(choice.SKILL)][selectedBarType].BAR then
                                 -- if API.VB_FindPSett(8332, -1, -1).state == SETTING_IDS[selectedBarType].BAR then
                                 if USE_BEGIN_PROJECT_INTERFACE_BUTTON then
                                     API.DoAction_Interface(0x24, 0xffffffff, 1, 37, 163, -1, API.OFF_ACT_GeneralInterface_route) 
@@ -429,7 +438,7 @@ while API.Read_LoopyLoop() do
                         API.RandomSleep2(500, 300, 300)
                     end
                 else
-                    openSmithingInterface(area)
+                    openSmithingInterface(area, choice)
                 end
             elseif hasUnfinishedItems() then
                 wasFull = true
