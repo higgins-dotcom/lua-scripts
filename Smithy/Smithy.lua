@@ -4,7 +4,7 @@
 @description AIO Smither for the Artisan Guild
 @author Higgins <discord@higginshax>
 @date 10/01/2024
-@version 1.8
+@version 1.9
 
 Add tasks to the settings
 
@@ -27,7 +27,11 @@ local tasks = {
 
     -- [ -- SMITHING example -- ]
     -- { metalType = "SILVER", itemType = "BOLTS_(UNF)", itemLevel = 0, amount = 1000 },
-    -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 0,        amount = 28 },
+    -- { metalType = "NECRONIUM",      itemType = "FULL_HELM",  itemLevel = 0,        amount = 1 },
+    -- { metalType = "NECRONIUM",      itemType = "FULL_HELM",  itemLevel = 1,        amount = 1 },
+    -- { metalType = "NECRONIUM",      itemType = "FULL_HELM",  itemLevel = 2,        amount = 1 },
+    -- { metalType = "NECRONIUM",      itemType = "FULL_HELM",  itemLevel = 3,        amount = 1 },
+    -- { metalType = "NECRONIUM",      itemType = "FULL_HELM",  itemLevel = 4,        amount = 1 },
     -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 1,        amount = 28 },
     -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 2,        amount = 28 },
     -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 3,        amount = 28 },
@@ -94,7 +98,83 @@ local function getCurrentDirectory()
     return str:match("(.*\\)") or ""
 end
 
+local function updateSmithingData()
+    local dataUrl = "https://raw.githubusercontent.com/higgins-dotcom/lua-scripts/refs/heads/main/Smithy/lib/smithing_data.json"
+    local dataFile = getCurrentDirectory() .. "lib\\smithing_data.json"
+    local etagFile = getCurrentDirectory() .. "lib\\smithing_data.etag"
+    
+    local fileExists = false
+    local testFile = io.open(dataFile, "r")
+    if testFile then
+        testFile:close()
+        fileExists = true
+    end
+    
+    local storedEtag = ""
+    local etagHandle = io.open(etagFile, "r")
+    if etagHandle then
+        storedEtag = etagHandle:read("*all"):gsub("%s+", "")
+        etagHandle:close()
+    end
+    
+    local headerCmd = string.format('curl --insecure -s -I "%s"', dataUrl)
+    local headerHandle = io.popen(headerCmd)
+    local headers = ""
+    local currentEtag = ""
+    local lastModified = ""
+    
+    if headerHandle then
+        headers = headerHandle:read("*a")
+        headerHandle:close()
+        
+        currentEtag = headers:match("etag:%s*([^\r\n]+)") or headers:match("ETag:%s*([^\r\n]+)") or ""
+        currentEtag = currentEtag:gsub("%s+", "")
+        
+        if currentEtag == "" then
+            lastModified = headers:match("last%-modified:%s*([^\r\n]+)") or headers:match("Last%-Modified:%s*([^\r\n]+)") or ""
+            lastModified = lastModified:gsub("%s+", "")
+        end
+    end
+       
+    local versionCheck = currentEtag ~= "" and currentEtag or lastModified
+    local storedVersion = storedEtag
+    
+    if not fileExists or (versionCheck ~= storedVersion and versionCheck ~= "") then
+        if not fileExists then
+            print("smithing_data.json missing, downloading...")
+        else
+            print("Updating smithing_data.json...")
+        end
+        
+        os.execute('if not exist "' .. getCurrentDirectory() .. 'lib" mkdir "' .. getCurrentDirectory() .. 'lib"')
+        
+        local downloadCmd = string.format('curl --insecure -s "%s"', dataUrl)
+        local downloadHandle = io.popen(downloadCmd)
+        if downloadHandle then
+            local content = downloadHandle:read("*a")
+            downloadHandle:close()
+            
+            if content and #content > 100 then
+                local outputFile = io.open(dataFile, "w")
+                if outputFile then
+                    outputFile:write(content)
+                    outputFile:close()
+                    
+                    if versionCheck ~= "" then
+                        local etagFile_handle = io.open(etagFile, "w")
+                        if etagFile_handle then
+                            etagFile_handle:write(versionCheck)
+                            etagFile_handle:close()
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
 local function loadJsonData()
+    updateSmithingData()
     local filename = getCurrentDirectory() .. "lib\\smithing_data.json"
     local file = io.open(filename, "r")
     local content = file:read("*all")
