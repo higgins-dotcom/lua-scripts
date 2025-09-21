@@ -703,9 +703,7 @@ local function walk()
                 local tile = WPOINT.new(2656 + math.random(-2, 2), 3310 + math.random(-2, 2), 0)
                 walkToTile(tile)
             else
-                if not teleportToDestination("Ardougne") then
-                    teleportToDestination("Ardougne", true)
-                end
+                teleportToDestination("Ardougne", true)
             end
         elseif location == LOCATIONS.ARDOUGNE_NORTH then
             if API.PInArea(2650, 5, 3301, 5, 0) and floor == 1 then
@@ -745,7 +743,7 @@ local function walk()
                     end
                 end
             else
-                teleportToDestination("Ardougne")
+                teleportToDestination("Ardougne", true)
             end
         elseif location == LOCATIONS.YANILLE then
             if isAtLocation(AREA.YANILLE, 50) then
