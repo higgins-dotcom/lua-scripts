@@ -235,22 +235,12 @@ local function setupGUI()
     API.DrawComboBox(comboReward)
 end
 
-local function invContains(items)
-    local loot = API.InvItemcount_2(items)
-    for _, v in ipairs(loot) do
-        if v > 0 then
-            return true
-        end
-    end
-    return false
-end
-
 local function hasLoot()
-    return invContains(ID.LOOT)
+    return Inventory:ContainsAny(ID.LOOT)
 end
 
 local function hasLootBag()
-    return invContains(ID.BAG)
+    return Inventory:ContainsAny(ID.BAG)
 end
 
 local function isCamelotCracked()
@@ -424,16 +414,16 @@ local function walk()
     local lootBagFull = checkForLootBagFullMessage()
 
     if (os.time() - lastVisit) > 300 then
-        if (API.InvFull_() and hasLoot() or lootBagFull) and location ~= LOCATIONS.GUILD then
+        if (Inventory:IsFull() and hasLoot() or lootBagFull) and location ~= LOCATIONS.GUILD then
             print("Going to guild...", API.ChatFind("Your loot bag is full", 2).pos_found, location, oldLocation)
-            print(API.InvFull_(), hasLoot(), lootBagFull, location)
+            print(Inventory:IsFull(), hasLoot(), lootBagFull, location)
             oldLocation = location
             location = tableLength(LOCATIONS)
         end
     end
 
     if location == LOCATIONS.GUILD then
-        print("G:", API.InvFull_(), hasLoot(), lootBagFull, location, oldLocation)
+        print("G:", Inventory:IsFull(), hasLoot(), lootBagFull, location, oldLocation)
         if isAtLocation(AREA.GUILD, 50) then
             if hasLoot() then
                 if API.Select_Option(rewardChoice) then
@@ -861,9 +851,9 @@ end
 
 local function invCheck()
     -- Inventory checks
-    local lockpickCheck = not needLockpick or API.InvItemcount_1(ID.LOCKPICK) > 0
-    local stethoscopeCheck = not needStethoscope or API.InvItemcount_1(ID.STETHOSCOPE) > 0
-    local wickedHoodCheck = API.InvItemcount_1(ID.WICKED_HOOD) > 0
+    local lockpickCheck = not needLockpick or Inventory:GetItemAmount(ID.LOCKPICK) > 0
+    local stethoscopeCheck = not needStethoscope or Inventory:GetItemAmount(ID.STETHOSCOPE) > 0
+    local wickedHoodCheck = Inventory:GetItemAmount(ID.WICKED_HOOD) > 0
     check(wickedHoodCheck, "You need a Wicked Hood in your inventory!")
     check(lockpickCheck, "You need lockpicks in your inventory!")
     check(stethoscopeCheck, "You need a Stethoscope in your inventory!")
