@@ -3,10 +3,11 @@
     Description: Safe cracking
 
     Author: Higgins
-    Version: 2.8
-    Release Date: 18/01/2024
+    Version: 2.9
+    Release Date: 21/09/2025
 
     Release Notes:
+    - Version 2.9 : Ardougne teleport fix
     - Version 2.8 : Removed old progressBar code - uses XpTracker now
     - Version 2.7 : Switched to Chat Events
     - Version 2.6 : Added support for teleport tabs
@@ -107,7 +108,7 @@ local ROUTES         = {
 local LODESTONES     = {
     ["Edgeville"] = 16,
     ["Lumbridge"] = 18,
-    ["Draynor"] = 15,
+    ["Draynor Village"] = 15,
     ["Varrock"] = 22,
     ["Yanille"] = 26,
     ["Ardougne"] = 12,
@@ -140,7 +141,7 @@ local rewardChoice
 local needLockpick
 local needStethoscope
 local errors         = {}
-local version        = "2.5"
+local version        = "2.9"
 
 local function tableLength(tbl)
     local count = 0
@@ -162,7 +163,6 @@ local function checkForLootBagFullMessage()
 end
 
 local function setupGUI()
-
     btnStop = API.CreateIG_answer()
     btnStop.box_start = FFPOINT.new(200, 125, 0)
     btnStop.box_name = " STOP "
@@ -352,7 +352,7 @@ end
 local function walkToTile(tile)
     API.DoAction_Tile(tile)
     lastTile = tile
-    API.RandomSleep2(600, 300, 300)
+    API.RandomSleep2(1200, 300, 300)
 end
 
 local function findDoor(doorId, tile, floor)
@@ -598,7 +598,7 @@ local function walk()
                 local tile = WPOINT.new(3108 + math.random(-2, 2), 3345 + math.random(-2, 2), 0)
                 walkToTile(tile)
             else
-                teleportToDestination("Draynor", true)
+                teleportToDestination("Draynor Village", true)
             end
         elseif location == LOCATIONS.VARROCK then
             if API.PInArea21(3200, 3206, 3469, 3475) then
@@ -636,7 +636,7 @@ local function walk()
                 end
             else
                 teleportToVarrock()
-                API.RandomSleep2(400, 600, 600)
+                API.RandomSleep2(800, 600, 600)
             end
         end
     elseif route == "KANDARIN" then
@@ -679,7 +679,10 @@ local function walk()
                 API.RandomSleep2(1000, 1000, 1000)
             end
         elseif location == LOCATIONS.ARDOUGNE_WEST then
-            if isAtLocation(AREA.ARDOUGNE, 25) then
+            if isAtLocation(AREA.ARDOUGNE_LODESTONE, 10) then
+                local tile = WPOINT.new(2656 + math.random(-2, 2), 3310 + math.random(-2, 2), 0)
+                walkToTile(tile)
+            elseif isAtLocation(AREA.ARDOUGNE, 25) then
                 if floor == 0 then
                     if not findDoor(34808, { 2651, 3302 }, floor) then
                         if API.DoAction_Object2(0x31, API.OFF_ACT_GeneralObject_route0, { 34807 }, 15, WPOINT.new(2652, 3302, 0)) then
@@ -699,15 +702,12 @@ local function walk()
                         walking = false
                     end
                 end
-            elseif isAtLocation(AREA.ARDOUGNE_LODESTONE, 10) then
-                local tile = WPOINT.new(2656 + math.random(-2, 2), 3310 + math.random(-2, 2), 0)
-                walkToTile(tile)
             else
                 teleportToDestination("Ardougne", true)
             end
         elseif location == LOCATIONS.ARDOUGNE_NORTH then
             if API.PInArea(2650, 5, 3301, 5, 0) and floor == 1 then
-                if not teleportToDestination("Ardougne") then
+                -- if not teleportToDestination("Ardougne", true) then
                     if not findDoor(34813, { 2649, 3300 }, floor) then
                         if API.DoAction_Object2(0x31, API.OFF_ACT_GeneralObject_route0, { 34811 }, 8, WPOINT.new(2648, 3300, 0)) then
                             API.RandomSleep2(300, 600, 600)
@@ -717,7 +717,7 @@ local function walk()
                             WPOINT.new(2649, 3297, 0))
                         API.RandomSleep2(800, 800, 800)
                     end
-                end
+                -- end
             elseif isAtLocation(AREA.ARDOUGNE, 40) then
                 if API.PInArea(2650, 10, 3301, 10, 0) and not findDoor(34808, { 2651, 3302 }, floor) then
                     if API.DoAction_Object2(0x31, API.OFF_ACT_GeneralObject_route0, { 34807 }, 15, WPOINT.new(2652, 3302, 0)) then
@@ -742,6 +742,9 @@ local function walk()
                         walking = false
                     end
                 end
+            elseif isAtLocation(AREA.ARDOUGNE_LODESTONE, 10) then
+                local tile = WPOINT.new(2650 + math.random(-2, 2), 3328 + math.random(-2, 2), 0)
+                walkToTile(tile)
             else
                 teleportToDestination("Ardougne", true)
             end
@@ -913,9 +916,9 @@ while API.Read_LoopyLoop() do
             needStethoscope = not tickStethoscope.box_ticked
             route = (comboRoute.int_value == 1) and "KANDARIN" or "ASGARNIA"
             MAX_IDLE_TIME_MINUTES = (tickJagexAcc.box_ticked == 1) and 5 or 15
-            API.SetMaxIdleTime(MAX_IDLE_TIME_MINUTES)
             LOCATIONS = ROUTES[route]
             scriptPaused = false
+            API.SetMaxIdleTime(MAX_IDLE_TIME_MINUTES)
         end
         goto continue
     end
