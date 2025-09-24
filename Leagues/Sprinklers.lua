@@ -177,9 +177,7 @@ while API.Read_LoopyLoop() do
 		-- Check if we have materials
 		if not hasBucketOfWater() then
 			print("No bucket of water found, loading bank preset")
-			if not loadBankPreset() then
-				break
-			end
+			loadBankPreset()
 			goto continue
 		end
 
