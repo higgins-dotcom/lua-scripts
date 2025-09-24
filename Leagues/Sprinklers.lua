@@ -76,6 +76,17 @@ local function loadBankPreset()
 	print("Loading last bank preset")
 	Interact:Object("Bank chest", "Load Last Preset from", 20)
 	API.RandomSleep2(1000, 500, 500)
+
+	-- Failsafe: Check if we got buckets after loading preset
+	if not hasBucketOfWater() then
+		print("ERROR: No bucket of water found after loading preset!")
+		print("Bank may be out of materials. Stopping script.")
+		API.Write_LoopyLoop(false)
+		return false
+	end
+
+	print("Bank preset loaded successfully with materials")
+	return true
 end
 
 local function openInventorsWorkbench()
@@ -152,7 +163,9 @@ while API.Read_LoopyLoop() do
 		-- Check if we have materials
 		if not hasBucketOfWater() then
 			print("No bucket of water found, loading bank preset")
-			loadBankPreset()
+			if not loadBankPreset() then
+				break
+			end
 			goto continue
 		end
 
