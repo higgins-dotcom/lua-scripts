@@ -63,10 +63,30 @@ local function isPlayerClose(targetCoords, threshold)
 end
 
 -- Equipment Functions
+local function checkForAccessDenied()
+	local chatTexts = API.GatherEvents_chat_check()
+	if chatTexts then
+		for _, chatText in ipairs(chatTexts) do
+			if string.find(chatText, "You currently do not have access") then
+				print("Access denied detected - swapping clue")
+				return true
+			end
+		end
+	end
+	return false
+end
+
 local function teleportWithJacket()
 	print("Teleporting with Globetrotter jacket")
 	API.DoAction_Ability("Globetrotter jacket", 1, API.OFF_ACT_GeneralInterface_route)
 	API.RandomSleep2(800, 600, 600)
+
+	-- Check if teleport was denied due to access restrictions
+	if checkForAccessDenied() then
+		handleBadClue()
+		return false
+	end
+	return true
 end
 
 local function openGlobetrotterBackpack()
@@ -86,7 +106,7 @@ end
 local function hasEasyClue()
 	local inv = Inventory:GetItems()
 	for _, item in ipairs(inv) do
-		if item.textitem == "<col=f8d56b>Clue scroll (easy)" then
+		if item.name and string.find(item.name, "Clue scroll %(easy%)") then
 			return item.itemid1
 		end
 	end
@@ -96,7 +116,7 @@ end
 local function hasScrollBox()
 	local inv = Inventory:GetItems()
 	for _, item in ipairs(inv) do
-		if item.textitem and string.find(item.textitem, "Scroll box %(easy%)") then
+		if item.name and string.find(item.name, "Scroll box %(easy%)") then
 			return item.itemid1
 		end
 	end
@@ -142,8 +162,12 @@ local function handleObjectClue(item)
 		end
 	else
 		print("Player needs to move closer to object coordinates")
-		teleportWithJacket()
+		local teleportSuccess = teleportWithJacket()
+		if not teleportSuccess then
+			return false -- Clue was swapped due to access denial
+		end
 	end
+	return true
 end
 
 local function handleNpcClue(item)
@@ -157,8 +181,12 @@ local function handleNpcClue(item)
 		Interact:NPC(npc.Name, npc.Action, 10)
 	else
 		print("NPC not found nearby, teleporting with jacket")
-		teleportWithJacket()
+		local teleportSuccess = teleportWithJacket()
+		if not teleportSuccess then
+			return false -- Clue was swapped due to access denial
+		end
 	end
+	return true
 end
 
 local function handleDigClue(item, clueId)
@@ -172,8 +200,12 @@ local function handleDigClue(item, clueId)
 		API.RandomSleep2(600, 600, 600)
 	else
 		print("Player needs to move closer to dig coordinates")
-		teleportWithJacket()
+		local teleportSuccess = teleportWithJacket()
+		if not teleportSuccess then
+			return false -- Clue was swapped due to access denial
+		end
 	end
+	return true
 end
 
 local function handleBadClue()
@@ -305,8 +337,9 @@ end
 print("Starting Easy Clue Script")
 print("All preflight checks passed!")
 Interact:SetSleep(900, 1200, 1200)
-API.Write_LoopyLoop(true)
+
 API.SetMaxIdleTime(10)
+API.GatherEvents_chat_check()
 
 while API.Read_LoopyLoop() do
 	if isPlayerReady() then
