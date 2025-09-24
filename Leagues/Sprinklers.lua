@@ -6,6 +6,8 @@ Version: 1.0
 Author: Higgins
 Description: Automatically manufactures sprinklers using Inventor's workbench with banking support
 
+Recommended Location: Fort Forinthry
+
 Requirements:
 - Access to Bank chest and Inventor's workbench
 - Materials for sprinkler manufacturing
