@@ -4,10 +4,12 @@ Buy Buckets of Water Script
 ====================================================================================================
 Version: 1.0
 Author: Higgins
-Description: Automatically buys buckets of water from NPC shop with banking support
+Description: Automatically buys buckets of water from Shanty at the Shantay Pass Shop with banking support
+
+Starting Location: Shantay Pass
 
 Requirements:
-- Access to NPC shop (ID: 836)
+- Access to Shanty (NPC ID: 836) at the Shantay Pass Shop
 - Access to bank (ID: 2693)
 - Sufficient GP to purchase buckets
 - Blank bank preset saved and loaded (for depositing all items)
@@ -27,7 +29,7 @@ local API = require("API")
 
 -- Constants
 local NPC_IDS = {
-	SHOP_KEEPER = 836,
+	SHANTY = 836, -- Shanty at Shantay Pass Shop
 }
 
 local OBJECT_IDS = {
@@ -80,9 +82,9 @@ local function isInventoryFull()
 end
 
 -- Action Functions
-local function talkToShopkeeper()
-	print("Talking to shopkeeper to open shop")
-	API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route2, { NPC_IDS.SHOP_KEEPER }, 50)
+local function talkToShanty()
+	print("Talking to Shanty to open shop")
+	API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route2, { NPC_IDS.SHANTY }, 50)
 	API.RandomSleep2(400, 600, 600)
 	currentState = ScriptState.CHECK_SHOP
 	shopAttempts = 0
@@ -143,7 +145,7 @@ end
 -- State Handler
 local function handleCurrentState()
 	if currentState == ScriptState.TALK_NPC then
-		talkToShopkeeper()
+		talkToShanty()
 	elseif currentState == ScriptState.CHECK_SHOP then
 		checkShopStatus()
 	elseif currentState == ScriptState.BUY_BUCKETS then
