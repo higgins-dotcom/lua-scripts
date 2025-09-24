@@ -41,6 +41,13 @@ local VB_SETTINGS = {
 	PROCESSING = 2229,
 }
 
+local SETTINGS = {
+	MAX_PRESET_ATTEMPTS = 3,
+}
+
+-- Global state tracking
+local presetAttempts = 0
+
 local INTERFACE_IDS = {
 	CATEGORY_BUTTON = { component = 1371, subcomponent = 28 },
 	SKILLING_OPTION = { component = 1477, subcomponent = 916, option = 3 },
@@ -75,19 +82,27 @@ end
 
 -- Action Functions
 local function loadBankPreset()
-	print("Loading last bank preset")
+	presetAttempts = presetAttempts + 1
+	print("Loading last bank preset (attempt " .. presetAttempts .. "/" .. SETTINGS.MAX_PRESET_ATTEMPTS .. ")")
+
 	Interact:Object("Bank chest", "Load Last Preset from", 20)
 	API.RandomSleep2(1000, 500, 500)
 
-	-- Failsafe: Check if we got buckets after loading preset
+	-- Check if we got buckets after loading preset
 	if not hasBucketOfWater() then
-		print("ERROR: No bucket of water found after loading preset!")
-		print("Bank may be out of materials. Stopping script.")
-		API.Write_LoopyLoop(false)
-		return false
+		if presetAttempts >= SETTINGS.MAX_PRESET_ATTEMPTS then
+			print("ERROR: Failed to load preset with materials after " .. SETTINGS.MAX_PRESET_ATTEMPTS .. " attempts!")
+			print("Bank may be out of materials or preset not configured correctly. Stopping script.")
+			API.Write_LoopyLoop(false)
+			return false
+		else
+			print("No bucket of water found, will retry preset loading...")
+			return false
+		end
 	end
 
 	print("Bank preset loaded successfully with materials")
+	presetAttempts = 0 -- Reset counter on success
 	return true
 end
 
@@ -135,13 +150,10 @@ local function handleCompletionDialog()
 	return false
 end
 
-local function isNotBusy()
-	return (not API.isProcessing() or API.VB_FindPSettinOrder(VB_SETTINGS.PROCESSING).state == 0)
-		and not API.ReadPlayerMovin2()
-end
-
 local function isPlayerReady()
-	return not API.ReadPlayerMovin2() and not API.CheckAnim(8)
+	return not API.ReadPlayerMovin2()
+		and not API.CheckAnim(8)
+		and (not API.isProcessing() or API.VB_FindPSettinOrder(VB_SETTINGS.PROCESSING).state == 0)
 end
 
 local function startManufacturing()
@@ -156,7 +168,7 @@ print("Starting Sprinklers Manufacturing Script")
 API.SetDrawTrackedSkills(true)
 
 while API.Read_LoopyLoop() do
-	if isPlayerReady() and isNotBusy() then
+	if isPlayerReady() then
 		-- Handle completion dialog first
 		if handleCompletionDialog() then
 			goto continue
