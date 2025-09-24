@@ -107,7 +107,7 @@ local function hasEasyClue()
 	local inv = Inventory:GetItems()
 	for _, item in ipairs(inv) do
 		if item.name and string.find(item.name, "Clue scroll %(easy%)") then
-			return item.itemid1
+			return item.id
 		end
 	end
 	return false
@@ -117,7 +117,7 @@ local function hasScrollBox()
 	local inv = Inventory:GetItems()
 	for _, item in ipairs(inv) do
 		if item.name and string.find(item.name, "Scroll box %(easy%)") then
-			return item.itemid1
+			return item.id
 		end
 	end
 	return false
