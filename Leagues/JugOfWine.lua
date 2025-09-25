@@ -41,7 +41,8 @@ local function isNotBusy()
 end
 
 local function isCookingWindowOpen()
-	return API.VB_FindPSettinOrder(SETTINGS.COOKING_WINDOW).state == 40 or API.VB_FindPSettinOrder(SETTINGS.COOKING_WINDOW).state == 1310738
+	return API.VB_FindPSettinOrder(SETTINGS.COOKING_WINDOW).state == 40
+		or API.VB_FindPSettinOrder(SETTINGS.COOKING_WINDOW).state == 1310738
 end
 
 local function makeWine()
@@ -57,26 +58,48 @@ local function makeWine()
 	end
 end
 
-local function bankItems()
+local function bankItems(retryCount)
 	local grapes = Inventory:GetItemAmount(ITEM_IDS.GRAPES)
 	local jugsOfWater = Inventory:GetItemAmount(ITEM_IDS.JUG_OF_WATER)
+	retryCount = retryCount or 0
 
 	if grapes == 0 or jugsOfWater == 0 then
 		Interact:Object("Chest", "Load Last Preset from", 30)
-		API.RandomSleep2(600, 500, 300)
+		API.RandomSleep2(2000, 1000, 500)
+
+		local newGrapes = Inventory:GetItemAmount(ITEM_IDS.GRAPES)
+		local newJugsOfWater = Inventory:GetItemAmount(ITEM_IDS.JUG_OF_WATER)
+
+		if newGrapes == 0 and newJugsOfWater == 0 then
+			retryCount = retryCount + 1
+			if retryCount >= 3 then
+				print("ERROR: Bank appears to be out of grapes or jugs of water!")
+				print("Preset load failed after 3 attempts - stopping script.")
+				API.Write_LoopyLoop(false)
+			else
+				print("Preset load failed, retrying... (" .. retryCount .. "/3)")
+				return retryCount
+			end
+		else
+			return 0 -- Reset retry count on success
+		end
 	end
+	return retryCount or 0
 end
 
 API.SetDrawTrackedSkills(true)
+
+local retryCount = 0
 
 while API.Read_LoopyLoop() do
 	local grapes = Inventory:GetItemAmount(ITEM_IDS.GRAPES)
 	local jugsOfWater = Inventory:GetItemAmount(ITEM_IDS.JUG_OF_WATER)
 
 	if grapes > 0 and jugsOfWater > 0 then
+		retryCount = 0 -- Reset retry count when we have items
 		makeWine()
 	else
-		bankItems()
+		retryCount = bankItems(retryCount)
 	end
 
 	API.RandomSleep2(300, 300, 300)
