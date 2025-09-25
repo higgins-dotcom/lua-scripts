@@ -70,7 +70,7 @@ local function bankItems(retryCount)
 		local newGrapes = Inventory:GetItemAmount(ITEM_IDS.GRAPES)
 		local newJugsOfWater = Inventory:GetItemAmount(ITEM_IDS.JUG_OF_WATER)
 
-		if newGrapes == 0 and newJugsOfWater == 0 then
+		if newGrapes == 0 or newJugsOfWater == 0 then
 			retryCount = retryCount + 1
 			if retryCount >= 3 then
 				print("ERROR: Bank appears to be out of grapes or jugs of water!")
