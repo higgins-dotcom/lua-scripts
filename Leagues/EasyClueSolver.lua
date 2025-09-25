@@ -67,7 +67,7 @@ local function checkForAccessDenied()
 	local chatTexts = API.GatherEvents_chat_check()
 	if chatTexts then
 		for _, chatText in ipairs(chatTexts) do
-			if string.find(chatText, "You currently do not have access") then
+			if string.find(chatText.text, "You currently do not have access") then
 				print("Access denied detected - swapping clue")
 				return true
 			end
