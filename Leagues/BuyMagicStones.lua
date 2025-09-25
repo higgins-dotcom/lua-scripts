@@ -2,7 +2,7 @@
 ====================================================================================================
 Buy Magic Stones Script
 ====================================================================================================
-Version: 1.0
+Version: 1.1
 Author: Higgins
 Description: Buys magic stones and disassembles them for GP - must have Perkfection relic (Leagues RS3)
 
@@ -116,6 +116,8 @@ local function disassemble()
 	if Inventory:GetItemAmount(ITEM_IDS.CRYSTAL) > 0 and isNotBusy() then
 		API.DoAction_Ability("Disassemble", 1, API.OFF_ACT_Bladed_interface_route, false)
 		API.RandomSleep2(600, 300, 200)
+
+		API.DoAction_DontResetSelection()
 
 		API.DoAction_Inventory1(ITEM_IDS.CRYSTAL, 0, 0, API.OFF_ACT_GeneralInterface_route1)
 		API.RandomSleep2(800, 300, 200)
