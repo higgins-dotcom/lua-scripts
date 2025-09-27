@@ -35,8 +35,13 @@ local API = require("API")
 -- CONSTANTS
 -- ================================================================================================
 
-local WEEDS_ID = 6005
+local WEEDS_ID = 6055
 local PATCH_COORDS = nil -- Will be set dynamically when patch is found
+
+-- Blacklisted seed IDs that should not be planted
+local BLACKLISTED_SEEDS = {
+	[37952] = true,
+}
 
 -- ================================================================================================
 -- UTILITY FUNCTIONS
@@ -44,6 +49,25 @@ local PATCH_COORDS = nil -- Will be set dynamically when patch is found
 
 -- Cache for seed level requirements and patch compatibility
 local seedCache = {}
+
+-- Mapping of seeds to their produced herbs (grimy herbs)
+local seedToHerbMap = {
+	-- Common herb seeds to grimy herbs
+	[5291] = 199, -- Guam seed -> Grimy guam
+	[5292] = 201, -- Marrentill seed -> Grimy marrentill
+	[5293] = 203, -- Tarromin seed -> Grimy tarromin
+	[5294] = 205, -- Harralander seed -> Grimy harralander
+	[5295] = 207, -- Ranarr seed -> Grimy ranarr
+	[5296] = 3049, -- Toadflax seed -> Grimy toadflax
+	[5297] = 209, -- Irit seed -> Grimy irit
+	[5298] = 211, -- Avantoe seed -> Grimy avantoe
+	[5299] = 213, -- Kwuarm seed -> Grimy kwuarm
+	[5300] = 3051, -- Snapdragon seed -> Grimy snapdragon
+	[5301] = 215, -- Cadantine seed -> Grimy cadantine
+	[5302] = 2485, -- Lantadyme seed -> Grimy lantadyme
+	[5303] = 217, -- Dwarf weed seed -> Grimy dwarf weed
+	[5304] = 219, -- Torstol seed -> Grimy torstol
+}
 
 local function getCurrentFarmingLevel()
 	return API.GetSkillsTableSkill(38)
@@ -80,11 +104,46 @@ local function getSeedRequirements(itemId)
 	return requirements
 end
 
+local function getProducedHerb(seedId)
+	return seedToHerbMap[seedId]
+end
+
 local function canPlantSeed(itemId)
+	-- Check if seed is blacklisted
+	if BLACKLISTED_SEEDS[itemId] then
+		return false
+	end
+
 	local playerLevel = getCurrentFarmingLevel()
 	local requirements = getSeedRequirements(itemId)
 
 	return requirements.isHerbSeed and playerLevel >= requirements.level
+end
+
+local function canAccommodateHerbs(seedId)
+	-- If inventory isn't full, we can always plant
+	if Inventory:FreeSpaces() > 0 then
+		return true
+	end
+
+	-- If inventory is full, check if we have a stack of the herb this seed produces
+	local producedHerb = getProducedHerb(seedId)
+	if producedHerb then
+		-- Check for regular herb
+		local herbCount = Inventory:GetItemAmount(producedHerb)
+		if herbCount > 0 then
+			return true -- We have a stack, herbs can be added to it
+		end
+
+		-- Check for noted herb (typically +1 from original ID)
+		local notedHerbCount = Inventory:GetItemAmount(producedHerb + 1)
+		if notedHerbCount > 0 then
+			return true -- We have a noted stack, herbs can be added to it
+		end
+	end
+
+	-- No space and no existing stack (regular or noted)
+	return false
 end
 
 -- ================================================================================================
@@ -164,7 +223,7 @@ local function getPlantableSeeds()
 	local inv = API.ReadInvArrays33()
 
 	for _, item in ipairs(inv) do
-		if item.itemid1 > 0 and canPlantSeed(item.itemid1) then
+		if item.itemid1 > 0 and canPlantSeed(item.itemid1) and canAccommodateHerbs(item.itemid1) then
 			table.insert(seeds, item.itemid1)
 		end
 	end
@@ -178,7 +237,7 @@ end
 
 local function dropWeeds()
 	if hasWeeds() then
-		API.DoAction_Inventory1(WEEDS_ID, 0, 7, API.OFF_ACT_GeneralInterface_route) -- Drop action
+		API.DoAction_Inventory1(WEEDS_ID, 0, 8, API.OFF_ACT_GeneralInterface_route2) -- Drop action
 		API.RandomSleep2(300, 200, 100)
 	end
 end
@@ -248,7 +307,27 @@ local function handlePatch()
 		local seeds = getPlantableSeeds()
 
 		if #seeds == 0 then
-			print("No plantable herb seeds found in inventory!")
+			-- Check if it's a level issue or inventory issue
+			local inv = API.ReadInvArrays33()
+			local hasValidSeeds = false
+			local inventoryBlocked = false
+
+			for _, item in ipairs(inv) do
+				if item.itemid1 > 0 and canPlantSeed(item.itemid1) then
+					hasValidSeeds = true
+					if not canAccommodateHerbs(item.itemid1) then
+						inventoryBlocked = true
+						break
+					end
+				end
+			end
+
+			if inventoryBlocked then
+				print("Cannot plant: Inventory full and no space for harvested herbs!")
+				print("Free up inventory space or ensure you have herb stacks for the seeds you want to plant.")
+			else
+				print("No plantable herb seeds found in inventory!")
+			end
 			return false
 		end
 
@@ -280,8 +359,33 @@ end
 -- Check if we have any plantable seeds
 local initialSeeds = getPlantableSeeds()
 if #initialSeeds == 0 then
-	print("ERROR: No plantable herb seeds found in inventory!")
-	print("Make sure you have herb seeds that match your Farming level.")
+	-- Check if it's a level issue or inventory issue
+	local inv = API.ReadInvArrays33()
+	local hasSeeds = false
+	local inventoryIssue = false
+
+	for _, item in ipairs(inv) do
+		if item.itemid1 > 0 and canPlantSeed(item.itemid1) then
+			hasSeeds = true
+			if not canAccommodateHerbs(item.itemid1) then
+				inventoryIssue = true
+				local producedHerb = getProducedHerb(item.itemid1)
+				local herbName = producedHerb
+						and (Item:Get(producedHerb) and Item:Get(producedHerb).name or "Unknown herb")
+					or "Unknown herb"
+				print("WARNING: Inventory full and no stack of " .. herbName .. " found for seed " .. item.itemid1)
+			end
+		end
+	end
+
+	if inventoryIssue then
+		print("ERROR: Inventory is full and no space for harvested herbs!")
+		print("Make sure you have existing stacks of the herbs your seeds will produce,")
+		print("or free up some inventory space before planting.")
+	elseif not hasSeeds then
+		print("ERROR: No plantable herb seeds found in inventory!")
+		print("Make sure you have herb seeds that match your Farming level.")
+	end
 	return
 end
 
@@ -292,17 +396,16 @@ API.Write_fake_mouse_do(false)
 API.SetDrawTrackedSkills(true)
 
 while API.Read_LoopyLoop() do
+	if not API.ReadPlayerMovin2() and not API.CheckAnim(5) then
+		if not API.DoRandomEvents(600, 600) then
+			dropWeeds()
+			local success = handlePatch()
 
-    API.DoRandomEvents()
-
-	if not API.CheckAnim(5) then
-		dropWeeds()
-		local success = handlePatch()
-
-		if not success then
-			print("Planting complete or no more work to do. Stopping script.")
-			API.Write_LoopyLoop(false)
-			break
+			if not success then
+				print("Planting complete or no more work to do. Stopping script.")
+				API.Write_LoopyLoop(false)
+				break
+			end
 		end
 	end
 
