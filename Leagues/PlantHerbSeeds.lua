@@ -7,7 +7,10 @@ Author: Higgins
 Description: Automatically plants herb seeds at Catherby herb patch based on Farming level
 
 Starting Location: Catherby herb patch (2792, 3464) with seeds in inventory
-Requirements: Herb seeds in inventory, appropriate Farming level, rake (if needed)
+Requirements: 
+- Herb seeds in inventory
+- Appropriate Farming level
+- Farming relic (Leagues RS3)
 
 How it works:
 1. Checks herb patch state (Inspect/Rake/Pick)
@@ -22,6 +25,7 @@ Level Requirements:
 - Only plants seeds for herb patches (param 4085 contains "herb patch" or category 20)
 
 Location: Catherby herb patch coordinates (2792, 3464)
+Note: Requires Farming relic for Leagues RS3
 ====================================================================================================
 ]]
 
