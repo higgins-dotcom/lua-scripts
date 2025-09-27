@@ -20,13 +20,13 @@ local API = require("api")
 -- ================================================================================================
 
 local ITEM_CONFIG = {
-	[3024] = 10, -- Super Restore (4)
-	[2436] = 10, -- Super Attack (4)
-	[2440] = 10, -- Super Strength (4)
-	[2442] = 10, -- Super Defence (4)
-	[3040] = 10, -- Super Magic Potion (4)
-	[2444] = 10, -- Super Ranging Potion (4)
-	[55316] = 10, -- Super Necromancy (4)
+	[3024] = 0, -- Super Restore (4)
+	[2436] = 0, -- Super Attack (4)
+	[2440] = 0, -- Super Strength (4)
+	[2442] = 0, -- Super Defence (4)
+	[3040] = 0, -- Super Magic Potion (4)
+	[2444] = 0, -- Super Ranging Potion (4)
+	[55316] = 0, -- Super Necromancy (4)
 	[12140] = 0, -- Summoning Potion (4)
 	[35199] = 0, -- Cooked Eeligator
 }
