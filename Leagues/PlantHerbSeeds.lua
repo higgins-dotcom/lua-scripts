@@ -6,7 +6,7 @@ Version: 1.0
 Author: Higgins
 Description: Automatically plants herb seeds at Catherby herb patch based on Farming level
 
-Starting Location: Catherby herb patch (2792, 3464) with seeds in inventory
+Starting Location: Next to any herb patch with seeds in inventory
 Requirements: 
 - Herb seeds in inventory
 - Appropriate Farming level
@@ -24,8 +24,8 @@ Level Requirements:
 - Script automatically checks your level against seed requirements (item param 771)
 - Only plants seeds for herb patches (param 4085 contains "herb patch" or category 20)
 
-Location: Catherby herb patch coordinates (2792, 3464)
-Note: Requires Farming relic for Leagues RS3
+Location: Any herb patch (coordinates detected automatically)
+Note: Requires Farming relic for Leagues RS3. Start next to an empty herb patch.
 ====================================================================================================
 ]]
 
@@ -35,8 +35,8 @@ local API = require("API")
 -- CONSTANTS
 -- ================================================================================================
 
-local PATCH_COORDS = { x = 2791, y = 3463, z = 4 }
 local WEEDS_ID = 6005
+local PATCH_COORDS = nil -- Will be set dynamically when patch is found
 
 -- ================================================================================================
 -- UTILITY FUNCTIONS
@@ -91,10 +91,43 @@ end
 -- PATCH & INVENTORY FUNCTIONS
 -- ================================================================================================
 
+local function findNearbyHerbPatch()
+	local objs = API.ReadAllObjectsArray({ 0 }, { -1 }, {})
+	local playerPos = API.PlayerCoordfloat()
+
+	for _, obj in ipairs(objs) do
+		-- Look for objects with farming-related actions within 10 tiles
+		if
+			obj.Action
+			and (
+				string.find(obj.Action, "Inspect")
+				or string.find(obj.Action, "Rake")
+				or string.find(obj.Action, "Pick")
+			)
+		then
+			local distance = math.sqrt((obj.CalcX - playerPos.x) ^ 2 + (obj.CalcY - playerPos.y) ^ 2)
+			if distance <= 10 then
+				-- Record the patch coordinates for future use
+				PATCH_COORDS = { x = obj.CalcX, y = obj.CalcY, z = obj.CalcZ or 0 }
+				print("Found herb patch at (" .. obj.CalcX .. ", " .. obj.CalcY .. "): " .. (obj.Name or "Unknown"))
+				return obj
+			end
+		end
+	end
+	return nil
+end
+
 local function getHerbPatchAtCoords()
+	-- If we don't have coordinates yet, find the patch
+	if not PATCH_COORDS then
+		return findNearbyHerbPatch()
+	end
+
+	-- Use recorded coordinates to find the specific patch
 	local objs = API.ReadAllObjectsArray({ 0 }, { -1 }, {})
 
 	for _, obj in ipairs(objs) do
+		-- Check if object is at our recorded coordinates
 		if obj.CalcX == PATCH_COORDS.x and obj.CalcY == PATCH_COORDS.y then
 			-- Look for objects with farming-related actions
 			if
@@ -229,33 +262,18 @@ local function handlePatch()
 end
 
 -- ================================================================================================
--- PREFLIGHT CHECKS
--- ================================================================================================
-
-local function isNearCatherbyPatch()
-	local playerPos = API.PlayerCoordfloat()
-	local targetX, targetY = PATCH_COORDS.x, PATCH_COORDS.y
-	local range = 20
-
-	local distance = math.sqrt((playerPos.x - targetX) ^ 2 + (playerPos.y - targetY) ^ 2)
-	return distance <= range
-end
-
--- ================================================================================================
 -- SCRIPT EXECUTION
 -- ================================================================================================
 
 print("Starting Plant Herb Seeds script...")
 print("Current Farming level: " .. getCurrentFarmingLevel())
-print("Target: Catherby herb patch (" .. PATCH_COORDS.x .. ", " .. PATCH_COORDS.y .. ")")
 
--- Location check
-if not isNearCatherbyPatch() then
-	local playerPos = API.PlayerCoordfloat()
-	print("ERROR: Player not near Catherby herb patch!")
-	print("Required: Within 20 tiles of (" .. PATCH_COORDS.x .. ", " .. PATCH_COORDS.y .. ")")
-	print("Current position: (" .. math.floor(playerPos.x) .. ", " .. math.floor(playerPos.y) .. ")")
-	print("Please move to the Catherby herb patch before running this script.")
+-- Try to find a nearby herb patch
+local initialPatch = findNearbyHerbPatch()
+if not initialPatch then
+	print("ERROR: No herb patch found nearby!")
+	print("Please stand next to an empty herb patch before running this script.")
+	print("The script will automatically detect and use the closest herb patch.")
 	return
 end
 
@@ -274,6 +292,9 @@ API.Write_fake_mouse_do(false)
 API.SetDrawTrackedSkills(true)
 
 while API.Read_LoopyLoop() do
+
+    API.DoRandomEvents()
+
 	if not API.CheckAnim(5) then
 		dropWeeds()
 		local success = handlePatch()
