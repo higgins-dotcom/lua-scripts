@@ -48,6 +48,7 @@ end
 print("Starting Object Action Script")
 print("Required item found in inventory!")
 API.SetDrawTrackedSkills(true)
+API.Write_fake_mouse_do(false)
 
 while API.Read_LoopyLoop() do
 	-- Check if we still have the required item

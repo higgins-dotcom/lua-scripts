@@ -141,6 +141,7 @@ print("Starting Clean Herbs script...")
 print("Current Herblore level: " .. getCurrentHerbloreLevel())
 
 API.SetDrawTrackedSkills(true)
+API.Write_fake_mouse_do(false)
 
 while API.Read_LoopyLoop() do
 	if not API.isProcessing() then

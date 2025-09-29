@@ -340,6 +340,7 @@ Interact:SetSleep(900, 1200, 1200)
 
 API.SetMaxIdleTime(10)
 API.GatherEvents_chat_check()
+API.Write_fake_mouse_do(false)
 
 while API.Read_LoopyLoop() do
 	if isPlayerReady() then

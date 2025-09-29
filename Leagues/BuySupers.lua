@@ -272,6 +272,7 @@ local startTime = os.time()
 
 print("Starting Buy Supers script...")
 print("Items to purchase: " .. #State.itemList)
+API.Write_fake_mouse_do(false)
 
 while API.Read_LoopyLoop() do
 	API.DrawTable(calculateMetrics(startTime))

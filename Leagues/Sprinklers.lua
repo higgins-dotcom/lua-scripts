@@ -166,6 +166,7 @@ end
 print("Starting Sprinklers Manufacturing Script")
 
 API.SetDrawTrackedSkills(true)
+API.Write_fake_mouse_do(false)
 
 while API.Read_LoopyLoop() do
 	if isPlayerReady() then

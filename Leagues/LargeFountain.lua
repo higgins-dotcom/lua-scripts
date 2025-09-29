@@ -150,6 +150,7 @@ end
 
 local startTime = os.time()
 API.SetDrawTrackedSkills(true)
+API.Write_fake_mouse_do(false)
 
 while API.Read_LoopyLoop() do
 	API.DrawTable(calculateMetrics(startTime))

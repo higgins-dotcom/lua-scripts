@@ -125,6 +125,8 @@ local startTime = os.time()
 local totalGrapesBought = 0
 local lastInventoryCount = 0
 
+API.Write_fake_mouse_do(false)
+
 while API.Read_LoopyLoop() do
 	API.DrawTable(calculateMetrics(startTime, totalGrapesBought))
 

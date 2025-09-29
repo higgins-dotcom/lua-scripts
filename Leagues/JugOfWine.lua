@@ -88,6 +88,7 @@ local function bankItems(retryCount)
 end
 
 API.SetDrawTrackedSkills(true)
+API.Write_fake_mouse_do(false)
 
 local retryCount = 0
 

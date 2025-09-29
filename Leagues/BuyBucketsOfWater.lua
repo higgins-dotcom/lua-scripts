@@ -158,6 +158,8 @@ end
 -- Main Script
 print("Starting Buy Buckets of Water Script")
 
+API.Write_fake_mouse_do(false)
+
 while API.Read_LoopyLoop() do
 	if isPlayerReady() then
 		handleCurrentState()

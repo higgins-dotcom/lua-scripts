@@ -159,6 +159,7 @@ API.Write_LoopyLoop(true)
 
 local startGP = API.VB_FindPSettinOrder(SETTINGS.GP).state
 local startTime = os.time()
+API.Write_fake_mouse_do(false)
 
 while API.Read_LoopyLoop() do
 	API.DrawTable(calculateMetrics(startGP, startTime))
