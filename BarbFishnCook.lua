@@ -71,10 +71,25 @@ local function hasCookedFish()
 end
 
 local function cook()
-    if API.Compare2874Status(1277970) or API.VB_FindPSettinOrder(2874).state == 1277970 then
+
+    local tool = false
+    local food = false
+
+    local chooseTool = API.ScanForInterfaceTest2Get(false, {{ 1179,0,-1,0 }, { 1179,99,-1,0 }, { 1179,99,14,0 }})
+    if #chooseTool > 1 then
+        if string.find(chooseTool[1].textids, "Choose a tool") then
+            tool = true
+        end
+    end
+
+    if API.VB_FindPSettinOrder(8847) > 0 then
+        food = true
+    end
+
+    if API.Compare2874Status(1277970) or API.VB_FindPSettinOrder(2874).state == 1277970 or tool then
         API.KeyboardPress2(0x31, 60, 120)
         API.RandomSleep2(200, 200, 200)
-    elseif API.Compare2874Status(1310738) or API.VB_FindPSettinOrder(2874).state == 1310738 then
+    elseif API.Compare2874Status(1310738) or API.VB_FindPSettinOrder(2874).state == 1310738 or food then
         API.KeyboardPress2(0x20, 60, 120)
         API.RandomSleep2(600, 200, 200)
     else
@@ -90,6 +105,7 @@ end
 state = STATE.DROP
 
 while API.Read_LoopyLoop() do
+    break
     if Inventory:GetItemAmount(314) < 1 then
         break
     end
