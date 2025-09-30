@@ -78,7 +78,7 @@ local function withdrawGrimyHerbs()
 	local playerLevel = getCurrentHerbloreLevel()
 
 	for index, value in ipairs(inv) do
-		if API.InvFull_() then
+		if Inventory:IsFull() then
 			break
 		end
 
@@ -114,11 +114,11 @@ end
 
 local function handleBanking()
 	if API.BankOpen2() then
-		if API.InvFull_() and not hasGrimyHerbs() then
+		if Inventory:IsFull() and not hasGrimyHerbs() then
 			-- Deposit clean herbs
 			API.KeyboardPress2(0x33, 60, 100) -- Deposit all
 			API.RandomSleep2(300, 300, 300)
-		elseif API.InvFull_() and hasGrimyHerbs() then
+		elseif Inventory:IsFull() and hasGrimyHerbs() then
 			-- Close bank to continue cleaning
 			API.KeyboardPress2(0x1B, 60, 100) -- ESC
 			API.RandomSleep2(300, 300, 300)
