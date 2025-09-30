@@ -71,10 +71,10 @@ local function hasCookedFish()
 end
 
 local function cook()
-    if API.Compare2874Status(1277970) or API.VB_FindPSettinOrder(2874, 1).state == 1277970 then
+    if API.Compare2874Status(1277970) or API.VB_FindPSettinOrder(2874).state == 1277970 then
         API.KeyboardPress2(0x31, 60, 120)
         API.RandomSleep2(200, 200, 200)
-    elseif API.Compare2874Status(1310738) or API.VB_FindPSettinOrder(2874, 1).state == 1310738 then
+    elseif API.Compare2874Status(1310738) or API.VB_FindPSettinOrder(2874).state == 1310738 then
         API.KeyboardPress2(0x20, 60, 120)
         API.RandomSleep2(600, 200, 200)
     else
