@@ -78,7 +78,7 @@ local function isShopOpen()
 end
 
 local function isInventoryFull()
-	return API.InvFull_() or API.InvItemcount_1(ITEM_IDS.BUCKET_OF_WATER) >= SETTINGS.MAX_INVENTORY_BUCKETS
+	return Inventory:IsFull() or Inventory:GetItemAmount(ITEM_IDS.BUCKET_OF_WATER) >= SETTINGS.MAX_INVENTORY_BUCKETS
 end
 
 -- Action Functions
