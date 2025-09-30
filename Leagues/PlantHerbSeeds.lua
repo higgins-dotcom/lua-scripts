@@ -4,7 +4,7 @@ Plant Herb Seeds Script
 ====================================================================================================
 Version: 1.0
 Author: Higgins
-Description: Automatically plants herb seeds at Catherby herb patch based on Farming level
+Description: Automatically plants herb seeds at any herb patch based on Farming level
 
 Starting Location: Next to any herb patch with seeds in inventory
 Requirements: 
