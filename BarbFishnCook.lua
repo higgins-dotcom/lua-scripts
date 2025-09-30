@@ -76,7 +76,7 @@ local function cook()
     local food = false
 
     local chooseTool = API.ScanForInterfaceTest2Get(false, {{ 1179,0,-1,0 }, { 1179,99,-1,0 }, { 1179,99,14,0 }})
-    if #chooseTool > 1 then
+    if #chooseTool > 0 then
         if string.find(chooseTool[1].textids, "Choose a tool") then
             tool = true
         end
