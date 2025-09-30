@@ -59,13 +59,7 @@ local function drop()
 end
 
 local function invContains(items)
-    local loot = API.InvItemcount_2(items)
-    for _, v in ipairs(loot) do
-        if v > 0 then
-            return true
-        end
-    end
-    return false
+    return Inventory:ContainsAny(items)
 end
 
 local function hasRawFish()
@@ -85,7 +79,7 @@ local function cook()
         API.RandomSleep2(600, 200, 200)
     else
         if not API.DoAction_Object1(0x2e, GeneralObject_route_useon, { 70755 }, 50) then
-            if API.InvItemcount_1(1511) > 0 then
+            if Inventory:GetItemAmount(1511) > 0 then
                 API.DoAction_Inventory1(1511, 0, 2, API.OFF_ACT_GeneralInterface_route) -- create fire
                 API.RandomSleep2(600, 300, 300)
             end
@@ -96,7 +90,7 @@ end
 state = STATE.DROP
 
 while API.Read_LoopyLoop() do
-    if API.InvItemcount_1(314) < 1 then
+    if Inventory:GetItemAmount(314) < 1 then
         break
     end
 
@@ -109,7 +103,7 @@ while API.Read_LoopyLoop() do
     end
 
     if API.ReadPlayerMovin2() or API.CheckAnim(35) then
-        if spotCheck() or API.InvFull_() then
+        if spotCheck() or Inventory:IsFull() then
             goto continue
         end
     end
@@ -128,12 +122,12 @@ while API.Read_LoopyLoop() do
         if not drop() then state = STATE.FISH end
         API.RandomSleep2(100, 100, 100)
     elseif state == STATE.FISH then
-        if API.InvFull_() then
+        if Inventory:IsFull() then
             state = STATE.COOK
         else
-            if not (API.InvItemcount_1(1511) > 0) then
-                if not API.DoAction_Object2(0x3b, 0, { 38783 }, 50, WPOINT.new(3104, 3433, 0)) then
-                    API.DoAction_Object2(0x3b, 0, { 38760 }, 50, WPOINT.new(3104, 3433, 0))
+            if not (Inventory:GetItemAmount(1511) > 0 and not API.CheckAnim(10)) then
+                if not API.DoAction_Object_valid2(0x3b, 0, { 38783 }, 50, WPOINT.new(3104, 3433, 0), true) then
+                    API.DoAction_Object_valid2(0x3b, 0, { 38760 }, 50, WPOINT.new(3104, 3433, 0), true)
                 end
                 API.RandomSleep2(600, 600, 600)
                 goto continue
