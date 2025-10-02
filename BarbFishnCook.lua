@@ -82,7 +82,7 @@ local function cook()
         end
     end
 
-    if API.VB_FindPSettinOrder(8847) > 0 then
+    if API.VB_FindPSettinOrder(8847).state > 0 then
         food = true
     end
 
