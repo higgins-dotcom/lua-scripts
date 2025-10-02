@@ -105,7 +105,6 @@ end
 state = STATE.DROP
 
 while API.Read_LoopyLoop() do
-    break
     if Inventory:GetItemAmount(314) < 1 then
         break
     end
