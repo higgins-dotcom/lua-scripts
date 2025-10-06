@@ -44,6 +44,15 @@ local SETTINGS = {
 	VB_CLUE_STATE = 2874,
 }
 
+local BLACKLISTED_CLUES = {
+	[7268] = true,
+	[3579] = true,
+	[3564] = true,
+	[2853] = true, -- Gnome Ref
+	-- Add more blacklisted clue IDs as needed:
+	-- [itemId] = true,
+}
+
 local REQUIRED_ABILITIES = {
 	{ name = "Globetrotter jacket", action = "Activate" },
 	{ name = "Globetrotter backpack", action = "Swap clue" },
@@ -119,6 +128,13 @@ local function hasScrollBox()
 		if item.name and string.find(item.name, "Scroll box %(easy%)") then
 			return item.id
 		end
+	end
+	return false
+end
+
+local function isClueBlacklisted(clueId)
+	if BLACKLISTED_CLUES[clueId] then
+		return true
 	end
 	return false
 end
@@ -253,6 +269,11 @@ local function processClue(clueId)
 	local hasObject = item:HasParam(CLUE_PARAMS.OBJECT)
 	local hasNpc = item:HasParam(CLUE_PARAMS.NPC)
 	local hasDig = item:HasParam(CLUE_PARAMS.DIG)
+
+	if clueId and isClueBlacklisted(clueId) then
+		print("Clue ID", clueId, "is blacklisted - swapping for new clue")
+		return handleBadClue()
+	end
 
 	if hasObject then
 		handleObjectClue(item)
