@@ -67,6 +67,7 @@ local seedToHerbMap = {
 	[5302] = 2485, -- Lantadyme seed -> Grimy lantadyme
 	[5303] = 217, -- Dwarf weed seed -> Grimy dwarf weed
 	[5304] = 219, -- Torstol seed -> Grimy torstol
+	[19917] = 27044 -- Samaden seed -> Noted Grimy Samaden (Herblore Habitat)
 }
 
 local function getCurrentFarmingLevel()
@@ -93,7 +94,7 @@ local function getSeedRequirements(itemId)
 		local patchInfo = item:GetParam(4085)
 		if patchInfo and string.find(tostring(patchInfo), "herb patch") then
 			requirements.isHerbSeed = true
-		elseif item.category == 20 then
+		elseif item.category == 20 or item.category == 2065 then
 			-- Fallback: check if item category is 20 (seeds)
 			requirements.isHerbSeed = true
 		end
