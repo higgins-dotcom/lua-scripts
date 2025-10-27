@@ -33,7 +33,7 @@ How it works:
 --
 
 local API = require("API")
-local PuzzleModule = require("Clues.PuzzleModule")
+local PuzzleModule = require("PuzzleModule")
 
 local SETTINGS = {
 	PROXIMITY_THRESHOLD = 5,
