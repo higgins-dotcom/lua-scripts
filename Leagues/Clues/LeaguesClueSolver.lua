@@ -159,6 +159,7 @@ end
 
 -- Forward declarations (defined later in the file)
 local updateClueCompletionMetrics
+local handleBadClue
 
 -- Action result pattern for standardized handler returns
 local ActionResult = {
