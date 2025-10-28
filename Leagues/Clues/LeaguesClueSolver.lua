@@ -775,7 +775,7 @@ local function handleChallengeScroll()
 	end
 end
 
-local function handleBadClue()
+handleBadClue = function()
 	print("Handling bad/unsolvable clue")
 
 	-- Track metrics using unified system (but keep the special hasSwappedThisClue check)
