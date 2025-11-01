@@ -37,7 +37,7 @@ local PuzzleModule = require("PuzzleModule")
 
 local SETTINGS = {
 	PROXIMITY_THRESHOLD = 5,
-	API_TOKEN = "dk_token_here", -- Add your API token here for puzzle solver authentication
+	API_TOKEN = "place your token here", -- Add your API token here for puzzle solver authentication
 	ALLOW_WILDERNESS_TELEPORTS = false, -- Set to true to allow wilderness teleports, false to swap wilderness clues
 	ALLOW_REQUIRED_ITEM_CLUES = false, -- Set to true to handle clues requiring items from NPCs, false to swap them
 	HAS_FOOT_SHAPED_KEY_UNLOCK = false, -- Set to true if you have "Way of the foot-shaped key" unlock (skips required items for medium clues)
@@ -61,6 +61,7 @@ local ClueState = {
 		mediumCluesCompleted = 0,
 		hardCluesCompleted = 0,
 		eliteCluesCompleted = 0,
+		masterCluesCompleted = 0,
 		totalCluesCompleted = 0,
 
 		-- Clue types processed
@@ -75,9 +76,17 @@ local ClueState = {
 		puzzleBoxesSolved = 0,
 		puzzleBoxesFailed = 0,
 
+		-- Lockboxes
+		lockboxesSolved = 0,
+		lockboxesFailed = 0,
+
 		-- Knot puzzles
 		knotPuzzlesSolved = 0,
 		knotPuzzlesFailed = 0,
+
+		-- Towers puzzles
+		towersPuzzlesSolved = 0,
+		towersPuzzlesFailed = 0,
 
 		-- Skipped/swapped clues
 		cluesSwapped = 0,
@@ -111,12 +120,19 @@ local ClueState = {
 		puzzleIncomplete = false,
 		clueCompleted = false,
 		clueCompletionType = nil,
+		lockboxComplete = false,
 	},
 
 	-- Puzzle state
 	puzzles = {
 		completed = {}, -- Track completed puzzle boxes to avoid re-solving them
 		attempts = {}, -- Track puzzle solve attempts per puzzle box
+	},
+
+	-- Lockbox state
+	lockboxes = {
+		completed = {}, -- Track completed lockboxes to avoid re-solving them
+		attempts = {}, -- Track lockbox solve attempts
 	},
 
 	-- Reset tracking state (called when clue completes)
@@ -139,6 +155,7 @@ local ClueState = {
 		self.chat.puzzleIncomplete = false
 		self.chat.clueCompleted = false
 		self.chat.clueCompletionType = nil
+		self.chat.lockboxComplete = false
 	end,
 }
 
@@ -225,11 +242,13 @@ local CHAT_PATTERNS = {
 	DIG_ACTION = "You dig",
 	SEARCH_ACTION = "You search",
 	CLUE_TYPES = {
+		MASTER = "master",
 		ELITE = "elite",
 		HARD = "hard",
 		MEDIUM = "medium",
 		EASY = "easy",
 	},
+	LOCKBOX_COMPLETE = "You crack the lock",
 }
 
 -- Equipment Functions
@@ -313,6 +332,12 @@ local function processChatEvents(resetFlags)
 			end
 		end
 
+		-- Check for lockbox completion
+		if matchesAnyPattern(text, CHAT_PATTERNS.LOCKBOX_COMPLETE) then
+			print("Chat: Lockbox completion detected:", text)
+			ClueState.chat.lockboxComplete = true
+		end
+
 		-- Check for clue completion
 		if matchesAnyPattern(text, CHAT_PATTERNS.CLUE_COMPLETE) then
 			print("Chat: Clue completion detected:", text)
@@ -320,7 +345,9 @@ local function processChatEvents(resetFlags)
 
 			-- Determine clue type from the message (check most specific first)
 			local textLower = text:lower()
-			if string.find(textLower, CHAT_PATTERNS.CLUE_TYPES.ELITE) then
+			if string.find(textLower, CHAT_PATTERNS.CLUE_TYPES.MASTER) then
+				ClueState.chat.clueCompletionType = CHAT_PATTERNS.CLUE_TYPES.MASTER
+			elseif string.find(textLower, CHAT_PATTERNS.CLUE_TYPES.ELITE) then
 				ClueState.chat.clueCompletionType = CHAT_PATTERNS.CLUE_TYPES.ELITE
 			elseif string.find(textLower, CHAT_PATTERNS.CLUE_TYPES.HARD) then
 				ClueState.chat.clueCompletionType = CHAT_PATTERNS.CLUE_TYPES.HARD
@@ -410,6 +437,7 @@ local function calculateMetrics()
 		{ "Medium Clues:", formatNumber(metrics.mediumCluesCompleted) },
 		{ "Hard Clues:", formatNumber(metrics.hardCluesCompleted) },
 		{ "Elite Clues:", formatNumber(metrics.eliteCluesCompleted) },
+		{ "Master Clues:", formatNumber(metrics.masterCluesCompleted) },
 		{ "__HEADER__Types" },
 		{ "=== CLUE TYPES ===", "" },
 		{ "Dig Clues:", formatNumber(metrics.digClues) },
@@ -422,10 +450,15 @@ local function calculateMetrics()
 		{ "=== PUZZLE BOXES ===", "" },
 		{ "Solved:", formatNumber(metrics.puzzleBoxesSolved) },
 		{ "Failed:", formatNumber(metrics.puzzleBoxesFailed) },
-		{ "__HEADER__Knots" },
+		{ "=== LOCKBOXES ===", "" },
+		{ "Solved:", formatNumber(metrics.lockboxesSolved) },
+		{ "Failed:", formatNumber(metrics.lockboxesFailed) },
 		{ "=== KNOT PUZZLES ===", "" },
 		{ "Solved:", formatNumber(metrics.knotPuzzlesSolved) },
 		{ "Failed:", formatNumber(metrics.knotPuzzlesFailed) },
+		{ "=== TOWERS PUZZLES ===", "" },
+		{ "Solved:", formatNumber(metrics.towersPuzzlesSolved) },
+		{ "Failed:", formatNumber(metrics.towersPuzzlesFailed) },
 		{ "__HEADER__Extra" },
 		{ "=== ITEMS OPENED ===", "" },
 		{ "Sealed Clues:", formatNumber(metrics.sealedCluesOpened) },
@@ -465,6 +498,8 @@ updateClueCompletionMetrics = function(clueType)
 		metrics.hardCluesCompleted = metrics.hardCluesCompleted + 1
 	elseif clueType == "elite" then
 		metrics.eliteCluesCompleted = metrics.eliteCluesCompleted + 1
+	elseif clueType == "master" then
+		metrics.masterCluesCompleted = metrics.masterCluesCompleted + 1
 	end
 	-- Note: "unknown" type just increments total without specific type
 
@@ -480,6 +515,8 @@ local function hasPuzzleBox()
 				string.find(item.name, "Puzzle box %(hard%)")
 				or string.find(item.name, "Puzzle box %(elite%)")
 				or string.find(item.name, "Puzzle scroll box %(elite%)")
+				or string.find(item.name, "Puzzle scroll box %(master%)")
+				or string.find(item.name, "Towers puzzle scroll %(master%)")
 			)
 		then
 			print("Found puzzle box with ID:", item.id, "Name:", item.name)
@@ -489,9 +526,21 @@ local function hasPuzzleBox()
 	return false
 end
 
+local function hasLockbox()
+	local inv = Inventory:GetItems()
+	for _, item in ipairs(inv) do
+		if item.id == 41800 then -- Lockbox (master)
+			print("Found lockbox with ID:", item.id, "Name:", item.name or "Lockbox (master)")
+			return item.id, item.name or "Lockbox (master)"
+		end
+	end
+	return false
+end
+
 -- Clean up completed puzzle boxes that are no longer in inventory
 local function cleanupCompletedPuzzleBoxes()
 	local currentPuzzleBoxId = hasPuzzleBox()
+	local currentLockboxId = hasLockbox()
 	local toRemove = {}
 
 	-- Check each completed puzzle box
@@ -508,6 +557,21 @@ local function cleanupCompletedPuzzleBoxes()
 		print("Cleaned up completed puzzle box ID:", puzzleBoxId, "(no longer in inventory)")
 	end
 
+	-- Clean up completed lockboxes that are no longer in inventory
+	if ClueState.lockboxes and ClueState.lockboxes.completed then
+		local toRemoveLockboxes = {}
+		for lockboxId, _ in pairs(ClueState.lockboxes.completed) do
+			if lockboxId ~= currentLockboxId and lockboxId ~= "lockbox_from_puzzle" then
+				table.insert(toRemoveLockboxes, lockboxId)
+			end
+		end
+
+		for _, lockboxId in ipairs(toRemoveLockboxes) do
+			ClueState.lockboxes.completed[lockboxId] = nil
+			print("Cleaned up completed lockbox ID:", lockboxId, "(no longer in inventory)")
+		end
+	end
+
 	-- Also clean up attempt counters for puzzle boxes no longer in inventory
 	if puzzleAttempts then
 		local toRemoveAttempts = {}
@@ -520,6 +584,21 @@ local function cleanupCompletedPuzzleBoxes()
 		for _, puzzleBoxId in ipairs(toRemoveAttempts) do
 			puzzleAttempts[puzzleBoxId] = nil
 			print("Cleaned up attempt counter for puzzle box ID:", puzzleBoxId, "(no longer in inventory)")
+		end
+	end
+
+	-- Clean up lockbox attempt counters
+	if ClueState.lockboxes and ClueState.lockboxes.attempts then
+		local toRemoveLockboxAttempts = {}
+		for lockboxId, _ in pairs(ClueState.lockboxes.attempts) do
+			if lockboxId ~= currentLockboxId and lockboxId ~= "lockbox_from_puzzle" then
+				table.insert(toRemoveLockboxAttempts, lockboxId)
+			end
+		end
+
+		for _, lockboxId in ipairs(toRemoveLockboxAttempts) do
+			ClueState.lockboxes.attempts[lockboxId] = nil
+			print("Cleaned up lockbox attempt counter for ID:", lockboxId, "(no longer in inventory)")
 		end
 	end
 end
@@ -562,6 +641,8 @@ local ITEM_IDS = {
 	SEALED_MEDIUM = 42007,
 	SEALED_HARD = 42008,
 	SEALED_ELITE = 42009,
+	SEALED_MASTER = 42010,
+	LOCKBOX = 41800,
 }
 
 local CLUE_PARAMS = {
@@ -570,6 +651,23 @@ local CLUE_PARAMS = {
 	NPC = 4683,
 	REQUIRED_ITEM = 4685,
 	SCAN = 235,
+}
+
+-- Master anagram clue NPCs for clue 41796 (teleport and talk to nearest NPC)
+local MASTER_ANAGRAM_NPCS = {
+	{ clue = "O eastern wishes", name = "Sensei Seaworth", coords = { 1785, 11953 }, challenge = "towers" },
+	{ clue = "Winsome Lad", name = "Wise Old Man", coords = { 3088, 3255 }, challenge = "none" },
+	{ clue = "Ah; wet arm", name = "Amaethwr", coords = { 2347, 3164 }, challenge = "lockbox" },
+	{ clue = "Pin heir all in place", name = "Philipe Carnillean", coords = { 2565, 3273 }, challenge = "none" },
+	{ clue = "Hear A Lady Rant", name = "Lady Trahaearn", coords = { 2221, 3298 }, challenge = "none" },
+	{ clue = "I Saw The Lie", name = "Ali the Wise", coords = { 3420, 2937 }, challenge = "none" },
+	{ clue = "A Pure Glow", name = "Paul Gower", coords = { 3256, 3355 }, challenge = "none" },
+	{ clue = "Reign us if immortal", name = "Malignius Mortifer", coords = { 3001, 3267 }, challenge = "lockbox" },
+	{ clue = "Hated", name = "Death", coords = { 414, 680 }, challenge = "none" },
+	{ clue = "We Irk Over Namesake", name = "Ramokee Skinweaver", coords = { 4646, 5383 }, challenge = "none" },
+	{ clue = "Taboo Rises Shyly", name = "Soothsayer Sybil", coords = { 3198, 6961 }, challenge = "none" },
+	{ clue = "Ergo I Dig Clay", name = "Celia Diggory", coords = { 3377, 3404 }, challenge = "towers" },
+	{ clue = "Quit Thy Brine Rat Roll", name = "Brother Tranquillity", coords = { 3681, 2962 }, challenge = "none" },
 }
 
 local INTERFACE_IDS = {
@@ -687,6 +785,10 @@ local function hasEliteClue()
 	return findClueByType("elite")
 end
 
+local function hasMasterClue()
+	return findClueByType("master")
+end
+
 local function findNpc(npcId)
 	local npcs = API.ReadAllObjectsArray({ 1 }, { -1 }, {})
 	for _, npc in pairs(npcs) do
@@ -696,6 +798,18 @@ local function findNpc(npcId)
 		end
 	end
 	print("NPC with ID", npcId, "not found")
+	return nil
+end
+
+local function findNpcByName(npcName)
+	local npcs = API.ReadAllObjectsArray({ 1 }, { -1 }, {})
+	for _, npc in pairs(npcs) do
+		if npc.Name and string.find(npc.Name, npcName) then
+			print("Found NPC by name:", npc.Name, "ID:", npc.Id)
+			return npc
+		end
+	end
+	print("NPC with name", npcName, "not found")
 	return nil
 end
 
@@ -817,8 +931,8 @@ end
 local function hasScrollBox()
 	local inv = Inventory:GetItems()
 	for _, item in ipairs(inv) do
-		-- Check for item ID 19040 first
-		if item.id == 19040 then
+		-- Check for special item IDs first
+		if item.id == 19040 or item.id == 41787 then
 			print("Found special scroll item with ID:", item.id)
 			return item.id
 		end
@@ -830,6 +944,7 @@ local function hasScrollBox()
 				or string.find(item.name, "Scroll box %(medium%)")
 				or string.find(item.name, "Scroll box %(hard%)")
 				or string.find(item.name, "Scroll box %(elite%)")
+				or string.find(item.name, "Scroll box %(master%)")
 			)
 		then
 			return item.id
@@ -1106,6 +1221,29 @@ local function handlePuzzleBox()
 	local isElitePuzzleBox = puzzleBoxName
 		and (string.find(puzzleBoxName, "elite") or string.find(puzzleBoxName, "Puzzle scroll box"))
 
+	-- Check for "already solved" interface (1189)
+	if puzzleBoxId then
+		local interface1189Open = GetInterfaceOpenBySize(1189)
+		print("DEBUG: Interface 1189 open:", interface1189Open)
+
+		if interface1189Open then
+			print("Interface 1189 detected - checking for 'already solved' message...")
+			local messages = API.ScanForInterfaceTest2Get(false, { { 1189, 2, -1, 0 }, { 1189, 3, -1, 0 } })[1]
+			print("DEBUG: Found", #messages, "messages in interface 1189")
+
+			local text = messages.textids
+			print("DEBUG: Message text:", text)
+			if text and string.find(string.lower(text), "already solved") then
+				print("Puzzle box already solved - marking as completed")
+				completedPuzzleBoxes[puzzleBoxId] = true
+				-- Close the interface
+				API.KeyboardPress2(0x1B, 50, 60) -- ESC key
+				API.RandomSleep2(500, 200, 200)
+				return false -- Continue with original clue processing
+			end
+		end
+	end
+
 	-- Check for "Please finish the puzzle for me!" dialogue - handled by centralized chat processor
 
 	-- Check if we've already completed this puzzle box (but only if we haven't just detected it's incomplete)
@@ -1242,8 +1380,112 @@ local function handleKnotPuzzle()
 	end
 end
 
+-- Lockbox handling using PuzzleModule
+local function handleLockbox()
+	print("Handling lockbox using PuzzleModule")
+
+	-- Check if lockbox interface is already open
+	if PuzzleModule.isLockboxOpen() then
+		print("Lockbox interface is open, solving...")
+
+		-- Try to get lockbox ID from inventory, but if not found, use a generic ID
+		local lockboxId = hasLockbox()
+		if not lockboxId then
+			print("No lockbox in inventory - may have come from puzzle box, using generic ID")
+			lockboxId = "lockbox_from_puzzle"
+		end
+
+		-- Initialize attempt counter if not exists
+		if not ClueState.lockboxes.attempts[lockboxId] then
+			ClueState.lockboxes.attempts[lockboxId] = 0
+		end
+
+		-- Increment attempt counter
+		ClueState.lockboxes.attempts[lockboxId] = ClueState.lockboxes.attempts[lockboxId] + 1
+		print("Lockbox solve attempt", ClueState.lockboxes.attempts[lockboxId], "of 3")
+
+		local success = PuzzleModule.solveLockbox(true)
+
+		if success then
+			print("Lockbox solved successfully!")
+			ClueState.metrics.lockboxesSolved = ClueState.metrics.lockboxesSolved + 1
+			ClueState.lockboxes.completed[lockboxId] = true
+			ClueState.lockboxes.attempts[lockboxId] = nil
+			print("Lockbox solved metrics updated")
+
+			-- Wait for "You crack the lock" message
+			API.RandomSleep2(1000, 500, 500)
+			processChatEvents(false)
+
+			if ClueState.chat.lockboxComplete then
+				print("Lockbox completion confirmed")
+
+				-- Check if this lockbox came from a puzzle box
+				local puzzleBoxId = hasPuzzleBox()
+				if puzzleBoxId and not completedPuzzleBoxes[puzzleBoxId] then
+					print("Lockbox came from puzzle box - need to reopen puzzle box to continue")
+					-- The openScrollItem function will handle reopening the puzzle box on next iteration
+				else
+					-- Lockbox came from master clue - need to talk to NPC to hand it back
+					print("Lockbox from master clue - need to talk to NPC to hand it back")
+					local masterClueId = hasMasterClue()
+					if masterClueId then
+						local item = Item:Get(masterClueId)
+						if item and item:HasParam(CLUE_PARAMS.NPC) then
+							local npcId = item:GetParam(CLUE_PARAMS.NPC)
+							print("Finding NPC ID:", npcId, "to hand back lockbox")
+							local npc = findNpc(npcId)
+							if npc then
+								interactWithNpc(npc)
+								API.RandomSleep2(1000, 500, 500)
+							else
+								print("NPC not found nearby")
+							end
+						end
+					end
+				end
+			end
+
+			return ActionResult.success("lockbox")
+		else
+			print("Failed to solve lockbox")
+
+			-- Check if we've reached maximum attempts
+			if ClueState.lockboxes.attempts[lockboxId] >= 3 then
+				print("Maximum attempts (3) reached for lockbox - swapping clue")
+				ClueState.metrics.lockboxesFailed = ClueState.metrics.lockboxesFailed + 1
+				ClueState.lockboxes.attempts[lockboxId] = nil
+				return handleBadClue()
+			else
+				print("Attempt", ClueState.lockboxes.attempts[lockboxId], "failed, will retry")
+				-- Close lockbox interface to retry
+				if PuzzleModule.isLockboxOpen() then
+					print("Closing lockbox interface to retry...")
+					API.KeyboardPress2(0x1B, 50, 60) -- ESC key
+					API.RandomSleep2(500, 200, 200)
+				end
+				return ActionResult.continue("lockbox_retry")
+			end
+		end
+	else
+		-- Lockbox interface not open, need to open it
+		local lockboxId = hasLockbox()
+		if not lockboxId then
+			print("No lockbox found in inventory and interface not open")
+			return ActionResult.failure("no_lockbox")
+		end
+
+		-- Open the lockbox
+		print("Opening lockbox with ID:", lockboxId)
+		API.DoAction_Inventory1(lockboxId, 0, 1, API.OFF_ACT_GeneralInterface_route)
+		API.RandomSleep2(1200, 600, 600)
+		return ActionResult.continue("lockbox_opening")
+	end
+end
+
 -- Sealed clue opening priority list - DRY refactoring
 local SEALED_CLUE_PRIORITY = {
+	{ id = ITEM_IDS.SEALED_MASTER, name = "sealed master clue", metric = "sealedCluesOpened" },
 	{ id = ITEM_IDS.SEALED_ELITE, name = "sealed elite clue", metric = "sealedCluesOpened" },
 	{ id = ITEM_IDS.SEALED_HARD, name = "sealed hard clue", metric = "sealedCluesOpened" },
 	{ id = ITEM_IDS.SEALED_MEDIUM, name = "sealed medium clue", metric = "sealedCluesOpened" },
@@ -1253,15 +1495,32 @@ local SEALED_CLUE_PRIORITY = {
 local function openScrollItem(scrollBoxId)
 	print("Opening scroll item")
 
+	-- Check if player is in combat
+	if API.ReadLpInteracting().Id > 0 then
+		print("Player is in combat - waiting before opening scroll")
+		return ActionResult.continue("in_combat")
+	end
+
 	-- Only increment if we haven't opened a scroll this loop iteration
 	if not ClueState.tracking.hasOpenedScrollThisLoop then
+		-- Priority 1: Check for puzzle boxes first (they need to be completed before opening new clues)
+		local puzzleBoxId = hasPuzzleBox()
+		if puzzleBoxId and not completedPuzzleBoxes[puzzleBoxId] then
+			print("Found incomplete puzzle box with ID:", puzzleBoxId, "- opening it first")
+			API.DoAction_Inventory1(puzzleBoxId, 0, 1, API.OFF_ACT_GeneralInterface_route)
+			ClueState.tracking.hasOpenedScrollThisLoop = true
+			API.RandomSleep2(600, 600, 600)
+			return ActionResult.success("open_puzzle_box")
+		end
+
+		-- Priority 2: Open scroll boxes if provided
 		if scrollBoxId then
 			print("Opening scroll box with ID:", scrollBoxId)
 			ClueState.metrics.scrollBoxesOpened = ClueState.metrics.scrollBoxesOpened + 1
 			print("Scroll box opened metrics updated")
 			API.DoAction_Inventory1(scrollBoxId, 0, 1, API.OFF_ACT_GeneralInterface_route)
 		else
-			-- Try to open sealed clues in priority order
+			-- Priority 3: Try to open sealed clues in priority order
 			for _, clueInfo in ipairs(SEALED_CLUE_PRIORITY) do
 				if Inventory:Contains(clueInfo.id) then
 					print("Opening " .. clueInfo.name)
@@ -1278,18 +1537,109 @@ local function openScrollItem(scrollBoxId)
 	return ActionResult.success("open_scroll")
 end
 
-local function processClue(clueId)
-	-- First check if we have a knot puzzle interface open
-	local isKnotOpen = PuzzleModule.isKnotPuzzleOpen()
-	if isKnotOpen then
-		print("Knot puzzle detected, handling...")
-		local success = handleKnotPuzzle()
-		if success then
-			print("Knot puzzle completed, continuing with clue processing")
-		else
-			print("Knot puzzle failed, swapping clue")
-			return handleBadClue()
+-- Unified puzzle handler to reduce duplication (DRY principle)
+local function handlePuzzleInterface(puzzleType, checkFunc, solveFunc, successMetric, failMetric)
+	if not checkFunc() then
+		return nil -- Not this puzzle type
+	end
+
+	print(puzzleType .. " detected, handling...")
+	local success = solveFunc()
+
+	if success then
+		print(puzzleType .. " completed")
+		if successMetric then
+			ClueState.metrics[successMetric] = ClueState.metrics[successMetric] + 1
 		end
+		return true
+	else
+		print(puzzleType .. " failed, swapping clue")
+		if failMetric then
+			ClueState.metrics[failMetric] = ClueState.metrics[failMetric] + 1
+		end
+		handleBadClue()
+		return false
+	end
+end
+
+-- Check and handle all puzzle interfaces (for main loop)
+local function checkPuzzleInterfaces()
+	-- Lockbox (highest priority for master clues)
+	if PuzzleModule.isLockboxOpen() then
+		print("Lockbox interface detected")
+		local result = handleLockbox()
+		if ActionResult.isSuccess(result) then
+			print("Lockbox completed")
+		else
+			print("Lockbox handling in progress or failed")
+		end
+		return true
+	end
+
+	-- Knot puzzle
+	if PuzzleModule.isKnotPuzzleOpen() then
+		handlePuzzleInterface("Knot puzzle", function()
+			return true
+		end, handleKnotPuzzle, "knotPuzzlesSolved", "knotPuzzlesFailed")
+		return true
+	end
+
+	-- Towers puzzle
+	if PuzzleModule.isTowersPuzzleOpen() then
+		handlePuzzleInterface("Towers puzzle", function()
+			return true
+		end, PuzzleModule.solveTowersPuzzle, "towersPuzzlesSolved", "towersPuzzlesFailed")
+		return true
+	end
+
+	-- Slide puzzle box
+	if PuzzleModule.isPuzzleOpen() then
+		print("Puzzle box interface detected")
+		local success = handlePuzzleBox()
+		if success then
+			print("Puzzle box handled")
+		end
+		return true
+	end
+
+	return false -- No puzzle interfaces open
+end
+
+local function processClue(clueId)
+	-- Check for puzzle interfaces using unified handler
+	-- Lockbox (special handling due to ActionResult)
+	if PuzzleModule.isLockboxOpen() then
+		print("Lockbox detected, handling...")
+		local result = handleLockbox()
+		if ActionResult.isSuccess(result) then
+			print("Lockbox completed - puzzle box will need to be reopened if applicable")
+		else
+			print("Lockbox handling in progress or failed")
+		end
+		return true
+	end
+
+	-- Knot puzzle
+	local knotResult = handlePuzzleInterface(
+		"Knot puzzle",
+		PuzzleModule.isKnotPuzzleOpen,
+		handleKnotPuzzle,
+		"knotPuzzlesSolved",
+		"knotPuzzlesFailed"
+	)
+	if knotResult ~= nil then
+		return true
+	end
+
+	-- Towers puzzle
+	local towersResult = handlePuzzleInterface(
+		"Towers puzzle",
+		PuzzleModule.isTowersPuzzleOpen,
+		PuzzleModule.solveTowersPuzzle,
+		"towersPuzzlesSolved",
+		"towersPuzzlesFailed"
+	)
+	if towersResult ~= nil then
 		return true
 	end
 
@@ -1307,6 +1657,109 @@ local function processClue(clueId)
 	if clueId and isClueBlacklisted(clueId) then
 		print("Clue ID", clueId, "is blacklisted - swapping for new clue")
 		return handleBadClue()
+	end
+
+	-- Special handling for clue 41796 (master anagram - teleport and talk to nearest NPC)
+	if clueId == 41796 then
+		print("Special clue 41796 detected - master anagram clue")
+
+		-- First, try to read the clue interface to identify which NPC we need
+		local expectedNpc = nil
+		local clueInterfaceOpen = GetInterfaceOpenBySize(345)
+
+		if not clueInterfaceOpen then
+			print("Clue interface not open, opening clue item...")
+			API.DoAction_Inventory1(41796, 0, 1, API.OFF_ACT_GeneralInterface_route)
+			API.RandomSleep2(800, 400, 400)
+			clueInterfaceOpen = GetInterfaceOpenBySize(345)
+		end
+
+		if clueInterfaceOpen then
+			print("Clue interface is open, reading anagram text...")
+			local messages = API.ScanForInterfaceTest2Get(true, { { 345, 9, -1, 0 }, { 345, 11, -1, 0 } })
+
+			for _, v in ipairs(messages) do
+				local clueText = v.textids
+				if clueText and string.len(clueText) > 5 then
+					print("Found clue text:", clueText)
+
+					-- Match the clue text to our NPC data (case-insensitive)
+					local clueTextLower = string.lower(clueText)
+					for _, npcData in ipairs(MASTER_ANAGRAM_NPCS) do
+						local clueLower = string.lower(npcData.clue)
+						if string.find(clueTextLower, clueLower) then
+							expectedNpc = npcData
+							print("Matched clue to NPC:", npcData.name, "Challenge:", npcData.challenge)
+							break
+						end
+					end
+
+					if expectedNpc then
+						break
+					end
+				end
+			end
+		else
+			print("Could not open clue interface")
+		end
+
+		-- Check if we need to teleport based on expected NPC location
+		local needsTeleport = true
+		if expectedNpc then
+			local playerCoords = API.PlayerCoord()
+			local distance =
+				math.sqrt((playerCoords.x - expectedNpc.coords[1]) ^ 2 + (playerCoords.y - expectedNpc.coords[2]) ^ 2)
+			if distance < 20 then
+				needsTeleport = false
+				print("Already near expected NPC:", expectedNpc.name, "Distance:", distance)
+			else
+				print("Not near expected NPC:", expectedNpc.name, "Distance:", distance, "- need to teleport")
+			end
+		else
+			print("Could not identify expected NPC - will teleport and check location")
+		end
+
+		-- Teleport if needed
+		if needsTeleport then
+			print("Teleporting with jacket...")
+			local teleportResult = teleportWithJacket()
+			if not teleportResult or not ActionResult.isSuccess(teleportResult) then
+				print("Teleport failed or access denied - clue was swapped")
+				return false
+			end
+
+			-- Wait for teleport to complete
+			API.RandomSleep2(1700, 600, 600)
+
+			-- If we didn't identify the NPC from the interface, check location after teleport
+			if not expectedNpc then
+				print("Checking location after teleport...")
+				local playerCoords = API.PlayerCoord()
+
+				for _, npcData in ipairs(MASTER_ANAGRAM_NPCS) do
+					local distance =
+						math.sqrt((playerCoords.x - npcData.coords[1]) ^ 2 + (playerCoords.y - npcData.coords[2]) ^ 2)
+					if distance < 20 then
+						expectedNpc = npcData
+						print("After teleport, near location for NPC:", npcData.name, "Distance:", distance)
+						break
+					end
+				end
+			end
+		end
+
+		-- Talk to the expected NPC
+		if expectedNpc then
+			print("Talking to NPC:", expectedNpc.name, "Challenge:", expectedNpc.challenge)
+			if not Interact:NPC(expectedNpc.name, "Talk-to", 50) then
+				Interact:NPC(expectedNpc.name, "Talk to", 50)
+			end
+			API.RandomSleep2(200, 200, 200)
+			return true
+		else
+			print("Could not identify which NPC to talk to - swapping clue")
+			return handleBadClue()
+		end
 	end
 
 	local item = Item:Get(clueId)
@@ -1467,36 +1920,47 @@ local function hasRequiredItems()
 	local sealedMedium = Inventory:Contains(ITEM_IDS.SEALED_MEDIUM)
 	local sealedHard = Inventory:Contains(ITEM_IDS.SEALED_HARD)
 	local sealedElite = Inventory:Contains(ITEM_IDS.SEALED_ELITE)
+	local sealedMaster = Inventory:Contains(ITEM_IDS.SEALED_MASTER)
 	local easyClue = hasEasyClue()
 	local mediumClue = hasMediumClue()
 	local hardClue = hasHardClue()
 	local eliteClue = hasEliteClue()
+	local masterClue = hasMasterClue()
+	local lockboxId = hasLockbox()
 
 	print("DEBUG: Checking for clue items...")
 	print("  Sealed Easy (42006):", sealedEasy)
 	print("  Sealed Medium (42007):", sealedMedium)
 	print("  Sealed Hard (42008):", sealedHard)
 	print("  Sealed Elite (42009):", sealedElite)
+	print("  Sealed Master (42010):", sealedMaster)
 	print("  Scroll Box:", scrollBoxId and scrollBoxId or "none")
 	if scrollBoxId == 19040 then
 		print("    -> Special scroll item (19040) detected")
+	elseif scrollBoxId == 41787 then
+		print("    -> Special scroll item (41787) detected")
 	end
 	print("  Puzzle Box:", puzzleBoxId and puzzleBoxId or "none")
+	print("  Lockbox:", lockboxId and lockboxId or "none")
 	print("  Easy Clue:", easyClue and easyClue or "none")
 	print("  Medium Clue:", mediumClue and mediumClue or "none")
 	print("  Hard Clue:", hardClue and hardClue or "none")
 	print("  Elite Clue:", eliteClue and eliteClue or "none")
+	print("  Master Clue:", masterClue and masterClue or "none")
 
 	local hasClueItems = sealedEasy
 		or sealedMedium
 		or sealedHard
 		or sealedElite
+		or sealedMaster
 		or scrollBoxId
 		or puzzleBoxId
+		or lockboxId
 		or easyClue
 		or mediumClue
 		or hardClue
 		or eliteClue
+		or masterClue
 
 	if not hasClueItems then
 		print("ERROR: No clue scrolls, sealed clues, or scroll boxes found in inventory")
@@ -1541,34 +2005,19 @@ while API.Read_LoopyLoop() do
 	-- Process all chat events once per loop (centralized handler)
 	processChatEvents()
 
-	-- Declare all state variables first to avoid goto scope issues
-	local challengeDialogueState = API.VB_FindPSettinOrder(GAME_CONSTANTS.VB_DIALOGUE_STATE)
+	-- Declare state variables first to avoid goto scope issues
 	local dialogueState = API.VB_FindPSettinOrder(GAME_CONSTANTS.VB_DIALOGUE_STATE)
-	local isKnotOpen = PuzzleModule.isKnotPuzzleOpen()
-	local isPuzzleOpen = PuzzleModule.isPuzzleOpen()
 
-	-- Check for knot puzzle interface first (highest priority)
-	if isKnotOpen then
-		print("Knot puzzle interface detected in main loop")
-		local result = handleKnotPuzzle()
-		if ActionResult.isSuccess(result) then
-			print("Knot puzzle completed in main loop")
-		else
-			print("Knot puzzle failed in main loop, swapping clue")
-			handleBadClue()
-		end
+	-- Check if player is in combat - skip processing if so
+	if API.ReadLpInteracting().Id > 0 then
+		print("Read", API.ReadLpInteracting())
+		print("Player is in combat - waiting...")
+		API.RandomSleep2(1000, 500, 500)
 		goto continue
 	end
 
-	-- Check for puzzle box interface second (high priority for item 19040)
-	if isPuzzleOpen then
-		print("Puzzle box interface detected in main loop")
-		local success = handlePuzzleBox()
-		if success then
-			print("Puzzle box handled in main loop")
-		else
-			print("Puzzle box handling failed in main loop")
-		end
+	-- Check for puzzle interfaces (unified handler - DRY principle)
+	if checkPuzzleInterfaces() then
 		goto continue
 	end
 
@@ -1621,7 +2070,23 @@ while API.Read_LoopyLoop() do
 			handleBadClue()
 			goto continue
 		else
-			print("Dialogue detected (state 12), pressing space to continue")
+			print("Dialogue detected (state 12), checking for 'already solved' message...")
+
+			-- Check if this is an "already solved" dialogue for puzzle boxes
+			local puzzleBoxId = hasPuzzleBox()
+			if puzzleBoxId then
+				local messages = API.ScanForInterfaceTest2Get(false, { { 1189, 2, -1, 0 }, { 1189, 3, -1, 0 } })
+				print("DEBUG: Found", #messages, "messages in interface 1189")
+
+				local text = messages[1].textids
+				print("DEBUG: Message text:", text)
+				if text and string.find(string.lower(text), "already solved") then
+					print("Puzzle box already solved - marking as completed")
+					completedPuzzleBoxes[puzzleBoxId] = true
+				end
+			end
+
+			print("Pressing space to continue dialogue")
 			API.KeyboardPress2(0x20, 100, 100)
 			API.RandomSleep2(200, 200, 200)
 			goto continue
@@ -1634,18 +2099,22 @@ while API.Read_LoopyLoop() do
 
 		local scrollBoxId = hasScrollBox()
 		local puzzleBoxId = hasPuzzleBox()
+		local lockboxId = hasLockbox()
 		local challengeScrollId = hasChallengeScroll()
 		local hasClueItems = Inventory:Contains(ITEM_IDS.SEALED_EASY)
 			or Inventory:Contains(ITEM_IDS.SEALED_MEDIUM)
 			or Inventory:Contains(ITEM_IDS.SEALED_HARD)
 			or Inventory:Contains(ITEM_IDS.SEALED_ELITE)
+			or Inventory:Contains(ITEM_IDS.SEALED_MASTER)
 			or scrollBoxId
 			or puzzleBoxId
+			or lockboxId
 			or challengeScrollId
 			or hasEasyClue()
 			or hasMediumClue()
 			or hasHardClue()
 			or hasEliteClue()
+			or hasMasterClue()
 
 		if hasClueItems then
 			-- Detect if we're processing a new clue and reset state tracking
@@ -1653,7 +2122,8 @@ while API.Read_LoopyLoop() do
 			local mediumClueId = hasMediumClue()
 			local hardClueId = hasHardClue()
 			local eliteClueId = hasEliteClue()
-			local currentClueId = eliteClueId or hardClueId or mediumClueId or easyClueId
+			local masterClueId = hasMasterClue()
+			local currentClueId = masterClueId or eliteClueId or hardClueId or mediumClueId or easyClueId
 
 			if currentClueId and currentClueId ~= stateTracking.lastProcessedClueId then
 				print("New clue detected, resetting state tracking")
@@ -1675,7 +2145,27 @@ while API.Read_LoopyLoop() do
 					print("Challenge scroll handling failed or not ready")
 					goto continue
 				end
-			-- Check for puzzle box second (high priority) - but only if not already completed
+			-- Check for lockbox second (high priority for master clues) - but only if not already completed
+			elseif lockboxId and not ClueState.lockboxes.completed[lockboxId] then
+				print("Processing lockbox ID:", lockboxId)
+				local result = handleLockbox()
+				if ActionResult.shouldContinue(result) then
+					goto continue
+				end
+			elseif lockboxId and ClueState.lockboxes.completed[lockboxId] then
+				print("Lockbox", lockboxId, "already completed - processing original clue instead")
+				-- Process the original clue since lockbox is completed
+				local masterClueId = hasMasterClue()
+				if masterClueId then
+					print("Processing master clue ID:", masterClueId, "(lockbox was completed)")
+					local shouldContinue = processClue(masterClueId)
+					if shouldContinue then
+						goto continue
+					end
+				else
+					print("No master clue found to process after lockbox completion")
+				end
+			-- Check for puzzle box third (high priority) - but only if not already completed
 			elseif puzzleBoxId and not completedPuzzleBoxes[puzzleBoxId] then
 				print("Processing puzzle box ID:", puzzleBoxId)
 				local shouldContinue = processClue(nil) -- Pass nil since we're handling puzzle box
@@ -1689,11 +2179,12 @@ while API.Read_LoopyLoop() do
 				local mediumClueId = hasMediumClue()
 				local hardClueId = hasHardClue()
 				local eliteClueId = hasEliteClue()
-				local clueId = eliteClueId or hardClueId or mediumClueId or easyClueId -- Prioritize elite, then hard, then medium, then easy
+				local masterClueId = hasMasterClue()
+				local clueId = masterClueId or eliteClueId or hardClueId or mediumClueId or easyClueId -- Prioritize master, elite, hard, medium, easy
 
 				if clueId then
-					local clueType = eliteClueId and "elite"
-						or (hardClueId and "hard" or (mediumClueId and "medium" or "easy"))
+					local clueType = masterClueId and "master"
+						or (eliteClueId and "elite" or (hardClueId and "hard" or (mediumClueId and "medium" or "easy")))
 					print("Processing", clueType, "clue ID:", clueId, "(puzzle box was completed)")
 					local shouldContinue = processClue(clueId)
 					if shouldContinue then
@@ -1707,11 +2198,12 @@ while API.Read_LoopyLoop() do
 				local mediumClueId = hasMediumClue()
 				local hardClueId = hasHardClue()
 				local eliteClueId = hasEliteClue()
-				local clueId = eliteClueId or hardClueId or mediumClueId or easyClueId -- Prioritize elite, then hard, then medium, then easy
+				local masterClueId = hasMasterClue()
+				local clueId = masterClueId or eliteClueId or hardClueId or mediumClueId or easyClueId -- Prioritize master, elite, hard, medium, easy
 
 				if clueId then
-					local clueType = eliteClueId and "elite"
-						or (hardClueId and "hard" or (mediumClueId and "medium" or "easy"))
+					local clueType = masterClueId and "master"
+						or (eliteClueId and "elite" or (hardClueId and "hard" or (mediumClueId and "medium" or "easy")))
 					print("Processing", clueType, "clue ID:", clueId)
 					local shouldContinue = processClue(clueId)
 					if shouldContinue then

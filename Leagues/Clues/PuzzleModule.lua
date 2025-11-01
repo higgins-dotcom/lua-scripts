@@ -1073,4 +1073,528 @@ function PuzzleModule.solveKnotPuzzleBox()
 	end
 end
 
+-- Lockbox Puzzle Solver (Combat Styles Grid)
+-- This solves a 5x5 grid where clicking tiles rotates them and adjacent tiles through 3 states
+-- Goal: Make all tiles the same type
+
+-- Tile IDs and rotation sequence: Sword -> Ranged -> Mage -> Sword
+local LOCKBOX_TILE_IDS = {
+	SWORD = 32272, -- State 0
+	BOW = 32274, -- State 1 (Ranged)
+	MAGIC = 32270, -- State 2
+}
+
+-- Convert tile ID to state (0, 1, 2) based on rotation sequence
+local function lockboxTileToState(tileId)
+	if tileId == LOCKBOX_TILE_IDS.SWORD then
+		return 0
+	elseif tileId == LOCKBOX_TILE_IDS.BOW then
+		return 1
+	elseif tileId == LOCKBOX_TILE_IDS.MAGIC then
+		return 2
+	end
+	return -1
+end
+
+-- Read the current lockbox grid state and return grid + tile components
+local function readLockboxGrid()
+	local tiles = API.ScanForInterfaceTest2Get(true, {
+		{ 1933, 26, -1, 0 },
+		{ 1933, 28, -1, 0 },
+		{ 1933, 30, -1, 0 },
+	})
+
+	local grid = {}
+	local tileComponents = {}
+	for i, v in ipairs(tiles) do
+		local tileId = API.Mem_Read_int(v.memloc + API.I_slides)
+		table.insert(grid, lockboxTileToState(tileId))
+		tileComponents[i] = v
+	end
+
+	return grid, tileComponents
+end
+
+-- Get affected cells when clicking position (row, col)
+-- Clicking affects the cell itself and adjacent cells (up, down, left, right)
+local function getLockboxAffectedCells(row, col)
+	local affected = {}
+	local idx = (row - 1) * 5 + col
+	table.insert(affected, idx)
+
+	-- Up
+	if row > 1 then
+		table.insert(affected, (row - 2) * 5 + col)
+	end
+	-- Down
+	if row < 5 then
+		table.insert(affected, row * 5 + col)
+	end
+	-- Left
+	if col > 1 then
+		table.insert(affected, (row - 1) * 5 + col - 1)
+	end
+	-- Right
+	if col < 5 then
+		table.insert(affected, (row - 1) * 5 + col + 1)
+	end
+
+	return affected
+end
+
+-- Solve lockbox using Gaussian elimination over GF(3)
+local function solveLockboxPuzzle(initialGrid)
+	local n = 25 -- 5x5 grid
+
+	-- Build the system of linear equations (mod 3)
+	-- We want to find clicks such that all tiles end up at the same state
+	local matrix = {}
+	for i = 1, n do
+		matrix[i] = {}
+		for j = 1, n do
+			matrix[i][j] = 0
+		end
+		matrix[i][n + 1] = 0 -- Augmented column
+	end
+
+	-- Fill the matrix based on click effects
+	for clickPos = 1, n do
+		local row = math.floor((clickPos - 1) / 5) + 1
+		local col = ((clickPos - 1) % 5) + 1
+		local affected = getLockboxAffectedCells(row, col)
+
+		for _, cellIdx in ipairs(affected) do
+			matrix[cellIdx][clickPos] = 1 -- Each click adds 1 (mod 3) to affected cells
+		end
+	end
+
+	-- Set target: we want all cells to reach state 0 (or any uniform state)
+	-- So we need to cancel out the initial state
+	for i = 1, n do
+		matrix[i][n + 1] = (3 - initialGrid[i]) % 3
+	end
+
+	-- Gaussian elimination (mod 3)
+	for col = 1, n do
+		-- Find pivot
+		local pivotRow = nil
+		for row = col, n do
+			if matrix[row][col] % 3 ~= 0 then
+				pivotRow = row
+				break
+			end
+		end
+
+		if not pivotRow then
+			goto continue_lockbox
+		end
+
+		-- Swap rows
+		if pivotRow ~= col then
+			matrix[col], matrix[pivotRow] = matrix[pivotRow], matrix[col]
+		end
+
+		-- Make pivot = 1
+		local pivot = matrix[col][col] % 3
+		if pivot == 2 then
+			-- Multiply row by 2 (since 2*2 = 4 = 1 mod 3)
+			for j = 1, n + 1 do
+				matrix[col][j] = (matrix[col][j] * 2) % 3
+			end
+		end
+
+		-- Eliminate column
+		for row = 1, n do
+			if row ~= col then
+				local factor = matrix[row][col] % 3
+				if factor ~= 0 then
+					for j = 1, n + 1 do
+						matrix[row][j] = (matrix[row][j] - factor * matrix[col][j]) % 3
+					end
+				end
+			end
+		end
+
+		::continue_lockbox::
+	end
+
+	-- Extract solution
+	local solution = {}
+	for i = 1, n do
+		solution[i] = matrix[i][n + 1] % 3
+	end
+
+	return solution
+end
+
+-- Convert solution to click sequence
+local function getLockboxClickSequence(solution)
+	local clicks = {}
+	for i = 1, 25 do
+		local row = math.floor((i - 1) / 5) + 1
+		local col = ((i - 1) % 5) + 1
+		local numClicks = solution[i]
+
+		for _ = 1, numClicks do
+			table.insert(clicks, { row = row, col = col, index = i })
+		end
+	end
+	return clicks
+end
+
+-- Execute clicks on the lockbox interface
+local function executeLockboxClicks(clicks, tileComponents)
+	print("Executing lockbox clicks...")
+	for i, click in ipairs(clicks) do
+		local tile = tileComponents[click.index]
+		if tile then
+			print(string.format("Click %d/%d: Row %d, Col %d (id2=%d)", i, #clicks, click.row, click.col, tile.id2))
+			API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1933, tile.id2, -1, API.OFF_ACT_GeneralInterface_route)
+			API.RandomSleep2(250, 250, 250)
+		end
+	end
+	print("Lockbox puzzle solved!")
+end
+
+-- Check if lockbox interface is open
+function PuzzleModule.isLockboxOpen()
+	local isOpen = GetInterfaceOpenBySize(1933)
+	if isOpen then
+		print("Lockbox interface detected as open")
+	else
+		print("Lockbox interface not detected")
+	end
+	return isOpen
+end
+
+-- Main lockbox solver function
+function PuzzleModule.solveLockbox(autoExecute)
+	if autoExecute == nil then
+		autoExecute = true
+	end
+
+	print("Starting lockbox puzzle solving process...")
+
+	-- Check if lockbox interface is open
+	if not PuzzleModule.isLockboxOpen() then
+		print("Lockbox interface not open")
+		return false
+	end
+
+	print("Reading lockbox grid...")
+	local grid, tileComponents = readLockboxGrid()
+
+	if not grid or #grid ~= 25 then
+		print("Failed to read lockbox grid")
+		return false
+	end
+
+	print("Current lockbox grid state:")
+	for i = 1, 5 do
+		local row = {}
+		for j = 1, 5 do
+			table.insert(row, grid[(i - 1) * 5 + j])
+		end
+		print(table.concat(row, " "))
+	end
+
+	print("Solving lockbox puzzle...")
+	local solution = solveLockboxPuzzle(grid)
+	local clicks = getLockboxClickSequence(solution)
+
+	print("Solution found! Total clicks needed: " .. #clicks)
+
+	if autoExecute then
+		executeLockboxClicks(clicks, tileComponents)
+		return true
+	else
+		print("Click sequence (row, col):")
+		for _, click in ipairs(clicks) do
+			print(string.format("Click tile at row %d, col %d", click.row, click.col))
+		end
+		return true
+	end
+end
+
+-- Towers Puzzle Solver
+-- Check if Towers puzzle interface is open
+function PuzzleModule.isTowersPuzzleOpen()
+	local isOpen = GetInterfaceOpenBySize(1934)
+	if isOpen then
+		print("Towers puzzle interface detected as open")
+	else
+		print("Towers puzzle interface not detected")
+	end
+	return isOpen
+end
+
+-- Fetch grid tiles from the game interface
+local function fetchTowersGridTiles()
+	local gridTiles = {}
+	for i = 1, 5 do
+		gridTiles[i] = {}
+	end
+
+	local parent = API.ScanForInterfaceTest2Get(
+		true,
+		{ { 1934, 8, -1, 0 }, { 1934, 10, -1, 0 }, { 1934, 17, -1, 0 }, { 1934, 6, -1, 0 } }
+	)
+
+	if #parent > 0 then
+		local tiles = API.ScanForInterfaceTest2Get(true, {
+			{ 1934, 8, -1, 0 },
+			{ 1934, 10, -1, 0 },
+			{ 1934, 17, -1, 0 },
+			{ 1934, 6, -1, 0 },
+			{ 1934, parent[1].id2, -1, 0 },
+		})
+
+		local idx = 1
+		for row = 1, 5 do
+			for col = 1, 5 do
+				if idx <= #tiles then
+					gridTiles[row][col] = tiles[idx].id3
+					idx = idx + 1
+				end
+			end
+		end
+	end
+
+	return gridTiles
+end
+
+-- Fetch clues dynamically from the game interface
+local function fetchTowersClues()
+	local clues = { top = {}, right = {}, bottom = {}, left = {} }
+
+	local tiles = API.ScanForInterfaceTest2Get(
+		true,
+		{ { 1934, 8, -1, 0 }, { 1934, 10, -1, 0 }, { 1934, 17, -1, 0 }, { 1934, 20, -1, 0 } }
+	)
+
+	for tileIdx, v in ipairs(tiles) do
+		local children = API.ScanForInterfaceTest2Get(true, {
+			{ 1934, 8, -1, 0 },
+			{ 1934, 10, -1, 0 },
+			{ 1934, 17, -1, 0 },
+			{ 1934, 20, -1, 0 },
+			{ 1934, v.id2, -1, 0 },
+		})
+
+		local sideClues = {}
+		for idx, vv in ipairs(children) do
+			local clueText = API.ReadCharsLimit(vv.memloc + API.I_itemids3, 100)
+			local clueValue = tonumber(clueText)
+			if clueValue then
+				table.insert(sideClues, clueValue)
+			end
+		end
+
+		if tileIdx == 1 then
+			clues.right = sideClues
+		elseif tileIdx == 2 then
+			clues.left = sideClues
+		elseif tileIdx == 3 then
+			clues.bottom = sideClues
+		elseif tileIdx == 4 then
+			clues.top = sideClues
+		end
+	end
+
+	return clues
+end
+
+-- Check if a number can be placed at position (row, col)
+local function isTowersValid(grid, row, col, num)
+	for c = 1, 5 do
+		if c ~= col and grid[row][c] == num then
+			return false
+		end
+	end
+	for r = 1, 5 do
+		if r ~= row and grid[r][col] == num then
+			return false
+		end
+	end
+	return true
+end
+
+-- Count visible towers from a direction
+local function countTowersVisible(sequence)
+	local count = 0
+	local maxHeight = 0
+	for i = 1, #sequence do
+		if sequence[i] > maxHeight then
+			count = count + 1
+			maxHeight = sequence[i]
+		end
+	end
+	return count
+end
+
+-- Check if current grid state satisfies all visibility constraints
+local function checkTowersConstraints(grid, clues)
+	for i = 1, 5 do
+		local row = {}
+		local rowComplete = true
+		for j = 1, 5 do
+			row[j] = grid[i][j]
+			if row[j] == 0 then
+				rowComplete = false
+			end
+		end
+
+		if rowComplete then
+			if countTowersVisible(row) ~= clues.left[i] then
+				return false
+			end
+			local reverseRow = {}
+			for j = 1, 5 do
+				reverseRow[j] = row[6 - j]
+			end
+			if countTowersVisible(reverseRow) ~= clues.right[i] then
+				return false
+			end
+		end
+
+		local col = {}
+		local colComplete = true
+		for j = 1, 5 do
+			col[j] = grid[j][i]
+			if col[j] == 0 then
+				colComplete = false
+			end
+		end
+
+		if colComplete then
+			if countTowersVisible(col) ~= clues.top[i] then
+				return false
+			end
+			local reverseCol = {}
+			for j = 1, 5 do
+				reverseCol[j] = col[6 - j]
+			end
+			if countTowersVisible(reverseCol) ~= clues.bottom[i] then
+				return false
+			end
+		end
+	end
+	return true
+end
+
+-- Solve using backtracking
+local function solveTowersBacktrack(grid, clues, row, col)
+	if row > 5 then
+		return checkTowersConstraints(grid, clues)
+	end
+
+	local nextRow, nextCol = row, col + 1
+	if nextCol > 5 then
+		nextRow, nextCol = row + 1, 1
+	end
+
+	for num = 1, 5 do
+		if isTowersValid(grid, row, col, num) then
+			grid[row][col] = num
+			if checkTowersConstraints(grid, clues) then
+				if solveTowersBacktrack(grid, clues, nextRow, nextCol) then
+					return true
+				end
+			end
+			grid[row][col] = 0
+		end
+	end
+	return false
+end
+
+-- Place the solution in the game
+local function placeTowersSolution(grid, gridTiles)
+	print("Placing solution in game...")
+
+	for row = 1, 5 do
+		for col = 1, 5 do
+			if not API.Read_LoopyLoop() then
+				break
+			end
+
+			-- Check if interface is still open
+			if not PuzzleModule.isTowersPuzzleOpen() then
+				print("Towers puzzle interface closed during placement")
+				return false
+			end
+
+			local value = grid[row][col]
+			local tileId3 = gridTiles[row][col]
+
+			if tileId3 and value > 0 then
+				API.DoAction_Interface(
+					0x2e,
+					0xffffffff,
+					value + 1,
+					1934,
+					7,
+					tileId3,
+					API.OFF_ACT_GeneralInterface_route
+				)
+				API.RandomSleep2(300, 300, 300)
+			end
+		end
+	end
+
+	-- Final check before clicking check button
+	if not PuzzleModule.isTowersPuzzleOpen() then
+		print("Towers puzzle interface closed before check button")
+		return false
+	end
+
+	print("Solution placed! Clicking check button...")
+	API.RandomSleep2(500, 750, 1000)
+	API.DoAction_Interface(0x24, 0xffffffff, 1, 1934, 61, -1, API.OFF_ACT_GeneralInterface_route)
+	API.RandomSleep2(1000, 1500, 2000)
+
+	return true
+end
+
+-- Main Towers puzzle solver function
+function PuzzleModule.solveTowersPuzzle()
+	print("Starting Towers puzzle solving process...")
+
+	if not PuzzleModule.isTowersPuzzleOpen() then
+		print("Towers puzzle interface not open")
+		return false
+	end
+
+	local clues = fetchTowersClues()
+	local gridTiles = fetchTowersGridTiles()
+
+	if #clues.top ~= 5 or #clues.right ~= 5 or #clues.bottom ~= 5 or #clues.left ~= 5 then
+		print("ERROR: Invalid number of clues fetched!")
+		return false
+	end
+
+	local grid = {}
+	for i = 1, 5 do
+		grid[i] = {}
+		for j = 1, 5 do
+			grid[i][j] = 0
+		end
+	end
+
+	print("Solving Towers puzzle...")
+	if solveTowersBacktrack(grid, clues, 1, 1) then
+		print("Solution found!")
+		local success = placeTowersSolution(grid, gridTiles)
+		if success then
+			print("Towers puzzle solved successfully!")
+			return true
+		else
+			print("Failed to place solution correctly")
+			return false
+		end
+	else
+		print("No solution found!")
+		return false
+	end
+end
+
 return PuzzleModule
