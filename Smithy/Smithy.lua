@@ -74,21 +74,21 @@ local AREA = {
 local AREA_ACTIONS = {
     [AREA.BURIAL] = {
         forge = function()
-            API.DoAction_Object1(0x3f, 0, ID.BURIAL.FORGE, 10)
+            API.DoAction_Object1(0x3f, API.OFF_ACT_GeneralObject_route0, ID.BURIAL.FORGE, 10)
         end,
         anvil = function()
-            API.DoAction_Object1(0x3f, 0, { ID.BURIAL.ANVIL }, 50)
+            API.DoAction_Object1(0x3f, API.OFF_ACT_GeneralObject_route0, { ID.BURIAL.ANVIL }, 50)
         end
     },
     [AREA.NORMAL] = {
         forge = function()
-            API.DoAction_Object1(0x3f, 0, ID.NORMAL.FORGE, 10)
+            API.DoAction_Object1(0x3f, API.OFF_ACT_GeneralObject_route0, ID.NORMAL.FORGE, 10)
         end,
         anvil = function()
-            API.DoAction_Object1(0x3f, 0, { ID.NORMAL.ANVIL }, 50)
+            API.DoAction_Object1(0x3f, API.OFF_ACT_GeneralObject_route0, { ID.NORMAL.ANVIL }, 50)
         end,
         furnance = function()
-            API.DoAction_Object1(0x3f, 0, { ID.NORMAL.FURNACE }, 50)
+            API.DoAction_Object1(0x3f, API.OFF_ACT_GeneralObject_route0, { ID.NORMAL.FURNACE }, 50)
         end
     },
 }
@@ -332,7 +332,7 @@ end
 
 local function bank(item)
     if selectedItemType == "BAR" then
-        API.DoAction_Object1(0x29, 80, ID.NORMAL.FURNACE, 50)
+        API.DoAction_Object1(0x29, API.OFF_ACT_GeneralObject_route1, ID.NORMAL.FURNACE, 50)
         API.RandomSleep2(600, 600, 600)
     else
 
