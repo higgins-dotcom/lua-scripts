@@ -384,7 +384,7 @@ local function hasPulse()
 end
 
 local function clickSafe(safe)
-    API.DoAction_Object_Direct(0x29, 0, safe)
+    API.DoAction_Object_Direct(0x29, API.OFF_ACT_GeneralObject_route0, safe)
     API.RandomSleep2(600, 400, 400)
 end
 
@@ -449,7 +449,7 @@ local function walk()
                 oldLocation = nil
             end
         elseif isAtLocation(AREA.TRAPDOOR, 15) then
-            API.DoAction_Object2(0x39, 0, { ID.TRAPDOOR }, 50, WPOINT.new(3223, 3268, 0))
+            API.DoAction_Object2(0x39, API.OFF_ACT_GeneralObject_route0, { ID.TRAPDOOR }, 50, WPOINT.new(3223, 3268, 0))
             API.RandomSleep2(3200, 1000, 1000)
         elseif isAtLocation(AREA.LUMBRIDGE_LODESTONE, 10) then
             local tile = WPOINT.new(3217 + math.random(-2, 2), 3264 + math.random(-2, 2), 0)
@@ -493,7 +493,7 @@ local function walk()
                     end
                 else
                     if floor == 0 then
-                        API.DoAction_Object2(0x34, 0, { 45483 }, 50, WPOINT.new(3230, 3205, 0))
+                        API.DoAction_Object2(0x34, API.OFF_ACT_GeneralObject_route0, { 45483 }, 50, WPOINT.new(3230, 3205, 0))
                         API.RandomSleep2(800, 600, 600)
                     elseif floor == 1 then
                         walking = false
@@ -506,7 +506,7 @@ local function walk()
         elseif location == LOCATIONS.RODDECKS_HOUSE then
             if isAtLocation(AREA.BOBS_AXES, 15) then
                 if floor == 1 then
-                    API.DoAction_Object2(0x35, 0, { 45484 }, 50, WPOINT.new(3230, 3205, 0))
+                    API.DoAction_Object2(0x35, API.OFF_ACT_GeneralObject_route0, { 45484 }, 50, WPOINT.new(3230, 3205, 0))
                     API.RandomSleep2(800, 600, 600)
                 else
                     if findDoor(45476, { 3234, 3203 }, 0) then
@@ -619,7 +619,7 @@ local function walk()
                         if API.PInArea21(3200, 3206, 3469, 3475) then
                             walking = false
                         else
-                            API.DoAction_Object2(0xc3, 0, { 111230 }, 50, WPOINT.new(3203, 3476, 0))
+                            API.DoAction_Object2(0xc3, API.OFF_ACT_GeneralObject_route0, { 111230 }, 50, WPOINT.new(3203, 3476, 0))
                             API.RandomSleep2(800, 800, 800)
                         end
                     end
@@ -679,7 +679,7 @@ local function walk()
                             API.RandomSleep2(300, 600, 600)
                         end
                     else
-                        if API.DoAction_Object2(0x34, 0, { 34498 }, 50, WPOINT.new(2649, 3297, 0)) then
+                        if API.DoAction_Object2(0x34, API.OFF_ACT_GeneralObject_route0, { 34498 }, 50, WPOINT.new(2649, 3297, 0)) then
                             API.RandomSleep2(3800, 600, 600)
                         end
                     end
@@ -768,7 +768,7 @@ local function walk()
                                 API.RandomSleep2(900, 600, 600)
                             end
                         else
-                            API.DoAction_Object2(0x34, 0, { 117943 }, 50, WPOINT.new(2556, 3081, 0))
+                            API.DoAction_Object2(0x34, API.OFF_ACT_GeneralObject_route0, { 117943 }, 50, WPOINT.new(2556, 3081, 0))
                             API.RandomSleep2(2800, 400, 400)
                         end
                     end
@@ -861,7 +861,7 @@ local function invCheck()
     -- Other checks
     local hasRequiredLevel = API.XPLevelTable(API.GetSkillXP(skill)) >= 65
     local hasLootBag = hasLootBag()
-    check(hasRequiredLevel, "You need at least Level 65 Thieving")
+    -- check(hasRequiredLevel, "You need at least Level 65 Thieving")
     check(hasLootBag, "You need a loot bag in your inventory!")
 
     -- Action bar checks
