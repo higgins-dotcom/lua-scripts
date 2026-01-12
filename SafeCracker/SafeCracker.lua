@@ -604,7 +604,7 @@ local function walk()
                 elseif floor == 1 then
                     if not findDoor(15535, { 3218, 3472 }, 1) then
                         door = findDoor(15536, { 3219, 3472 }, 1)
-                        API.DoAction_Object_Direct(0x31, 0, door)
+                        API.DoAction_Object_Direct(0x31, API.OFF_ACT_GeneralObject_route0, door)
                         API.RandomSleep2(800, 600, 600)
                     else
                         API.DoAction_Object2(0x34, API.OFF_ACT_GeneralObject_route0, { 24361 }, 50,
