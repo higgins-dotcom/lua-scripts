@@ -57,7 +57,7 @@ LAST_FOUND = {
 }
 
 local function clickPlatform()
-    if API.DoAction_Object1(0x29, 0, ID.PLATFORM, 50) then
+    if API.DoAction_Object1(0x29, API.OFF_ACT_GeneralObject_route0, ID.PLATFORM, 50) then
         API.RandomSleep2(4500, 500, 500)
         REPAIR_FAIL = 0
     end
