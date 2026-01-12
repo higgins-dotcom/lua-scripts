@@ -886,6 +886,8 @@ API.GatherEvents_chat_check()
 API.SetDrawTrackedSkills(true)
 Write_fake_mouse_do(false)
 
+print("SafeCracker2DEBUG")
+
 while API.Read_LoopyLoop() do
     if scriptPaused then
         if btnStop.return_click then
