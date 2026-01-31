@@ -150,8 +150,8 @@ while API.Read_LoopyLoop() do
 			end
 		else
 			if not (Inventory:GetItemAmount(1511) > 0 and not API.CheckAnim(10)) then
-				if not API.DoAction_Object_valid2(0x3b, 0, { 38783 }, 50, WPOINT.new(3104, 3433, 0), true) then
-					API.DoAction_Object_valid2(0x3b, 0, { 38760 }, 50, WPOINT.new(3104, 3433, 0), true)
+				if not API.DoAction_Object_valid2(0x3b, API.OFF_ACT_GeneralObject_route0, { 38783 }, 50, WPOINT.new(3104, 3433, 0), true) then
+					API.DoAction_Object_valid2(0x3b, API.OFF_ACT_GeneralObject_route0, { 38760 }, 50, WPOINT.new(3104, 3433, 0), true)
 				end
 				API.RandomSleep2(600, 600, 600)
 			else
