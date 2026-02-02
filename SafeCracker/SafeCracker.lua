@@ -293,7 +293,7 @@ local function teleportToLodestone(name)
         API.RandomSleep2(1600, 800, 800)
     else
         API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1465, 33, -1, API.OFF_ACT_GeneralInterface_route)
-        API.RandomSleep2(quickTeleport and 300 or 1600, quickTeleport and 300 or 1800, quickTeleport and 300 or 2000)
+        API.RandomSleep2(quickTeleport and 1600 or 1800, quickTeleport and 1600 or 1800, quickTeleport and 1600 or 1800)
     end
 end
 
