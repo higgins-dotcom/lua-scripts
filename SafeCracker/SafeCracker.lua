@@ -136,7 +136,7 @@ local lastTile       = nil
 local scriptPaused   = true
 local walking        = true
 local firstRun       = true
-local lastVisit      = os.time()
+local lastVisit      = os.time() - 300
 local skill          = "THIEVING"
 local rewardChoice
 local needLockpick
