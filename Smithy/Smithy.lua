@@ -74,21 +74,26 @@ local AREA = {
 local AREA_ACTIONS = {
     [AREA.BURIAL] = {
         forge = function()
-            API.DoAction_Object1(0x3f, API.OFF_ACT_GeneralObject_route0, ID.BURIAL.FORGE, 10)
+            Interact:Object("Burial Forge", "Heat")
+            -- API.DoAction_Object1(0x3f, API.OFF_ACT_GeneralObject_route0, ID.BURIAL.FORGE, 10)
         end,
         anvil = function()
-            API.DoAction_Object1(0x3f, API.OFF_ACT_GeneralObject_route0, { ID.BURIAL.ANVIL }, 50)
+            Interact:Object("Burial Anvil", "Smith")
+            -- API.DoAction_Object1(0x3f, API.OFF_ACT_GeneralObject_route0, { ID.BURIAL.ANVIL }, 50)
         end
     },
     [AREA.NORMAL] = {
         forge = function()
-            API.DoAction_Object1(0x3f, API.OFF_ACT_GeneralObject_route0, ID.NORMAL.FORGE, 10)
+            Interact:Object("Forge", "Heat")
+            -- API.DoAction_Object1(0x3f, API.OFF_ACT_GeneralObject_route0, ID.NORMAL.FORGE, 10)
         end,
         anvil = function()
-            API.DoAction_Object1(0x3f, API.OFF_ACT_GeneralObject_route0, { ID.NORMAL.ANVIL }, 50)
+            Interact:Object("Anvil", "Smith")
+            -- API.DoAction_Object1(0x3f, API.OFF_ACT_GeneralObject_route0, { ID.NORMAL.ANVIL }, 50)
         end,
         furnance = function()
-            API.DoAction_Object1(0x3f, API.OFF_ACT_GeneralObject_route0, { ID.NORMAL.FURNACE }, 50)
+            Interact:Object("Furnace", "Smelt")
+            -- API.DoAction_Object1(0x3f, API.OFF_ACT_GeneralObject_route0, { ID.NORMAL.FURNACE }, 50)
         end
     },
 }
@@ -261,9 +266,20 @@ local function openSmithingInterface(area, choice)
         forgeObject = ID.NORMAL.FURNACE
         furnace = true
     end
-    local action = furnace and 0x3f or 0x29
-    local offset = furnace and API.OFF_ACT_GeneralObject_route0 or API.OFF_ACT_GeneralObject_route3
-    API.DoAction_Object1(action, offset, forgeObject, 50)
+    -- local action = furnace and 0x3f or 0x29
+    -- local offset = furnace and API.OFF_ACT_GeneralObject_route0 or API.OFF_ACT_GeneralObject_route3
+    -- API.DoAction_Object1(action, offset, forgeObject, 50)
+
+    if furnace then
+        Interact:Object("Furnace", "Smelt")
+    else
+        if forgeObject == ID.NORMAL.FORGE then
+            Interact:Object("Forge", "Open smithing interface")
+        else
+            Interact:Object("Burial Forge", "Open smithing interface")
+        end
+    end
+
     API.RandomSleep2(800, 400, 600)
 end
 
@@ -332,7 +348,8 @@ end
 
 local function bank(item)
     if selectedItemType == "BAR" then
-        API.DoAction_Object1(0x29, API.OFF_ACT_GeneralObject_route1, ID.NORMAL.FURNACE, 50)
+        -- API.DoAction_Object1(0x29, API.OFF_ACT_GeneralObject_route1, ID.NORMAL.FURNACE, 50)
+        Interact:Object("Furnace", "Deposit-all (into metal bank)")
         API.RandomSleep2(600, 600, 600)
     else
 
@@ -393,9 +410,10 @@ local function bank(item)
                 API.RandomSleep2(800, 600, 600)
             end
         else
-            if API.DoAction_Object1(0x2e, API.OFF_ACT_GeneralObject_route1, { ID.BANK_CHEST }, 50) then
-                API.RandomSleep2(800, 500, 300)
-            end
+            Interact:Object("Bank chest", "Use")
+            -- if API.DoAction_Object1(0x2e, API.OFF_ACT_GeneralObject_route1, { ID.BANK_CHEST }, 50) then
+            --     API.RandomSleep2(800, 500, 300)
+            -- end
         end
     end
     return true
