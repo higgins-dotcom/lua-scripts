@@ -1,5 +1,9 @@
 # Necromancy Rituals
 
+## Download
+
+[Click here to download Necromancy Rituals](https://github.com/higgins-dotcom/lua-scripts/raw/main/NecromancyRituals/NecromancyRituals.zip)
+
 RS3 script for performing Necromancy Rituals with GUI configuration.
 
 ## Features
