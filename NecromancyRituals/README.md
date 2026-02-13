@@ -41,6 +41,10 @@ Settings are saved to `configs/necrorituals-<character>.config.json`
 
 Higgins
 
+## Download
+
+[Click here to download Necromancy Rituals](https://github.com/higgins-dotcom/lua-scripts/raw/main/NecromancyRituals/NecromancyRituals.zip)
+
 ## Version
 
 ### v3.0 (Major Update)
