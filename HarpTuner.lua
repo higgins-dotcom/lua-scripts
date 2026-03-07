@@ -1,37 +1,36 @@
 --[[
-
-@title Harp Tuner
-@description Tunes harmonium harps at the Ithell Clan district of Prifddinas
-@author Higgins <discord@higginshax>
-@date 25/09/2023
-@version 1.0
-
+# Script Name:   Harp Tuner
+# Description:  Tunes harmonium harps at the Ithell Clan district of Prifddinas
+# Author:        Higgins <discord@higginshax>
+# Version:       1.2
+# Date:          2024.01.01
 --]]
 
 local MAX_IDLE_TIME_MINUTES = 5
-
 local API = require("api")
 
-local startTime, afk = os.time(), os.time()
-local skill = "CONSTRUCTION"
-local startXp = API.GetSkillXP(skill)
+local SKILLS = { "CRAFTING", "CONSTRUCTION" }
+local startXp = {
+    CRAFTING = API.GetSkillXP("CRAFTING"),
+    CONSTRUCTION = API.GetSkillXP("CONSTRUCTION")
+}
+local startTime = os.time()
 
 local ID = {
     HARMONIC_DUST = 32622,
-    HARP = {94059, 94060},
+    HARP = { 94059, 94060 },
 }
 
-local startDust = API.InvStackSize(ID.HARMONIC_DUST)
+local startDust = Inventory:GetItemAmount(ID.HARMONIC_DUST)
 
-local function idleCheck()
-    local timeDiff = os.difftime(os.time(), afk)
-    local randomTime = math.random((MAX_IDLE_TIME_MINUTES * 60) * 0.6, (MAX_IDLE_TIME_MINUTES * 60) * 0.9)
-
-    if timeDiff > randomTime then
-        API.PIdle2()
-        afk = os.time()
-    end
-end
+local COLORS = {
+    dark = { 0.06, 0.04, 0.10 },
+    medium = { 0.12, 0.06, 0.18 },
+    crafting = { 0.90, 0.55, 0.15 },
+    construction = { 0.55, 0.35, 0.20 },
+    text = { 0.85, 0.85, 0.90 },
+    accent = { 0.65, 0.30, 0.80 },
+}
 
 local function round(val, decimal)
     if decimal then
@@ -51,71 +50,107 @@ local function formatNumber(num)
     end
 end
 
-local function formatElapsedTime(startTime)
-    local currentTime = os.time()
-    local elapsedTime = currentTime - startTime
-    local hours = math.floor(elapsedTime / 3600)
-    local minutes = math.floor((elapsedTime % 3600) / 60)
-    local seconds = elapsedTime % 60
-    return string.format("[%02d:%02d:%02d]", hours, minutes, seconds)
+local function formatElapsedTime(start)
+    local elapsed = os.time() - start
+    local hours = math.floor(elapsed / 3600)
+    local minutes = math.floor((elapsed % 3600) / 60)
+    local seconds = elapsed % 60
+    return string.format("%02d:%02d:%02d", hours, minutes, seconds)
 end
 
-local function calcProgressPercentage(skill, currentExp)
-    local currentLevel = API.XPLevelTable(API.GetSkillXP(skill))
-    if currentLevel == 120 then return 100 end
+local function calcProgressPercentage(skill)
+    local currentExp = API.GetSkillXP(skill)
+    local currentLevel = API.XPLevelTable(currentExp)
+    if currentLevel >= 120 then return 100 end
     local nextLevelExp = XPForLevel(currentLevel + 1)
     local currentLevelExp = XPForLevel(currentLevel)
-    local progressPercentage = (currentExp - currentLevelExp) / (nextLevelExp - currentLevelExp) * 100
-    return math.floor(progressPercentage)
+    return math.floor((currentExp - currentLevelExp) / (nextLevelExp - currentLevelExp) * 100)
 end
 
-local function printProgressReport(final)
-    local currentXp = API.GetSkillXP(skill)
-    local elapsedMinutes = (os.time() - startTime) / 60
-    local diffXp = math.abs(currentXp - startXp);
-    local xpPH = round((diffXp * 60) / elapsedMinutes);
-    local time = formatElapsedTime(startTime)
-    local currentLevel = API.XPLevelTable(API.GetSkillXP(skill))
-    local dust = API.InvStackSize(ID.HARMONIC_DUST) - startDust
-    local dustPH = round((dust * 60) / ((os.time() - startTime) / 60));
-    IGP.radius = calcProgressPercentage(skill, API.GetSkillXP(skill)) / 100
-    IGP.string_value = time ..
-        " | " ..
-        string.lower(skill):gsub("^%l", string.upper) ..
-        ": " ..
-        currentLevel ..
-        " | XP/H: " ..
-        formatNumber(xpPH) ..
-        " | XP: " ..
-        formatNumber(diffXp) ..
-        " | Harmonic Dust: " .. formatNumber(dust) .. " | Harmonic Dust/H: " .. formatNumber(dustPH)
-end
-
-local function setupGUI()
-    IGP = API.CreateIG_answer()
-    IGP.box_start = FFPOINT.new(5, 5, 0)
-    IGP.box_name = "PROGRESSBAR"
-    IGP.colour = ImColor.new(116, 2, 179);
-    IGP.string_value = "HARP TUNER"
+local function drawProgressBar(skill, progress, color, currentLevel, diffXp, xpPH)
+    local barHeight = 22
+    
+    ImGui.PushStyleColor(ImGuiCol.Text, color[1], color[2], color[3], 1.0)
+    ImGui.TextWrapped(skill:gsub("^%l", string.upper))
+    ImGui.PopStyleColor(1)
+    
+    local label = string.format("Lvl %d | %d%% | XP: %s | XP/H: %s",
+        currentLevel,
+        progress,
+        formatNumber(diffXp),
+        formatNumber(xpPH)
+    )
+    
+    ImGui.PushStyleColor(ImGuiCol.PlotHistogram, color[1], color[2], color[3], 0.75)
+    ImGui.PushStyleColor(ImGuiCol.Text, 1.0, 1.0, 1.0, 1.0)
+    ImGui.ProgressBar(progress / 100, -1, barHeight, label)
+    ImGui.PopStyleColor(2)
+    ImGui.Spacing()
 end
 
 local function drawGUI()
-    DrawProgressBar(IGP)
+    local elapsedMinutes = (os.time() - startTime) / 60
+    if elapsedMinutes < 0.01 then elapsedMinutes = 0.01 end
+    
+    ImGui.SetNextWindowSize(500, 0, ImGuiCond.Always)
+    ImGui.SetNextWindowPos(100, 100, ImGuiCond.FirstUseEver)
+    
+    ImGui.PushStyleColor(ImGuiCol.WindowBg, COLORS.dark[1], COLORS.dark[2], COLORS.dark[3], 0.95)
+    ImGui.PushStyleColor(ImGuiCol.TitleBg, COLORS.medium[1], COLORS.medium[2], COLORS.medium[3], 1.0)
+    ImGui.PushStyleColor(ImGuiCol.TitleBgActive, COLORS.medium[1], COLORS.medium[2], COLORS.medium[3], 1.0)
+    ImGui.PushStyleColor(ImGuiCol.Text, COLORS.text[1], COLORS.text[2], COLORS.text[3], 1.0)
+    ImGui.PushStyleVar(ImGuiStyleVar.WindowRounding, 6)
+    ImGui.PushStyleVar(ImGuiStyleVar.FrameRounding, 4)
+    
+    local visible = ImGui.Begin("Harp Tuner###HarpGUI", true)
+    
+    if visible then
+        ImGui.PushStyleColor(ImGuiCol.Text, COLORS.accent[1], COLORS.accent[2], COLORS.accent[3], 1.0)
+        ImGui.TextWrapped("Time: " .. formatElapsedTime(startTime))
+        ImGui.PopStyleColor(1)
+        ImGui.Separator()
+        ImGui.Spacing()
+        
+        for _, skill in ipairs(SKILLS) do
+            local currentXp = API.GetSkillXP(skill)
+            local diffXp = math.abs(currentXp - startXp[skill])
+            local xpPH = round((diffXp * 60) / elapsedMinutes)
+            local currentLevel = API.XPLevelTable(currentXp)
+            local progress = calcProgressPercentage(skill)
+            local color = skill == "CRAFTING" and COLORS.crafting or COLORS.construction
+            
+            drawProgressBar(skill, progress, color, currentLevel, diffXp, xpPH)
+        end
+        
+        ImGui.Separator()
+        ImGui.Spacing()
+        
+        local dust = Inventory:GetItemAmount(ID.HARMONIC_DUST) - startDust
+        local dustPH = round((dust * 60) / elapsedMinutes)
+        
+        ImGui.PushStyleColor(ImGuiCol.Text, COLORS.accent[1], COLORS.accent[2], COLORS.accent[3], 1.0)
+        ImGui.TextWrapped("Harmonic Dust")
+        ImGui.PopStyleColor(1)
+        ImGui.PushStyleColor(ImGuiCol.Text, COLORS.text[1], COLORS.text[2], COLORS.text[3], 1.0)
+        ImGui.TextWrapped(string.format("  Gained: %s  |  Per Hour: %s", formatNumber(dust), formatNumber(dustPH)))
+        ImGui.PopStyleColor(1)
+    end
+    
+    ImGui.PopStyleVar(2)
+    ImGui.PopStyleColor(4)
+    ImGui.End()
 end
 
-setupGUI()
+API.SetMaxIdleTime(MAX_IDLE_TIME_MINUTES)
+
+ClearRender()
+DrawImGui(drawGUI)
 
 while API.Read_LoopyLoop() do
-    drawGUI()
     local anim = API.ReadPlayerAnim()
-    if anim ~= 25021 and anim ~= 25026 then
-        API.DoAction_Object1(0xae, API.OFF_ACT_GeneralObject_route0, ID.HARP, 50)
-        API.RandomSleep2(1500, 800, 800)
-    elseif VB_FindPSettinOrder(4892).state / 65536 >= 25344 then
-        API.DoAction_Object1(0xae, API.OFF_ACT_GeneralObject_route0, ID.HARP, 50)
-        API.RandomSleep2(2500, 800, 800)
+    if (anim ~= 25021 and anim ~= 25026) or GetVarbitValue(25951) >= 3 then
+        Interact:Object("Harp", "Tune")
+        API.RandomSleep2(1800, 800, 800)
     end
-    idleCheck()
-    printProgressReport()
     API.RandomSleep2(500, 500, 500)
 end
