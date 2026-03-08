@@ -359,7 +359,7 @@ local function bank(item)
         Interact:Object("Furnace", "Deposit-all (into metal bank)")
         API.RandomSleep2(600, 600, 600)
     else
-        if API.BankOpen2() then
+        if API.Compare2874Status(24) then
             if Inventory:FreeSpaces() < 26 then
                 if DEBUG_USE_INTERFACE_OVER_KEYPRESS then
                     API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 517, 39, -1, API.OFF_ACT_GeneralInterface_route)
