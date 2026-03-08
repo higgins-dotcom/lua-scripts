@@ -15,7 +15,8 @@ local API = require("api")
 -- [[ SETTINGS ]] --
 
 local MAX_IDLE_TIME_MINUTES = 15
-local USE_BEGIN_PROJECT_INTERFACE_BUTTON = false
+local USE_BEGIN_PROJECT_INTERFACE_BUTTON = false -- instead of pressing space
+local USE_FINISH_INTERFACE_BUTTON = false -- instead of pressing space
 
 local tasks = {
     -- #########################################################################
@@ -104,67 +105,69 @@ local function getCurrentDirectory()
 end
 
 local function updateSmithingData()
-    local dataUrl = "https://raw.githubusercontent.com/higgins-dotcom/lua-scripts/refs/heads/main/Smithy/lib/smithing_data.json"
+    local dataUrl =
+    "https://raw.githubusercontent.com/higgins-dotcom/lua-scripts/refs/heads/main/Smithy/lib/smithing_data.json"
     local dataFile = getCurrentDirectory() .. "lib\\smithing_data.json"
     local etagFile = getCurrentDirectory() .. "lib\\smithing_data.etag"
-    
+
     local fileExists = false
     local testFile = io.open(dataFile, "r")
     if testFile then
         testFile:close()
         fileExists = true
     end
-    
+
     local storedEtag = ""
     local etagHandle = io.open(etagFile, "r")
     if etagHandle then
         storedEtag = etagHandle:read("*all"):gsub("%s+", "")
         etagHandle:close()
     end
-    
+
     local headerCmd = string.format('curl --insecure -s -I "%s"', dataUrl)
     local headerHandle = io.popen(headerCmd)
     local headers = ""
     local currentEtag = ""
     local lastModified = ""
-    
+
     if headerHandle then
         headers = headerHandle:read("*a")
         headerHandle:close()
-        
+
         currentEtag = headers:match("etag:%s*([^\r\n]+)") or headers:match("ETag:%s*([^\r\n]+)") or ""
         currentEtag = currentEtag:gsub("%s+", "")
-        
+
         if currentEtag == "" then
-            lastModified = headers:match("last%-modified:%s*([^\r\n]+)") or headers:match("Last%-Modified:%s*([^\r\n]+)") or ""
+            lastModified = headers:match("last%-modified:%s*([^\r\n]+)") or headers:match("Last%-Modified:%s*([^\r\n]+)") or
+            ""
             lastModified = lastModified:gsub("%s+", "")
         end
     end
-       
+
     local versionCheck = currentEtag ~= "" and currentEtag or lastModified
     local storedVersion = storedEtag
-    
+
     if not fileExists or (versionCheck ~= storedVersion and versionCheck ~= "") then
         if not fileExists then
             print("smithing_data.json missing, downloading...")
         else
             print("Updating smithing_data.json...")
         end
-        
+
         os.execute('if not exist "' .. getCurrentDirectory() .. 'lib" mkdir "' .. getCurrentDirectory() .. 'lib"')
-        
+
         local downloadCmd = string.format('curl --insecure -s "%s"', dataUrl)
         local downloadHandle = io.popen(downloadCmd)
         if downloadHandle then
             local content = downloadHandle:read("*a")
             downloadHandle:close()
-            
+
             if content and #content > 100 then
                 local outputFile = io.open(dataFile, "w")
                 if outputFile then
                     outputFile:write(content)
                     outputFile:close()
-                    
+
                     if versionCheck ~= "" then
                         local etagFile_handle = io.open(etagFile, "w")
                         if etagFile_handle then
@@ -213,7 +216,8 @@ local function selectItem(bar, choice)
 
         local id = choice.SKILL == 14 and 52 or 62
 
-        API.DoAction_Interface(0xffffffff, string.format("0x%X", bar_setting[bar].ID), 1, 37, id, bar_setting[bar].INTERFACE,
+        API.DoAction_Interface(0xffffffff, string.format("0x%X", bar_setting[bar].ID), 1, 37, id,
+            bar_setting[bar].INTERFACE,
             API.OFF_ACT_GeneralInterface_route)
         API.RandomSleep2(600, 600, 600)
     end
@@ -352,7 +356,6 @@ local function bank(item)
         Interact:Object("Furnace", "Deposit-all (into metal bank)")
         API.RandomSleep2(600, 600, 600)
     else
-
         if API.BankOpen2() then
             if Inventory:FreeSpaces() < 26 then
                 API.KeyboardPress2(0x33, 60, 120)
@@ -374,7 +377,6 @@ local function bank(item)
                     return false
                 end
             elseif type(item) == "table" then
-
                 local itemCount = 0
                 for _, tableItem in pairs(item) do
                     itemCount = itemCount + 1
@@ -454,7 +456,22 @@ while API.Read_LoopyLoop() do
             o == "Would you like to partake in ceremonial smithing?" then
             API.KeyboardPress2(0x32, 60, 100)
         else
-            API.KeyboardPress2(0x20, 60, 100)
+            t = API.ScanForInterfaceTest2Get(false, { { 1189,2,-1,0 }, { 1189,3,-1,0 } })
+            if t and #t > 0 and t[1].textids and #t[1].textids > 0 then
+                local text = t[1].textids
+                if string.find(text, "You finish smithing") then
+
+                    if USE_FINISH_INTERFACE_BUTTON then
+                        API.DoAction_Interface(0xffffffff, 0xffffffff, 0, 1189, 19, -1, API.OFF_ACT_GeneralInterface_Choose_option)
+                    else
+                        API.KeyboardPress2(0x32, 60, 100)
+                    end
+                    API.RandomSleep2(600, 800, 800)
+                    goto continue
+                end
+            else
+                API.KeyboardPress2(0x32, 60, 100)
+            end
         end
         API.RandomSleep2(600, 800, 800)
         goto continue
@@ -510,7 +527,8 @@ while API.Read_LoopyLoop() do
                             local quantity = VB_FindPSettinOrder(8336, -1).state
                             -- local quantity = API.VB_FindPSett(8336, -1, -1).state
                             if USE_BEGIN_PROJECT_INTERFACE_BUTTON then
-                                API.DoAction_Interface(0x24, 0xffffffff, 1, 37, 163, -1, API.OFF_ACT_GeneralInterface_route) 
+                                API.DoAction_Interface(0x24, 0xffffffff, 1, 37, 163, -1,
+                                    API.OFF_ACT_GeneralInterface_route)
                             else
                                 API.KeyboardPress2(0x20, 60, 100)
                             end
@@ -520,7 +538,8 @@ while API.Read_LoopyLoop() do
                             if VB_FindPSettinOrder(8332, -1).state == SETTING_IDS[tostring(choice.SKILL)][selectedBarType].BAR then
                                 -- if API.VB_FindPSett(8332, -1, -1).state == SETTING_IDS[selectedBarType].BAR then
                                 if USE_BEGIN_PROJECT_INTERFACE_BUTTON then
-                                    API.DoAction_Interface(0x24, 0xffffffff, 1, 37, 163, -1, API.OFF_ACT_GeneralInterface_route) 
+                                    API.DoAction_Interface(0x24, 0xffffffff, 1, 37, 163, -1,
+                                        API.OFF_ACT_GeneralInterface_route)
                                 else
                                     API.KeyboardPress2(0x20, 60, 100)
                                 end
