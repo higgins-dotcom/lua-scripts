@@ -4,7 +4,7 @@
 @description AIO Smither for the Artisan Guild
 @author Higgins <discord@higginshax>
 @date 10/01/2024
-@version 1.9
+@version 2.0
 
 Add tasks to the settings
 
@@ -15,8 +15,10 @@ local API = require("api")
 -- [[ SETTINGS ]] --
 
 local MAX_IDLE_TIME_MINUTES = 15
-local USE_BEGIN_PROJECT_INTERFACE_BUTTON = false -- instead of pressing space
-local USE_FINISH_INTERFACE_BUTTON = false -- instead of pressing space
+
+local DEBUG_USE_INTERFACE_OVER_KEYPRESS = false
+-- Set to true to use interface actions instead of keypresses for banking and furnace interactions.
+-- This may be more reliable for some users but can cause issues for others, so test both settings to see which works best for you.
 
 local tasks = {
     -- #########################################################################
@@ -139,7 +141,7 @@ local function updateSmithingData()
 
         if currentEtag == "" then
             lastModified = headers:match("last%-modified:%s*([^\r\n]+)") or headers:match("Last%-Modified:%s*([^\r\n]+)") or
-            ""
+                ""
             lastModified = lastModified:gsub("%s+", "")
         end
     end
@@ -343,7 +345,8 @@ local function Action_Bank(item)
     local inventory = API.FetchBankArray()
     for _, inv in ipairs(inventory) do
         if inv.itemid1 == item then
-            API.DoAction_Interface(-1, inv.itemid1, 1, inv.id1, inv.id2, inv.id3, API.OFF_ACT_GeneralInterface_route)
+            API.DoAction_Interface(0xffffffff, inv.itemid1, 1, inv.id1, inv.id2, inv.id3,
+                API.OFF_ACT_GeneralInterface_route)
             API.RandomSleep2(300, 600, 600)
             break
         end
@@ -358,7 +361,11 @@ local function bank(item)
     else
         if API.BankOpen2() then
             if Inventory:FreeSpaces() < 26 then
-                API.KeyboardPress2(0x33, 60, 120)
+                if DEBUG_USE_INTERFACE_OVER_KEYPRESS then
+                    API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 517, 39, -1, API.OFF_ACT_GeneralInterface_route)
+                else
+                    API.KeyboardPress2(0x33, 60, 120)
+                end
                 API.RandomSleep2(300, 600, 600)
             end
 
@@ -405,10 +412,19 @@ local function bank(item)
                 end
             elseif item == nil then
                 if Inventory:FreeSpaces() < 26 then
-                    API.KeyboardPress2(0x33, 60, 120)
+                    if DEBUG_USE_INTERFACE_OVER_KEYPRESS then
+                        API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 517, 39, -1, API
+                            .OFF_ACT_GeneralInterface_route)
+                    else
+                        API.KeyboardPress2(0x33, 60, 120)
+                    end
                     API.RandomSleep2(300, 600, 600)
                 end
-                API.KeyboardPress2(0x1B, 60, 120)
+                if DEBUG_USE_INTERFACE_OVER_KEYPRESS then
+                    API.DoAction_Interface(0x24, 0xffffffff, 1, 517, 317, -1, API.OFF_ACT_GeneralInterface_route)
+                else
+                    API.KeyboardPress2(0x1B, 60, 120)
+                end
                 API.RandomSleep2(800, 600, 600)
             end
         else
@@ -456,13 +472,13 @@ while API.Read_LoopyLoop() do
             o == "Would you like to partake in ceremonial smithing?" then
             API.KeyboardPress2(0x32, 60, 100)
         else
-            t = API.ScanForInterfaceTest2Get(false, { { 1189,2,-1,0 }, { 1189,3,-1,0 } })
+            t = API.ScanForInterfaceTest2Get(false, { { 1189, 2, -1, 0 }, { 1189, 3, -1, 0 } })
             if t and #t > 0 and t[1].textids and #t[1].textids > 0 then
                 local text = t[1].textids
                 if string.find(text, "You finish smithing") then
-
-                    if USE_FINISH_INTERFACE_BUTTON then
-                        API.DoAction_Interface(0xffffffff, 0xffffffff, 0, 1189, 19, -1, API.OFF_ACT_GeneralInterface_Choose_option)
+                    if DEBUG_USE_INTERFACE_OVER_KEYPRESS then
+                        API.DoAction_Interface(0xffffffff, 0xffffffff, 0, 1189, 19, -1,
+                            API.OFF_ACT_GeneralInterface_Choose_option)
                     else
                         API.KeyboardPress2(0x32, 60, 100)
                     end
@@ -526,7 +542,7 @@ while API.Read_LoopyLoop() do
                         if selectedItemType == "BAR" then
                             local quantity = VB_FindPSettinOrder(8336, -1).state
                             -- local quantity = API.VB_FindPSett(8336, -1, -1).state
-                            if USE_BEGIN_PROJECT_INTERFACE_BUTTON then
+                            if DEBUG_USE_INTERFACE_OVER_KEYPRESS then
                                 API.DoAction_Interface(0x24, 0xffffffff, 1, 37, 163, -1,
                                     API.OFF_ACT_GeneralInterface_route)
                             else
@@ -537,7 +553,7 @@ while API.Read_LoopyLoop() do
                         else
                             if VB_FindPSettinOrder(8332, -1).state == SETTING_IDS[tostring(choice.SKILL)][selectedBarType].BAR then
                                 -- if API.VB_FindPSett(8332, -1, -1).state == SETTING_IDS[selectedBarType].BAR then
-                                if USE_BEGIN_PROJECT_INTERFACE_BUTTON then
+                                if DEBUG_USE_INTERFACE_OVER_KEYPRESS then
                                     API.DoAction_Interface(0x24, 0xffffffff, 1, 37, 163, -1,
                                         API.OFF_ACT_GeneralInterface_route)
                                 else
