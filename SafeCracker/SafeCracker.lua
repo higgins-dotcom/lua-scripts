@@ -107,12 +107,12 @@ local ROUTES         = {
 }
 
 local LODESTONES     = {
-    ["Edgeville"] = 16,
-    ["Lumbridge"] = 18,
-    ["Draynor Village"] = 15,
-    ["Varrock"] = 22,
-    ["Yanille"] = 26,
-    ["Ardougne"] = 12,
+    ["Edgeville"] = 15,
+    ["Lumbridge"] = 17,
+    ["Draynor Village"] = 14,
+    ["Varrock"] = 21,
+    ["Yanille"] = 25,
+    ["Ardougne"] = 11,
 }
 
 local TELEPORTS      = {
