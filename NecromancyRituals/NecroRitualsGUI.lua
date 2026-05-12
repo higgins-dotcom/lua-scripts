@@ -16,6 +16,7 @@ NecroGUI.selectInfoTab = false
 
 NecroGUI.config = {
     maxIdleTime = 5,
+    fakeMouse = false,
     disturbancesEnabled = true,
     autoRun = false,
     handleMoth = true,
@@ -64,6 +65,7 @@ end
 local function saveConfigToFile(cfg)
     local data = {
         MaxIdleTime = cfg.maxIdleTime,
+        FakeMouse = cfg.fakeMouse,
         DisturbancesEnabled = cfg.disturbancesEnabled,
         AutoRun = cfg.autoRun,
         HandleMoth = cfg.handleMoth,
@@ -110,6 +112,7 @@ function NecroGUI.loadConfig()
     
     local c = NecroGUI.config
     if type(saved.MaxIdleTime) == "number" then c.maxIdleTime = saved.MaxIdleTime end
+    if type(saved.FakeMouse) == "boolean" then c.fakeMouse = saved.FakeMouse end
     if type(saved.DisturbancesEnabled) == "boolean" then c.disturbancesEnabled = saved.DisturbancesEnabled end
     if type(saved.AutoRun) == "boolean" then c.autoRun = saved.AutoRun end
     if type(saved.HandleMoth) == "boolean" then c.handleMoth = saved.HandleMoth end
@@ -174,18 +177,15 @@ end
 
 local function drawConfigTab(cfg, gui)
     if gui.started then
-        local statusText = gui.paused and "PAUSED" or "Running"
-        local statusColor = gui.paused and { 1.0, 0.8, 0.2 } or { 0.4, 0.8, 0.4 }
-        ImGui.PushStyleColor(ImGuiCol.Text, statusColor[1], statusColor[2], statusColor[3], 1.0)
-        ImGui.TextWrapped(statusText)
-        ImGui.PopStyleColor(1)
         ImGui.Spacing()
         ImGui.Separator()
 
         if ImGui.BeginTable("##cfgsummary", 2) then
             ImGui.TableSetupColumn("Label", ImGuiTableColumnFlags.WidthStretch, 0.4)
             ImGui.TableSetupColumn("Value", ImGuiTableColumnFlags.WidthStretch, 0.6)
-            row("Max Idle Time:", cfg.maxIdleTime .. " minutes")
+            local idleText = cfg.fakeMouse and "Disabled (FakeMouse)" or cfg.maxIdleTime .. " minutes"
+            row("Max Idle Time:", idleText)
+            row("FakeMouse:", cfg.fakeMouse and "Enabled" or "Disabled")
             row("Disturbances:", cfg.disturbancesEnabled and "Enabled" or "Disabled")
             ImGui.EndTable()
         end
@@ -198,7 +198,7 @@ local function drawConfigTab(cfg, gui)
             ImGui.PushStyleColor(ImGuiCol.Button, 0.15, 0.35, 0.20, 0.9)
             ImGui.PushStyleColor(ImGuiCol.ButtonHovered, 0.20, 0.45, 0.25, 1.0)
             ImGui.PushStyleColor(ImGuiCol.ButtonActive, 0.10, 0.50, 0.15, 1.0)
-            if ImGui.Button("Resume Script##resume", -1, 28) then
+            if ImGui.Button("Resume Script##resume_cfg", -1, 28) then
                 gui.paused = false
             end
             ImGui.PopStyleColor(3)
@@ -206,7 +206,7 @@ local function drawConfigTab(cfg, gui)
             ImGui.PushStyleColor(ImGuiCol.Button, 0.25, 0.15, 0.30, 0.9)
             ImGui.PushStyleColor(ImGuiCol.ButtonHovered, 0.35, 0.20, 0.40, 1.0)
             ImGui.PushStyleColor(ImGuiCol.ButtonActive, 0.45, 0.25, 0.50, 1.0)
-            if ImGui.Button("Pause Script##pause", -1, 28) then
+            if ImGui.Button("Pause Script##pause_cfg", -1, 28) then
                 gui.paused = true
             end
             ImGui.PopStyleColor(3)
@@ -217,7 +217,7 @@ local function drawConfigTab(cfg, gui)
         ImGui.PushStyleColor(ImGuiCol.Button, 0.5, 0.15, 0.15, 0.9)
         ImGui.PushStyleColor(ImGuiCol.ButtonHovered, 0.6, 0.2, 0.2, 1.0)
         ImGui.PushStyleColor(ImGuiCol.ButtonActive, 0.7, 0.25, 0.25, 1.0)
-        if ImGui.Button("Stop Script##stop", -1, 28) then
+        if ImGui.Button("Stop Script##stop_cfg", -1, 28) then
             gui.stopped = true
         end
         ImGui.PopStyleColor(3)
@@ -241,14 +241,35 @@ local function drawConfigTab(cfg, gui)
     ImGui.Separator()
     ImGui.Spacing()
 
-    sectionHeader("Idle Settings")
-    flavorText("Configure maximum idle time (minutes) before AFK check.")
+    sectionHeader("FakeMouse")
+    flavorText("Use fake mouse input instead of real mouse interactions.")
     ImGui.Spacing()
     
-    local idleTime = cfg.maxIdleTime
-    local changed, newIdle = ImGui.SliderInt("##idleTime", idleTime, 5, 15)
-    if changed then
-        cfg.maxIdleTime = newIdle
+    local fakeMouseChanged, newFakeMouse = ImGui.Checkbox("Enable FakeMouse", cfg.fakeMouse)
+    if fakeMouseChanged then
+        cfg.fakeMouse = newFakeMouse
+    end
+    ImGui.PushStyleColor(ImGuiCol.Text, NECRO.bright[1], NECRO.bright[2], NECRO.bright[3], 1.0)
+    ImGui.TextWrapped("When enabled, disables idle timeout and uses fake mouse input.")
+    ImGui.PopStyleColor(1)
+    
+    ImGui.Spacing()
+    ImGui.Separator()
+    ImGui.Spacing()
+
+    sectionHeader("Idle Settings")
+    if cfg.fakeMouse then
+        ImGui.PushStyleColor(ImGuiCol.Text, 0.5, 0.5, 0.5, 1.0)
+        ImGui.TextWrapped("Disabled (FakeMouse enabled)")
+        ImGui.PopStyleColor(1)
+    else
+        flavorText("Configure maximum idle time (minutes) before AFK check.")
+        ImGui.Spacing()
+        local idleTime = cfg.maxIdleTime
+        local changed, newIdle = ImGui.SliderInt("##idleTime", idleTime, 5, 15)
+        if changed then
+            cfg.maxIdleTime = newIdle
+        end
     end
 
     ImGui.Spacing()
@@ -314,7 +335,7 @@ local function drawConfigTab(cfg, gui)
     ImGui.PushStyleColor(ImGuiCol.Button, 0.35, 0.15, 0.45, 0.9)
     ImGui.PushStyleColor(ImGuiCol.ButtonHovered, 0.45, 0.20, 0.55, 1.0)
     ImGui.PushStyleColor(ImGuiCol.ButtonActive, 0.55, 0.25, 0.65, 1.0)
-    if ImGui.Button("Start Ritual##start", -1, 32) then
+    if ImGui.Button("Start Ritual##start_cfg", -1, 32) then
         NecroGUI.updateSharedConfig()
         gui.started = true
     end
@@ -325,18 +346,15 @@ local function drawConfigTab(cfg, gui)
     ImGui.PushStyleColor(ImGuiCol.Button, 0.4, 0.4, 0.4, 0.2)
     ImGui.PushStyleColor(ImGuiCol.ButtonHovered, 0.4, 0.4, 0.4, 0.35)
     ImGui.PushStyleColor(ImGuiCol.ButtonActive, 0.5, 0.5, 0.5, 0.5)
-    if ImGui.Button("Cancel##cancel", -1, 28) then
+    if ImGui.Button("Cancel##cancel_cfg", -1, 28) then
         gui.cancelled = true
     end
     ImGui.PopStyleColor(3)
 end
 
 local function drawInfoTab(cfg)
-    local statusText = NecroGUI.paused and "PAUSED" or "Running"
-    local statusColor = NecroGUI.paused and { 1.0, 0.8, 0.2 } or { 0.4, 0.8, 0.4 }
-    ImGui.PushStyleColor(ImGuiCol.Text, statusColor[1], statusColor[2], statusColor[3], 1.0)
-    ImGui.TextWrapped(statusText)
-    ImGui.PopStyleColor(1)
+    ImGui.Spacing()
+    ImGui.Separator()
 
     ImGui.Spacing()
     ImGui.Separator()
@@ -349,7 +367,9 @@ local function drawInfoTab(cfg)
         ImGui.TableSetupColumn("Setting", ImGuiTableColumnFlags.WidthStretch, 0.5)
         ImGui.TableSetupColumn("Value", ImGuiTableColumnFlags.WidthStretch, 0.5)
         
-        row("Max Idle Time", cfg.maxIdleTime .. " minutes")
+        local idleText = cfg.fakeMouse and "Disabled (FakeMouse)" or cfg.maxIdleTime .. " minutes"
+        row("Max Idle Time", idleText)
+        row("FakeMouse", cfg.fakeMouse and "Enabled" or "Disabled")
         row("Disturbances", cfg.disturbancesEnabled and "Enabled" or "Disabled")
         
         if cfg.disturbancesEnabled then
@@ -373,7 +393,7 @@ local function drawInfoTab(cfg)
         ImGui.PushStyleColor(ImGuiCol.Button, 0.15, 0.35, 0.20, 0.9)
         ImGui.PushStyleColor(ImGuiCol.ButtonHovered, 0.20, 0.45, 0.25, 1.0)
         ImGui.PushStyleColor(ImGuiCol.ButtonActive, 0.10, 0.50, 0.15, 1.0)
-        if ImGui.Button("Resume Script##resume", -1, 28) then
+        if ImGui.Button("Resume Script##resume_info", -1, 28) then
             NecroGUI.paused = false
         end
         ImGui.PopStyleColor(3)
@@ -381,7 +401,7 @@ local function drawInfoTab(cfg)
         ImGui.PushStyleColor(ImGuiCol.Button, 0.25, 0.15, 0.30, 0.9)
         ImGui.PushStyleColor(ImGuiCol.ButtonHovered, 0.35, 0.20, 0.40, 1.0)
         ImGui.PushStyleColor(ImGuiCol.ButtonActive, 0.45, 0.25, 0.50, 1.0)
-        if ImGui.Button("Pause Script##pause", -1, 28) then
+        if ImGui.Button("Pause Script##pause_info", -1, 28) then
             NecroGUI.paused = true
         end
         ImGui.PopStyleColor(3)
@@ -392,7 +412,7 @@ local function drawInfoTab(cfg)
     ImGui.PushStyleColor(ImGuiCol.Button, 0.5, 0.15, 0.15, 0.9)
     ImGui.PushStyleColor(ImGuiCol.ButtonHovered, 0.6, 0.2, 0.2, 1.0)
     ImGui.PushStyleColor(ImGuiCol.ButtonActive, 0.7, 0.25, 0.25, 1.0)
-    if ImGui.Button("Stop Script##stop", -1, 28) then
+    if ImGui.Button("Stop Script##stop_info", -1, 28) then
         NecroGUI.stopped = true
     end
     ImGui.PopStyleColor(3)
