@@ -887,7 +887,6 @@ setupGUI()
 
 API.GatherEvents_chat_check()
 API.SetDrawTrackedSkills(true)
-Write_fake_mouse_do(false)
 
 while API.Read_LoopyLoop() do
     if scriptPaused then
