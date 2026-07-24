@@ -83,9 +83,8 @@ local function findPedestal()
     return false
 end
 
-local function findNpc(npcid, distance)
-    local distance = distance or 20
-    local npcs = API.GetAllObjArrayInteract({ npcid }, distance, { 1 })
+local function findNpc(npcid)
+    local npcs = API.ReadAllObjectsArray({ 2 }, {npcid}, {})
     if #npcs > 0 then return npcs[1] else return false end
 end
 
@@ -194,7 +193,7 @@ end
 
 local function watchForSoul()
     if not GUI.getConfig().handleWanderingSoul then return false end
-    local soul = findNpc(ID.WANDERING_SOUL, 15)
+    local soul = findNpc(ID.WANDERING_SOUL)
     if soul then
         API.RandomSleep2(400, 300, 200)
         API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route, { ID.WANDERING_SOUL }, 15)
@@ -300,7 +299,7 @@ end
 
 local function watchForHorror()
     if not GUI.getConfig().handleShamblingHorror then return false end
-    local horror = findNpc(ID.SHAMBLING_HORROR, 50)
+    local horror = findNpc(ID.SHAMBLING_HORROR)
     if horror and horror.Anim < 0 then
         API.RandomSleep2(800, 800, 1200)
         API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route, { ID.SHAMBLING_HORROR }, 50)
