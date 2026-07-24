@@ -416,8 +416,8 @@ local function walk()
 
     if (os.time() - lastVisit) > 300 then
         if (Inventory:IsFull() and hasLoot() or lootBagFull) and location ~= LOCATIONS.GUILD then
-            print("Going to guild...", API.ChatFind("Your loot bag is full", 2).pos_found, location, oldLocation)
-            print(Inventory:IsFull(), hasLoot(), lootBagFull, location)
+            -- print("Going to guild...", API.ChatFind("Your loot bag is full", 2).pos_found, location, oldLocation)
+            -- print(Inventory:IsFull(), hasLoot(), lootBagFull, location)
             oldLocation = location
             location = tableLength(LOCATIONS)
         end
@@ -974,19 +974,6 @@ while API.Read_LoopyLoop() do
             end
             walking = true
 
-            -- if API.ChatFind("Your loot bag is full", 2).pos_found > 0 and location ~= LOCATIONS.GUILD then
-            --     oldLocation = location
-            --     location = LOCATIONS.GUILD
-            --     walking = true
-            -- else
-            --     if location == LOCATIONS.GUILD then
-            --         location = oldLocation + 1
-            --     else
-            --         location = location + 1
-            --     end
-            --     if location > (tableLength(LOCATIONS) - 1) then location = 1 end
-            --     walking = true
-            -- end
             API.RandomSleep2(300, 300, 300)
         end
     end
