@@ -12,6 +12,8 @@ Add tasks to the settings
 
 local API = require("api")
 
+local version = "2.0.2"
+
 -- [[ SETTINGS ]] --
 
 local MAX_IDLE_TIME_MINUTES = 15
@@ -35,15 +37,13 @@ local tasks = {
     -- { metalType = "NECRONIUM",      itemType = "FULL_HELM",  itemLevel = 2,        amount = 1 },
     -- { metalType = "NECRONIUM",      itemType = "FULL_HELM",  itemLevel = 3,        amount = 1 },
     -- { metalType = "NECRONIUM",      itemType = "FULL_HELM",  itemLevel = 4,        amount = 1 },
-    -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 1,        amount = 28 },
-    -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 2,        amount = 28 },
-    -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 3,        amount = 28 },
-    -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 4,        amount = 28 },
-    -- { metalType = "ELDER_RUNE",      itemType = "PLATEBODY",  itemLevel = 5,        amount = 27 },
-    -- { metalType = "ELDER_RUNE",      itemType = "SET",  itemLevel = "BURIAL",        amount = 0 }
-    -- { metalType = "ORIKALKUM",      itemType = "PLATEBODY",  itemLevel = 2,        amount = 1 },
-    -- { metalType = "ORIKALKUM",      itemType = "PLATEBODY",  itemLevel = 3,        amount = 50 },
-    -- { metalType = "STEEL",      itemType = "FULL_HELM",  itemLevel = 0, amount = 5 },
+    -- { metalType = "ELDER_RUNE",     itemType = "PLATEBODY",  itemLevel = 1,        amount = 1 },
+    -- { metalType = "ELDER_RUNE",     itemType = "PLATEBODY",  itemLevel = 2,        amount = 1 },
+    -- { metalType = "ELDER_RUNE",     itemType = "PLATEBODY",  itemLevel = 3,        amount = 1 },
+    -- { metalType = "ELDER_RUNE",     itemType = "PLATEBODY",  itemLevel = 4,        amount = 1 },
+    -- { metalType = "ELDER_RUNE",     itemType = "PLATEBODY",  itemLevel = 5,        amount = 1 },
+
+    -- { metalType = "ELDER_RUNE",     itemType = "SET",  itemLevel = "BURIAL",        amount = 0 }
 
     -- If unsure - open the lib/smithing_data.json file and search for the item
     --
@@ -452,6 +452,8 @@ loadJsonData()
 API.SetMaxIdleTime(MAX_IDLE_TIME_MINUTES)
 API.SetDrawTrackedSkills(true)
 
+print("Starting Smithy script - version " .. version)
+
 while API.Read_LoopyLoop() do
     if currentTaskIndex > #tasks then
         print("No more tasks")
@@ -477,15 +479,18 @@ while API.Read_LoopyLoop() do
                 local text = t[1].textids
                 if string.find(text, "You finish smithing") then
                     if DEBUG_USE_INTERFACE_OVER_KEYPRESS then
-                        API.DoAction_Interface(0xffffffff, 0xffffffff, 0, 1189, 19, -1,
+                        print("[DEBUG] Using interface action to continue")
+                        API.DoAction_Interface(0xffffffff, 0xffffffff, 0, 1189, 20, -1,
                             API.OFF_ACT_GeneralInterface_Choose_option)
                     else
+                        print("[DEBUG] Pressing space to continue")
                         API.KeyboardPress2(0x32, 60, 100)
                     end
                     API.RandomSleep2(600, 800, 800)
                     goto continue
                 end
             else
+                print("[DEBUG] Pressing space to continue")
                 API.KeyboardPress2(0x32, 60, 100)
             end
         end
