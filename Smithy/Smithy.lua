@@ -484,14 +484,14 @@ while API.Read_LoopyLoop() do
                             API.OFF_ACT_GeneralInterface_Choose_option)
                     else
                         print("[DEBUG] Pressing space to continue")
-                        API.KeyboardPress2(0x32, 60, 100)
+                        API.KeyboardPress2(0x20, 60, 100)
                     end
                     API.RandomSleep2(600, 800, 800)
                     goto continue
                 end
             else
                 print("[DEBUG] Pressing space to continue")
-                API.KeyboardPress2(0x32, 60, 100)
+                API.KeyboardPress2(0x20, 60, 100)
             end
         end
         API.RandomSleep2(600, 800, 800)
