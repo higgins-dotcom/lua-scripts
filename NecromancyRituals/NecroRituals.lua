@@ -430,7 +430,7 @@ while API.Read_LoopyLoop() do
             API.RandomSleep2(400, 400, 400)
         end
 
-        local vState = API.VB_FindPSettinOrder(10937, -1).state
+        local vState = GetVarbitValue(53292)
         
         if cfg.disturbancesEnabled and vState > 0 then
             currentStatus = "Handling Disturbance"
