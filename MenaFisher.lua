@@ -53,7 +53,7 @@ local function fish()
 end
 
 local function checkBait()
-    if NEED_BAIT and API.InvStackSize(ID.BAIT) == 0 then
+    if NEED_BAIT and Inventory:GetItemAmount(ID.BAIT) == 0 then
         print("No more bait")
         return false
     end
@@ -72,7 +72,7 @@ local function isAtMenaphos()
 end
 
 API.SetDrawTrackedSkills(true)
-API.SetMaxIdleTime(MAX_IDLE_TIME_MINUTES)
+-- API.SetMaxIdleTime(MAX_IDLE_TIME_MINUTES)
 
 while API.Read_LoopyLoop() do
 
@@ -81,14 +81,16 @@ while API.Read_LoopyLoop() do
         break
     end
 
+    API.DoRandomEvents(600, 600)
+
     if API.ReadPlayerMovin2() or API.CheckAnim(3) then
-        if spotCheck() or API.InvFull_() then
+        if spotCheck() or Inventory:IsFull() then
             goto continue
         end
         API.RandomSleep2(400, 300, 300)
     end
 
-    if API.InvFull_() then
+    if Inventory:IsFull() then
         deposit()
     else
         fish()
