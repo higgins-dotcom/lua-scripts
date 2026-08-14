@@ -1,18 +1,18 @@
 --[[
 
 @title Smithy
-@description AIO Smither for the Artisan Guild
+@description AIO Smither for the Artisan Guild, Lumbridge, and Burthope
 @author Higgins <discord@higginshax>
 @date 10/01/2024
-@version 2.0
+@version 2.1.0
 
 Add tasks to the settings
 
 --]]
 
-local API = require("api")
+local API = require('api')
 
-local version = "2.0.2"
+local version = "2.1.0"
 
 -- [[ SETTINGS ]] --
 
@@ -43,7 +43,7 @@ local tasks = {
     -- { metalType = "ELDER_RUNE",     itemType = "PLATEBODY",  itemLevel = 4,        amount = 1 },
     -- { metalType = "ELDER_RUNE",     itemType = "PLATEBODY",  itemLevel = 5,        amount = 1 },
 
-    -- { metalType = "ELDER_RUNE",     itemType = "SET",  itemLevel = "BURIAL",        amount = 0 }
+    -- { metalType = "ADAMANT",     itemType = "ARROWHEADS",  itemLevel = 0,        amount = 100 }
 
     -- If unsure - open the lib/smithing_data.json file and search for the item
     --
@@ -73,6 +73,63 @@ local AREA = {
     NORMAL = 1,
     BURIAL = 2
 }
+
+-- Add future smithing locations here.  Coordinates are the center of the
+-- area; the radius keeps nearby bank/forge tiles in the same location mode.
+local LOCATIONS = {
+    {
+        name = "Lumbridge",
+        x = 3229,
+        y = 3255,
+        z = 0,
+        radius = 35,
+        actionArea = AREA.NORMAL,
+        normalOnly = true,
+    },
+    {
+        name = "Artisan's Guild",
+        x = 3045,
+        y = 3342,
+        z = 0,
+        radius = 35,
+        actionArea = AREA.NORMAL,
+        normalOnly = false,
+    },
+    {
+        name = "Burthope",
+        x = 2886,
+        y = 3503,
+        z = 0,
+        radius = 35,
+        actionArea = AREA.NORMAL,
+        normalOnly = true,
+    },
+}
+
+local function getActiveLocation()
+    local position = API.PlayerCoordfloat()
+    if not position then
+        return nil
+    end
+
+    local x = tonumber(position.x)
+    local y = tonumber(position.y)
+    local z = tonumber(position.z)
+    if not x or not y then
+        return nil
+    end
+
+    for _, location in ipairs(LOCATIONS) do
+        local dx = x - location.x
+        local dy = y - location.y
+        local zMatches = not location.z or not z or math.floor(z) == location.z
+        if zMatches and (dx * dx) + (dy * dy) <= (location.radius * location.radius) then
+            return location
+        end
+    end
+
+    return nil
+end
 
 local AREA_ACTIONS = {
     [AREA.BURIAL] = {
@@ -213,7 +270,7 @@ end
 local function selectItem(bar, choice)
     local bar_setting = SETTING_IDS[tostring(choice.SKILL)]
 
-    if not (VB_FindPSettinOrder(8332, -1).state == bar_setting[bar].BAR) and (choice.ITEM_TYPE ~= "BAR") then
+    if not (VC_FindPSett(8332, -1).state == bar_setting[bar].BAR) and (choice.ITEM_TYPE ~= "BAR") then
         -- if not (API.VB_FindPSett(8332, -1, -1).state == SETTING_IDS[choice.SKILL][bar].BAR) and (choice.ITEM_TYPE ~= "BAR") then
 
         local id = choice.SKILL == 14 and 52 or 62
@@ -261,7 +318,7 @@ local function selectItem(bar, choice)
 end
 
 local function isSmithingInterfaceOpen()
-    return API.Compare2874Status(85, false)
+    return API.Compare2874Status(85)
 end
 
 local function openSmithingInterface(area, choice)
@@ -503,6 +560,7 @@ while API.Read_LoopyLoop() do
         selectedBarType = currentTask.metalType
         selectedItemType = currentTask.itemType
         selectedItemLevel = currentTask.itemLevel
+        local activeLocation = getActiveLocation()
         if type(selectedItemLevel) == "number" then
             itemLevel = tostring(selectedItemLevel)
             ID.ANVIL = ID.ANVIL
@@ -519,6 +577,15 @@ while API.Read_LoopyLoop() do
 
         local area = itemLevel == "BURIAL" and AREA.BURIAL or AREA.NORMAL
         if selectedItemType == "SET" then area = AREA.BURIAL end
+
+        if activeLocation and activeLocation.normalOnly then
+            if area == AREA.BURIAL then
+                print(activeLocation.name .. " supports normal smithing only; burial tasks are not supported here")
+                API.Write_LoopyLoop(false)
+                break
+            end
+            area = activeLocation.actionArea or AREA.NORMAL
+        end
         local success, choice = pcall(function()
             return ITEMS[currentTask.metalType][currentTask.itemType][itemLevel]
         end)
