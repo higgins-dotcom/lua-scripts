@@ -84,8 +84,13 @@ local function findPedestal()
 end
 
 local function findNpc(npcid)
-    local npcs = API.ReadAllObjectsArray({ 2 }, {npcid}, {})
-    if #npcs > 0 then return npcs[1] else return false end
+    local npcs = API.ReadAllObjectsArray({1}, {npcid}, {})
+
+    if #npcs > 0 then
+        return npcs[1]
+    end
+
+    return false
 end
 
 local function findNpcByAction(action)
@@ -174,13 +179,13 @@ local function watchForStorm()
         API.RandomSleep2(800, 400, 400)
         API.WaitUntilMovingEnds()
         API.RandomSleep2(800, 400, 400)
-        if waitForGfxChange(7916, 8) then
+        if waitForGfxChange(7916, 15) then
             dissipate = findDissipate()
             if dissipate then
                 API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route, { dissipate.Id }, 50)
                 API.RandomSleep2(800, 400, 400)
             end
-            if waitForGfxChange(7917, 8) then
+            if waitForGfxChange(7917, 15) then
                 if dissipate then
                     API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route, { dissipate.Id }, 50)
                     API.RandomSleep2(900, 400, 400)
@@ -300,7 +305,8 @@ end
 local function watchForHorror()
     if not GUI.getConfig().handleShamblingHorror then return false end
     local horror = findNpc(ID.SHAMBLING_HORROR)
-    if horror and horror.Anim < 0 then
+
+    if horror and horror.Id == ID.SHAMBLING_HORROR and horror.Anim < 0 then
         API.RandomSleep2(800, 800, 1200)
         API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route, { ID.SHAMBLING_HORROR }, 50)
         API.RandomSleep2(400, 600, 900)
