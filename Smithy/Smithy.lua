@@ -104,6 +104,15 @@ local LOCATIONS = {
         actionArea = AREA.NORMAL,
         normalOnly = true,
     },
+    {
+        name = "Fort Forinthry",
+        x = 3281,
+        y = 3560,
+        z = 0,
+        radius = 35,
+        actionArea = AREA.NORMAL,
+        normalOnly = true,
+    },
 }
 
 local function getActiveLocation()
