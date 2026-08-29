@@ -447,18 +447,21 @@ while API.Read_LoopyLoop() do
         end
 
         if API.CheckAnim(10) or API.ReadPlayerMovin2() then
+            print("[DEBUG] Player is moving or animating, Varbit 53292 value: " .. vState)
             if not API.ReadPlayerMovin2() then
                 local p = API.PlayerCoordfloat()
 
                 local match = false
                 for _, tile in ipairs(PLATFORM_TILE) do
                     if p.x == tile[1] and p.y == tile[2] then
+                        print("[DEBUG] Player is on a platform tile, Varbit 53292 value: " .. vState)
                         match = true
                         break
                     end
                 end
 
                 if match and cfg.disturbancesEnabled and vState > 0 then
+                    print("[DEBUG] Ritual is active, Varbit 53292 value: " .. vState)
                     currentStatus = "Ritual Active"
                     API.RandomSleep2(100, 200, 200)
                     goto continue
