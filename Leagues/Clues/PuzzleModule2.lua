@@ -1377,16 +1377,14 @@ local function getLockboxClickSequence(solution)
 	return clicks
 end
 
--- Execute clicks on the lockbox interface
-local function executeLockboxClicks(clicks, tileComponents)
+-- Execute clicks on the lockbox interface. The CS2 dump defines tile
+-- components 1-25 in visual row-major order, so no interface scan is needed.
+local function executeLockboxClicks(clicks)
 	print("Executing lockbox clicks...")
 	for i, click in ipairs(clicks) do
-		local tile = tileComponents[click.index]
-		if tile then
-			print(string.format("Click %d/%d: Row %d, Col %d (id2=%d)", i, #clicks, click.row, click.col, tile.id2))
-			API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1933, tile.id2, -1, API.OFF_ACT_GeneralInterface_route)
-			API.RandomSleep2(250, 250, 250)
-		end
+		print(string.format("Click %d/%d: Row %d, Col %d (id2=%d)", i, #clicks, click.row, click.col, click.index))
+		API.DoAction_Interface(0xffffffff, 0xffffffff, 1, 1933, click.index, -1, API.OFF_ACT_GeneralInterface_route)
+		API.RandomSleep2(250, 250, 250)
 	end
 	print("Lockbox puzzle solved!")
 end
@@ -1440,23 +1438,7 @@ function PuzzleModule.solveLockbox(autoExecute)
 	print("Solution found! Total clicks needed: " .. #clicks)
 
 	if autoExecute then
-		-- Interface component discovery is still needed for clicks; state is read
-		-- exclusively from varbits above.
-		local scannedTiles = API.ScanForInterfaceTest2Get2(true, { 1933, 30, -1, 0 })
-		local tiles = {}
-		for _, tile in ipairs(scannedTiles or {}) do
-			local index = tonumber(tile.id2)
-			if index and index >= 1 and index <= 25 then
-				tiles[index] = tile
-			end
-		end
-		for index = 1, 25 do
-			if not tiles[index] then
-				print("Failed to locate lockbox tile component", index)
-				return false
-			end
-		end
-		executeLockboxClicks(clicks, tiles)
+		executeLockboxClicks(clicks)
 		return true
 	else
 		print("Click sequence (row, col):")
@@ -1477,32 +1459,6 @@ function PuzzleModule.isTowersPuzzleOpen()
 		print("Towers puzzle interface not detected")
 	end
 	return isOpen
-end
-
--- Fetch grid tiles from the game interface
-local function fetchTowersGridTiles()
-	local gridTiles = {}
-	for i = 1, 5 do
-		gridTiles[i] = {}
-	end
-
-	-- Values come from trail17_skyscrapers_slot_* varbits. Only the component
-	-- IDs are discovered here because they are required later for clicking.
-	local tiles = API.ScanForInterfaceTest2Get2(true, { 1934, 7, -1, 0 })
-	if tiles and #tiles > 0 then
-		for _, tile in ipairs(tiles) do
-			-- id3 is the actual 0-based grid slot. Do not rely on the scan
-			-- response order, which can differ from visual row-major order.
-			local slot = tonumber(tile.id3)
-			if slot and slot >= 0 and slot < 25 then
-				local row = math.floor(slot / 5) + 1
-				local col = (slot % 5) + 1
-				gridTiles[row][col] = tile.id3
-			end
-		end
-	end
-
-	return gridTiles
 end
 
 local function readTowersGrid()
@@ -1645,7 +1601,7 @@ local function solveTowersBacktrack(grid, clues, row, col)
 end
 
 -- Place the solution in the game
-local function placeTowersSolution(grid, gridTiles)
+local function placeTowersSolution(grid, clickCheck)
 	print("Placing solution in game...")
 
 	for row = 1, 5 do
@@ -1661,13 +1617,13 @@ local function placeTowersSolution(grid, gridTiles)
 			end
 
 			local value = grid[row][col]
-			local tileId3 = gridTiles[row][col]
+			local tileId3 = (row - 1) * 5 + (col - 1)
 
-			if tileId3 and value > 0 then
+			if value > 0 then
 				API.DoAction_Interface(
 					0x2e,
 					0xffffffff,
-					value,
+					value + 1,
 					1934,
 					7,
 					tileId3,
@@ -1676,6 +1632,11 @@ local function placeTowersSolution(grid, gridTiles)
 				API.RandomSleep2(300, 300, 300)
 			end
 		end
+	end
+
+	if clickCheck == false then
+		print("Solution placed. Check button intentionally skipped.")
+		return true
 	end
 
 	-- Final check before clicking check button
@@ -1693,8 +1654,11 @@ local function placeTowersSolution(grid, gridTiles)
 end
 
 -- Main Towers puzzle solver function
-function PuzzleModule.solveTowersPuzzle()
+function PuzzleModule.solveTowersPuzzle(clickCheck)
 	print("Starting Towers puzzle solving process...")
+	if clickCheck == nil then
+		clickCheck = true
+	end
 
 	if not PuzzleModule.isTowersPuzzleOpen() then
 		print("Towers puzzle interface not open")
@@ -1702,28 +1666,18 @@ function PuzzleModule.solveTowersPuzzle()
 	end
 
 	local clues = fetchTowersClues()
-	local gridTiles = fetchTowersGridTiles()
 	local initialGrid = readTowersGrid()
 
 	if not clues or not initialGrid or #clues.top ~= 5 or #clues.right ~= 5 or #clues.bottom ~= 5 or #clues.left ~= 5 then
 		print("ERROR: Invalid tower varbits fetched!")
 		return false
 	end
-	for row = 1, 5 do
-		for col = 1, 5 do
-			if not gridTiles[row][col] then
-				print("ERROR: Could not locate Towers tile component", row, col)
-				return false
-			end
-		end
-	end
-
 	local grid = initialGrid
 
 	print("Solving Towers puzzle...")
 	if solveTowersBacktrack(grid, clues, 1, 1) then
 		print("Solution found!")
-		local success = placeTowersSolution(grid, gridTiles)
+		local success = placeTowersSolution(grid, clickCheck)
 		if success then
 			print("Towers puzzle solved successfully!")
 			return true
