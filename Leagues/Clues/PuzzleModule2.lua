@@ -1442,7 +1442,20 @@ function PuzzleModule.solveLockbox(autoExecute)
 	if autoExecute then
 		-- Interface component discovery is still needed for clicks; state is read
 		-- exclusively from varbits above.
-		local tiles = API.ScanForInterfaceTest2Get2(true, { 1933, 30, -1, 0 })
+		local scannedTiles = API.ScanForInterfaceTest2Get2(true, { 1933, 30, -1, 0 })
+		local tiles = {}
+		for _, tile in ipairs(scannedTiles or {}) do
+			local index = tonumber(tile.id2)
+			if index and index >= 1 and index <= 25 then
+				tiles[index] = tile
+			end
+		end
+		for index = 1, 25 do
+			if not tiles[index] then
+				print("Failed to locate lockbox tile component", index)
+				return false
+			end
+		end
 		executeLockboxClicks(clicks, tiles)
 		return true
 	else
@@ -1477,13 +1490,14 @@ local function fetchTowersGridTiles()
 	-- IDs are discovered here because they are required later for clicking.
 	local tiles = API.ScanForInterfaceTest2Get2(true, { 1934, 7, -1, 0 })
 	if tiles and #tiles > 0 then
-		local idx = 1
-		for row = 1, 5 do
-			for col = 1, 5 do
-				if idx <= #tiles then
-					gridTiles[row][col] = tiles[idx].id3
-					idx = idx + 1
-				end
+		for _, tile in ipairs(tiles) do
+			-- id3 is the actual 0-based grid slot. Do not rely on the scan
+			-- response order, which can differ from visual row-major order.
+			local slot = tonumber(tile.id3)
+			if slot and slot >= 0 and slot < 25 then
+				local row = math.floor(slot / 5) + 1
+				local col = (slot % 5) + 1
+				gridTiles[row][col] = tile.id3
 			end
 		end
 	end
@@ -1653,7 +1667,7 @@ local function placeTowersSolution(grid, gridTiles)
 				API.DoAction_Interface(
 					0x2e,
 					0xffffffff,
-					value + 1,
+					value,
 					1934,
 					7,
 					tileId3,
@@ -1694,6 +1708,14 @@ function PuzzleModule.solveTowersPuzzle()
 	if not clues or not initialGrid or #clues.top ~= 5 or #clues.right ~= 5 or #clues.bottom ~= 5 or #clues.left ~= 5 then
 		print("ERROR: Invalid tower varbits fetched!")
 		return false
+	end
+	for row = 1, 5 do
+		for col = 1, 5 do
+			if not gridTiles[row][col] then
+				print("ERROR: Could not locate Towers tile component", row, col)
+				return false
+			end
+		end
 	end
 
 	local grid = initialGrid
