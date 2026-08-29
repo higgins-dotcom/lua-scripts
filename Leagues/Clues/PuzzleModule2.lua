@@ -22,6 +22,16 @@ local ACTIVE_PUZZLE_STRUCT_VARP = 6168
 local PUZZLE_STRUCT_TYPE_PARAM = 6892
 local CLIENT_PIECE_VARBIT_BASE = 39405
 
+-- Current clue-puzzle varbits from the CS2 cache.
+local LOCKBOX_VARBIT_BASE = 39624 -- trail_lightsout_pos_0 .. _24
+local TOWERS_SLOT_VARBIT_BASE = 39675 -- trail17_skyscrapers_slot_0_0 .. _4_4
+local TOWERS_HINT_VARBIT_BASE = {
+	top = 39747,
+	left = 39752,
+	bottom = 39757,
+	right = 39762,
+}
+
 local PUZZLE_BANKS = {
 	[0] = { name = "hard", player_piece_base = 39330 },
 	[1] = { name = "elite", player_piece_base = 39355 },
@@ -144,6 +154,18 @@ local function readPieceRange(firstVarbit)
 		return nil
 	end
 	return state
+end
+
+local function readVarbitRange(firstVarbit, count, validator)
+	local values = {}
+	for index = 0, count - 1 do
+		local value = readVarbit(firstVarbit + index)
+		if value == nil or (validator and not validator(value)) then
+			return nil
+		end
+		values[index + 1] = value
+	end
+	return values
 end
 
 local function statesEqual(left, right)
@@ -616,8 +638,7 @@ local function completeClueStep()
 	end
 
 	-- Check for any reward interfaces or continue buttons
-	local continueInterface =
-		API.ScanForInterfaceTest2Get2(true, { 1188, 3, 14, 3, 0 })
+	local continueInterface = API.ScanForInterfaceTest2Get2(true, { 1188, 3, 14, 3 })
 	if continueInterface and #continueInterface > 0 then
 		print("Continue interface detected, clicking...")
 		API.DoAction_Interface(0x24, 0xffffffff, 1, 1188, 3, 14, API.OFF_ACT_GeneralInterface_route)
@@ -1215,38 +1236,18 @@ end
 -- This solves a 5x5 grid where clicking tiles rotates them and adjacent tiles through 3 states
 -- Goal: Make all tiles the same type
 
--- Tile IDs and rotation sequence: Sword -> Ranged -> Mage -> Sword
-local LOCKBOX_TILE_IDS = {
-	SWORD = 32272, -- State 0
-	BOW = 32274, -- State 1 (Ranged)
-	MAGIC = 32270, -- State 2
-}
-
--- Convert tile ID to state (0, 1, 2) based on rotation sequence
-local function lockboxTileToState(tileId)
-	if tileId == LOCKBOX_TILE_IDS.SWORD then
-		return 0
-	elseif tileId == LOCKBOX_TILE_IDS.BOW then
-		return 1
-	elseif tileId == LOCKBOX_TILE_IDS.MAGIC then
-		return 2
-	end
-	return -1
-end
-
--- Read the current lockbox grid state and return grid + tile components
+-- Read the current lockbox grid state from trail_lightsout_pos_0 .. _24.
 local function readLockboxGrid()
-	local tiles = API.ScanForInterfaceTest2Get2(true, { 1933, 30, -1, 0 })
-
-	local grid = {}
-	local tileComponents = {}
-	for i, v in ipairs(tiles) do
-		local tileId = API.Mem_Read_int(v.memloc + API.I_slides)
-		table.insert(grid, lockboxTileToState(tileId))
-		tileComponents[i] = v
+	-- The CS2 cache exposes each Lights Out/lockbox position directly. This
+	-- avoids relying on the graphic/item data returned by the interface scan.
+	local grid = readVarbitRange(LOCKBOX_VARBIT_BASE, 25, function(value)
+		return value >= 0 and value <= 2
+	end)
+	if not grid then
+		return nil, nil
 	end
 
-	return grid, tileComponents
+	return grid
 end
 
 -- Get affected cells when clicking position (row, col)
@@ -1416,7 +1417,7 @@ function PuzzleModule.solveLockbox(autoExecute)
 	end
 
 	print("Reading lockbox grid...")
-	local grid, tileComponents = readLockboxGrid()
+	local grid = readLockboxGrid()
 
 	if not grid or #grid ~= 25 then
 		print("Failed to read lockbox grid")
@@ -1439,7 +1440,10 @@ function PuzzleModule.solveLockbox(autoExecute)
 	print("Solution found! Total clicks needed: " .. #clicks)
 
 	if autoExecute then
-		executeLockboxClicks(clicks, tileComponents)
+		-- Interface component discovery is still needed for clicks; state is read
+		-- exclusively from varbits above.
+		local tiles = API.ScanForInterfaceTest2Get2(true, { 1933, 30, -1, 0 })
+		executeLockboxClicks(clicks, tiles)
 		return true
 	else
 		print("Click sequence (row, col):")
@@ -1469,11 +1473,10 @@ local function fetchTowersGridTiles()
 		gridTiles[i] = {}
 	end
 
-	local parent = API.ScanForInterfaceTest2Get2(true, { 1934, 6, -1, 0 })
-
-	if #parent > 0 then
-		local tiles = API.ScanForInterfaceTest2Get2(true, { 1934, parent[1].id2, -1, 0 })
-
+	-- Values come from trail17_skyscrapers_slot_* varbits. Only the component
+	-- IDs are discovered here because they are required later for clicking.
+	local tiles = API.ScanForInterfaceTest2Get2(true, { 1934, 7, -1, 0 })
+	if tiles and #tiles > 0 then
 		local idx = 1
 		for row = 1, 5 do
 			for col = 1, 5 do
@@ -1488,35 +1491,39 @@ local function fetchTowersGridTiles()
 	return gridTiles
 end
 
--- Fetch clues dynamically from the game interface
-local function fetchTowersClues()
-	local clues = { top = {}, right = {}, bottom = {}, left = {} }
-
-	local tiles = API.ScanForInterfaceTest2Get2(true, { 1934, 20, -1, 0 })
-
-	for tileIdx, v in ipairs(tiles) do
-		local children = API.ScanForInterfaceTest2Get2(true, { 1934, v.id2, -1, 0 })
-
-		local sideClues = {}
-		for idx, vv in ipairs(children) do
-			local clueText = API.ReadCharsLimit(vv.memloc + API.I_itemids3, 100)
-			local clueValue = tonumber(clueText)
-			if clueValue then
-				table.insert(sideClues, clueValue)
-			end
-		end
-
-		if tileIdx == 1 then
-			clues.right = sideClues
-		elseif tileIdx == 2 then
-			clues.left = sideClues
-		elseif tileIdx == 3 then
-			clues.bottom = sideClues
-		elseif tileIdx == 4 then
-			clues.top = sideClues
-		end
+local function readTowersGrid()
+	local values = readVarbitRange(TOWERS_SLOT_VARBIT_BASE, 25, function(value)
+		return value >= 0 and value <= 5
+	end)
+	if not values then
+		return nil
 	end
 
+	local grid = {}
+	for row = 1, 5 do
+		grid[row] = {}
+		for col = 1, 5 do
+			-- The cache ordering is column-major: slot_0_0 .. slot_4_0,
+			-- then slot_0_1 .. slot_4_1.
+			local index = (col - 1) * 5 + row
+			grid[row][col] = values[index]
+		end
+	end
+	return grid
+end
+
+-- Read the four sets of five tower clues from the CS2 player varbits.
+local function fetchTowersClues()
+	local clues = { top = {}, right = {}, bottom = {}, left = {} }
+	for direction, baseVarbit in pairs(TOWERS_HINT_VARBIT_BASE) do
+		local values = readVarbitRange(baseVarbit, 5, function(value)
+			return value >= 0 and value <= 5
+		end)
+		if not values then
+			return nil
+		end
+		clues[direction] = values
+	end
 	return clues
 end
 
@@ -1682,19 +1689,14 @@ function PuzzleModule.solveTowersPuzzle()
 
 	local clues = fetchTowersClues()
 	local gridTiles = fetchTowersGridTiles()
+	local initialGrid = readTowersGrid()
 
-	if #clues.top ~= 5 or #clues.right ~= 5 or #clues.bottom ~= 5 or #clues.left ~= 5 then
-		print("ERROR: Invalid number of clues fetched!")
+	if not clues or not initialGrid or #clues.top ~= 5 or #clues.right ~= 5 or #clues.bottom ~= 5 or #clues.left ~= 5 then
+		print("ERROR: Invalid tower varbits fetched!")
 		return false
 	end
 
-	local grid = {}
-	for i = 1, 5 do
-		grid[i] = {}
-		for j = 1, 5 do
-			grid[i][j] = 0
-		end
-	end
+	local grid = initialGrid
 
 	print("Solving Towers puzzle...")
 	if solveTowersBacktrack(grid, clues, 1, 1) then
