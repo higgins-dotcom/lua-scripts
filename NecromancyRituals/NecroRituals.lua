@@ -437,6 +437,7 @@ while API.Read_LoopyLoop() do
         end
 
         local vState = GetVarbitValue(53292)
+        print("[DEBUG] Varbit 53292 value: " .. vState)
         
         if cfg.disturbancesEnabled and vState > 0 then
             currentStatus = "Handling Disturbance"
@@ -468,6 +469,7 @@ while API.Read_LoopyLoop() do
         end
 
         if vState == 0 then
+            print("[DEBUG] Ritual is inactive, Varbit 53292 value: " .. vState)
             if CheckForNewMessages() then
                 break
             end
@@ -479,6 +481,7 @@ while API.Read_LoopyLoop() do
             end
 
             if not findDepleted() then
+                print("[DEBUG] No depleted tiles found, Varbit 53292 value: " .. vState)
                 currentStatus = "Performing Ritual"
                 clickPlatform()
             else
@@ -487,8 +490,10 @@ while API.Read_LoopyLoop() do
                 API.RandomSleep2(600, 300, 300)
             end
         else
+            print("[DEBUG] Ritual is active, Varbit 53292 value: " .. vState)
             if findPedestal() then
                 currentStatus = "Performing Ritual"
+                print("[DEBUG] Performing ritual, Varbit 53292 value: " .. vState)
                 clickPlatform()
             end
         end
