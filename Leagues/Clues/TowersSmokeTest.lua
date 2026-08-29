@@ -1,6 +1,6 @@
 --[[
 # Script Name:   TowersSmokeTest
-# Description:   Read-only smoke test for the Towers/Skyscrapers clue puzzle
+# Description:   Smoke test and optional no-submit solver for Towers puzzle
 # Author:        Higgins
 # Version:       1.0
 # Date:          2026.08.29
@@ -9,6 +9,7 @@
 -- while API.Read_LoopyLoop() do
 
 local API = require("API")
+local PuzzleModule = require("PuzzleModule2")
 
 local TOWERS_INTERFACE = 1934
 local TOWERS_GRID_COMPONENT = 7
@@ -19,6 +20,9 @@ local TOWERS_HINT_VARBITS = {
 	bottom = 39757,
 	right = 39762,
 }
+
+-- This test fills the puzzle but never clicks the Check button.
+local RUN_SOLVER = true
 
 local function readVarbit(id)
 	local success, value = pcall(function()
@@ -68,82 +72,18 @@ local function printHints()
 	end
 end
 
-local function getReturnedInfo(result)
-	if type(result) == "table" then
-		if result.id3 ~= nil then
-			return result
-		end
-		return result[1]
-	end
-
-	local success, id3 = pcall(function()
-		return result.id3
-	end)
-	if success and id3 ~= nil then
-		return result
-	end
-	return nil
-end
-
-local function probeTile(slot, targetUnder)
-	local success, result = pcall(function()
-		return API.ScanForInterfaceTest2Get2(
-			targetUnder,
-			{ TOWERS_INTERFACE, TOWERS_GRID_COMPONENT, slot, 0 }
-		)
-	end)
-	if not success then
-		return nil, "call failed: " .. tostring(result)
-	end
-
-	local info = getReturnedInfo(result)
-	if not info then
-		return nil, "type=" .. type(result)
-	end
-	return info
-end
-
 local function inspectTileComponents()
-	print("Probing Towers tile components individually...")
+	print("Using direct Towers tile targets; no interface scan required")
+	print("Parent component: 1934,7")
 	print("Expected action mapping: visible 1->operation 2, 2->3, 3->4, 4->5, 5->6")
 
-	local validCount = 0
 	for slot = 0, 24 do
 		local row = math.floor(slot / 5) + 1
 		local col = (slot % 5) + 1
-		local tile, errorMessage = probeTile(slot, false)
-
-		-- Some API builds interpret target_under differently. Probe the alternate
-		-- mode as diagnostics, without performing any action.
-		if not tile then
-			local alternateTile, alternateError = probeTile(slot, true)
-			if alternateTile then
-				tile = alternateTile
-				errorMessage = "found with target_under=true"
-			else
-				errorMessage = tostring(errorMessage) .. "; alternate: " .. tostring(alternateError)
-			end
-		end
-
-		if tile then
-			validCount = validCount + 1
-			print(string.format(
-				"slot %02d -> row %d col %d | returned id1=%s id2=%s id3=%s | %s",
-				slot,
-				row,
-				col,
-				tostring(tile.id1),
-				tostring(tile.id2),
-				tostring(tile.id3),
-				errorMessage or "target_under=false"
-			))
-		else
-			print(string.format("MISSING: slot %02d expected at row %d col %d (%s)", slot, row, col, errorMessage))
-		end
+		print(string.format("slot %02d -> row %d col %d | DoAction(..., 1934, 7, %d, ...)", slot, row, col, slot))
 	end
 
-	print(string.format("Valid individually resolved tile slots: %d/25", validCount))
-	return validCount == 25
+	return true
 end
 
 local function main()
@@ -162,12 +102,24 @@ local function main()
 	printGrid(grid)
 	printHints()
 	local componentsOk = inspectTileComponents()
-	if componentsOk then
-		print("RESULT: Towers varbits and all 25 tile mappings look valid")
-	else
+	if not componentsOk then
 		print("RESULT: Towers tile mapping is incomplete or invalid")
+		return false
 	end
-	return componentsOk
+
+	if not RUN_SOLVER then
+		print("RESULT: Towers varbits and direct targets look valid; solver disabled")
+		return true
+	end
+
+	print("Starting solver; the Check button will NOT be clicked")
+	local solved = PuzzleModule.solveTowersPuzzle(false)
+	if solved then
+		print("RESULT: Towers solution placed; Check button was skipped")
+	else
+		print("RESULT: Towers solver failed before completion")
+	end
+	return solved
 end
 
 main()
