@@ -437,7 +437,6 @@ while API.Read_LoopyLoop() do
         end
 
         local vState = GetVarbitValue(53292)
-        print("[DEBUG] Varbit 53292 value: " .. vState)
         
         if cfg.disturbancesEnabled and vState > 0 then
             currentStatus = "Handling Disturbance"
@@ -447,32 +446,31 @@ while API.Read_LoopyLoop() do
         end
 
         if API.CheckAnim(10) or API.ReadPlayerMovin2() then
-            print("[DEBUG] Player is moving or animating, Varbit 53292 value: " .. vState)
             if not API.ReadPlayerMovin2() then
                 local p = API.PlayerCoordfloat()
 
                 local match = false
                 for _, tile in ipairs(PLATFORM_TILE) do
                     if p.x == tile[1] and p.y == tile[2] then
-                        print("[DEBUG] Player is on a platform tile, Varbit 53292 value: " .. vState)
                         match = true
                         break
                     end
                 end
 
                 if match and cfg.disturbancesEnabled and vState > 0 then
-                    print("[DEBUG] Ritual is active, Varbit 53292 value: " .. vState)
                     currentStatus = "Ritual Active"
                     API.RandomSleep2(100, 200, 200)
-                    goto continue
                 end
             end
             currentStatus = "Moving"
             API.RandomSleep2(400, 200, 200)
+
+
+            goto continue
+
         end
 
         if vState == 0 then
-            print("[DEBUG] Ritual is inactive, Varbit 53292 value: " .. vState)
             if CheckForNewMessages() then
                 break
             end
@@ -484,7 +482,6 @@ while API.Read_LoopyLoop() do
             end
 
             if not findDepleted() then
-                print("[DEBUG] No depleted tiles found, Varbit 53292 value: " .. vState)
                 currentStatus = "Performing Ritual"
                 clickPlatform()
             else
@@ -493,10 +490,8 @@ while API.Read_LoopyLoop() do
                 API.RandomSleep2(600, 300, 300)
             end
         else
-            print("[DEBUG] Ritual is active, Varbit 53292 value: " .. vState)
             if findPedestal() then
                 currentStatus = "Performing Ritual"
-                print("[DEBUG] Performing ritual, Varbit 53292 value: " .. vState)
                 clickPlatform()
             end
         end
