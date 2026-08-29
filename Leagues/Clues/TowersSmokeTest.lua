@@ -68,45 +68,81 @@ local function printHints()
 	end
 end
 
-local function inspectTileComponents()
-	print("Scanning Towers tile components...")
-	local success, tiles = pcall(function()
-		return API.ScanForInterfaceTest2Get2(true, { TOWERS_INTERFACE, TOWERS_GRID_COMPONENT, -1, 0 })
+local function getReturnedInfo(result)
+	if type(result) == "table" then
+		if result.id3 ~= nil then
+			return result
+		end
+		return result[1]
+	end
+
+	local success, id3 = pcall(function()
+		return result.id3
 	end)
-	if not success or type(tiles) ~= "table" then
-		print("FAILED: ScanForInterfaceTest2Get2 did not return a component list")
-		return false
+	if success and id3 ~= nil then
+		return result
+	end
+	return nil
+end
+
+local function probeTile(slot, targetUnder)
+	local success, result = pcall(function()
+		return API.ScanForInterfaceTest2Get2(
+			targetUnder,
+			{ TOWERS_INTERFACE, TOWERS_GRID_COMPONENT, slot, 0 }
+		)
+	end)
+	if not success then
+		return nil, "call failed: " .. tostring(result)
 	end
 
-	print("Scan returned " .. tostring(#tiles) .. " components")
-	local seen = {}
+	local info = getReturnedInfo(result)
+	if not info then
+		return nil, "type=" .. type(result)
+	end
+	return info
+end
+
+local function inspectTileComponents()
+	print("Probing Towers tile components individually...")
+	print("Expected action mapping: visible 1->operation 2, 2->3, 3->4, 4->5, 5->6")
+
 	local validCount = 0
-	for _, tile in ipairs(tiles) do
-		local slot = tonumber(tile.id3)
-		if slot and slot >= 0 and slot < 25 then
-			local row = math.floor(slot / 5) + 1
-			local col = (slot % 5) + 1
-			if seen[slot] then
-				print(string.format("DUPLICATE: id3=%d at row %d col %d", slot, row, col))
-			else
-				seen[slot] = true
-				validCount = validCount + 1
-				print(string.format("id3=%d -> row %d col %d", slot, row, col))
-			end
-		else
-			print("INVALID: returned tile has id3=" .. tostring(tile.id3))
-		end
-	end
-
 	for slot = 0, 24 do
-		if not seen[slot] then
-			local row = math.floor(slot / 5) + 1
-			local col = (slot % 5) + 1
-			print(string.format("MISSING: id3=%d expected at row %d col %d", slot, row, col))
+		local row = math.floor(slot / 5) + 1
+		local col = (slot % 5) + 1
+		local tile, errorMessage = probeTile(slot, false)
+
+		-- Some API builds interpret target_under differently. Probe the alternate
+		-- mode as diagnostics, without performing any action.
+		if not tile then
+			local alternateTile, alternateError = probeTile(slot, true)
+			if alternateTile then
+				tile = alternateTile
+				errorMessage = "found with target_under=true"
+			else
+				errorMessage = tostring(errorMessage) .. "; alternate: " .. tostring(alternateError)
+			end
+		end
+
+		if tile then
+			validCount = validCount + 1
+			print(string.format(
+				"slot %02d -> row %d col %d | returned id1=%s id2=%s id3=%s | %s",
+				slot,
+				row,
+				col,
+				tostring(tile.id1),
+				tostring(tile.id2),
+				tostring(tile.id3),
+				errorMessage or "target_under=false"
+			))
+		else
+			print(string.format("MISSING: slot %02d expected at row %d col %d (%s)", slot, row, col, errorMessage))
 		end
 	end
 
-	print(string.format("Valid unique tile slots: %d/25", validCount))
+	print(string.format("Valid individually resolved tile slots: %d/25", validCount))
 	return validCount == 25
 end
 
