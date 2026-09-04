@@ -1,0 +1,1518 @@
+{
+  "abilities": [
+    {
+      "display_name": "Bladed Dive",
+      "end_varc": 6038,
+      "gameval": "combatv2_ability_attack_bladed_dive",
+      "name": "Bladed Dive",
+      "sprite_id": 30331,
+      "start_varc": 6037,
+      "struct_id": 1488
+    },
+    {
+      "display_name": "Greater Dazing Shot",
+      "end_varc": 2168,
+      "gameval": "combatv2_ability_ranged_flashbang_override",
+      "name": "Greater Dazing Shot",
+      "sprite_id": 30332,
+      "start_varc": 2167,
+      "struct_id": 1490
+    },
+    {
+      "display_name": "Salt the Wound",
+      "end_varc": 6036,
+      "gameval": "combatv2_ability_ranged_puncture_arrow",
+      "name": "Salt the Wound",
+      "sprite_id": 30334,
+      "start_varc": 6035,
+      "struct_id": 1491
+    },
+    {
+      "display_name": "Darkness",
+      "end_varc": 7279,
+      "gameval": "combatv2_ability_necromancy_darkness_multiple",
+      "name": "Darkness",
+      "sprite_id": 30700,
+      "start_varc": 7278,
+      "struct_id": 1874
+    },
+    {
+      "display_name": "Greater Flurry",
+      "end_varc": 2108,
+      "gameval": "combatv2_ability_attack_flurry_override_dot",
+      "name": "Greater Flurry",
+      "sprite_id": 841,
+      "start_varc": 2107,
+      "struct_id": 12297
+    },
+    {
+      "display_name": "Piercing Shot",
+      "end_varc": 2168,
+      "gameval": "combatv2_ability_ranged_piercing_shot",
+      "name": "Piercing Shot",
+      "sprite_id": 23727,
+      "start_varc": 2167,
+      "struct_id": 14663
+    },
+    {
+      "display_name": "Binding Shot",
+      "end_varc": 2170,
+      "gameval": "combatv2_ability_ranged_binding_shot",
+      "name": "Binding Shot",
+      "sprite_id": 14244,
+      "start_varc": 2169,
+      "struct_id": 14664
+    },
+    {
+      "display_name": "Escape",
+      "end_varc": 2172,
+      "gameval": "combatv2_ability_ranged_escape",
+      "name": "Escape",
+      "sprite_id": 14245,
+      "start_varc": 2171,
+      "struct_id": 14665
+    },
+    {
+      "display_name": "Snipe",
+      "end_varc": 2174,
+      "gameval": "combatv2_ability_ranged_snipe",
+      "name": "Snipe",
+      "sprite_id": 23729,
+      "start_varc": 2173,
+      "struct_id": 14666
+    },
+    {
+      "display_name": "Fragmentation Shot",
+      "end_varc": 2176,
+      "gameval": "combatv2_ability_ranged_fragmentation_shot",
+      "name": "Fragmentation Shot",
+      "sprite_id": 14247,
+      "start_varc": 2175,
+      "struct_id": 14667
+    },
+    {
+      "display_name": "Ricochet",
+      "end_varc": 2178,
+      "gameval": "combatv2_ability_ranged_ricochet",
+      "name": "Ricochet",
+      "sprite_id": 23868,
+      "start_varc": 2177,
+      "struct_id": 14668
+    },
+    {
+      "display_name": "Snap Shot",
+      "end_varc": 2180,
+      "gameval": "combatv2_ability_ranged_snap_shot",
+      "name": "Snap Shot",
+      "sprite_id": 23728,
+      "start_varc": 2179,
+      "struct_id": 14669
+    },
+    {
+      "display_name": "Rapid Fire",
+      "end_varc": 2182,
+      "gameval": "combatv2_ability_ranged_rapid_fire",
+      "name": "Rapid Fire",
+      "sprite_id": 14250,
+      "start_varc": 2181,
+      "struct_id": 14670
+    },
+    {
+      "display_name": "Bombardment",
+      "end_varc": 2184,
+      "gameval": "combatv2_ability_ranged_bombardment",
+      "name": "Bombardment",
+      "sprite_id": 14251,
+      "start_varc": 2183,
+      "struct_id": 14671
+    },
+    {
+      "display_name": "Incendiary Shot",
+      "end_varc": 2186,
+      "gameval": "combatv2_ability_ranged_explosive_shot",
+      "name": "Incendiary Shot",
+      "sprite_id": 14252,
+      "start_varc": 2185,
+      "struct_id": 14672
+    },
+    {
+      "display_name": "Unload",
+      "end_varc": 2188,
+      "gameval": "combatv2_ability_ranged_unload",
+      "name": "Unload",
+      "sprite_id": 14253,
+      "start_varc": 2187,
+      "struct_id": 14673
+    },
+    {
+      "display_name": "Deadshot",
+      "end_varc": 2190,
+      "gameval": "combatv2_ability_ranged_headshot",
+      "name": "Deadshot",
+      "sprite_id": 23730,
+      "start_varc": 2189,
+      "struct_id": 14674
+    },
+    {
+      "display_name": "Slice",
+      "end_varc": 2094,
+      "gameval": "combatv2_ability_attack_strike",
+      "name": "Slice",
+      "sprite_id": 14207,
+      "start_varc": 2093,
+      "struct_id": 14677
+    },
+    {
+      "display_name": "Barge",
+      "end_varc": 2096,
+      "gameval": "combatv2_ability_attack_charge",
+      "name": "Barge",
+      "sprite_id": 14208,
+      "start_varc": 2095,
+      "struct_id": 14678
+    },
+    {
+      "display_name": "Adaptive Strike",
+      "end_varc": 2098,
+      "gameval": "combatv2_ability_attack_sever",
+      "name": "Adaptive Strike",
+      "sprite_id": 21237,
+      "start_varc": 2097,
+      "struct_id": 14679
+    },
+    {
+      "display_name": "Smash",
+      "end_varc": 2102,
+      "gameval": "combatv2_ability_attack_smash",
+      "name": "Smash",
+      "sprite_id": 14211,
+      "start_varc": 2101,
+      "struct_id": 14681
+    },
+    {
+      "display_name": "Backhand",
+      "end_varc": 2104,
+      "gameval": "combatv2_ability_attack_backhand",
+      "name": "Backhand",
+      "sprite_id": 14212,
+      "start_varc": 2103,
+      "struct_id": 14682
+    },
+    {
+      "display_name": "Slaughter",
+      "end_varc": 2106,
+      "gameval": "combatv2_ability_attack_haemorrhage",
+      "name": "Slaughter",
+      "sprite_id": 14213,
+      "start_varc": 2105,
+      "struct_id": 14683
+    },
+    {
+      "display_name": "Flurry",
+      "end_varc": 2108,
+      "gameval": "combatv2_ability_attack_flurry",
+      "name": "Flurry",
+      "sprite_id": 14214,
+      "start_varc": 2107,
+      "struct_id": 14684
+    },
+    {
+      "display_name": "Hurricane",
+      "end_varc": 2110,
+      "gameval": "combatv2_ability_attack_whirlwind",
+      "name": "Hurricane",
+      "sprite_id": 14215,
+      "start_varc": 2109,
+      "struct_id": 14685
+    },
+    {
+      "display_name": "Overpower",
+      "end_varc": 2112,
+      "gameval": "combatv2_ability_attack_overpower",
+      "name": "Overpower",
+      "sprite_id": 14216,
+      "start_varc": 2111,
+      "struct_id": 14686
+    },
+    {
+      "display_name": "Massacre",
+      "end_varc": 2114,
+      "gameval": "combatv2_ability_attack_eviscerate",
+      "name": "Massacre",
+      "sprite_id": 14217,
+      "start_varc": 2113,
+      "struct_id": 14687
+    },
+    {
+      "display_name": "Meteor Strike",
+      "end_varc": 2116,
+      "gameval": "combatv2_ability_attack_meteor_strike",
+      "name": "Meteor Strike",
+      "sprite_id": 21363,
+      "start_varc": 2115,
+      "struct_id": 14688
+    },
+    {
+      "display_name": "Regenerate",
+      "end_varc": 2166,
+      "gameval": "combatv2_ability_constitution_regenerate",
+      "name": "Regenerate",
+      "sprite_id": 14267,
+      "start_varc": 2165,
+      "struct_id": 14690
+    },
+    {
+      "display_name": "Incite",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_constitution_incite",
+      "name": "Incite",
+      "sprite_id": 14268,
+      "struct_id": 14691
+    },
+    {
+      "display_name": "Balanced Stance",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_constitution_barb_balanced_stance",
+      "name": "Balanced Stance",
+      "sprite_id": 16854,
+      "struct_id": 14693
+    },
+    {
+      "display_name": "Defensive Stance",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_constitution_barb_defensive_stance",
+      "name": "Defensive Stance",
+      "sprite_id": 16853,
+      "struct_id": 14694
+    },
+    {
+      "display_name": "Aggressive Stance",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_constitution_barb_aggressive_stance",
+      "name": "Aggressive Stance",
+      "sprite_id": 16852,
+      "struct_id": 14695
+    },
+    {
+      "display_name": "Punish",
+      "end_varc": 2122,
+      "gameval": "combatv2_ability_strength_punish",
+      "name": "Punish",
+      "sprite_id": 14257,
+      "start_varc": 2121,
+      "struct_id": 14700
+    },
+    {
+      "display_name": "Fury",
+      "end_varc": 2124,
+      "gameval": "combatv2_ability_strength_fury",
+      "name": "Fury",
+      "sprite_id": 14258,
+      "start_varc": 2123,
+      "struct_id": 14701
+    },
+    {
+      "display_name": "Decimate",
+      "end_varc": 2126,
+      "gameval": "combatv2_ability_strength_smite",
+      "name": "Decimate",
+      "sprite_id": 14259,
+      "start_varc": 2125,
+      "struct_id": 14702
+    },
+    {
+      "display_name": "Cleave",
+      "end_varc": 2128,
+      "gameval": "combatv2_ability_strength_cleave",
+      "name": "Cleave",
+      "sprite_id": 14260,
+      "start_varc": 2127,
+      "struct_id": 14703
+    },
+    {
+      "display_name": "Assault",
+      "end_varc": 2130,
+      "gameval": "combatv2_ability_strength_assault",
+      "name": "Assault",
+      "sprite_id": 14261,
+      "start_varc": 2129,
+      "struct_id": 14704
+    },
+    {
+      "display_name": "Quake",
+      "end_varc": 2132,
+      "gameval": "combatv2_ability_strength_quake",
+      "name": "Quake",
+      "sprite_id": 14262,
+      "start_varc": 2131,
+      "struct_id": 14705
+    },
+    {
+      "display_name": "Destroy",
+      "end_varc": 2134,
+      "gameval": "combatv2_ability_strength_destroy",
+      "name": "Destroy",
+      "sprite_id": 14263,
+      "start_varc": 2133,
+      "struct_id": 14706
+    },
+    {
+      "display_name": "Berserk",
+      "end_varc": 2136,
+      "gameval": "combatv2_ability_strength_berserk",
+      "name": "Berserk",
+      "sprite_id": 14264,
+      "start_varc": 2135,
+      "struct_id": 14707
+    },
+    {
+      "display_name": "Frenzy",
+      "end_varc": 2138,
+      "gameval": "combatv2_ability_strength_frenzy",
+      "name": "Frenzy",
+      "sprite_id": 14265,
+      "start_varc": 2137,
+      "struct_id": 14708
+    },
+    {
+      "display_name": "Pulverise",
+      "end_varc": 2140,
+      "gameval": "combatv2_ability_strength_pulverise",
+      "name": "Pulverise",
+      "sprite_id": 14266,
+      "start_varc": 2139,
+      "struct_id": 14709
+    },
+    {
+      "display_name": "Anticipation",
+      "end_varc": 2142,
+      "gameval": "combatv2_ability_defence_anticipation",
+      "name": "Anticipation",
+      "sprite_id": 14219,
+      "start_varc": 2141,
+      "struct_id": 14710
+    },
+    {
+      "display_name": "Freedom",
+      "end_varc": 2144,
+      "gameval": "combatv2_ability_defence_freedom",
+      "name": "Freedom",
+      "sprite_id": 14220,
+      "start_varc": 2143,
+      "struct_id": 14711
+    },
+    {
+      "display_name": "Provoke",
+      "end_varc": 2146,
+      "gameval": "combatv2_ability_defence_taunt",
+      "name": "Provoke",
+      "sprite_id": 14221,
+      "start_varc": 2145,
+      "struct_id": 14712
+    },
+    {
+      "display_name": "Resonance",
+      "end_varc": 2148,
+      "gameval": "combatv2_ability_defence_resonance",
+      "name": "Resonance",
+      "sprite_id": 14222,
+      "start_varc": 2147,
+      "struct_id": 14713
+    },
+    {
+      "display_name": "Preparation",
+      "end_varc": 2150,
+      "gameval": "combatv2_ability_defence_preparation",
+      "name": "Preparation",
+      "sprite_id": 14223,
+      "start_varc": 2149,
+      "struct_id": 14714
+    },
+    {
+      "display_name": "Bash",
+      "end_varc": 2152,
+      "gameval": "combatv2_ability_defence_bash",
+      "name": "Bash",
+      "sprite_id": 14224,
+      "start_varc": 2151,
+      "struct_id": 14715
+    },
+    {
+      "display_name": "Reflect",
+      "end_varc": 2154,
+      "gameval": "combatv2_ability_defence_reflect",
+      "name": "Reflect",
+      "sprite_id": 14225,
+      "start_varc": 2153,
+      "struct_id": 14716
+    },
+    {
+      "display_name": "Debilitate",
+      "end_varc": 2156,
+      "gameval": "combatv2_ability_defence_debilitate",
+      "name": "Debilitate",
+      "sprite_id": 14226,
+      "start_varc": 2155,
+      "struct_id": 14717
+    },
+    {
+      "display_name": "Revenge",
+      "end_varc": 2158,
+      "gameval": "combatv2_ability_defence_revenge",
+      "name": "Revenge",
+      "sprite_id": 14227,
+      "start_varc": 2157,
+      "struct_id": 14718
+    },
+    {
+      "display_name": "Barricade",
+      "end_varc": 2160,
+      "gameval": "combatv2_ability_defence_barricade",
+      "name": "Barricade",
+      "sprite_id": 14228,
+      "start_varc": 2159,
+      "struct_id": 14719
+    },
+    {
+      "display_name": "Rejuvenate",
+      "end_varc": 2162,
+      "gameval": "combatv2_ability_defence_resurgence",
+      "name": "Rejuvenate",
+      "sprite_id": 14229,
+      "start_varc": 2161,
+      "struct_id": 14720
+    },
+    {
+      "display_name": "Immortality",
+      "end_varc": 2164,
+      "gameval": "combatv2_ability_defence_heroism",
+      "name": "Immortality",
+      "sprite_id": 14230,
+      "start_varc": 2163,
+      "struct_id": 14721
+    },
+    {
+      "display_name": "Runic Charge",
+      "end_varc": 2192,
+      "gameval": "combatv2_ability_magic_chastise",
+      "name": "Runic Charge",
+      "sprite_id": 23725,
+      "start_varc": 2191,
+      "struct_id": 14725
+    },
+    {
+      "display_name": "Surge",
+      "end_varc": 2194,
+      "gameval": "combatv2_ability_magic_surge",
+      "name": "Surge",
+      "sprite_id": 14233,
+      "start_varc": 2193,
+      "struct_id": 14726
+    },
+    {
+      "display_name": "Impact",
+      "end_varc": 2196,
+      "gameval": "combatv2_ability_magic_impact",
+      "name": "Impact",
+      "sprite_id": 14234,
+      "start_varc": 2195,
+      "struct_id": 14727
+    },
+    {
+      "display_name": "Chain",
+      "end_varc": 2198,
+      "gameval": "combatv2_ability_magic_chain",
+      "name": "Chain",
+      "sprite_id": 15037,
+      "start_varc": 2197,
+      "struct_id": 14728
+    },
+    {
+      "display_name": "Combust",
+      "end_varc": 2200,
+      "gameval": "combatv2_ability_magic_combust",
+      "name": "Combust",
+      "sprite_id": 23401,
+      "start_varc": 2199,
+      "struct_id": 14729
+    },
+    {
+      "display_name": "Dragon Breath",
+      "end_varc": 2202,
+      "gameval": "combatv2_ability_magic_dragonbreath",
+      "name": "Dragon Breath",
+      "sprite_id": 14236,
+      "start_varc": 2201,
+      "struct_id": 14730
+    },
+    {
+      "display_name": "Asphyxiate",
+      "end_varc": 2204,
+      "gameval": "combatv2_ability_magic_choke",
+      "name": "Asphyxiate",
+      "sprite_id": 14237,
+      "start_varc": 2203,
+      "struct_id": 14731
+    },
+    {
+      "display_name": "Detonate",
+      "end_varc": 2206,
+      "gameval": "combatv2_ability_magic_detonate",
+      "name": "Detonate",
+      "sprite_id": 14238,
+      "start_varc": 2205,
+      "struct_id": 14732
+    },
+    {
+      "display_name": "Wild Magic",
+      "end_varc": 2208,
+      "gameval": "combatv2_ability_magic_wild_magic",
+      "name": "Wild Magic",
+      "sprite_id": 14239,
+      "start_varc": 2207,
+      "struct_id": 14733
+    },
+    {
+      "display_name": "Metamorphosis",
+      "end_varc": 2210,
+      "gameval": "combatv2_ability_magic_metamorphosis",
+      "name": "Metamorphosis",
+      "sprite_id": 14241,
+      "start_varc": 2209,
+      "struct_id": 14734
+    },
+    {
+      "display_name": "Tsunami",
+      "end_varc": 2212,
+      "gameval": "combatv2_ability_magic_tsunami",
+      "name": "Tsunami",
+      "sprite_id": 14240,
+      "start_varc": 2211,
+      "struct_id": 14735
+    },
+    {
+      "display_name": "Omnipower",
+      "end_varc": 2214,
+      "gameval": "combatv2_ability_magic_overload",
+      "name": "Omnipower",
+      "sprite_id": 14242,
+      "start_varc": 2213,
+      "struct_id": 14736
+    },
+    {
+      "display_name": "Death's Swiftness",
+      "end_varc": 2720,
+      "gameval": "combatv2_ability_ranged_deaths_swiftness",
+      "name": "Death's Swiftness",
+      "sprite_id": 20185,
+      "start_varc": 2719,
+      "struct_id": 19251
+    },
+    {
+      "display_name": "Natural Instinct",
+      "end_varc": 2716,
+      "gameval": "combatv2_ability_defence_natural_instinct",
+      "name": "Natural Instinct",
+      "sprite_id": 16549,
+      "start_varc": 2715,
+      "struct_id": 19252
+    },
+    {
+      "display_name": "Guthix's Blessing",
+      "end_varc": 2718,
+      "gameval": "combatv2_ability_constitution_guthix_blessing",
+      "name": "Guthix's Blessing",
+      "sprite_id": 16558,
+      "start_varc": 2717,
+      "struct_id": 19253
+    },
+    {
+      "display_name": "Sunshine",
+      "end_varc": 2722,
+      "gameval": "combatv2_ability_magic_sunshine",
+      "name": "Sunshine",
+      "sprite_id": 20183,
+      "start_varc": 2721,
+      "struct_id": 19254
+    },
+    {
+      "display_name": "Balanced Strike",
+      "end_varc": 2714,
+      "gameval": "combatv2_ability_attack_balanced_strike",
+      "name": "Balanced Strike",
+      "sprite_id": 16548,
+      "start_varc": 2713,
+      "struct_id": 19255
+    },
+    {
+      "display_name": "Dazing Shot",
+      "end_varc": 2724,
+      "gameval": "combatv2_ability_ranged_flashbang",
+      "name": "Dazing Shot",
+      "sprite_id": 9316,
+      "start_varc": 2723,
+      "struct_id": 19340
+    },
+    {
+      "display_name": "Sonic Wave",
+      "end_varc": 2728,
+      "gameval": "combatv2_ability_magic_sonic_boom",
+      "name": "Sonic Wave",
+      "sprite_id": 27430,
+      "start_varc": 2727,
+      "struct_id": 19342
+    },
+    {
+      "display_name": "Concentrated Blast",
+      "end_varc": 2730,
+      "gameval": "combatv2_ability_magic_concentrated_blast",
+      "name": "Concentrated Blast",
+      "sprite_id": 13309,
+      "start_varc": 2729,
+      "struct_id": 19343
+    },
+    {
+      "display_name": "Sacrifice",
+      "end_varc": 3896,
+      "gameval": "combatv2_ability_constitution_sacrifice",
+      "name": "Sacrifice",
+      "sprite_id": 21666,
+      "start_varc": 3895,
+      "struct_id": 24188
+    },
+    {
+      "display_name": "Transfigure",
+      "end_varc": 3898,
+      "gameval": "combatv2_ability_constitution_transfigure",
+      "name": "Transfigure",
+      "sprite_id": 26106,
+      "start_varc": 3897,
+      "struct_id": 24189
+    },
+    {
+      "display_name": "Shout - Tofu",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_constitution_barb_shout_tofu",
+      "name": "Shout - Tofu",
+      "sprite_id": 16864,
+      "struct_id": 24362
+    },
+    {
+      "display_name": "Shout - Crackers",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_constitution_barb_shout_crackers",
+      "name": "Shout - Crackers",
+      "sprite_id": 16865,
+      "struct_id": 24363
+    },
+    {
+      "display_name": "Shout - Worms",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_constitution_barb_shout_worms",
+      "name": "Shout - Worms",
+      "sprite_id": 16866,
+      "struct_id": 24364
+    },
+    {
+      "display_name": "Shout - Red Egg",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_constitution_barb_shout_red",
+      "name": "Shout - Red Egg",
+      "sprite_id": 16861,
+      "struct_id": 24365
+    },
+    {
+      "display_name": "Shout - Green Egg",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_constitution_barb_shout_green",
+      "name": "Shout - Green Egg",
+      "sprite_id": 16862,
+      "struct_id": 24366
+    },
+    {
+      "display_name": "Shout - Blue Egg",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_constitution_barb_shout_blue",
+      "name": "Shout - Blue Egg",
+      "sprite_id": 16863,
+      "struct_id": 24367
+    },
+    {
+      "display_name": "Shout - Poisoned Worms",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_constitution_barb_shout_worms_poison",
+      "name": "Shout - Poisoned Worms",
+      "sprite_id": 16859,
+      "struct_id": 24368
+    },
+    {
+      "display_name": "Shout - Poisoned Tofu",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_constitution_barb_shout_tofu_poison",
+      "name": "Shout - Poisoned Tofu",
+      "sprite_id": 16858,
+      "struct_id": 24369
+    },
+    {
+      "display_name": "Shout - Poisoned Meat",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_constitution_barb_shout_meat_poison",
+      "name": "Shout - Poisoned Meat",
+      "sprite_id": 16860,
+      "struct_id": 24370
+    },
+    {
+      "display_name": "Shout - Balanced Stance",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_constitution_barb_shout_controlled",
+      "name": "Shout - Balanced Stance",
+      "sprite_id": 16857,
+      "struct_id": 24371
+    },
+    {
+      "display_name": "Shout - Aggressive Stance",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_constitution_barb_shout_aggressive",
+      "name": "Shout - Aggressive Stance",
+      "sprite_id": 16855,
+      "struct_id": 24372
+    },
+    {
+      "display_name": "Shout - Defensive Stance",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_constitution_barb_shout_defensive",
+      "name": "Shout - Defensive Stance",
+      "sprite_id": 16856,
+      "struct_id": 24373
+    },
+    {
+      "display_name": "Devotion",
+      "end_varc": 3894,
+      "gameval": "combatv2_ability_defence_devotion",
+      "name": "Devotion",
+      "sprite_id": 21665,
+      "start_varc": 3893,
+      "struct_id": 25028
+    },
+    {
+      "display_name": "Shadow Tendrils",
+      "end_varc": 4180,
+      "gameval": "combatv2_ability_ranged_shadow_tendrils",
+      "name": "Shadow Tendrils",
+      "sprite_id": 20914,
+      "start_varc": 4179,
+      "struct_id": 28177
+    },
+    {
+      "display_name": "Blood Tendrils",
+      "end_varc": 4176,
+      "gameval": "combatv2_ability_attack_blood_tendrils",
+      "name": "Blood Tendrils",
+      "sprite_id": 17500,
+      "start_varc": 4175,
+      "struct_id": 28178
+    },
+    {
+      "display_name": "Ice Asylum",
+      "end_varc": 4178,
+      "gameval": "combatv2_ability_constitution_ice_asylum",
+      "name": "Ice Asylum",
+      "sprite_id": 17503,
+      "start_varc": 4177,
+      "struct_id": 28179
+    },
+    {
+      "display_name": "Smoke Tendrils",
+      "end_varc": 4182,
+      "gameval": "combatv2_ability_magic_smoke_tendrils",
+      "name": "Smoke Tendrils",
+      "sprite_id": 17501,
+      "start_varc": 4181,
+      "struct_id": 28180
+    },
+    {
+      "display_name": "Siphon",
+      "end_varc": 4236,
+      "gameval": "combatv2_ability_constitution_siphon",
+      "name": "Siphon",
+      "sprite_id": 18764,
+      "start_varc": 4235,
+      "struct_id": 28429
+    },
+    {
+      "display_name": "Deep Impact",
+      "end_varc": 4240,
+      "gameval": "combatv2_ability_magic_impact2",
+      "name": "Deep Impact",
+      "sprite_id": 22755,
+      "start_varc": 4239,
+      "struct_id": 28431
+    },
+    {
+      "display_name": "Magma Tempest",
+      "end_varc": 6992,
+      "gameval": "combatv2_ability_magic_magma_tempest_revolution",
+      "name": "Magma Tempest",
+      "sprite_id": 4378,
+      "start_varc": 6991,
+      "struct_id": 28927
+    },
+    {
+      "display_name": "Magma Tempest - Area of effect damage",
+      "end_varc": 6992,
+      "gameval": "combatv2_ability_magic_magma_tempest_dummy",
+      "name": "Magma Tempest - Area of effect damage",
+      "sprite_id": 4378,
+      "start_varc": 6991,
+      "struct_id": 28928
+    },
+    {
+      "display_name": "Tuska's Wrath",
+      "end_varc": 7773,
+      "gameval": "combatv2_ability_constitution_tuska_wrath",
+      "name": "Tuska's Wrath",
+      "sprite_id": 8861,
+      "start_varc": 7772,
+      "struct_id": 31649
+    },
+    {
+      "display_name": "Storm Shards",
+      "end_varc": 7775,
+      "gameval": "combatv2_ability_constitution_storm_shards",
+      "name": "Storm Shards",
+      "sprite_id": 19227,
+      "start_varc": 7774,
+      "struct_id": 31982
+    },
+    {
+      "display_name": "Shatter",
+      "end_varc": 7777,
+      "gameval": "combatv2_ability_constitution_shatter",
+      "name": "Shatter",
+      "sprite_id": 19228,
+      "start_varc": 7776,
+      "struct_id": 31983
+    },
+    {
+      "display_name": "Onslaught",
+      "end_varc": 7779,
+      "gameval": "combatv2_ability_constitution_surging_onslaught",
+      "name": "Onslaught",
+      "sprite_id": 19289,
+      "start_varc": 7778,
+      "struct_id": 31984
+    },
+    {
+      "display_name": "Corruption Blast",
+      "end_varc": 4981,
+      "gameval": "combatv2_ability_magic_corruption",
+      "name": "Corruption Blast",
+      "sprite_id": 19226,
+      "start_varc": 4980,
+      "struct_id": 31985
+    },
+    {
+      "display_name": "Corruption Shot",
+      "end_varc": 4979,
+      "gameval": "combatv2_ability_ranged_corruption",
+      "name": "Corruption Shot",
+      "sprite_id": 17255,
+      "start_varc": 4978,
+      "struct_id": 31986
+    },
+    {
+      "display_name": "Command Phantom Guardian",
+      "end_varc": 7794,
+      "gameval": "combatv2_ability_necromancy_command_phantom_guardian",
+      "name": "Command Phantom Guardian",
+      "sprite_id": 34168,
+      "start_varc": 7793,
+      "struct_id": 32342
+    },
+    {
+      "display_name": "Reprisal",
+      "end_varc": 7781,
+      "gameval": "combatv2_ability_constitution_reprisal",
+      "name": "Reprisal",
+      "sprite_id": 799,
+      "start_varc": 7780,
+      "struct_id": 33650
+    },
+    {
+      "display_name": "Ingenuity of the Humans",
+      "end_varc": 6598,
+      "gameval": "combatv2_ability_constitution_ingenuity_of_the_humans",
+      "name": "Ingenuity of the Humans",
+      "sprite_id": 1521,
+      "start_varc": 6597,
+      "struct_id": 37199
+    },
+    {
+      "display_name": "Demon Slayer",
+      "end_varc": 6600,
+      "gameval": "combatv2_ability_constitution_demon_slayer",
+      "name": "Demon Slayer",
+      "sprite_id": 1517,
+      "start_varc": 6599,
+      "struct_id": 37200
+    },
+    {
+      "display_name": "Dragon Slayer",
+      "end_varc": 6602,
+      "gameval": "combatv2_ability_constitution_dragon_slayer",
+      "name": "Dragon Slayer",
+      "sprite_id": 1518,
+      "start_varc": 6601,
+      "struct_id": 37201
+    },
+    {
+      "display_name": "Undead Slayer",
+      "end_varc": 6604,
+      "gameval": "combatv2_ability_constitution_undead_slayer",
+      "name": "Undead Slayer",
+      "sprite_id": 1524,
+      "start_varc": 6603,
+      "struct_id": 37202
+    },
+    {
+      "display_name": "Limitless",
+      "end_varc": 6606,
+      "gameval": "combatv2_ability_constitution_limitless",
+      "name": "Limitless",
+      "sprite_id": 1522,
+      "start_varc": 6605,
+      "struct_id": 37203
+    },
+    {
+      "display_name": "Slayer's Insight",
+      "end_varc": 6608,
+      "gameval": "combatv2_ability_constitution_slaying",
+      "name": "Slayer's Insight",
+      "sprite_id": 1523,
+      "start_varc": 6607,
+      "struct_id": 37204
+    },
+    {
+      "display_name": "Kuradal's Favour",
+      "end_varc": 6610,
+      "gameval": "combatv2_ability_constitution_ferocious",
+      "name": "Kuradal's Favour",
+      "sprite_id": 1519,
+      "start_varc": 6609,
+      "struct_id": 37205
+    },
+    {
+      "display_name": "Unsullied",
+      "end_varc": 6594,
+      "gameval": "combatv2_ability_defence_unsullied",
+      "name": "Unsullied",
+      "sprite_id": 1525,
+      "start_varc": 6593,
+      "struct_id": 37206
+    },
+    {
+      "display_name": "Aggression",
+      "end_varc": 6596,
+      "gameval": "combatv2_ability_defence_aggression",
+      "name": "Aggression",
+      "sprite_id": 1516,
+      "start_varc": 6595,
+      "struct_id": 37207
+    },
+    {
+      "display_name": "Golden Touch",
+      "end_varc": 6612,
+      "gameval": "combatv2_ability_magic_golden_touch",
+      "name": "Golden Touch",
+      "sprite_id": 1520,
+      "start_varc": 6611,
+      "struct_id": 37220
+    },
+    {
+      "display_name": "Shock",
+      "end_varc": 6389,
+      "gameval": "combatv2_ability_magic_shock",
+      "name": "Shock",
+      "sprite_id": 33083,
+      "start_varc": 6388,
+      "struct_id": 39530
+    },
+    {
+      "display_name": "Horror",
+      "end_varc": 6391,
+      "gameval": "combatv2_ability_magic_horror",
+      "name": "Horror",
+      "sprite_id": 33084,
+      "start_varc": 6390,
+      "struct_id": 39531
+    },
+    {
+      "display_name": "Demoralise",
+      "end_varc": 6385,
+      "gameval": "combatv2_ability_ranged_demoralise",
+      "name": "Demoralise",
+      "sprite_id": 33085,
+      "start_varc": 6384,
+      "struct_id": 39532
+    },
+    {
+      "display_name": "Rout",
+      "end_varc": 6387,
+      "gameval": "combatv2_ability_ranged_rout",
+      "name": "Rout",
+      "sprite_id": 33086,
+      "start_varc": 6386,
+      "struct_id": 39533
+    },
+    {
+      "display_name": "Greater Barge",
+      "end_varc": 2096,
+      "gameval": "combatv2_ability_attack_charge_override",
+      "name": "Greater Barge",
+      "sprite_id": 840,
+      "start_varc": 2095,
+      "struct_id": 40935
+    },
+    {
+      "display_name": "Greater Flurry",
+      "end_varc": 2108,
+      "gameval": "combatv2_ability_attack_flurry_override",
+      "name": "Greater Flurry [attack_flurry_override]",
+      "sprite_id": 841,
+      "start_varc": 2107,
+      "struct_id": 40936
+    },
+    {
+      "display_name": "Greater Fury",
+      "end_varc": 2124,
+      "gameval": "combatv2_ability_strength_fury_override",
+      "name": "Greater Fury",
+      "sprite_id": 842,
+      "start_varc": 2123,
+      "struct_id": 40941
+    },
+    {
+      "display_name": "Eat Food",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_eat_food",
+      "name": "Eat Food",
+      "sprite_id": 1601,
+      "struct_id": 44225
+    },
+    {
+      "display_name": "Dismember",
+      "end_varc": 8381,
+      "gameval": "combatv2_ability_strength_dismember",
+      "name": "Dismember",
+      "sprite_id": 21239,
+      "start_varc": 8380,
+      "struct_id": 44244
+    },
+    {
+      "display_name": "Sanguine Charge",
+      "end_varc": 2192,
+      "gameval": "combatv2_ability_magic_blood_tithe_wrack",
+      "name": "Sanguine Charge",
+      "sprite_id": 13308,
+      "start_varc": 2191,
+      "struct_id": 44900
+    },
+    {
+      "display_name": "Divert",
+      "end_varc": 6867,
+      "gameval": "combatv2_ability_defence_divert",
+      "name": "Divert",
+      "sprite_id": 15035,
+      "start_varc": 6866,
+      "struct_id": 45045
+    },
+    {
+      "display_name": "Greater Chain",
+      "end_varc": 2198,
+      "gameval": "combatv2_ability_magic_greater_chain",
+      "name": "Greater Chain",
+      "sprite_id": 15038,
+      "start_varc": 2197,
+      "struct_id": 45046
+    },
+    {
+      "display_name": "Greater Ricochet",
+      "end_varc": 2178,
+      "gameval": "combatv2_ability_ranged_greater_ricochet",
+      "name": "Greater Ricochet",
+      "sprite_id": 15039,
+      "start_varc": 2177,
+      "struct_id": 45048
+    },
+    {
+      "display_name": "Cease",
+      "end_varc": 6952,
+      "gameval": "combatv2_ability_defence_stop_attacking",
+      "name": "Cease",
+      "sprite_id": 15036,
+      "start_varc": 6951,
+      "struct_id": 45340
+    },
+    {
+      "display_name": "Greater Concentrated Blast",
+      "end_varc": 2730,
+      "gameval": "combatv2_ability_magic_greater_concentrated_blast",
+      "name": "Greater Concentrated Blast",
+      "sprite_id": 13310,
+      "start_varc": 2729,
+      "struct_id": 45450
+    },
+    {
+      "display_name": "Magma Tempest (Targeted)",
+      "end_varc": 6992,
+      "gameval": "combatv2_ability_magic_magma_tempest",
+      "name": "Magma Tempest (Targeted)",
+      "sprite_id": 15033,
+      "start_varc": 6991,
+      "struct_id": 45800
+    },
+    {
+      "display_name": "Quiver ammo slot 1",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_ranged_quiver_ammo_slot_1",
+      "name": "Quiver ammo slot 1",
+      "sprite_id": 15031,
+      "struct_id": 45801
+    },
+    {
+      "display_name": "Quiver ammo slot 2",
+      "end_varc": 2092,
+      "gameval": "combatv2_ability_ranged_quiver_ammo_slot_2",
+      "name": "Quiver ammo slot 2",
+      "sprite_id": 15032,
+      "struct_id": 45802
+    },
+    {
+      "display_name": "Greater Sunshine",
+      "end_varc": 2722,
+      "gameval": "combatv2_ability_magic_solar_charge",
+      "name": "Greater Sunshine",
+      "sprite_id": 20184,
+      "start_varc": 2721,
+      "struct_id": 46275
+    },
+    {
+      "display_name": "Greater Death's Swiftness",
+      "end_varc": 2720,
+      "gameval": "combatv2_ability_ranged_deaths_shroud",
+      "name": "Greater Death's Swiftness",
+      "sprite_id": 20186,
+      "start_varc": 2719,
+      "struct_id": 46276
+    },
+    {
+      "display_name": "Chaos Roar",
+      "end_varc": 7060,
+      "gameval": "combatv2_ability_strength_chaos_roar",
+      "name": "Chaos Roar",
+      "sprite_id": 21238,
+      "start_varc": 7059,
+      "struct_id": 46279
+    },
+    {
+      "display_name": "Dive",
+      "end_varc": 6038,
+      "gameval": "combatv2_ability_attack_dive",
+      "name": "Dive",
+      "sprite_id": 23714,
+      "start_varc": 6037,
+      "struct_id": 47129
+    },
+    {
+      "display_name": "Greater Sonic Wave",
+      "end_varc": 2728,
+      "gameval": "combatv2_ability_magic_greater_sonic_wave",
+      "name": "Greater Sonic Wave",
+      "sprite_id": 27432,
+      "start_varc": 2727,
+      "struct_id": 47221
+    },
+    {
+      "display_name": "Touch of Death",
+      "end_varc": 7226,
+      "gameval": "combatv2_ability_necromancy_death_touch",
+      "name": "Touch of Death",
+      "sprite_id": 30076,
+      "start_varc": 7225,
+      "struct_id": 48296
+    },
+    {
+      "display_name": "Finger of Death",
+      "end_varc": 7243,
+      "gameval": "combatv2_ability_necromancy_finger_of_death",
+      "name": "Finger of Death",
+      "sprite_id": 30077,
+      "start_varc": 7242,
+      "struct_id": 48297
+    },
+    {
+      "display_name": "Soul Sap",
+      "end_varc": 7245,
+      "gameval": "combatv2_ability_necromancy_soul_sap",
+      "name": "Soul Sap",
+      "sprite_id": 30080,
+      "start_varc": 7244,
+      "struct_id": 48298
+    },
+    {
+      "display_name": "Soul Strike",
+      "end_varc": 7248,
+      "gameval": "combatv2_ability_necromancy_soul_strike",
+      "name": "Soul Strike",
+      "sprite_id": 30082,
+      "start_varc": 7247,
+      "struct_id": 48299
+    },
+    {
+      "display_name": "Volley of Souls",
+      "end_varc": 7250,
+      "gameval": "combatv2_ability_necromancy_volley_of_souls",
+      "name": "Volley of Souls",
+      "sprite_id": 30088,
+      "start_varc": 7249,
+      "struct_id": 48301
+    },
+    {
+      "display_name": "Command Skeleton Warrior",
+      "end_varc": 7230,
+      "gameval": "combatv2_ability_necromancy_command_skeleton_warrior",
+      "name": "Command Skeleton Warrior",
+      "sprite_id": 34165,
+      "start_varc": 7229,
+      "struct_id": 48303
+    },
+    {
+      "display_name": "Conjure Putrid Zombie",
+      "end_varc": 7233,
+      "gameval": "combatv2_ability_necromancy_conjure_putrid_zombie",
+      "name": "Conjure Putrid Zombie",
+      "sprite_id": 34173,
+      "start_varc": 7232,
+      "struct_id": 48304
+    },
+    {
+      "display_name": "Bloat",
+      "end_varc": 7252,
+      "gameval": "combatv2_ability_necromancy_bloat",
+      "name": "Bloat",
+      "sprite_id": 30016,
+      "start_varc": 7251,
+      "struct_id": 48308
+    },
+    {
+      "display_name": "Blood Siphon",
+      "end_varc": 7254,
+      "gameval": "combatv2_ability_necromancy_blood_siphon",
+      "name": "Blood Siphon",
+      "sprite_id": 30017,
+      "start_varc": 7253,
+      "struct_id": 48309
+    },
+    {
+      "display_name": "Spectral Scythe",
+      "end_varc": 7256,
+      "gameval": "combatv2_ability_necromancy_spectral_scythe",
+      "name": "Spectral Scythe",
+      "sprite_id": 30084,
+      "start_varc": 7255,
+      "struct_id": 48311
+    },
+    {
+      "display_name": "Spectral Scythe",
+      "end_varc": 7258,
+      "gameval": "combatv2_ability_necromancy_spectral_scythe_recast_1",
+      "name": "Spectral Scythe [necromancy_spectral_scythe_recast_1]",
+      "sprite_id": 30086,
+      "start_varc": 7257,
+      "struct_id": 48312
+    },
+    {
+      "display_name": "Spectral Scythe",
+      "end_varc": 7260,
+      "gameval": "combatv2_ability_necromancy_spectral_scythe_recast_2",
+      "name": "Spectral Scythe [necromancy_spectral_scythe_recast_2]",
+      "sprite_id": 30087,
+      "start_varc": 7259,
+      "struct_id": 48313
+    },
+    {
+      "display_name": "Death Skulls",
+      "end_varc": 7262,
+      "gameval": "combatv2_ability_necromancy_death_skulls",
+      "name": "Death Skulls",
+      "sprite_id": 30074,
+      "start_varc": 7261,
+      "struct_id": 48314
+    },
+    {
+      "display_name": "Living Death",
+      "end_varc": 7264,
+      "gameval": "combatv2_ability_necromancy_living_death",
+      "name": "Living Death",
+      "sprite_id": 30078,
+      "start_varc": 7263,
+      "struct_id": 48324
+    },
+    {
+      "display_name": "Life Transfer",
+      "end_varc": 7267,
+      "gameval": "combatv2_ability_necromancy_life_transfer",
+      "name": "Life Transfer",
+      "sprite_id": 30704,
+      "start_varc": 7266,
+      "struct_id": 48328
+    },
+    {
+      "display_name": "Threads of Fate",
+      "end_varc": 7273,
+      "gameval": "combatv2_ability_necromancy_threads_of_fate",
+      "name": "Threads of Fate",
+      "sprite_id": 30734,
+      "start_varc": 7272,
+      "struct_id": 48329
+    },
+    {
+      "display_name": "Invoke Death",
+      "end_varc": 7276,
+      "gameval": "combatv2_ability_necromancy_invoke_death",
+      "name": "Invoke Death",
+      "sprite_id": 30702,
+      "start_varc": 7275,
+      "struct_id": 48330
+    },
+    {
+      "display_name": "Darkness",
+      "end_varc": 7279,
+      "gameval": "combatv2_ability_necromancy_darkness",
+      "name": "Darkness [necromancy_darkness]",
+      "sprite_id": 30700,
+      "start_varc": 7278,
+      "struct_id": 48331
+    },
+    {
+      "display_name": "Split Soul",
+      "end_varc": 7282,
+      "gameval": "combatv2_ability_necromancy_split_soul",
+      "name": "Split Soul",
+      "sprite_id": 30706,
+      "start_varc": 7281,
+      "struct_id": 48332
+    },
+    {
+      "display_name": "Rend",
+      "end_varc": 8379,
+      "gameval": "combatv2_ability_attack_adaptive_sweep",
+      "name": "Rend",
+      "sprite_id": 14211,
+      "start_varc": 8378,
+      "struct_id": 52781
+    },
+    {
+      "display_name": "Flurry",
+      "end_varc": 2108,
+      "gameval": "combatv2_ability_attack_flurry_bloodlust",
+      "name": "Flurry [attack_flurry_bloodlust]",
+      "sprite_id": 14214,
+      "start_varc": 2107,
+      "struct_id": 52782
+    },
+    {
+      "display_name": "Flurry",
+      "end_varc": 2108,
+      "gameval": "combatv2_ability_attack_flurry_dot",
+      "name": "Flurry [attack_flurry_dot]",
+      "sprite_id": 14214,
+      "start_varc": 2107,
+      "struct_id": 52783
+    },
+    {
+      "display_name": "Flurry",
+      "end_varc": 2108,
+      "gameval": "combatv2_ability_attack_flurry_dot_bloodlust",
+      "name": "Flurry [attack_flurry_dot_bloodlust]",
+      "sprite_id": 14214,
+      "start_varc": 2107,
+      "struct_id": 52784
+    },
+    {
+      "display_name": "Greater Flurry",
+      "end_varc": 2108,
+      "gameval": "combatv2_ability_attack_flurry_override_bloodlust",
+      "name": "Greater Flurry [attack_flurry_override_bloodlust]",
+      "sprite_id": 841,
+      "start_varc": 2107,
+      "struct_id": 52785
+    },
+    {
+      "display_name": "Greater Flurry",
+      "end_varc": 2108,
+      "gameval": "combatv2_ability_attack_flurry_override_dot_bloodlust",
+      "name": "Greater Flurry [attack_flurry_override_dot_bloodlust]",
+      "sprite_id": 841,
+      "start_varc": 2107,
+      "struct_id": 52786
+    },
+    {
+      "display_name": "Hurricane",
+      "end_varc": 2110,
+      "gameval": "combatv2_ability_attack_whirlwind_bloodlust",
+      "name": "Hurricane [attack_whirlwind_bloodlust]",
+      "sprite_id": 14215,
+      "start_varc": 2109,
+      "struct_id": 52787
+    },
+    {
+      "display_name": "Slaughter",
+      "end_varc": 8383,
+      "gameval": "combatv2_ability_melee_dismember_recast_1",
+      "name": "Slaughter [melee_dismember_recast_1]",
+      "sprite_id": 21362,
+      "start_varc": 8382,
+      "struct_id": 52788
+    },
+    {
+      "display_name": "Massacre",
+      "end_varc": 8385,
+      "gameval": "combatv2_ability_melee_dismember_recast_2",
+      "name": "Massacre [melee_dismember_recast_2]",
+      "sprite_id": 21296,
+      "start_varc": 8384,
+      "struct_id": 52789
+    },
+    {
+      "display_name": "Assault",
+      "end_varc": 2130,
+      "gameval": "combatv2_ability_strength_assault_bloodlust",
+      "name": "Assault [strength_assault_bloodlust]",
+      "sprite_id": 14261,
+      "start_varc": 2129,
+      "struct_id": 52790
+    },
+    {
+      "display_name": "Imbue: Shadows",
+      "end_varc": 8393,
+      "gameval": "combatv2_ability_ranged_imbue_shadows",
+      "name": "Imbue: Shadows",
+      "sprite_id": 23761,
+      "start_varc": 8392,
+      "struct_id": 52796
+    },
+    {
+      "display_name": "Galeshot",
+      "end_varc": 8391,
+      "gameval": "combatv2_ability_ranged_galeshot",
+      "name": "Galeshot",
+      "sprite_id": 23731,
+      "start_varc": 8390,
+      "struct_id": 52799
+    }
+  ],
+  "client_build": 949,
+  "global_cooldown_end_varc": 2092,
+  "schema_version": 1
+}
