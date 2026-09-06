@@ -443,8 +443,8 @@ local function walk()
         print("G:", Inventory:IsFull(), hasLoot(), lootBagFull, location, oldLocation)
         if isAtLocation(AREA.GUILD, 50) then
             if hasLoot() then
-                if GetInterfaceOpenBySize(1188) and scanForInterface(false, { 1188, 6, -1, 0 })[1].textids == "Pilfer points" then
-                    if rewardChoice == "Pilfer points" then
+                if GetInterfaceOpenBySize(1188) and scanForInterface(false, { 1188, 6, -1, 0 })[1].textids == "Pilfer Points" then
+                    if rewardChoice == "Pilfer Points" then
                         API.KeyboardPress2(0x31, 60, 100)
                     else
                         API.KeyboardPress2(0x32, 60, 100)
