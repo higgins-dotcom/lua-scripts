@@ -263,8 +263,22 @@ local function isAtLocation(location, distance)
     return API.PInArea(location.x, distance, location.y, distance, location.z)
 end
 
+local function scanForInterface(fullPath, paths)
+    if type(API.ScanForInterfaceTest2Get2) == "function" then
+        local path = paths
+        if type(paths) == "table" and type(paths[1]) == "table" then
+            path = paths[#paths]
+        end
+        if type(path) == "table" then
+            path = { path[1], path[2], path[3], path[4] }
+        end
+        return API.ScanForInterfaceTest2Get2(fullPath, path)
+    end
+    return API.ScanForInterfaceTest2Get(fullPath, paths)
+end
+
 local function isLodestoneInterfaceUp()
-    return (#API.ScanForInterfaceTest2Get(true, { { 1092, 1, -1, -1, 0 }, { 1092, 54, -1, 1, 0 } }) > 0) or API.VB_FindPSettinOrder(2874, 1).state == 30 or API.Compare2874Status(30)
+    return (#scanForInterface(true, { { 1092, 1, -1, -1, 0 }, { 1092, 54, -1, 1, 0 } }) > 0) or API.VB_FindPSettinOrder(2874, 1).state == 30 or API.Compare2874Status(30)
 end
 
 local function getABS_id(id, name)
@@ -460,10 +474,10 @@ local function walk()
             local mch = API.GetABs_name1("Master camouflage head")
             if #mch.name > 0 then
                 if isTeleportOptionsUp() then
-                    -- local opts = API.ScanForInterfaceTest2Get(true, { { 720, 2, -1, -1, 0 }, { 720, 16, -1, 2, 0 } })
+                    -- local opts = scanForInterface(true, { { 720, 2, -1, -1, 0 }, { 720, 16, -1, 2, 0 } })
                     -- if opts[1].y > 35 then
 
-                    local firstOpt = API.ScanForInterfaceTest2Get(false, { { 720,2,-1,0 }, { 720,16,-1,0 }, { 720,4,-1,0 }, { 720,14,-1,0 } })
+                    local firstOpt = scanForInterface(false, { { 720,2,-1,0 }, { 720,16,-1,0 }, { 720,4,-1,0 }, { 720,14,-1,0 } })
                     if string.find(firstOpt[1].textids, "Iorwerth") then
                         API.KeyboardPress2(0x30, 60, 100)
                         API.RandomSleep2(300, 300, 300)
