@@ -444,7 +444,7 @@ local function walk()
         if isAtLocation(AREA.GUILD, 50) then
             if hasLoot() then
                 if GetInterfaceOpenBySize(1188) and scanForInterface(false, { 1188, 6, -1, 0 })[1].textids == "Pilfer points" then
-                    if rewardChoice == 1 then
+                    if rewardChoice == "Pilfer points" then
                         API.KeyboardPress2(0x31, 60, 100)
                     else
                         API.KeyboardPress2(0x32, 60, 100)
