@@ -261,8 +261,22 @@ local function loadJsonData()
     SETTING_IDS = data["SETTING_IDS"]
 end
 
+local function scanForInterface(fullPath, paths)
+    if type(API.ScanForInterfaceTest2Get2) == "function" then
+        local path = paths
+        if type(paths) == "table" and type(paths[1]) == "table" then
+            path = paths[#paths]
+        end
+        if type(path) == "table" then
+            path = { path[1], path[2], path[3], path[4] }
+        end
+        return API.ScanForInterfaceTest2Get2(fullPath, path)
+    end
+    return API.ScanForInterfaceTest2Get(fullPath, paths)
+end
+
 local function getItemText()
-    return API.ScanForInterfaceTest2Get(false,
+    return scanForInterface(false,
         { { 37, 17, -1, -1, 0 }, { 37, 19, -1, 17, 0 }, { 37, 29, -1, 19, 0 }, { 37, 40, -1, 29, 0 } })[1].textids
 end
 
@@ -315,7 +329,7 @@ local function selectItem(bar, choice)
             table.insert(combined, element)
         end
 
-        local opt = API.ScanForInterfaceTest2Get(true, combined)
+        local opt = scanForInterface(true, combined)
         for _, v in ipairs(opt) do
             if v.itemid1 == choice.OUTPUT then
                 API.DoAction_Interface(0xffffffff, string.format("0x%X", choice.OUTPUT), 1, v.id1, v.id2, v.id3,
@@ -356,7 +370,7 @@ local function openSmithingInterface(area, choice)
 end
 
 local function hasOption()
-    local option = API.ScanForInterfaceTest2Get(false,
+    local option = scanForInterface(false,
         { { 1188, 5, -1, -1, 0 }, { 1188, 3, -1, 5, 0 }, { 1188, 3, 14, 3, 0 } })
     if #option > 0 then
         if #option[1].textids > 0 then
@@ -540,7 +554,7 @@ while API.Read_LoopyLoop() do
             o == "Would you like to partake in ceremonial smithing?" then
             API.KeyboardPress2(0x32, 60, 100)
         else
-            t = API.ScanForInterfaceTest2Get(false, { { 1189, 2, -1, 0 }, { 1189, 3, -1, 0 } })
+            t = scanForInterface(false, { { 1189, 2, -1, 0 }, { 1189, 3, -1, 0 } })
             if t and #t > 0 and t[1].textids and #t[1].textids > 0 then
                 local text = t[1].textids
                 if string.find(text, "You finish smithing") then
