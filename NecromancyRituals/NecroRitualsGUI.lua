@@ -229,7 +229,7 @@ local function drawConfigTab(cfg, gui)
     sectionHeader("Auto Run")
     ImGui.Spacing()
     
-    local autoRunChanged, newAutoRun = ImGui.Checkbox("Auto Run", cfg.autoRun)
+    local autoRunChanged, newAutoRun = ImGui.Checkbox("Auto Run##auto_run_cfg", cfg.autoRun)
     if autoRunChanged then
         cfg.autoRun = newAutoRun
     end
@@ -245,7 +245,7 @@ local function drawConfigTab(cfg, gui)
     flavorText("Use fake mouse input instead of real mouse interactions.")
     ImGui.Spacing()
     
-    local fakeMouseChanged, newFakeMouse = ImGui.Checkbox("Enable FakeMouse", cfg.fakeMouse)
+    local fakeMouseChanged, newFakeMouse = ImGui.Checkbox("Enable FakeMouse##fake_mouse_cfg", cfg.fakeMouse)
     if fakeMouseChanged then
         cfg.fakeMouse = newFakeMouse
     end
@@ -353,13 +353,6 @@ local function drawConfigTab(cfg, gui)
 end
 
 local function drawInfoTab(cfg)
-    ImGui.Spacing()
-    ImGui.Separator()
-
-    ImGui.Spacing()
-    ImGui.Separator()
-    ImGui.Spacing()
-
     sectionHeader("Current Settings")
     ImGui.Spacing()
     
@@ -432,8 +425,6 @@ local function drawContent(data, gui)
     ImGui.PushStyleColor(ImGuiCol.Text, statusColor[1], statusColor[2], statusColor[3], 1.0)
     ImGui.TextWrapped("Status: " .. currentState)
     ImGui.PopStyleColor(1)
-    ImGui.Spacing()
-    ImGui.Separator()
     ImGui.Spacing()
     
     if ImGui.BeginTabBar("##maintabs", 0) then

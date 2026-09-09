@@ -32,7 +32,7 @@ local function getScriptDir()
 end
 
 local SCRIPT_DIR = getScriptDir()
-local GUI = require("NecromancyRituals.NecroRitualsGUI")
+local GUI = require("NecroRitualsGUI")
 GUI.setScriptDirectory(SCRIPT_DIR)
 
 -- [[ IDS & SETTINGS ]] --
@@ -390,6 +390,8 @@ end
 API.SetDrawTrackedSkills(true)
 API.GatherEvents_chat_check()
 
+local liveGuiData = {}
+
 local function waitForGUIStart()
     GUI.reset()
     GUI.loadConfig()
@@ -403,7 +405,7 @@ local function waitForGUIStart()
 
     ClearRender()
     DrawImGui(function()
-        if GUI.open then GUI.draw({}) end
+        if GUI.open then GUI.draw(liveGuiData) end
     end)
 
     while API.Read_LoopyLoop() and not GUI.started do
@@ -419,12 +421,6 @@ end
 
 local function startLiveGUI()
     GUI.selectInfoTab = true
-    ClearRender()
-    DrawImGui(function()
-        if GUI.open then
-            GUI.draw({})
-        end
-    end)
 end
 
 if not waitForGUIStart() then return end
@@ -502,7 +498,7 @@ while API.Read_LoopyLoop() do
     end
 
     ::continue::
-    GUI.draw({state = currentStatus})
+    liveGuiData.state = currentStatus
     API.RandomSleep2(100, 200, 200)
 end
 
