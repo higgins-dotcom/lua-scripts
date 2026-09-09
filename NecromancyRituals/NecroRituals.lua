@@ -163,7 +163,7 @@ local function watchForDefile()
         API.RandomSleep2(300, 400, 400)
         if waitForGfxChange(7930, 8) then
             siphon = findNpcByAction("Siphon")
-            if API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route, { siphon.Id }, 50) then
+            if siphon and API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route, { siphon.Id }, 50) then
                 API.RandomSleep2(800, 400, 400)
             end
         end
@@ -205,7 +205,9 @@ local function watchForSoul()
         API.RandomSleep2(1200, 300, 200)
         API.WaitUntilMovingEnds()
         API.RandomSleep2(300, 300, 200)
+        return true
     end
+    return false
 end
 
 local function watchForMoth()
@@ -214,7 +216,9 @@ local function watchForMoth()
         API.RandomSleep2(600, 200, 200)
         API.WaitUntilMovingEnds()
         API.RandomSleep2(400, 200, 200)
+        return true
     end
+    return false
 end
 
 local function watchForSparkling()
@@ -225,7 +229,9 @@ local function watchForSparkling()
         API.RandomSleep2(400, 200, 200)
         API.WaitUntilMovingEnds()
         API.RandomSleep2(600, 200, 200)
+        return true
     end
+    return false
 end
 
 local function waitForCondition(condition, maxIterations, interval)
@@ -241,7 +247,12 @@ end
 
 local function watchForCorrupt()
     if not GUI.getConfig().handleCorruptGlyphs then return false end
-    while findCorrupt() do
+    local corrupt = findCorrupt()
+    local found = corrupt ~= false and corrupt ~= nil
+
+    local attempts = 0
+    while corrupt and attempts < 5 do
+        attempts = attempts + 1
         if not API.ReadPlayerMovin2() then
             API.RandomSleep2(500, 500, 500)
 
@@ -249,7 +260,8 @@ local function watchForCorrupt()
             local npcFound = false
 
             for _, npcID in ipairs(npcIDs) do
-                if API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route, { npcID }, 20) then
+                local actionSent = API.DoAction_NPC(0x29, API.OFF_ACT_InteractNPC_route, { npcID }, 20)
+                if actionSent then
                     API.RandomSleep2(400, 500, 600)
                     npcFound = true
                     break
@@ -260,13 +272,19 @@ local function watchForCorrupt()
                 break
             end
         end
+
+        API.RandomSleep2(500, 300, 300)
+        corrupt = findCorrupt()
     end
+
+    return found
 end
 
 local function findNpcAtTile(tile)
     local allNpc = API.ReadAllObjectsArray({ 1 }, { -1 }, {})
     for _, v in pairs(allNpc) do
-        if math.floor(v.TileX / 512) == tile.x and math.floor(v.TileY / 512) == tile.y then
+        if v.TileX and v.TileY and
+            math.floor(v.TileX / 512) == tile.x and math.floor(v.TileY / 512) == tile.y then
             return v
         end
     end
@@ -284,7 +302,7 @@ local function findGlint()
 end
 
 local function clickTile(tile)
-    local isDepleted = string.find(tile.Name, "depleted") ~= nil
+    local isDepleted = string.find(tostring(tile.Name), "depleted") ~= nil
     local action = isDepleted and 0xAE or 0x29
     local offset = isDepleted and API.OFF_ACT_InteractNPC_route2 or API.OFF_ACT_InteractNPC_route
 
@@ -440,34 +458,16 @@ while API.Read_LoopyLoop() do
         
         if cfg.disturbancesEnabled and vState > 0 then
             currentStatus = "Handling Disturbance"
-            if watchForDisturbances() then
+            local handled = watchForDisturbances()
+            if handled then
                 goto continue
             end
         end
 
         if API.CheckAnim(10) or API.ReadPlayerMovin2() then
-            if not API.ReadPlayerMovin2() then
-                local p = API.PlayerCoordfloat()
-
-                local match = false
-                for _, tile in ipairs(PLATFORM_TILE) do
-                    if p.x == tile[1] and p.y == tile[2] then
-                        match = true
-                        break
-                    end
-                end
-
-                if match and cfg.disturbancesEnabled and vState > 0 then
-                    currentStatus = "Ritual Active"
-                    API.RandomSleep2(100, 200, 200)
-                end
-            end
             currentStatus = "Moving"
             API.RandomSleep2(400, 200, 200)
-
-
             goto continue
-
         end
 
         if vState == 0 then
