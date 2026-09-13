@@ -891,6 +891,7 @@ local function invCheck()
     local hasLootBag = hasLootBag()
     -- check(hasRequiredLevel, "You need at least Level 65 Thieving")
     check(hasLootBag, "You need a loot bag in your inventory!")
+    check(API.GetVarbitValue(15932) == 0, "Your Camelot teleport must be set to Camelot, not Seers' Village")
 
     -- Action bar checks
     if not isTeleportOptionsUp() then
